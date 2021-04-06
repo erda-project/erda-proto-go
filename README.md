@@ -1,5 +1,5 @@
 # erda-proto-go
-Generated code for Erda protobuf data model
+Generated code from protobuf for Erda protobuf .
 
 This repository depends on [erda-proto](https://github.com/erda-project/erda-proto-go)
 
