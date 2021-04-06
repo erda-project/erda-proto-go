@@ -11,10 +11,28 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
-var _ urlenc.URLValuesUnmarshaler = (*TODO)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*TODORequst)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*TODOResponse)(nil)
 
-// TODO implement urlenc.URLValuesUnmarshaler.
-func (m *TODO) UnmarshalURLValues(prefix string, values url.Values) error {
+// TODORequst implement urlenc.URLValuesUnmarshaler.
+func (m *TODORequst) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "id":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Id = val
+			}
+		}
+	}
+	return nil
+}
+
+// TODOResponse implement urlenc.URLValuesUnmarshaler.
+func (m *TODOResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
