@@ -7,7 +7,7 @@ import (
 	fmt "fmt"
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto/monitor/pb"
+	pb "github.com/erda-project/erda-proto-go/monitor/pb"
 	grpc1 "google.golang.org/grpc"
 	reflect "reflect"
 	strings "strings"

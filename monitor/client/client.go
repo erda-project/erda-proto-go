@@ -4,8 +4,9 @@
 package client
 
 import (
+	context "context"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto/monitor/pb"
+	pb "github.com/erda-project/erda-proto-go/monitor/pb"
 	grpc1 "google.golang.org/grpc"
 )
 
@@ -33,4 +34,8 @@ func (c *serviceClients) TODOService() pb.TODOServiceClient {
 type todoserviceWrapper struct {
 	client pb.TODOServiceClient
 	opts   []grpc1.CallOption
+}
+
+func (s *todoserviceWrapper) Do(ctx context.Context, req *pb.TODORequst) (*pb.TODOResponse, error) {
+	return s.client.Do(ctx, req, s.opts...)
 }
