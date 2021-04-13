@@ -16,17 +16,22 @@ fi
 
 # build protocol
 build_protocol() {
-    PKG_PATH=$(go run github.com/erda-project/erda-infra/tools/gopkg github.com/erda-project/erda-infra/tools)
     MODULES=$(find ".proto" -type d);
     for path in ${MODULES}; do
         HAS_PROTO_FILE=$(eval echo $(bash -c "find "${path}" -maxdepth 1 -name *.proto 2>/dev/null" | wc -l));
         if [ ${HAS_PROTO_FILE} -gt 0 ]; then
-            if [ -z "${path#.proto}" ]; then
+            if [ -z "$(echo ${path#.proto})" ]; then
                 continue; # skip .proto
             fi
-            echo "build module ${MODULE_PATH}";
             MODULE_PATH=${path#.proto/};
-            PB_OUTPUT="./${MODULE_PATH}" "${PKG_PATH}/protoc.sh" protocol "${path}/*.proto"
+            echo "build module ${MODULE_PATH}";
+            mkdir -p ${MODULE_PATH}/pb;
+            mkdir -p ${MODULE_PATH}/client;
+            gohub protoc protocol \
+                 --msg_out="${MODULE_PATH}/pb" \
+                 --service_out="${MODULE_PATH}/pb" \
+                 --client_out="${MODULE_PATH}/client" \
+                 ${path}/*.proto
         fi;
     done;
     echo "";
@@ -39,7 +44,7 @@ clean_result() {
     for path in ${MODULES}; do
         HAS_PROTO_FILE=$(eval echo $(bash -c "find "${path}" -maxdepth 1 -name *.proto 2>/dev/null" | wc -l));
         if [ ${HAS_PROTO_FILE} -gt 0 ]; then
-            if [ -z "${path#.proto}" ]; then
+            if [ -z "$(echo ${path#.proto})" ]; then
                 continue; # skip .proto
             fi
             MODULE_PATH=${path#.proto/};

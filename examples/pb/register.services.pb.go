@@ -37,11 +37,13 @@ func ServiceNames(svr ...string) []string {
 }
 
 var (
-	greeterServiceClientType = reflect.TypeOf((*GreeterServiceClient)(nil)).Elem()
-	greeterServiceServerType = reflect.TypeOf((*GreeterServiceServer)(nil)).Elem()
+	greeterServiceClientType  = reflect.TypeOf((*GreeterServiceClient)(nil)).Elem()
+	greeterServiceServerType  = reflect.TypeOf((*GreeterServiceServer)(nil)).Elem()
+	greeterServiceHandlerType = reflect.TypeOf((*GreeterServiceHandler)(nil)).Elem()
 
-	userServiceClientType = reflect.TypeOf((*UserServiceClient)(nil)).Elem()
-	userServiceServerType = reflect.TypeOf((*UserServiceServer)(nil)).Elem()
+	userServiceClientType  = reflect.TypeOf((*UserServiceClient)(nil)).Elem()
+	userServiceServerType  = reflect.TypeOf((*UserServiceServer)(nil)).Elem()
+	userServiceHandlerType = reflect.TypeOf((*UserServiceHandler)(nil)).Elem()
 )
 
 // GreeterServiceClientType .
@@ -50,11 +52,17 @@ func GreeterServiceClientType() reflect.Type { return greeterServiceClientType }
 // GreeterServiceServerType .
 func GreeterServiceServerType() reflect.Type { return greeterServiceServerType }
 
+// GreeterServiceHandlerType .
+func GreeterServiceHandlerType() reflect.Type { return greeterServiceHandlerType }
+
 // UserServiceClientType .
 func UserServiceClientType() reflect.Type { return userServiceClientType }
 
 // UserServiceServerType .
 func UserServiceServerType() reflect.Type { return userServiceServerType }
+
+// UserServiceHandlerType .
+func UserServiceHandlerType() reflect.Type { return userServiceHandlerType }
 
 func Types() []reflect.Type {
 	return []reflect.Type{
@@ -64,5 +72,8 @@ func Types() []reflect.Type {
 		// server types
 		greeterServiceServerType,
 		userServiceServerType,
+		// handler types
+		greeterServiceHandlerType,
+		userServiceHandlerType,
 	}
 }

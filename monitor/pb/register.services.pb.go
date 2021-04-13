@@ -26,8 +26,9 @@ func ServiceNames(svr ...string) []string {
 }
 
 var (
-	todoserviceClientType = reflect.TypeOf((*TODOServiceClient)(nil)).Elem()
-	todoserviceServerType = reflect.TypeOf((*TODOServiceServer)(nil)).Elem()
+	todoserviceClientType  = reflect.TypeOf((*TODOServiceClient)(nil)).Elem()
+	todoserviceServerType  = reflect.TypeOf((*TODOServiceServer)(nil)).Elem()
+	todoserviceHandlerType = reflect.TypeOf((*TODOServiceHandler)(nil)).Elem()
 )
 
 // TODOServiceClientType .
@@ -36,11 +37,16 @@ func TODOServiceClientType() reflect.Type { return todoserviceClientType }
 // TODOServiceServerType .
 func TODOServiceServerType() reflect.Type { return todoserviceServerType }
 
+// TODOServiceHandlerType .
+func TODOServiceHandlerType() reflect.Type { return todoserviceHandlerType }
+
 func Types() []reflect.Type {
 	return []reflect.Type{
 		// client types
 		todoserviceClientType,
 		// server types
 		todoserviceServerType,
+		// handler types
+		todoserviceHandlerType,
 	}
 }
