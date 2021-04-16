@@ -11,5 +11,32 @@
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 
+# Files for macos
+*.DS_Store
+._*
+
+# Files for ideas
+.idea/*
+*.iml
+
+# Files for vim
+.*.sw?
+
+# Files for direnv
+.envrc
+
+# Files for vscode
+.vscode/*
+.vendor/*
+
 # Dependency directories (remove the comment below to include it)
-# vendor/
+/vendor/
+
+# build output
+/bin
+
+# for local debug
+/.env
+/.env.*
+
+# generated files
