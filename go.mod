@@ -3,9 +3,9 @@ module github.com/erda-project/erda-proto-go
 go 1.14
 
 require (
-	github.com/erda-project/erda-infra v0.0.0-20210406064843-766ab170fe54
-	google.golang.org/genproto v0.0.0-20210317182105-75c7a8546eb9
-	google.golang.org/grpc v1.31.0
+	github.com/erda-project/erda-infra v0.0.0-20210412035315-b1699f584b1e
+	google.golang.org/genproto v0.0.0-20210406143921-e86de6bf7a46
+	google.golang.org/grpc v1.36.1
 	google.golang.org/protobuf v1.26.0
 )
 
