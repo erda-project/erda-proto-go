@@ -20,11 +20,11 @@ const _ = http.SupportPackageIsVersion1
 
 // ConfigCenterServiceHandler is the server API for ConfigCenterService service.
 type ConfigCenterServiceHandler interface {
-	// GET /api/tmc/config/tenants/{tenantId}/groups
+	// GET /api/tmc/config/tenants/{tenantID}/groups
 	GetGroups(context.Context, *GetGroupRequest) (*GetGroupResponse, error)
-	// GET /config/tenants/{tenantId}/groups/{groupId}
+	// GET /api/tmc/config/tenants/{tenantID}/groups/{groupID}
 	GetGroupProperties(context.Context, *GetGroupPropertiesRequest) (*GetGroupPropertiesResponse, error)
-	// POST /api/tmc/config/tenants/{tenantId}/groups/{groupId}
+	// POST /api/tmc/config/tenants/{tenantID}/groups/{groupID}
 	SaveGroupProperties(context.Context, *SaveGroupPropertiesRequest) (*SaveGroupPropertiesResponse, error)
 }
 
@@ -86,8 +86,8 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 					}
 					for k, val := range vars {
 						switch k {
-						case "tenantId":
-							in.TenantId = val
+						case "tenantID":
+							in.TenantID = val
 						}
 					}
 				}
@@ -143,10 +143,10 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 					}
 					for k, val := range vars {
 						switch k {
-						case "tenantId":
-							in.TenantId = val
-						case "groupId":
-							in.GroupId = val
+						case "tenantID":
+							in.TenantID = val
+						case "groupID":
+							in.GroupID = val
 						}
 					}
 				}
@@ -202,10 +202,10 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 					}
 					for k, val := range vars {
 						switch k {
-						case "tenantId":
-							in.TenantId = val
-						case "groupId":
-							in.GroupId = val
+						case "tenantID":
+							in.TenantID = val
+						case "groupID":
+							in.GroupID = val
 						}
 					}
 				}
@@ -222,7 +222,7 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 		)
 	}
 
-	add_GetGroups("GET", "/api/tmc/config/tenants/{tenantId}/groups", srv.GetGroups)
-	add_GetGroupProperties("GET", "/config/tenants/{tenantId}/groups/{groupId}", srv.GetGroupProperties)
-	add_SaveGroupProperties("POST", "/api/tmc/config/tenants/{tenantId}/groups/{groupId}", srv.SaveGroupProperties)
+	add_GetGroups("GET", "/api/tmc/config/tenants/{tenantID}/groups", srv.GetGroups)
+	add_GetGroupProperties("GET", "/api/tmc/config/tenants/{tenantID}/groups/{groupID}", srv.GetGroupProperties)
+	add_SaveGroupProperties("POST", "/api/tmc/config/tenants/{tenantID}/groups/{groupID}", srv.SaveGroupProperties)
 }

@@ -31,6 +31,7 @@ build_protocol() {
                  --msg_out="${MODULE_PATH}/pb" \
                  --service_out="${MODULE_PATH}/pb" \
                  --client_out="${MODULE_PATH}/client" \
+                 --validate=true \
                  ${path}/*.proto
         fi;
     done;
