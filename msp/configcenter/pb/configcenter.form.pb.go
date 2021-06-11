@@ -13,21 +13,21 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*GetGroupRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetGroupResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*ConfigCenterGroups)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Groups)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetGroupPropertiesRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetGroupPropertiesResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*ConfigCenterPropertyList)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*ConfigCenterProperty)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*SaveGroupPropertiesRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*SaveGroupPropertiesResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GroupProperties)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Property)(nil)
 
 // GetGroupRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetGroupRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "tenantId":
-				m.TenantId = vals[0]
+			case "tenantID":
+				m.TenantID = vals[0]
 			case "keyword":
 				m.Keyword = vals[0]
 			case "pageNum":
@@ -55,11 +55,11 @@ func (m *GetGroupResponse) UnmarshalURLValues(prefix string, values url.Values) 
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &ConfigCenterGroups{}
+					m.Data = &Groups{}
 				}
 			case "data.total":
 				if m.Data == nil {
-					m.Data = &ConfigCenterGroups{}
+					m.Data = &Groups{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -72,8 +72,8 @@ func (m *GetGroupResponse) UnmarshalURLValues(prefix string, values url.Values) 
 	return nil
 }
 
-// ConfigCenterGroups implement urlenc.URLValuesUnmarshaler.
-func (m *ConfigCenterGroups) UnmarshalURLValues(prefix string, values url.Values) error {
+// Groups implement urlenc.URLValuesUnmarshaler.
+func (m *Groups) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -94,10 +94,10 @@ func (m *GetGroupPropertiesRequest) UnmarshalURLValues(prefix string, values url
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "tenantId":
-				m.TenantId = vals[0]
-			case "groupId":
-				m.GroupId = vals[0]
+			case "tenantID":
+				m.TenantID = vals[0]
+			case "groupID":
+				m.GroupID = vals[0]
 			}
 		}
 	}
@@ -109,37 +109,15 @@ func (m *GetGroupPropertiesResponse) UnmarshalURLValues(prefix string, values ur
 	return nil
 }
 
-// ConfigCenterPropertyList implement urlenc.URLValuesUnmarshaler.
-func (m *ConfigCenterPropertyList) UnmarshalURLValues(prefix string, values url.Values) error {
-	return nil
-}
-
-// ConfigCenterProperty implement urlenc.URLValuesUnmarshaler.
-func (m *ConfigCenterProperty) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "key":
-				m.Key = vals[0]
-			case "value":
-				m.Value = vals[0]
-			case "source":
-				m.Source = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
 // SaveGroupPropertiesRequest implement urlenc.URLValuesUnmarshaler.
 func (m *SaveGroupPropertiesRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "tenantId":
-				m.TenantId = vals[0]
-			case "groupId":
-				m.GroupId = vals[0]
+			case "tenantID":
+				m.TenantID = vals[0]
+			case "groupID":
+				m.GroupID = vals[0]
 			}
 		}
 	}
@@ -157,6 +135,36 @@ func (m *SaveGroupPropertiesResponse) UnmarshalURLValues(prefix string, values u
 					return err
 				}
 				m.Data = val
+			}
+		}
+	}
+	return nil
+}
+
+// GroupProperties implement urlenc.URLValuesUnmarshaler.
+func (m *GroupProperties) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "group":
+				m.Group = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// Property implement urlenc.URLValuesUnmarshaler.
+func (m *Property) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "key":
+				m.Key = vals[0]
+			case "value":
+				m.Value = vals[0]
+			case "source":
+				m.Source = vals[0]
 			}
 		}
 	}
