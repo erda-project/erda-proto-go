@@ -17,7 +17,7 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func (this *SpanRequest) Validate() error {
+func (this *GetSpansRequest) Validate() error {
 	if this.TraceId == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("TraceId", fmt.Errorf(`value '%v' must not be an empty string`, this.TraceId))
 	}
@@ -26,13 +26,13 @@ func (this *SpanRequest) Validate() error {
 	}
 	return nil
 }
-func (this *TraceRequest) Validate() error {
+func (this *GetTracesRequest) Validate() error {
 	if this.ScopeId == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("ScopeId", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeId))
 	}
 	return nil
 }
-func (this *SpanResponse) Validate() error {
+func (this *GetSpansResponse) Validate() error {
 	for _, item := range this.Data {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
@@ -42,7 +42,7 @@ func (this *SpanResponse) Validate() error {
 	}
 	return nil
 }
-func (this *TraceResponse) Validate() error {
+func (this *GetTracesResponse) Validate() error {
 	for _, item := range this.Data {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {

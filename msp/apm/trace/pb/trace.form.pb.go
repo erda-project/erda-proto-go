@@ -11,15 +11,15 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
-var _ urlenc.URLValuesUnmarshaler = (*SpanRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*TraceRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*SpanResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*TraceResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetSpansRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetTracesRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetSpansResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetTracesResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Span)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Trace)(nil)
 
-// SpanRequest implement urlenc.URLValuesUnmarshaler.
-func (m *SpanRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetSpansRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetSpansRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -39,8 +39,8 @@ func (m *SpanRequest) UnmarshalURLValues(prefix string, values url.Values) error
 	return nil
 }
 
-// TraceRequest implement urlenc.URLValuesUnmarshaler.
-func (m *TraceRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetTracesRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -82,13 +82,13 @@ func (m *TraceRequest) UnmarshalURLValues(prefix string, values url.Values) erro
 	return nil
 }
 
-// SpanResponse implement urlenc.URLValuesUnmarshaler.
-func (m *SpanResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetSpansResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetSpansResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
-// TraceResponse implement urlenc.URLValuesUnmarshaler.
-func (m *TraceResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetTracesResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetTracesResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 

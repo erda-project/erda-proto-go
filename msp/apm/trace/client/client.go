@@ -36,10 +36,10 @@ type traceServiceWrapper struct {
 	opts   []grpc1.CallOption
 }
 
-func (s *traceServiceWrapper) GetSpansBySpecifyTrace(ctx context.Context, req *pb.SpanRequest) (*pb.SpanResponse, error) {
-	return s.client.GetSpansBySpecifyTrace(ctx, req, s.opts...)
+func (s *traceServiceWrapper) GetSpans(ctx context.Context, req *pb.GetSpansRequest) (*pb.GetSpansResponse, error) {
+	return s.client.GetSpans(ctx, req, s.opts...)
 }
 
-func (s *traceServiceWrapper) GetTraces(ctx context.Context, req *pb.TraceRequest) (*pb.TraceResponse, error) {
+func (s *traceServiceWrapper) GetTraces(ctx context.Context, req *pb.GetTracesRequest) (*pb.GetTracesResponse, error) {
 	return s.client.GetTraces(ctx, req, s.opts...)
 }

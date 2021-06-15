@@ -21,9 +21,9 @@ const _ = http.SupportPackageIsVersion1
 // TraceServiceHandler is the server API for TraceService service.
 type TraceServiceHandler interface {
 	// GET /api/apm/trace/{traceId}/spans
-	GetSpansBySpecifyTrace(context.Context, *SpanRequest) (*SpanResponse, error)
+	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
 	// GET /api/apm/traces
-	GetTraces(context.Context, *TraceRequest) (*TraceResponse, error)
+	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
 }
 
 // RegisterTraceServiceHandler register TraceServiceHandler to http.Router.
@@ -45,13 +45,13 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		}
 	}
 
-	add_GetSpansBySpecifyTrace := func(method, path string, fn func(context.Context, *SpanRequest) (*SpanResponse, error)) {
+	add_GetSpans := func(method, path string, fn func(context.Context, *GetSpansRequest) (*GetSpansResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*SpanRequest))
+			return fn(ctx, req.(*GetSpansRequest))
 		}
-		var GetSpansBySpecifyTrace_info transport.ServiceInfo
+		var GetSpans_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetSpansBySpecifyTrace_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetSpansBySpecifyTrace", srv)
+			GetSpans_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetSpans", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -59,7 +59,7 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in SpanRequest
+				var in GetSpansRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -91,7 +91,7 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 				}
 				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSpansBySpecifyTrace_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSpans_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -102,9 +102,9 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		)
 	}
 
-	add_GetTraces := func(method, path string, fn func(context.Context, *TraceRequest) (*TraceResponse, error)) {
+	add_GetTraces := func(method, path string, fn func(context.Context, *GetTracesRequest) (*GetTracesResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*TraceRequest))
+			return fn(ctx, req.(*GetTracesRequest))
 		}
 		var GetTraces_info transport.ServiceInfo
 		if h.Interceptor != nil {
@@ -113,7 +113,7 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in TraceRequest
+				var in GetTracesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -136,6 +136,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		)
 	}
 
-	add_GetSpansBySpecifyTrace("GET", "/api/apm/trace/{traceId}/spans", srv.GetSpansBySpecifyTrace)
+	add_GetSpans("GET", "/api/apm/trace/{traceId}/spans", srv.GetSpans)
 	add_GetTraces("GET", "/api/apm/traces", srv.GetTraces)
 }
