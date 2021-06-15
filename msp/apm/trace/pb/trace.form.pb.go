@@ -28,7 +28,11 @@ func (m *SpanRequest) UnmarshalURLValues(prefix string, values url.Values) error
 			case "scopeId":
 				m.ScopeId = vals[0]
 			case "limit":
-				m.Limit = vals[0]
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Limit = val
 			}
 		}
 	}
@@ -67,7 +71,11 @@ func (m *TraceRequest) UnmarshalURLValues(prefix string, values url.Values) erro
 				}
 				m.EndTime = val
 			case "limit":
-				m.Limit = vals[0]
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Limit = val
 			}
 		}
 	}
