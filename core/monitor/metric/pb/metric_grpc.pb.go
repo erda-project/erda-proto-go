@@ -20,7 +20,10 @@ const _ = grpc.SupportPackageIsVersion5
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MetricServiceClient interface {
-	Query(ctx context.Context, in *QueryRequst, opts ...grpc.CallOption) (*QueryResponse, error)
+	QueryWithInfluxFormat(ctx context.Context, in *QueryWithInfluxFormatRequest, opts ...grpc.CallOption) (*QueryWithInfluxFormatResponse, error)
+	SearchWithInfluxFormat(ctx context.Context, in *QueryWithInfluxFormatRequest, opts ...grpc.CallOption) (*QueryWithInfluxFormatResponse, error)
+	QueryWithTableFormat(ctx context.Context, in *QueryWithTableFormatRequest, opts ...grpc.CallOption) (*QueryWithTableFormatResponse, error)
+	SearchWithTableFormat(ctx context.Context, in *QueryWithTableFormatRequest, opts ...grpc.CallOption) (*QueryWithTableFormatResponse, error)
 }
 
 type metricServiceClient struct {
@@ -31,9 +34,36 @@ func NewMetricServiceClient(cc grpc1.ClientConnInterface) MetricServiceClient {
 	return &metricServiceClient{cc}
 }
 
-func (c *metricServiceClient) Query(ctx context.Context, in *QueryRequst, opts ...grpc.CallOption) (*QueryResponse, error) {
-	out := new(QueryResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/Query", in, out, opts...)
+func (c *metricServiceClient) QueryWithInfluxFormat(ctx context.Context, in *QueryWithInfluxFormatRequest, opts ...grpc.CallOption) (*QueryWithInfluxFormatResponse, error) {
+	out := new(QueryWithInfluxFormatResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/QueryWithInfluxFormat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *metricServiceClient) SearchWithInfluxFormat(ctx context.Context, in *QueryWithInfluxFormatRequest, opts ...grpc.CallOption) (*QueryWithInfluxFormatResponse, error) {
+	out := new(QueryWithInfluxFormatResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/SearchWithInfluxFormat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *metricServiceClient) QueryWithTableFormat(ctx context.Context, in *QueryWithTableFormatRequest, opts ...grpc.CallOption) (*QueryWithTableFormatResponse, error) {
+	out := new(QueryWithTableFormatResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/QueryWithTableFormat", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *metricServiceClient) SearchWithTableFormat(ctx context.Context, in *QueryWithTableFormatRequest, opts ...grpc.CallOption) (*QueryWithTableFormatResponse, error) {
+	out := new(QueryWithTableFormatResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/SearchWithTableFormat", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -44,15 +74,27 @@ func (c *metricServiceClient) Query(ctx context.Context, in *QueryRequst, opts .
 // All implementations should embed UnimplementedMetricServiceServer
 // for forward compatibility
 type MetricServiceServer interface {
-	Query(context.Context, *QueryRequst) (*QueryResponse, error)
+	QueryWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
+	SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
+	QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
+	SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
 }
 
 // UnimplementedMetricServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedMetricServiceServer struct {
 }
 
-func (*UnimplementedMetricServiceServer) Query(context.Context, *QueryRequst) (*QueryResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method Query not implemented")
+func (*UnimplementedMetricServiceServer) QueryWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWithInfluxFormat not implemented")
+}
+func (*UnimplementedMetricServiceServer) SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchWithInfluxFormat not implemented")
+}
+func (*UnimplementedMetricServiceServer) QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryWithTableFormat not implemented")
+}
+func (*UnimplementedMetricServiceServer) SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method SearchWithTableFormat not implemented")
 }
 
 func RegisterMetricServiceServer(s grpc1.ServiceRegistrar, srv MetricServiceServer, opts ...grpc1.HandleOption) {
@@ -73,38 +115,134 @@ func _get_MetricService_serviceDesc(srv MetricServiceServer, opts ...grpc1.Handl
 		op(h)
 	}
 
-	_MetricService_Query_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.Query(ctx, req.(*QueryRequst))
+	_MetricService_QueryWithInfluxFormat_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.QueryWithInfluxFormat(ctx, req.(*QueryWithInfluxFormatRequest))
 	}
-	var _MetricService_Query_info transport.ServiceInfo
+	var _MetricService_QueryWithInfluxFormat_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_MetricService_Query_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "Query", srv)
-		_MetricService_Query_Handler = h.Interceptor(_MetricService_Query_Handler)
+		_MetricService_QueryWithInfluxFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "QueryWithInfluxFormat", srv)
+		_MetricService_QueryWithInfluxFormat_Handler = h.Interceptor(_MetricService_QueryWithInfluxFormat_Handler)
+	}
+
+	_MetricService_SearchWithInfluxFormat_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.SearchWithInfluxFormat(ctx, req.(*QueryWithInfluxFormatRequest))
+	}
+	var _MetricService_SearchWithInfluxFormat_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_MetricService_SearchWithInfluxFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "SearchWithInfluxFormat", srv)
+		_MetricService_SearchWithInfluxFormat_Handler = h.Interceptor(_MetricService_SearchWithInfluxFormat_Handler)
+	}
+
+	_MetricService_QueryWithTableFormat_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.QueryWithTableFormat(ctx, req.(*QueryWithTableFormatRequest))
+	}
+	var _MetricService_QueryWithTableFormat_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_MetricService_QueryWithTableFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "QueryWithTableFormat", srv)
+		_MetricService_QueryWithTableFormat_Handler = h.Interceptor(_MetricService_QueryWithTableFormat_Handler)
+	}
+
+	_MetricService_SearchWithTableFormat_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.SearchWithTableFormat(ctx, req.(*QueryWithTableFormatRequest))
+	}
+	var _MetricService_SearchWithTableFormat_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_MetricService_SearchWithTableFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "SearchWithTableFormat", srv)
+		_MetricService_SearchWithTableFormat_Handler = h.Interceptor(_MetricService_SearchWithTableFormat_Handler)
 	}
 
 	var serviceDesc = _MetricService_serviceDesc
 	serviceDesc.Methods = []grpc.MethodDesc{
 		{
-			MethodName: "Query",
+			MethodName: "QueryWithInfluxFormat",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(QueryRequst)
+				in := new(QueryWithInfluxFormatRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(MetricServiceServer).Query(ctx, in)
+					return srv.(MetricServiceServer).QueryWithInfluxFormat(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_Query_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_QueryWithInfluxFormat_info)
 				}
 				if interceptor == nil {
-					return _MetricService_Query_Handler(ctx, in)
+					return _MetricService_QueryWithInfluxFormat_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.metric.MetricService/Query",
+					FullMethod: "/erda.core.monitor.metric.MetricService/QueryWithInfluxFormat",
 				}
-				return interceptor(ctx, in, info, _MetricService_Query_Handler)
+				return interceptor(ctx, in, info, _MetricService_QueryWithInfluxFormat_Handler)
+			},
+		},
+		{
+			MethodName: "SearchWithInfluxFormat",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(QueryWithInfluxFormatRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(MetricServiceServer).SearchWithInfluxFormat(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_SearchWithInfluxFormat_info)
+				}
+				if interceptor == nil {
+					return _MetricService_SearchWithInfluxFormat_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.core.monitor.metric.MetricService/SearchWithInfluxFormat",
+				}
+				return interceptor(ctx, in, info, _MetricService_SearchWithInfluxFormat_Handler)
+			},
+		},
+		{
+			MethodName: "QueryWithTableFormat",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(QueryWithTableFormatRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(MetricServiceServer).QueryWithTableFormat(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_QueryWithTableFormat_info)
+				}
+				if interceptor == nil {
+					return _MetricService_QueryWithTableFormat_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.core.monitor.metric.MetricService/QueryWithTableFormat",
+				}
+				return interceptor(ctx, in, info, _MetricService_QueryWithTableFormat_Handler)
+			},
+		},
+		{
+			MethodName: "SearchWithTableFormat",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(QueryWithTableFormatRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(MetricServiceServer).SearchWithTableFormat(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_SearchWithTableFormat_info)
+				}
+				if interceptor == nil {
+					return _MetricService_SearchWithTableFormat_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.core.monitor.metric.MetricService/SearchWithTableFormat",
+				}
+				return interceptor(ctx, in, info, _MetricService_SearchWithTableFormat_Handler)
 			},
 		},
 	}

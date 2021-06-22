@@ -5,9 +5,11 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
 	proto "github.com/golang/protobuf/proto"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "google.golang.org/protobuf/types/known/anypb"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -15,9 +17,93 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func (this *QueryRequst) Validate() error {
+func (this *QueryWithInfluxFormatRequest) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Filters {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Filters", err)
+			}
+		}
+	}
 	return nil
 }
-func (this *QueryResponse) Validate() error {
+func (this *QueryWithInfluxFormatResponse) Validate() error {
+	if this.Results != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Results); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Results", err)
+		}
+	}
+	return nil
+}
+func (this *Series) Validate() error {
+	for _, item := range this.Values {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Values", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *Results) Validate() error {
+	for _, item := range this.Services {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Services", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *QueryWithTableFormatRequest) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Filters {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Filters", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *QueryWithTableFormatResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *TableResult) Validate() error {
+	for _, item := range this.Cols {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Cols", err)
+			}
+		}
+	}
+	for _, item := range this.Data {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *TableColumn) Validate() error {
+	return nil
+}
+func (this *TableRow) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
+	return nil
+}
+func (this *Filter) Validate() error {
+	if this.Value != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Value); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Value", err)
+		}
+	}
 	return nil
 }

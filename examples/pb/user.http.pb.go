@@ -21,9 +21,11 @@ const _ = http.SupportPackageIsVersion1
 // UserServiceHandler is the server API for UserService service.
 type UserServiceHandler interface {
 	// get user
+	// +publish path:"/user/{id}"
 	// GET /api/user/{id}
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// update user
+	// +private
 	// PUT /api/user/{id}
 	UpdateUser(context.Context, *GetUserRequest) (*UpdateUserResponse, error)
 }

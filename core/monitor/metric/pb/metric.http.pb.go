@@ -17,8 +17,14 @@ const _ = http.SupportPackageIsVersion1
 
 // MetricServiceHandler is the server API for MetricService service.
 type MetricServiceHandler interface {
-	// GET /api/todo
-	Query(context.Context, *QueryRequst) (*QueryResponse, error)
+	// POST /query
+	QueryWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
+	// GET /query
+	SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
+	// POST /api/query
+	QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
+	// GET /api/query
+	SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
 }
 
 // RegisterMetricServiceHandler register MetricServiceHandler to http.Router.
@@ -40,18 +46,18 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 	}
 
-	add_Query := func(method, path string, fn func(context.Context, *QueryRequst) (*QueryResponse, error)) {
+	add_QueryWithInfluxFormat := func(method, path string, fn func(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*QueryRequst))
+			return fn(ctx, req.(*QueryWithInfluxFormatRequest))
 		}
-		var Query_info transport.ServiceInfo
+		var QueryWithInfluxFormat_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			Query_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "Query", srv)
+			QueryWithInfluxFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "QueryWithInfluxFormat", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in QueryRequst
+				var in QueryWithInfluxFormatRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -63,7 +69,7 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				}
 				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, Query_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithInfluxFormat_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -74,5 +80,110 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		)
 	}
 
-	add_Query("GET", "/api/todo", srv.Query)
+	add_SearchWithInfluxFormat := func(method, path string, fn func(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*QueryWithInfluxFormatRequest))
+		}
+		var SearchWithInfluxFormat_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			SearchWithInfluxFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "SearchWithInfluxFormat", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in QueryWithInfluxFormatRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithInfluxFormat_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_QueryWithTableFormat := func(method, path string, fn func(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*QueryWithTableFormatRequest))
+		}
+		var QueryWithTableFormat_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			QueryWithTableFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "QueryWithTableFormat", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in QueryWithTableFormatRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithTableFormat_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_SearchWithTableFormat := func(method, path string, fn func(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*QueryWithTableFormatRequest))
+		}
+		var SearchWithTableFormat_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			SearchWithTableFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "SearchWithTableFormat", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in QueryWithTableFormatRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithTableFormat_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_QueryWithInfluxFormat("POST", "/query", srv.QueryWithInfluxFormat)
+	add_SearchWithInfluxFormat("GET", "/query", srv.SearchWithInfluxFormat)
+	add_QueryWithTableFormat("POST", "/api/query", srv.QueryWithTableFormat)
+	add_SearchWithTableFormat("GET", "/api/query", srv.SearchWithTableFormat)
 }

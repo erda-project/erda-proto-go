@@ -21,6 +21,7 @@ const _ = http.SupportPackageIsVersion1
 // GreeterServiceHandler is the server API for GreeterService service.
 type GreeterServiceHandler interface {
 	// say hello
+	// +publish
 	// GET /api/hello/{name}
 	SayHello(context.Context, *HelloRequest) (*HelloResponse, error)
 }
