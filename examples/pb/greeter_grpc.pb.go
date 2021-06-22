@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion5
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreeterServiceClient interface {
 	// say hello
+	// +publish
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
 }
 
@@ -46,6 +47,7 @@ func (c *greeterServiceClient) SayHello(ctx context.Context, in *HelloRequest, o
 // for forward compatibility
 type GreeterServiceServer interface {
 	// say hello
+	// +publish
 	SayHello(context.Context, *HelloRequest) (*HelloResponse, error)
 }
 
