@@ -40,8 +40,8 @@ func (m *ListMetricNamesRequest) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "scope":
 				m.Scope = vals[0]
-			case "scopeID":
-				m.ScopeID = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			}
 		}
 	}
@@ -60,8 +60,8 @@ func (m *ListMetricMetaRequest) UnmarshalURLValues(prefix string, values url.Val
 			switch prefix + key {
 			case "scope":
 				m.Scope = vals[0]
-			case "scopeID":
-				m.ScopeID = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			case "metrics":
 				m.Metrics = vals[0]
 			}
@@ -82,8 +82,8 @@ func (m *ListMetricGroupsRequest) UnmarshalURLValues(prefix string, values url.V
 			switch prefix + key {
 			case "scope":
 				m.Scope = vals[0]
-			case "scopeID":
-				m.ScopeID = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			case "mode":
 				m.Mode = vals[0]
 			}
@@ -104,8 +104,8 @@ func (m *GetMetricGroupRequest) UnmarshalURLValues(prefix string, values url.Val
 			switch prefix + key {
 			case "scope":
 				m.Scope = vals[0]
-			case "scopeID":
-				m.ScopeID = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			case "id":
 				m.Id = vals[0]
 			case "mode":
@@ -133,6 +133,10 @@ func (m *GetMetricGroupResponse) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "id":
 				m.Id = vals[0]
+			case "meta":
+				if m.Meta == nil {
+					m.Meta = &MetaMode{}
+				}
 			}
 		}
 	}
@@ -144,9 +148,9 @@ func (m *GroupMetricMeta) UnmarshalURLValues(prefix string, values url.Values) e
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "Metric":
+			case "metric":
 				m.Metric = vals[0]
-			case "Name":
+			case "name":
 				m.Name = vals[0]
 			}
 		}
