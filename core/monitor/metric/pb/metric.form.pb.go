@@ -23,6 +23,7 @@ var _ urlenc.URLValuesUnmarshaler = (*TableResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TableColumn)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TableRow)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Filter)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*MapValue)(nil)
 
 // QueryWithInfluxFormatRequest implement urlenc.URLValuesUnmarshaler.
 func (m *QueryWithInfluxFormatRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -195,5 +196,10 @@ func (m *Filter) UnmarshalURLValues(prefix string, values url.Values) error {
 			}
 		}
 	}
+	return nil
+}
+
+// MapValue implement urlenc.URLValuesUnmarshaler.
+func (m *MapValue) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
