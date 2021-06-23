@@ -133,6 +133,10 @@ func (m *GetMetricGroupResponse) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "id":
 				m.Id = vals[0]
+			case "meta":
+				if m.Meta == nil {
+					m.Meta = &MetaMode{}
+				}
 			}
 		}
 	}
@@ -144,9 +148,9 @@ func (m *GroupMetricMeta) UnmarshalURLValues(prefix string, values url.Values) e
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "Metric":
+			case "metric":
 				m.Metric = vals[0]
-			case "Name":
+			case "name":
 				m.Name = vals[0]
 			}
 		}
