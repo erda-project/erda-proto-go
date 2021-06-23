@@ -21,12 +21,17 @@ var _ urlenc.URLValuesUnmarshaler = (*ListMetricGroupsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ListMetricGroupsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetMetricGroupRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetMetricGroupResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GroupMetricMeta)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*MetricMeta)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*NameDefine)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TagDefine)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*FieldDefine)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ValueDefine)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Group)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*MetaMode)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*TypeDefine)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Aggregation)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Operation)(nil)
 
 // ListMetricNamesRequest implement urlenc.URLValuesUnmarshaler.
 func (m *ListMetricNamesRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -123,6 +128,29 @@ func (m *GetMetricGroupRequest) UnmarshalURLValues(prefix string, values url.Val
 
 // GetMetricGroupResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetMetricGroupResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "id":
+				m.Id = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GroupMetricMeta implement urlenc.URLValuesUnmarshaler.
+func (m *GroupMetricMeta) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "Metric":
+				m.Metric = vals[0]
+			case "Name":
+				m.Name = vals[0]
+			}
+		}
+	}
 	return nil
 }
 
@@ -246,6 +274,54 @@ func (m *Group) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Order = int32(val)
+			}
+		}
+	}
+	return nil
+}
+
+// MetaMode implement urlenc.URLValuesUnmarshaler.
+func (m *MetaMode) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// TypeDefine implement urlenc.URLValuesUnmarshaler.
+func (m *TypeDefine) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// Aggregation implement urlenc.URLValuesUnmarshaler.
+func (m *Aggregation) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "aggregation":
+				m.Aggregation = vals[0]
+			case "name":
+				m.Name = vals[0]
+			case "result_type":
+				m.ResultType = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// Operation implement urlenc.URLValuesUnmarshaler.
+func (m *Operation) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "operation":
+				m.Operation = vals[0]
+			case "name":
+				m.Name = vals[0]
+			case "multi":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Multi = val
 			}
 		}
 	}
