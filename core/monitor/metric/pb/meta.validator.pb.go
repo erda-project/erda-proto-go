@@ -5,11 +5,11 @@ package pb
 
 import (
 	fmt "fmt"
-	proto "github.com/golang/protobuf/proto"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
-	_ "google.golang.org/protobuf/types/known/anypb"
 	math "math"
+	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/known/anypb"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -34,6 +34,13 @@ func (this *ListMetricMetaRequest) Validate() error {
 	return nil
 }
 func (this *ListMetricMetaResponse) Validate() error {
+	for _, item := range this.Metas {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Metas", err)
+			}
+		}
+	}
 	return nil
 }
 func (this *ListMetricGroupsRequest) Validate() error {
@@ -53,6 +60,42 @@ func (this *GetMetricGroupRequest) Validate() error {
 	return nil
 }
 func (this *GetMetricGroupResponse) Validate() error {
+	if this.Meta != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Meta); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Meta", err)
+		}
+	}
+	for _, item := range this.Metrics {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Metrics", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *GroupMetricMeta) Validate() error {
+	for _, item := range this.Filters {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Filters", err)
+			}
+		}
+	}
+	for _, item := range this.Fields {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Fields", err)
+			}
+		}
+	}
+	for _, item := range this.Tags {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Tags", err)
+			}
+		}
+	}
 	return nil
 }
 func (this *MetricMeta) Validate() error {
@@ -105,5 +148,46 @@ func (this *Group) Validate() error {
 			}
 		}
 	}
+	return nil
+}
+func (this *MetaMode) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Filters {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Filters", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *TypeDefine) Validate() error {
+	for _, item := range this.Aggregations {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Aggregations", err)
+			}
+		}
+	}
+	for _, item := range this.Operations {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Operations", err)
+			}
+		}
+	}
+	for _, item := range this.Filters {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Filters", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *Aggregation) Validate() error {
+	return nil
+}
+func (this *Operation) Validate() error {
 	return nil
 }

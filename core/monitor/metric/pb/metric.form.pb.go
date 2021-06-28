@@ -15,8 +15,9 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*QueryWithInfluxFormatRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryWithInfluxFormatResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Series)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Results)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Serie)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Row)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Result)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryWithTableFormatRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryWithTableFormatResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TableResult)(nil)
@@ -33,8 +34,8 @@ func (m *QueryWithInfluxFormatRequest) UnmarshalURLValues(prefix string, values 
 				m.Start = vals[0]
 			case "end":
 				m.End = vals[0]
-			case "q":
-				m.Q = vals[0]
+			case "statement":
+				m.Statement = vals[0]
 			}
 		}
 	}
@@ -43,26 +44,11 @@ func (m *QueryWithInfluxFormatRequest) UnmarshalURLValues(prefix string, values 
 
 // QueryWithInfluxFormatResponse implement urlenc.URLValuesUnmarshaler.
 func (m *QueryWithInfluxFormatResponse) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "results":
-				if m.Results == nil {
-					m.Results = &Results{}
-				}
-			case "results.statement_id":
-				if m.Results == nil {
-					m.Results = &Results{}
-				}
-				m.Results.StatementId = vals[0]
-			}
-		}
-	}
 	return nil
 }
 
-// Series implement urlenc.URLValuesUnmarshaler.
-func (m *Series) UnmarshalURLValues(prefix string, values url.Values) error {
+// Serie implement urlenc.URLValuesUnmarshaler.
+func (m *Serie) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -74,8 +60,13 @@ func (m *Series) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
-// Results implement urlenc.URLValuesUnmarshaler.
-func (m *Results) UnmarshalURLValues(prefix string, values url.Values) error {
+// Row implement urlenc.URLValuesUnmarshaler.
+func (m *Row) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// Result implement urlenc.URLValuesUnmarshaler.
+func (m *Result) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -96,6 +87,8 @@ func (m *QueryWithTableFormatRequest) UnmarshalURLValues(prefix string, values u
 				m.Start = vals[0]
 			case "end":
 				m.End = vals[0]
+			case "statement":
+				m.Statement = vals[0]
 			}
 		}
 	}
