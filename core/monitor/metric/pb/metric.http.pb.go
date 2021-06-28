@@ -67,6 +67,10 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["q"]; len(vals) > 0 {
+					in.Statement = vals[0]
+				}
 				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithInfluxFormat_info)
@@ -100,6 +104,10 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
+				}
+				params := r.URL.Query()
+				if vals := params["q"]; len(vals) > 0 {
+					in.Statement = vals[0]
 				}
 				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
