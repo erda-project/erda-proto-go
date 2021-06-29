@@ -200,13 +200,6 @@ func (this *CustomizeAlertDetail) Validate() error {
 			}
 		}
 	}
-	for _, item := range this.Lang {
-		if item != nil {
-			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
-				return github_com_mwitkow_go_proto_validators.FieldError("Lang", err)
-			}
-		}
-	}
 	return nil
 }
 func (this *CustomizeAlertRule) Validate() error {
@@ -248,9 +241,6 @@ func (this *CustomizeAlertNotifyTemplates) Validate() error {
 	// Validation of proto3 map<> fields is unsupported.
 	return nil
 }
-func (this *LanguageCode) Validate() error {
-	return nil
-}
 func (this *GetCustomizeAlertDetailRequest) Validate() error {
 	if !(this.Id > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
@@ -266,9 +256,19 @@ func (this *GetCustomizeAlertDetailResponse) Validate() error {
 	return nil
 }
 func (this *CreateCustomizeAlertRequest) Validate() error {
-	if this.Alert != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
 		}
 	}
 	return nil
@@ -279,6 +279,11 @@ func (this *CreateCustomizeAlertResponse) Validate() error {
 func (this *UpdateCustomizeAlertRequest) Validate() error {
 	if !(this.Id > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
+	}
+	if this.Alert != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+		}
 	}
 	return nil
 }
@@ -359,9 +364,19 @@ func (this *GetOrgCustomizeAlertDetailResponse) Validate() error {
 	return nil
 }
 func (this *CreateOrgCustomizeAlertRequest) Validate() error {
-	if this.Alert != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
 		}
 	}
 	return nil
@@ -402,12 +417,27 @@ func (this *DeleteOrgCustomizeAlertRequest) Validate() error {
 	return nil
 }
 func (this *DeleteOrgCustomizeAlertResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
 	return nil
 }
 func (this *QueryDashboardByAlertRequest) Validate() error {
-	if this.Alert != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
 		}
 	}
 	return nil
@@ -462,6 +492,24 @@ func (this *API) Validate() error {
 	// Validation of proto3 map<> fields is unsupported.
 	// Validation of proto3 map<> fields is unsupported.
 	// Validation of proto3 map<> fields is unsupported.
+	return nil
+}
+func (this *QueryOrgDashboardByAlertRequest) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
+		}
+	}
 	return nil
 }
 func (this *QueryOrgDashboardByAlertResponse) Validate() error {
@@ -626,7 +674,7 @@ func (this *AlertExpression) Validate() error {
 	}
 	return nil
 }
-func (this *AlertExpression_AlertExpressionFunction) Validate() error {
+func (this *AlertExpressionFunction) Validate() error {
 	if this.Value != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Value); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Value", err)
@@ -706,12 +754,36 @@ func (this *GetAlertDetailResponse) Validate() error {
 	}
 	return nil
 }
+func (this *CreateAlertRequest) Validate() error {
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
+		}
+	}
+	// Validation of proto3 map<> fields is unsupported.
+	// Validation of proto3 map<> fields is unsupported.
+	return nil
+}
 func (this *CreateAlertResponse) Validate() error {
 	return nil
 }
 func (this *UpdateAlertRequest) Validate() error {
 	if !(this.Id > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
+	}
+	if this.Alert != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+		}
 	}
 	return nil
 }
@@ -734,6 +806,7 @@ func (this *DeleteAlertRequest) Validate() error {
 	return nil
 }
 func (this *DeleteAlertResponse) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
 	return nil
 }
 func (this *QueryOrgAlertRuleRequest) Validate() error {
@@ -791,6 +864,25 @@ func (this *GetOrgAlertDetailResponse) Validate() error {
 	}
 	return nil
 }
+func (this *CreateOrgAlertRequest) Validate() error {
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
+		}
+	}
+	// Validation of proto3 map<> fields is unsupported.
+	// Validation of proto3 map<> fields is unsupported.
+	return nil
+}
 func (this *CreateOrgAlertResponse) Validate() error {
 	if !(this.Id > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
@@ -827,6 +919,7 @@ func (this *DeleteOrgAlertRequest) Validate() error {
 	return nil
 }
 func (this *DeleteOrgAlertResponse) Validate() error {
+	// Validation of proto3 map<> fields is unsupported.
 	return nil
 }
 func (this *GetAlertRecordAttrRequest) Validate() error {
@@ -1020,7 +1113,7 @@ func (this *QueryOrgHostsAlertRecordRequest) Validate() error {
 	}
 	return nil
 }
-func (this *QueryOrgHostsAlertRecordRequestClusterReq) Validate() error {
+func (this *ClusterReq) Validate() error {
 	return nil
 }
 func (this *QueryOrgAlertRecordResponse) Validate() error {
