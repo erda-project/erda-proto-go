@@ -108,7 +108,7 @@ func (s *monitorServiceWrapper) QueryDashboardByAlert(ctx context.Context, req *
 	return s.client.QueryDashboardByAlert(ctx, req, s.opts...)
 }
 
-func (s *monitorServiceWrapper) QueryOrgDashboardByAlert(ctx context.Context, req *pb.CustomizeAlertDetail) (*pb.QueryOrgDashboardByAlertResponse, error) {
+func (s *monitorServiceWrapper) QueryOrgDashboardByAlert(ctx context.Context, req *pb.QueryOrgDashboardByAlertRequest) (*pb.QueryOrgDashboardByAlertResponse, error) {
 	return s.client.QueryOrgDashboardByAlert(ctx, req, s.opts...)
 }
 
@@ -128,7 +128,7 @@ func (s *monitorServiceWrapper) GetAlertDetail(ctx context.Context, req *pb.GetA
 	return s.client.GetAlertDetail(ctx, req, s.opts...)
 }
 
-func (s *monitorServiceWrapper) CreateAlert(ctx context.Context, req *pb.Alert) (*pb.CreateAlertResponse, error) {
+func (s *monitorServiceWrapper) CreateAlert(ctx context.Context, req *pb.CreateAlertRequest) (*pb.CreateAlertResponse, error) {
 	return s.client.CreateAlert(ctx, req, s.opts...)
 }
 
@@ -156,7 +156,7 @@ func (s *monitorServiceWrapper) GetOrgAlertDetail(ctx context.Context, req *pb.G
 	return s.client.GetOrgAlertDetail(ctx, req, s.opts...)
 }
 
-func (s *monitorServiceWrapper) CreateOrgAlert(ctx context.Context, req *pb.Alert) (*pb.CreateOrgAlertResponse, error) {
+func (s *monitorServiceWrapper) CreateOrgAlert(ctx context.Context, req *pb.CreateOrgAlertRequest) (*pb.CreateOrgAlertResponse, error) {
 	return s.client.CreateOrgAlert(ctx, req, s.opts...)
 }
 

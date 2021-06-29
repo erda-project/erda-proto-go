@@ -38,19 +38,19 @@ type MonitorServiceClient interface {
 	UpdateOrgCustomizeAlertEnable(ctx context.Context, in *UpdateOrgCustomizeAlertEnableRequest, opts ...grpc.CallOption) (*UpdateOrgCustomizeAlertEnableResponse, error)
 	DeleteOrgCustomizeAlert(ctx context.Context, in *DeleteOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*DeleteOrgCustomizeAlertResponse, error)
 	QueryDashboardByAlert(ctx context.Context, in *QueryDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryDashboardByAlertResponse, error)
-	QueryOrgDashboardByAlert(ctx context.Context, in *CustomizeAlertDetail, opts ...grpc.CallOption) (*QueryOrgDashboardByAlertResponse, error)
+	QueryOrgDashboardByAlert(ctx context.Context, in *QueryOrgDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryOrgDashboardByAlertResponse, error)
 	QueryAlertRule(ctx context.Context, in *QueryAlertRuleRequest, opts ...grpc.CallOption) (*QueryAlertRuleResponse, error)
 	QueryAlert(ctx context.Context, in *QueryAlertRequest, opts ...grpc.CallOption) (*QueryAlertsResponse, error)
 	GetAlert(ctx context.Context, in *GetAlertRequest, opts ...grpc.CallOption) (*GetAlertResponse, error)
 	GetAlertDetail(ctx context.Context, in *GetAlertDetailRequest, opts ...grpc.CallOption) (*GetAlertDetailResponse, error)
-	CreateAlert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*CreateAlertResponse, error)
+	CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error)
 	UpdateAlert(ctx context.Context, in *UpdateAlertRequest, opts ...grpc.CallOption) (*UpdateAlertResponse, error)
 	UpdateAlertEnable(ctx context.Context, in *UpdateAlertEnableRequest, opts ...grpc.CallOption) (*UpdateAlertEnableResponse, error)
 	DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...grpc.CallOption) (*DeleteAlertResponse, error)
 	QueryOrgAlertRule(ctx context.Context, in *QueryOrgAlertRuleRequest, opts ...grpc.CallOption) (*QueryOrgAlertRuleResponse, error)
 	QueryOrgAlert(ctx context.Context, in *QueryOrgAlertRequest, opts ...grpc.CallOption) (*QueryOrgAlertResponse, error)
 	GetOrgAlertDetail(ctx context.Context, in *GetOrgAlertDetailRequest, opts ...grpc.CallOption) (*GetOrgAlertDetailResponse, error)
-	CreateOrgAlert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*CreateOrgAlertResponse, error)
+	CreateOrgAlert(ctx context.Context, in *CreateOrgAlertRequest, opts ...grpc.CallOption) (*CreateOrgAlertResponse, error)
 	UpdateOrgAlert(ctx context.Context, in *UpdateOrgAlertRequest, opts ...grpc.CallOption) (*UpdateOrgAlertResponse, error)
 	UpdateOrgAlertEnable(ctx context.Context, in *UpdateOrgAlertEnableRequest, opts ...grpc.CallOption) (*UpdateOrgAlertEnableResponse, error)
 	DeleteOrgAlert(ctx context.Context, in *DeleteOrgAlertRequest, opts ...grpc.CallOption) (*DeleteOrgAlertResponse, error)
@@ -239,7 +239,7 @@ func (c *monitorServiceClient) QueryDashboardByAlert(ctx context.Context, in *Qu
 	return out, nil
 }
 
-func (c *monitorServiceClient) QueryOrgDashboardByAlert(ctx context.Context, in *CustomizeAlertDetail, opts ...grpc.CallOption) (*QueryOrgDashboardByAlertResponse, error) {
+func (c *monitorServiceClient) QueryOrgDashboardByAlert(ctx context.Context, in *QueryOrgDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryOrgDashboardByAlertResponse, error) {
 	out := new(QueryOrgDashboardByAlertResponse)
 	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgDashboardByAlert", in, out, opts...)
 	if err != nil {
@@ -284,7 +284,7 @@ func (c *monitorServiceClient) GetAlertDetail(ctx context.Context, in *GetAlertD
 	return out, nil
 }
 
-func (c *monitorServiceClient) CreateAlert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*CreateAlertResponse, error) {
+func (c *monitorServiceClient) CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error) {
 	out := new(CreateAlertResponse)
 	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateAlert", in, out, opts...)
 	if err != nil {
@@ -347,7 +347,7 @@ func (c *monitorServiceClient) GetOrgAlertDetail(ctx context.Context, in *GetOrg
 	return out, nil
 }
 
-func (c *monitorServiceClient) CreateOrgAlert(ctx context.Context, in *Alert, opts ...grpc.CallOption) (*CreateOrgAlertResponse, error) {
+func (c *monitorServiceClient) CreateOrgAlert(ctx context.Context, in *CreateOrgAlertRequest, opts ...grpc.CallOption) (*CreateOrgAlertResponse, error) {
 	out := new(CreateOrgAlertResponse)
 	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateOrgAlert", in, out, opts...)
 	if err != nil {
@@ -522,19 +522,19 @@ type MonitorServiceServer interface {
 	UpdateOrgCustomizeAlertEnable(context.Context, *UpdateOrgCustomizeAlertEnableRequest) (*UpdateOrgCustomizeAlertEnableResponse, error)
 	DeleteOrgCustomizeAlert(context.Context, *DeleteOrgCustomizeAlertRequest) (*DeleteOrgCustomizeAlertResponse, error)
 	QueryDashboardByAlert(context.Context, *QueryDashboardByAlertRequest) (*QueryDashboardByAlertResponse, error)
-	QueryOrgDashboardByAlert(context.Context, *CustomizeAlertDetail) (*QueryOrgDashboardByAlertResponse, error)
+	QueryOrgDashboardByAlert(context.Context, *QueryOrgDashboardByAlertRequest) (*QueryOrgDashboardByAlertResponse, error)
 	QueryAlertRule(context.Context, *QueryAlertRuleRequest) (*QueryAlertRuleResponse, error)
 	QueryAlert(context.Context, *QueryAlertRequest) (*QueryAlertsResponse, error)
 	GetAlert(context.Context, *GetAlertRequest) (*GetAlertResponse, error)
 	GetAlertDetail(context.Context, *GetAlertDetailRequest) (*GetAlertDetailResponse, error)
-	CreateAlert(context.Context, *Alert) (*CreateAlertResponse, error)
+	CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)
 	UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error)
 	UpdateAlertEnable(context.Context, *UpdateAlertEnableRequest) (*UpdateAlertEnableResponse, error)
 	DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error)
 	QueryOrgAlertRule(context.Context, *QueryOrgAlertRuleRequest) (*QueryOrgAlertRuleResponse, error)
 	QueryOrgAlert(context.Context, *QueryOrgAlertRequest) (*QueryOrgAlertResponse, error)
 	GetOrgAlertDetail(context.Context, *GetOrgAlertDetailRequest) (*GetOrgAlertDetailResponse, error)
-	CreateOrgAlert(context.Context, *Alert) (*CreateOrgAlertResponse, error)
+	CreateOrgAlert(context.Context, *CreateOrgAlertRequest) (*CreateOrgAlertResponse, error)
 	UpdateOrgAlert(context.Context, *UpdateOrgAlertRequest) (*UpdateOrgAlertResponse, error)
 	UpdateOrgAlertEnable(context.Context, *UpdateOrgAlertEnableRequest) (*UpdateOrgAlertEnableResponse, error)
 	DeleteOrgAlert(context.Context, *DeleteOrgAlertRequest) (*DeleteOrgAlertResponse, error)
@@ -611,7 +611,7 @@ func (*UnimplementedMonitorServiceServer) DeleteOrgCustomizeAlert(context.Contex
 func (*UnimplementedMonitorServiceServer) QueryDashboardByAlert(context.Context, *QueryDashboardByAlertRequest) (*QueryDashboardByAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryDashboardByAlert not implemented")
 }
-func (*UnimplementedMonitorServiceServer) QueryOrgDashboardByAlert(context.Context, *CustomizeAlertDetail) (*QueryOrgDashboardByAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgDashboardByAlert(context.Context, *QueryOrgDashboardByAlertRequest) (*QueryOrgDashboardByAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgDashboardByAlert not implemented")
 }
 func (*UnimplementedMonitorServiceServer) QueryAlertRule(context.Context, *QueryAlertRuleRequest) (*QueryAlertRuleResponse, error) {
@@ -626,7 +626,7 @@ func (*UnimplementedMonitorServiceServer) GetAlert(context.Context, *GetAlertReq
 func (*UnimplementedMonitorServiceServer) GetAlertDetail(context.Context, *GetAlertDetailRequest) (*GetAlertDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlertDetail not implemented")
 }
-func (*UnimplementedMonitorServiceServer) CreateAlert(context.Context, *Alert) (*CreateAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAlert not implemented")
 }
 func (*UnimplementedMonitorServiceServer) UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error) {
@@ -647,7 +647,7 @@ func (*UnimplementedMonitorServiceServer) QueryOrgAlert(context.Context, *QueryO
 func (*UnimplementedMonitorServiceServer) GetOrgAlertDetail(context.Context, *GetOrgAlertDetailRequest) (*GetOrgAlertDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgAlertDetail not implemented")
 }
-func (*UnimplementedMonitorServiceServer) CreateOrgAlert(context.Context, *Alert) (*CreateOrgAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateOrgAlert(context.Context, *CreateOrgAlertRequest) (*CreateOrgAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrgAlert not implemented")
 }
 func (*UnimplementedMonitorServiceServer) UpdateOrgAlert(context.Context, *UpdateOrgAlertRequest) (*UpdateOrgAlertResponse, error) {
@@ -880,7 +880,7 @@ func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.Han
 	}
 
 	_MonitorService_QueryOrgDashboardByAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.QueryOrgDashboardByAlert(ctx, req.(*CustomizeAlertDetail))
+		return srv.QueryOrgDashboardByAlert(ctx, req.(*QueryOrgDashboardByAlertRequest))
 	}
 	var _MonitorService_QueryOrgDashboardByAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
@@ -925,7 +925,7 @@ func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.Han
 	}
 
 	_MonitorService_CreateAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.CreateAlert(ctx, req.(*Alert))
+		return srv.CreateAlert(ctx, req.(*CreateAlertRequest))
 	}
 	var _MonitorService_CreateAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
@@ -988,7 +988,7 @@ func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.Han
 	}
 
 	_MonitorService_CreateOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.CreateOrgAlert(ctx, req.(*Alert))
+		return srv.CreateOrgAlert(ctx, req.(*CreateOrgAlertRequest))
 	}
 	var _MonitorService_CreateOrgAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
@@ -1559,7 +1559,7 @@ func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.Han
 		{
 			MethodName: "QueryOrgDashboardByAlert",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(CustomizeAlertDetail)
+				in := new(QueryOrgDashboardByAlertRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
@@ -1674,7 +1674,7 @@ func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.Han
 		{
 			MethodName: "CreateAlert",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(Alert)
+				in := new(CreateAlertRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
@@ -1835,7 +1835,7 @@ func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.Han
 		{
 			MethodName: "CreateOrgAlert",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(Alert)
+				in := new(CreateOrgAlertRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}

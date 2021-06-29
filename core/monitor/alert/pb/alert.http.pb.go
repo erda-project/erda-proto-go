@@ -58,7 +58,7 @@ type MonitorServiceHandler interface {
 	// POST /api/customize/alerts/dash-preview/query
 	QueryDashboardByAlert(context.Context, *QueryDashboardByAlertRequest) (*QueryDashboardByAlertResponse, error)
 	// POST /api/orgs/customize/alerts/dash-preview/query
-	QueryOrgDashboardByAlert(context.Context, *CustomizeAlertDetail) (*QueryOrgDashboardByAlertResponse, error)
+	QueryOrgDashboardByAlert(context.Context, *QueryOrgDashboardByAlertRequest) (*QueryOrgDashboardByAlertResponse, error)
 	// GET /api/alerts/rules
 	QueryAlertRule(context.Context, *QueryAlertRuleRequest) (*QueryAlertRuleResponse, error)
 	// GET /api/alerts
@@ -68,7 +68,7 @@ type MonitorServiceHandler interface {
 	// GET /api/alerts/{id}/detail
 	GetAlertDetail(context.Context, *GetAlertDetailRequest) (*GetAlertDetailResponse, error)
 	// POST /api/alerts
-	CreateAlert(context.Context, *Alert) (*CreateAlertResponse, error)
+	CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)
 	// PUT /api/alerts/{id}
 	UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error)
 	// PUT /api/alerts/{id}/switch
@@ -82,7 +82,7 @@ type MonitorServiceHandler interface {
 	// GET /api/orgs/alerts/{id}
 	GetOrgAlertDetail(context.Context, *GetOrgAlertDetailRequest) (*GetOrgAlertDetailResponse, error)
 	// POST /api/orgs/alerts
-	CreateOrgAlert(context.Context, *Alert) (*CreateOrgAlertResponse, error)
+	CreateOrgAlert(context.Context, *CreateOrgAlertRequest) (*CreateOrgAlertResponse, error)
 	// PUT /api/orgs/alerts/{id}
 	UpdateOrgAlert(context.Context, *UpdateOrgAlertRequest) (*UpdateOrgAlertResponse, error)
 	// PUT /api/orgs/alerts/{id}/switch
@@ -991,9 +991,9 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 		)
 	}
 
-	add_QueryOrgDashboardByAlert := func(method, path string, fn func(context.Context, *CustomizeAlertDetail) (*QueryOrgDashboardByAlertResponse, error)) {
+	add_QueryOrgDashboardByAlert := func(method, path string, fn func(context.Context, *QueryOrgDashboardByAlertRequest) (*QueryOrgDashboardByAlertResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*CustomizeAlertDetail))
+			return fn(ctx, req.(*QueryOrgDashboardByAlertRequest))
 		}
 		var QueryOrgDashboardByAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
@@ -1002,7 +1002,7 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in CustomizeAlertDetail
+				var in QueryOrgDashboardByAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -1215,9 +1215,9 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 		)
 	}
 
-	add_CreateAlert := func(method, path string, fn func(context.Context, *Alert) (*CreateAlertResponse, error)) {
+	add_CreateAlert := func(method, path string, fn func(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*Alert))
+			return fn(ctx, req.(*CreateAlertRequest))
 		}
 		var CreateAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
@@ -1226,7 +1226,7 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in Alert
+				var in CreateAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -1561,9 +1561,9 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 		)
 	}
 
-	add_CreateOrgAlert := func(method, path string, fn func(context.Context, *Alert) (*CreateOrgAlertResponse, error)) {
+	add_CreateOrgAlert := func(method, path string, fn func(context.Context, *CreateOrgAlertRequest) (*CreateOrgAlertResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*Alert))
+			return fn(ctx, req.(*CreateOrgAlertRequest))
 		}
 		var CreateOrgAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
@@ -1572,7 +1572,7 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in Alert
+				var in CreateOrgAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
