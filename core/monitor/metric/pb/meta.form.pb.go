@@ -4,9 +4,8 @@
 package pb
 
 import (
-	base64 "encoding/base64"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	anypb "google.golang.org/protobuf/types/known/anypb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	url "net/url"
 	strconv "strconv"
 )
@@ -21,6 +20,7 @@ var _ urlenc.URLValuesUnmarshaler = (*ListMetricGroupsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ListMetricGroupsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetMetricGroupRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetMetricGroupResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*MetricGroup)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GroupMetricMeta)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*MetricMeta)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*NameDefine)(nil)
@@ -62,8 +62,6 @@ func (m *ListMetricMetaRequest) UnmarshalURLValues(prefix string, values url.Val
 				m.Scope = vals[0]
 			case "scopeID":
 				m.ScopeID = vals[0]
-			case "metrics":
-				m.Metrics = vals[0]
 			}
 		}
 	}
@@ -128,6 +126,33 @@ func (m *GetMetricGroupRequest) UnmarshalURLValues(prefix string, values url.Val
 
 // GetMetricGroupResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetMetricGroupResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &MetricGroup{}
+				}
+			case "data.id":
+				if m.Data == nil {
+					m.Data = &MetricGroup{}
+				}
+				m.Data.Id = vals[0]
+			case "data.meta":
+				if m.Data == nil {
+					m.Data = &MetricGroup{}
+				}
+				if m.Data.Meta == nil {
+					m.Data.Meta = &MetaMode{}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+// MetricGroup implement urlenc.URLValuesUnmarshaler.
+func (m *MetricGroup) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -241,22 +266,49 @@ func (m *ValueDefine) UnmarshalURLValues(prefix string, values url.Values) error
 				m.Name = vals[0]
 			case "value":
 				if m.Value == nil {
-					m.Value = &anypb.Any{}
+					m.Value = &structpb.Value{}
 				}
-			case "value.type_url":
+			case "value.null_value":
 				if m.Value == nil {
-					m.Value = &anypb.Any{}
+					m.Value = &structpb.Value{}
 				}
-				m.Value.TypeUrl = vals[0]
-			case "value.value":
+			case "value.number_value":
 				if m.Value == nil {
-					m.Value = &anypb.Any{}
+					m.Value = &structpb.Value{}
 				}
-				val, err := base64.StdEncoding.DecodeString(vals[0])
+				val, err := strconv.ParseFloat(vals[0], 64)
 				if err != nil {
 					return err
 				}
-				m.Value.Value = val
+				m.Value.NumberValue = val
+			case "value.string_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				m.Value.StringValue = vals[0]
+			case "value.bool_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Value.BoolValue = val
+			case "value.struct_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				if m.Value.StructValue == nil {
+					m.Value.StructValue = &structpb.Struct{}
+				}
+			case "value.list_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				if m.Value.ListValue == nil {
+					m.Value.ListValue = &structpb.ListValue{}
+				}
 			}
 		}
 	}

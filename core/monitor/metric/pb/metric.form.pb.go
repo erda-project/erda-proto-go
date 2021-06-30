@@ -4,9 +4,8 @@
 package pb
 
 import (
-	base64 "encoding/base64"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	anypb "google.golang.org/protobuf/types/known/anypb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	url "net/url"
 	strconv "strconv"
 )
@@ -169,22 +168,49 @@ func (m *Filter) UnmarshalURLValues(prefix string, values url.Values) error {
 				m.Op = vals[0]
 			case "value":
 				if m.Value == nil {
-					m.Value = &anypb.Any{}
+					m.Value = &structpb.Value{}
 				}
-			case "value.type_url":
+			case "value.null_value":
 				if m.Value == nil {
-					m.Value = &anypb.Any{}
+					m.Value = &structpb.Value{}
 				}
-				m.Value.TypeUrl = vals[0]
-			case "value.value":
+			case "value.number_value":
 				if m.Value == nil {
-					m.Value = &anypb.Any{}
+					m.Value = &structpb.Value{}
 				}
-				val, err := base64.StdEncoding.DecodeString(vals[0])
+				val, err := strconv.ParseFloat(vals[0], 64)
 				if err != nil {
 					return err
 				}
-				m.Value.Value = val
+				m.Value.NumberValue = val
+			case "value.string_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				m.Value.StringValue = vals[0]
+			case "value.bool_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Value.BoolValue = val
+			case "value.struct_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				if m.Value.StructValue == nil {
+					m.Value.StructValue = &structpb.Struct{}
+				}
+			case "value.list_value":
+				if m.Value == nil {
+					m.Value = &structpb.Value{}
+				}
+				if m.Value.ListValue == nil {
+					m.Value.ListValue = &structpb.ListValue{}
+				}
 			}
 		}
 	}
