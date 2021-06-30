@@ -37,9 +37,9 @@ type menuServiceWrapper struct {
 }
 
 func (s *menuServiceWrapper) GetMenu(ctx context.Context, req *pb.GetMenuRequest) (*pb.GetMenuResponse, error) {
-	return s.client.GetMenu(ctx, req, s.opts...)
+	return s.client.GetMenu(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *menuServiceWrapper) GetSetting(ctx context.Context, req *pb.GetSettingRequest) (*pb.GetSettingResponse, error) {
-	return s.client.GetSetting(ctx, req, s.opts...)
+	return s.client.GetSetting(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

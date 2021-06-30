@@ -37,13 +37,13 @@ type configCenterServiceWrapper struct {
 }
 
 func (s *configCenterServiceWrapper) GetGroups(ctx context.Context, req *pb.GetGroupRequest) (*pb.GetGroupResponse, error) {
-	return s.client.GetGroups(ctx, req, s.opts...)
+	return s.client.GetGroups(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *configCenterServiceWrapper) GetGroupProperties(ctx context.Context, req *pb.GetGroupPropertiesRequest) (*pb.GetGroupPropertiesResponse, error) {
-	return s.client.GetGroupProperties(ctx, req, s.opts...)
+	return s.client.GetGroupProperties(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *configCenterServiceWrapper) SaveGroupProperties(ctx context.Context, req *pb.SaveGroupPropertiesRequest) (*pb.SaveGroupPropertiesResponse, error) {
-	return s.client.SaveGroupProperties(ctx, req, s.opts...)
+	return s.client.SaveGroupProperties(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
