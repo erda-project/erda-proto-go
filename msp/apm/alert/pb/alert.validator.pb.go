@@ -179,7 +179,7 @@ func (this *AlertExpression) Validate() error {
 	}
 	return nil
 }
-func (this *AlertExpression_AlertExpressionFunction) Validate() error {
+func (this *AlertExpressionFunction) Validate() error {
 	if this.Value != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Value); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Value", err)
@@ -312,6 +312,14 @@ func (this *DeleteAlertRequest) Validate() error {
 	return nil
 }
 func (this *DeleteAlertResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *DeleteAlertData) Validate() error {
 	return nil
 }
 func (this *QueryCustomizeMetricRequest) Validate() error {
@@ -478,13 +486,6 @@ func (this *CustomizeAlertDetail) Validate() error {
 			}
 		}
 	}
-	for _, item := range this.Lang {
-		if item != nil {
-			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
-				return github_com_mwitkow_go_proto_validators.FieldError("Lang", err)
-			}
-		}
-	}
 	return nil
 }
 func (this *CustomizeAlertRule) Validate() error {
@@ -526,13 +527,20 @@ func (this *CustomizeAlertNotifyTemplates) Validate() error {
 	// Validation of proto3 map<> fields is unsupported.
 	return nil
 }
-func (this *LanguageCode) Validate() error {
-	return nil
-}
 func (this *CreateCustomizeAlertRequest) Validate() error {
-	if this.Alert != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
 		}
 	}
 	return nil
@@ -552,9 +560,19 @@ func (this *UpdateCustomizeAlertRequest) Validate() error {
 	if !(this.Id > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
 	}
-	if this.Alert != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
 		}
 	}
 	return nil
@@ -689,9 +707,19 @@ func (this *UpdateAlertRecordIssueResponse) Validate() error {
 	return nil
 }
 func (this *DashboardPreviewRequest) Validate() error {
-	if this.Alert != nil {
-		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Alert); err != nil {
-			return github_com_mwitkow_go_proto_validators.FieldError("Alert", err)
+	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
 		}
 	}
 	return nil
