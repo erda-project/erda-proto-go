@@ -4,11 +4,12 @@
 package pb
 
 import (
-	base64 "encoding/base64"
+	json "encoding/json"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	anypb "google.golang.org/protobuf/types/known/anypb"
+	structpb "google.golang.org/protobuf/types/known/structpb"
 	url "net/url"
 	strconv "strconv"
+	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -54,6 +55,8 @@ func (m *Serie) UnmarshalURLValues(prefix string, values url.Values) error {
 			switch prefix + key {
 			case "name":
 				m.Name = vals[0]
+			case "columns":
+				m.Columns = vals
 			}
 		}
 	}
@@ -168,23 +171,29 @@ func (m *Filter) UnmarshalURLValues(prefix string, values url.Values) error {
 			case "op":
 				m.Op = vals[0]
 			case "value":
-				if m.Value == nil {
-					m.Value = &anypb.Any{}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Value = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Value = val
+					} else {
+						m.Value = structpb.NewStringValue(vals[0])
+					}
 				}
-			case "value.type_url":
-				if m.Value == nil {
-					m.Value = &anypb.Any{}
-				}
-				m.Value.TypeUrl = vals[0]
-			case "value.value":
-				if m.Value == nil {
-					m.Value = &anypb.Any{}
-				}
-				val, err := base64.StdEncoding.DecodeString(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Value.Value = val
 			}
 		}
 	}

@@ -111,6 +111,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
@@ -119,9 +122,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
-				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -145,7 +145,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListInterface_info)
 				}
@@ -183,14 +184,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
 				if vals := params["nacosId"]; len(vals) > 0 {
 					in.NacosID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -214,7 +215,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHTTPServices_info)
 				}
@@ -252,11 +254,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["nacosId"]; len(vals) > 0 {
 					in.NacosID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -280,7 +282,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, EnableHTTPService_info)
 				}
@@ -354,7 +357,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetRouteRule_info)
 				}
@@ -392,6 +396,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
@@ -400,9 +407,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -428,7 +432,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateRouteRule_info)
 				}
@@ -466,17 +471,17 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
-				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -502,7 +507,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteRouteRule_info)
 				}
@@ -540,14 +546,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -573,7 +579,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHostRule_info)
 				}
@@ -644,7 +651,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateHostRule_info)
 				}
@@ -682,14 +690,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
+				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
-				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -715,7 +723,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteHostRule_info)
 				}
@@ -753,14 +762,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -786,7 +795,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHostRuntimeRule_info)
 				}
@@ -824,14 +834,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -857,7 +867,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateHostRuntimeRule_info)
 				}
@@ -895,9 +906,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
@@ -906,6 +914,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -929,7 +940,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllHostRuntimeRules_info)
 				}
@@ -967,14 +979,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1000,7 +1012,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceTime_info)
 				}
@@ -1038,14 +1051,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
-				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1071,7 +1084,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceQPS_info)
 				}
@@ -1109,14 +1123,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1142,7 +1156,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceFailed_info)
 				}
@@ -1213,7 +1228,8 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceAvgTime_info)
 				}

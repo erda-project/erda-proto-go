@@ -37,9 +37,9 @@ type traceServiceWrapper struct {
 }
 
 func (s *traceServiceWrapper) GetSpans(ctx context.Context, req *pb.GetSpansRequest) (*pb.GetSpansResponse, error) {
-	return s.client.GetSpans(ctx, req, s.opts...)
+	return s.client.GetSpans(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *traceServiceWrapper) GetTraces(ctx context.Context, req *pb.GetTracesRequest) (*pb.GetTracesResponse, error) {
-	return s.client.GetTraces(ctx, req, s.opts...)
+	return s.client.GetTraces(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

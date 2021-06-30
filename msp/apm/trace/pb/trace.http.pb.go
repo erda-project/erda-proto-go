@@ -89,7 +89,8 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSpans_info)
 				}
@@ -123,7 +124,8 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraces_info)
 				}

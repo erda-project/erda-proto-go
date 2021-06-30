@@ -157,7 +157,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeMetric_info)
 				}
@@ -191,7 +192,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeNotifyTarget_info)
 				}
@@ -225,7 +227,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgCustomizeNotifyTarget_info)
 				}
@@ -259,7 +262,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeAlert_info)
 				}
@@ -320,7 +324,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCustomizeAlert_info)
 				}
@@ -381,7 +386,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCustomizeAlertDetail_info)
 				}
@@ -415,7 +421,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateCustomizeAlert_info)
 				}
@@ -476,7 +483,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomizeAlert_info)
 				}
@@ -537,7 +545,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomizeAlertEnable_info)
 				}
@@ -598,7 +607,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCustomizeAlert_info)
 				}
@@ -632,7 +642,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgCustomizeMetric_info)
 				}
@@ -666,7 +677,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgCustomizeAlerts_info)
 				}
@@ -727,7 +739,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetOrgCustomizeAlertDetail_info)
 				}
@@ -761,7 +774,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateOrgCustomizeAlert_info)
 				}
@@ -822,7 +836,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateOrgCustomizeAlert_info)
 				}
@@ -883,7 +898,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateOrgCustomizeAlertEnable_info)
 				}
@@ -944,7 +960,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteOrgCustomizeAlert_info)
 				}
@@ -978,7 +995,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryDashboardByAlert_info)
 				}
@@ -1012,7 +1030,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgDashboardByAlert_info)
 				}
@@ -1046,7 +1065,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlertRule_info)
 				}
@@ -1080,7 +1100,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlert_info)
 				}
@@ -1141,7 +1162,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlert_info)
 				}
@@ -1202,7 +1224,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertDetail_info)
 				}
@@ -1236,7 +1259,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAlert_info)
 				}
@@ -1297,7 +1321,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlert_info)
 				}
@@ -1358,7 +1383,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlertEnable_info)
 				}
@@ -1419,7 +1445,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteAlert_info)
 				}
@@ -1453,7 +1480,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgAlertRule_info)
 				}
@@ -1487,7 +1515,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgAlert_info)
 				}
@@ -1548,7 +1577,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetOrgAlertDetail_info)
 				}
@@ -1582,7 +1612,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateOrgAlert_info)
 				}
@@ -1643,7 +1674,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateOrgAlert_info)
 				}
@@ -1704,7 +1736,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateOrgAlertEnable_info)
 				}
@@ -1765,7 +1798,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteOrgAlert_info)
 				}
@@ -1799,7 +1833,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecordAttr_info)
 				}
@@ -1833,7 +1868,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlertRecord_info)
 				}
@@ -1890,7 +1926,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecord_info)
 				}
@@ -1947,7 +1984,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlertHistory_info)
 				}
@@ -2004,7 +2042,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAlertIssue_info)
 				}
@@ -2067,7 +2106,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlertIssue_info)
 				}
@@ -2101,7 +2141,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetOrgAlertRecordAttr_info)
 				}
@@ -2135,7 +2176,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgAlertRecord_info)
 				}
@@ -2169,7 +2211,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						return nil, err
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgHostsAlertRecord_info)
 				}
@@ -2226,7 +2269,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetOrgAlertRecord_info)
 				}
@@ -2283,7 +2327,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryOrgAlertHistory_info)
 				}
@@ -2340,7 +2385,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateOrgAlertIssue_info)
 				}
@@ -2397,7 +2443,8 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateOrgAlertIssue_info)
 				}

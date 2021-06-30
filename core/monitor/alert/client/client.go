@@ -37,189 +37,189 @@ type monitorServiceWrapper struct {
 }
 
 func (s *monitorServiceWrapper) QueryCustomizeMetric(ctx context.Context, req *pb.QueryCustomizeMetricRequest) (*pb.QueryCustomizeMetricResponse, error) {
-	return s.client.QueryCustomizeMetric(ctx, req, s.opts...)
+	return s.client.QueryCustomizeMetric(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryCustomizeNotifyTarget(ctx context.Context, req *pb.QueryCustomizeNotifyTargetRequest) (*pb.QueryCustomizeNotifyTargetResponse, error) {
-	return s.client.QueryCustomizeNotifyTarget(ctx, req, s.opts...)
+	return s.client.QueryCustomizeNotifyTarget(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgCustomizeNotifyTarget(ctx context.Context, req *pb.QueryOrgCustomizeNotifyTargetRequest) (*pb.QueryOrgCustomizeNotifyTargetResponse, error) {
-	return s.client.QueryOrgCustomizeNotifyTarget(ctx, req, s.opts...)
+	return s.client.QueryOrgCustomizeNotifyTarget(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryCustomizeAlert(ctx context.Context, req *pb.QueryCustomizeAlertRequest) (*pb.QueryCustomizeAlertResponse, error) {
-	return s.client.QueryCustomizeAlert(ctx, req, s.opts...)
+	return s.client.QueryCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetCustomizeAlert(ctx context.Context, req *pb.GetCustomizeAlertRequest) (*pb.GetCustomizeAlertResponse, error) {
-	return s.client.GetCustomizeAlert(ctx, req, s.opts...)
+	return s.client.GetCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetCustomizeAlertDetail(ctx context.Context, req *pb.GetCustomizeAlertDetailRequest) (*pb.GetCustomizeAlertDetailResponse, error) {
-	return s.client.GetCustomizeAlertDetail(ctx, req, s.opts...)
+	return s.client.GetCustomizeAlertDetail(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) CreateCustomizeAlert(ctx context.Context, req *pb.CreateCustomizeAlertRequest) (*pb.CreateCustomizeAlertResponse, error) {
-	return s.client.CreateCustomizeAlert(ctx, req, s.opts...)
+	return s.client.CreateCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateCustomizeAlert(ctx context.Context, req *pb.UpdateCustomizeAlertRequest) (*pb.UpdateCustomizeAlertResponse, error) {
-	return s.client.UpdateCustomizeAlert(ctx, req, s.opts...)
+	return s.client.UpdateCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateCustomizeAlertEnable(ctx context.Context, req *pb.UpdateCustomizeAlertEnableRequest) (*pb.UpdateCustomizeAlertEnableResponse, error) {
-	return s.client.UpdateCustomizeAlertEnable(ctx, req, s.opts...)
+	return s.client.UpdateCustomizeAlertEnable(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) DeleteCustomizeAlert(ctx context.Context, req *pb.DeleteCustomizeAlertRequest) (*pb.DeleteCustomizeAlertResponse, error) {
-	return s.client.DeleteCustomizeAlert(ctx, req, s.opts...)
+	return s.client.DeleteCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgCustomizeMetric(ctx context.Context, req *pb.QueryOrgCustomizeMetricRequest) (*pb.QueryOrgCustomizeMetricResponse, error) {
-	return s.client.QueryOrgCustomizeMetric(ctx, req, s.opts...)
+	return s.client.QueryOrgCustomizeMetric(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgCustomizeAlerts(ctx context.Context, req *pb.QueryOrgCustomizeAlertsRequest) (*pb.QueryOrgCustomizeAlertsResponse, error) {
-	return s.client.QueryOrgCustomizeAlerts(ctx, req, s.opts...)
+	return s.client.QueryOrgCustomizeAlerts(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetOrgCustomizeAlertDetail(ctx context.Context, req *pb.GetOrgCustomizeAlertDetailRequest) (*pb.GetOrgCustomizeAlertDetailResponse, error) {
-	return s.client.GetOrgCustomizeAlertDetail(ctx, req, s.opts...)
+	return s.client.GetOrgCustomizeAlertDetail(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) CreateOrgCustomizeAlert(ctx context.Context, req *pb.CreateOrgCustomizeAlertRequest) (*pb.CreateOrgCustomizeAlertResponse, error) {
-	return s.client.CreateOrgCustomizeAlert(ctx, req, s.opts...)
+	return s.client.CreateOrgCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateOrgCustomizeAlert(ctx context.Context, req *pb.UpdateOrgCustomizeAlertRequest) (*pb.UpdateOrgCustomizeAlertResponse, error) {
-	return s.client.UpdateOrgCustomizeAlert(ctx, req, s.opts...)
+	return s.client.UpdateOrgCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateOrgCustomizeAlertEnable(ctx context.Context, req *pb.UpdateOrgCustomizeAlertEnableRequest) (*pb.UpdateOrgCustomizeAlertEnableResponse, error) {
-	return s.client.UpdateOrgCustomizeAlertEnable(ctx, req, s.opts...)
+	return s.client.UpdateOrgCustomizeAlertEnable(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) DeleteOrgCustomizeAlert(ctx context.Context, req *pb.DeleteOrgCustomizeAlertRequest) (*pb.DeleteOrgCustomizeAlertResponse, error) {
-	return s.client.DeleteOrgCustomizeAlert(ctx, req, s.opts...)
+	return s.client.DeleteOrgCustomizeAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryDashboardByAlert(ctx context.Context, req *pb.QueryDashboardByAlertRequest) (*pb.QueryDashboardByAlertResponse, error) {
-	return s.client.QueryDashboardByAlert(ctx, req, s.opts...)
+	return s.client.QueryDashboardByAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgDashboardByAlert(ctx context.Context, req *pb.QueryOrgDashboardByAlertRequest) (*pb.QueryOrgDashboardByAlertResponse, error) {
-	return s.client.QueryOrgDashboardByAlert(ctx, req, s.opts...)
+	return s.client.QueryOrgDashboardByAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryAlertRule(ctx context.Context, req *pb.QueryAlertRuleRequest) (*pb.QueryAlertRuleResponse, error) {
-	return s.client.QueryAlertRule(ctx, req, s.opts...)
+	return s.client.QueryAlertRule(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryAlert(ctx context.Context, req *pb.QueryAlertRequest) (*pb.QueryAlertsResponse, error) {
-	return s.client.QueryAlert(ctx, req, s.opts...)
+	return s.client.QueryAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetAlert(ctx context.Context, req *pb.GetAlertRequest) (*pb.GetAlertResponse, error) {
-	return s.client.GetAlert(ctx, req, s.opts...)
+	return s.client.GetAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetAlertDetail(ctx context.Context, req *pb.GetAlertDetailRequest) (*pb.GetAlertDetailResponse, error) {
-	return s.client.GetAlertDetail(ctx, req, s.opts...)
+	return s.client.GetAlertDetail(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) CreateAlert(ctx context.Context, req *pb.CreateAlertRequest) (*pb.CreateAlertResponse, error) {
-	return s.client.CreateAlert(ctx, req, s.opts...)
+	return s.client.CreateAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateAlert(ctx context.Context, req *pb.UpdateAlertRequest) (*pb.UpdateAlertResponse, error) {
-	return s.client.UpdateAlert(ctx, req, s.opts...)
+	return s.client.UpdateAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateAlertEnable(ctx context.Context, req *pb.UpdateAlertEnableRequest) (*pb.UpdateAlertEnableResponse, error) {
-	return s.client.UpdateAlertEnable(ctx, req, s.opts...)
+	return s.client.UpdateAlertEnable(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) DeleteAlert(ctx context.Context, req *pb.DeleteAlertRequest) (*pb.DeleteAlertResponse, error) {
-	return s.client.DeleteAlert(ctx, req, s.opts...)
+	return s.client.DeleteAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgAlertRule(ctx context.Context, req *pb.QueryOrgAlertRuleRequest) (*pb.QueryOrgAlertRuleResponse, error) {
-	return s.client.QueryOrgAlertRule(ctx, req, s.opts...)
+	return s.client.QueryOrgAlertRule(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgAlert(ctx context.Context, req *pb.QueryOrgAlertRequest) (*pb.QueryOrgAlertResponse, error) {
-	return s.client.QueryOrgAlert(ctx, req, s.opts...)
+	return s.client.QueryOrgAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetOrgAlertDetail(ctx context.Context, req *pb.GetOrgAlertDetailRequest) (*pb.GetOrgAlertDetailResponse, error) {
-	return s.client.GetOrgAlertDetail(ctx, req, s.opts...)
+	return s.client.GetOrgAlertDetail(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) CreateOrgAlert(ctx context.Context, req *pb.CreateOrgAlertRequest) (*pb.CreateOrgAlertResponse, error) {
-	return s.client.CreateOrgAlert(ctx, req, s.opts...)
+	return s.client.CreateOrgAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateOrgAlert(ctx context.Context, req *pb.UpdateOrgAlertRequest) (*pb.UpdateOrgAlertResponse, error) {
-	return s.client.UpdateOrgAlert(ctx, req, s.opts...)
+	return s.client.UpdateOrgAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateOrgAlertEnable(ctx context.Context, req *pb.UpdateOrgAlertEnableRequest) (*pb.UpdateOrgAlertEnableResponse, error) {
-	return s.client.UpdateOrgAlertEnable(ctx, req, s.opts...)
+	return s.client.UpdateOrgAlertEnable(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) DeleteOrgAlert(ctx context.Context, req *pb.DeleteOrgAlertRequest) (*pb.DeleteOrgAlertResponse, error) {
-	return s.client.DeleteOrgAlert(ctx, req, s.opts...)
+	return s.client.DeleteOrgAlert(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetAlertRecordAttr(ctx context.Context, req *pb.GetAlertRecordAttrRequest) (*pb.GetAlertRecordAttrResponse, error) {
-	return s.client.GetAlertRecordAttr(ctx, req, s.opts...)
+	return s.client.GetAlertRecordAttr(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryAlertRecord(ctx context.Context, req *pb.QueryAlertRecordRequest) (*pb.QueryAlertRecordResponse, error) {
-	return s.client.QueryAlertRecord(ctx, req, s.opts...)
+	return s.client.QueryAlertRecord(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetAlertRecord(ctx context.Context, req *pb.GetAlertRecordRequest) (*pb.GetAlertRecordResponse, error) {
-	return s.client.GetAlertRecord(ctx, req, s.opts...)
+	return s.client.GetAlertRecord(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryAlertHistory(ctx context.Context, req *pb.QueryAlertHistoryRequest) (*pb.QueryAlertHistoryResponse, error) {
-	return s.client.QueryAlertHistory(ctx, req, s.opts...)
+	return s.client.QueryAlertHistory(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) CreateAlertIssue(ctx context.Context, req *pb.CreateAlertIssueRequest) (*pb.CreateAlertIssueResponse, error) {
-	return s.client.CreateAlertIssue(ctx, req, s.opts...)
+	return s.client.CreateAlertIssue(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateAlertIssue(ctx context.Context, req *pb.UpdateAlertIssueRequest) (*pb.UpdateAlertIssueResponse, error) {
-	return s.client.UpdateAlertIssue(ctx, req, s.opts...)
+	return s.client.UpdateAlertIssue(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetOrgAlertRecordAttr(ctx context.Context, req *pb.GetOrgAlertRecordAttrRequest) (*pb.GetOrgAlertRecordAttrResponse, error) {
-	return s.client.GetOrgAlertRecordAttr(ctx, req, s.opts...)
+	return s.client.GetOrgAlertRecordAttr(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgAlertRecord(ctx context.Context, req *pb.QueryOrgAlertRecordRequest) (*pb.QueryOrgAlertRecordResponse, error) {
-	return s.client.QueryOrgAlertRecord(ctx, req, s.opts...)
+	return s.client.QueryOrgAlertRecord(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgHostsAlertRecord(ctx context.Context, req *pb.QueryOrgHostsAlertRecordRequest) (*pb.QueryOrgAlertRecordResponse, error) {
-	return s.client.QueryOrgHostsAlertRecord(ctx, req, s.opts...)
+	return s.client.QueryOrgHostsAlertRecord(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) GetOrgAlertRecord(ctx context.Context, req *pb.GetOrgAlertRecordRequest) (*pb.GetOrgAlertRecordResponse, error) {
-	return s.client.GetOrgAlertRecord(ctx, req, s.opts...)
+	return s.client.GetOrgAlertRecord(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) QueryOrgAlertHistory(ctx context.Context, req *pb.QueryOrgAlertHistoryRequest) (*pb.QueryOrgAlertHistoryResponse, error) {
-	return s.client.QueryOrgAlertHistory(ctx, req, s.opts...)
+	return s.client.QueryOrgAlertHistory(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) CreateOrgAlertIssue(ctx context.Context, req *pb.CreateOrgAlertIssueRequest) (*pb.CreateOrgAlertIssueResponse, error) {
-	return s.client.CreateOrgAlertIssue(ctx, req, s.opts...)
+	return s.client.CreateOrgAlertIssue(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *monitorServiceWrapper) UpdateOrgAlertIssue(ctx context.Context, req *pb.UpdateOrgAlertIssueRequest) (*pb.UpdateOrgAlertIssueResponse, error) {
-	return s.client.UpdateOrgAlertIssue(ctx, req, s.opts...)
+	return s.client.UpdateOrgAlertIssue(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
