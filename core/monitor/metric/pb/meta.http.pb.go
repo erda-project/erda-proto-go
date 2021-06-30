@@ -74,7 +74,8 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricNames_info)
 				}
@@ -112,7 +113,8 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricMeta_info)
 				}
@@ -150,7 +152,8 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricGroups_info)
 				}
@@ -211,7 +214,8 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMetricGroup_info)
 				}

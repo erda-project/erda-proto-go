@@ -311,6 +311,24 @@ func (m *GetCheckerStatusV1Response) UnmarshalURLValues(prefix string, values ur
 				if m.Data == nil {
 					m.Data = &CheckerStatusV1{}
 				}
+			case "data.time":
+				if m.Data == nil {
+					m.Data = &CheckerStatusV1{}
+				}
+				list := make([]int64, 0, len(vals))
+				for _, text := range vals {
+					val, err := strconv.ParseInt(text, 10, 64)
+					if err != nil {
+						return err
+					}
+					list = append(list, val)
+				}
+				m.Data.Time = list
+			case "data.status":
+				if m.Data == nil {
+					m.Data = &CheckerStatusV1{}
+				}
+				m.Data.Status = vals
 			}
 		}
 	}
@@ -319,6 +337,24 @@ func (m *GetCheckerStatusV1Response) UnmarshalURLValues(prefix string, values ur
 
 // CheckerStatusV1 implement urlenc.URLValuesUnmarshaler.
 func (m *CheckerStatusV1) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "time":
+				list := make([]int64, 0, len(vals))
+				for _, text := range vals {
+					val, err := strconv.ParseInt(text, 10, 64)
+					if err != nil {
+						return err
+					}
+					list = append(list, val)
+				}
+				m.Time = list
+			case "status":
+				m.Status = vals
+			}
+		}
+	}
 	return nil
 }
 
@@ -435,6 +471,37 @@ func (m *DescribeItemV1) UnmarshalURLValues(prefix string, values url.Values) er
 				if m.Chart == nil {
 					m.Chart = &CheckerChartV1{}
 				}
+			case "chart.latency":
+				if m.Chart == nil {
+					m.Chart = &CheckerChartV1{}
+				}
+				list := make([]float64, 0, len(vals))
+				for _, text := range vals {
+					val, err := strconv.ParseFloat(text, 64)
+					if err != nil {
+						return err
+					}
+					list = append(list, val)
+				}
+				m.Chart.Latency = list
+			case "chart.time":
+				if m.Chart == nil {
+					m.Chart = &CheckerChartV1{}
+				}
+				list := make([]int64, 0, len(vals))
+				for _, text := range vals {
+					val, err := strconv.ParseInt(text, 10, 64)
+					if err != nil {
+						return err
+					}
+					list = append(list, val)
+				}
+				m.Chart.Time = list
+			case "chart.status":
+				if m.Chart == nil {
+					m.Chart = &CheckerChartV1{}
+				}
+				m.Chart.Status = vals
 			}
 		}
 	}
@@ -443,5 +510,33 @@ func (m *DescribeItemV1) UnmarshalURLValues(prefix string, values url.Values) er
 
 // CheckerChartV1 implement urlenc.URLValuesUnmarshaler.
 func (m *CheckerChartV1) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "latency":
+				list := make([]float64, 0, len(vals))
+				for _, text := range vals {
+					val, err := strconv.ParseFloat(text, 64)
+					if err != nil {
+						return err
+					}
+					list = append(list, val)
+				}
+				m.Latency = list
+			case "time":
+				list := make([]int64, 0, len(vals))
+				for _, text := range vals {
+					val, err := strconv.ParseInt(text, 10, 64)
+					if err != nil {
+						return err
+					}
+					list = append(list, val)
+				}
+				m.Time = list
+			case "status":
+				m.Status = vals
+			}
+		}
+	}
 	return nil
 }
