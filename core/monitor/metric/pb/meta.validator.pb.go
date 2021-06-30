@@ -5,11 +5,12 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/anypb"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "github.com/mwitkow/go-proto-validators"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "google.golang.org/protobuf/types/known/structpb"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -18,6 +19,12 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *ListMetricNamesRequest) Validate() error {
+	if this.Scope == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Scope", fmt.Errorf(`value '%v' must not be an empty string`, this.Scope))
+	}
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
+	}
 	return nil
 }
 func (this *ListMetricNamesResponse) Validate() error {
@@ -31,19 +38,31 @@ func (this *ListMetricNamesResponse) Validate() error {
 	return nil
 }
 func (this *ListMetricMetaRequest) Validate() error {
+	if this.Scope == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Scope", fmt.Errorf(`value '%v' must not be an empty string`, this.Scope))
+	}
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
+	}
 	return nil
 }
 func (this *ListMetricMetaResponse) Validate() error {
-	for _, item := range this.Metas {
+	for _, item := range this.Data {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
-				return github_com_mwitkow_go_proto_validators.FieldError("Metas", err)
+				return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
 			}
 		}
 	}
 	return nil
 }
 func (this *ListMetricGroupsRequest) Validate() error {
+	if this.Scope == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Scope", fmt.Errorf(`value '%v' must not be an empty string`, this.Scope))
+	}
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
+	}
 	return nil
 }
 func (this *ListMetricGroupsResponse) Validate() error {
@@ -57,9 +76,26 @@ func (this *ListMetricGroupsResponse) Validate() error {
 	return nil
 }
 func (this *GetMetricGroupRequest) Validate() error {
+	if this.Scope == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Scope", fmt.Errorf(`value '%v' must not be an empty string`, this.Scope))
+	}
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
+	}
+	if this.Id == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must not be an empty string`, this.Id))
+	}
 	return nil
 }
 func (this *GetMetricGroupResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *MetricGroup) Validate() error {
 	if this.Meta != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Meta); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Meta", err)
