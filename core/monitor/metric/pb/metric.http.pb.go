@@ -21,9 +21,9 @@ type MetricServiceHandler interface {
 	QueryWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
 	// GET /query
 	SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
-	// POST /api/query
+	// POST /api/metric/query-table
 	QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
-	// GET /api/query
+	// GET /api/metric/query-table
 	SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
 }
 
@@ -145,6 +145,10 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["q"]; len(vals) > 0 {
+					in.Statement = vals[0]
+				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
@@ -180,6 +184,10 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["q"]; len(vals) > 0 {
+					in.Statement = vals[0]
+				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
@@ -196,6 +204,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 
 	add_QueryWithInfluxFormat("POST", "/query", srv.QueryWithInfluxFormat)
 	add_SearchWithInfluxFormat("GET", "/query", srv.SearchWithInfluxFormat)
-	add_QueryWithTableFormat("POST", "/api/query", srv.QueryWithTableFormat)
-	add_SearchWithTableFormat("GET", "/api/query", srv.SearchWithTableFormat)
+	add_QueryWithTableFormat("POST", "/api/metric/query-table", srv.QueryWithTableFormat)
+	add_SearchWithTableFormat("GET", "/api/metric/query-table", srv.SearchWithTableFormat)
 }

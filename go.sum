@@ -105,8 +105,8 @@ github.com/elazarl/goproxy v0.0.0-20180725130230-947c36da3153/go.mod h1:/Zj4wYkg
 github.com/emicklei/go-restful v0.0.0-20170410110728-ff4f55a20633/go.mod h1:otzb+WCGbkyDHkqmQmT5YD2WR4BBwUdeQoFo8l/7tVs=
 github.com/envoyproxy/go-control-plane v0.9.1-0.20191026205805-5f8ba28d4473/go.mod h1:YTl/9mNaCwkRvm6d1a2C3ymFceY/DCBVvsKhRF0iEA4=
 github.com/envoyproxy/protoc-gen-validate v0.1.0/go.mod h1:iSmxcyjqTsJpI2R4NaDN7+kN2VEUnK/pcBlmesArF7c=
-github.com/erda-project/erda-infra v0.0.0-20210611082924-94de82a456ab h1:915rAVhO21Hnjn1Yn7b6cStJCn7Byn1VFytMvtYdkY0=
-github.com/erda-project/erda-infra v0.0.0-20210611082924-94de82a456ab/go.mod h1:JzDud6McvHHuTs6IO7CzxQMl4c5z50/uxiNaFeeeUkc=
+github.com/erda-project/erda-infra v0.0.0-20210701123259-88aec4fcbe75 h1:JFWnBnJNaZzbzvAnDWR92C49XBDx8Vs6KPoQOX/3hTE=
+github.com/erda-project/erda-infra v0.0.0-20210701123259-88aec4fcbe75/go.mod h1:JzDud6McvHHuTs6IO7CzxQMl4c5z50/uxiNaFeeeUkc=
 github.com/erikstmartin/go-testdb v0.0.0-20160219214506-8d10e4a1bae5/go.mod h1:a2zkGnVExMxdzMo3M0Hi/3sEU+cWnZpSni0O6/Yb/P0=
 github.com/evanphx/json-patch v4.2.0+incompatible/go.mod h1:50XU6AFN0ol/bzJsmQLiYLvXMP4fmwYFNcr97nuDLSk=
 github.com/fatih/color v1.7.0/go.mod h1:Zm6kSWBoL9eyXnKyktHP6abPY2pDugNf5KwzbycvMj4=
