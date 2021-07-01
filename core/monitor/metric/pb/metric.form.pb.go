@@ -74,7 +74,11 @@ func (m *Result) UnmarshalURLValues(prefix string, values url.Values) error {
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "statement_id":
-				m.StatementId = vals[0]
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.StatementId = val
 			}
 		}
 	}

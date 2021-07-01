@@ -28,6 +28,7 @@ build_protocol() {
             mkdir -p ${MODULE_PATH}/pb;
             mkdir -p ${MODULE_PATH}/client;
             gohub protoc protocol \
+                 --include=.proto \
                  --msg_out="${MODULE_PATH}/pb" \
                  --service_out="${MODULE_PATH}/pb" \
                  --client_out="${MODULE_PATH}/client" \
