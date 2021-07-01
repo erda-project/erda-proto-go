@@ -6,8 +6,8 @@ package pb
 import (
 	json "encoding/json"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
+	pb "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	url "net/url"
 	strconv "strconv"
 	strings "strings"
@@ -17,24 +17,9 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*QueryAlertRuleRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryAlertRuleResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertTypeRuleResp)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*DisplayKey)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertTypeRule)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertRule)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertRuleFunction)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Operator)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*NotifySilence)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryAlertRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryAlertData)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Alert)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertExpression)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertExpressionFunction)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertNotify)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*NotifyGroup)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*NotifyTarget)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Target)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertNotifySilence)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAlertRequest)(nil)
@@ -49,24 +34,12 @@ var _ urlenc.URLValuesUnmarshaler = (*DeleteAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteAlertData)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeMetricRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeMetricResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeMetricData)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*MetricMeta)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*FieldMeta)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*TagMeta)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeNotifyTargetRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeNotifyTargetResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeNotifyTargetData)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeAlertsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeAlertsResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*QueryCustomizeAlertsData)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeAlertOverview)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetCustomizeAlertRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetCustomizeAlertResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeAlertDetail)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeAlertRule)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeAlertRuleFunction)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeAlertRuleFilter)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CustomizeAlertNotifyTemplates)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateCustomizeAlertRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateCustomizeAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateCustomizeAlertData)(nil)
@@ -79,25 +52,19 @@ var _ urlenc.URLValuesUnmarshaler = (*DeleteCustomizeAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteCustomizeAlertData)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordAttrsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordAttrsResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertRecordAttr)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordsData)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertRecord)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRecordResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertHistoriesRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertHistoriesResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AlertHistory)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAlertRecordIssueRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAlertRecordIssueResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*UpdateAlertRecordIssueRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*UpdateAlertRecordIssueResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DashboardPreviewRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DashboardPreviewResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*View)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Config)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*API)(nil)
 
 // QueryAlertRuleRequest implement urlenc.URLValuesUnmarshaler.
 func (m *QueryAlertRuleRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -119,11 +86,11 @@ func (m *QueryAlertRuleResponse) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &AlertTypeRuleResp{}
+					m.Data = &pb.AlertTypeRuleResp{}
 				}
 			case "data.windows":
 				if m.Data == nil {
-					m.Data = &AlertTypeRuleResp{}
+					m.Data = &pb.AlertTypeRuleResp{}
 				}
 				list := make([]int64, 0, len(vals))
 				for _, text := range vals {
@@ -134,241 +101,6 @@ func (m *QueryAlertRuleResponse) UnmarshalURLValues(prefix string, values url.Va
 					list = append(list, val)
 				}
 				m.Data.Windows = list
-			}
-		}
-	}
-	return nil
-}
-
-// AlertTypeRuleResp implement urlenc.URLValuesUnmarshaler.
-func (m *AlertTypeRuleResp) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "windows":
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Windows = list
-			}
-		}
-	}
-	return nil
-}
-
-// DisplayKey implement urlenc.URLValuesUnmarshaler.
-func (m *DisplayKey) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "key":
-				m.Key = vals[0]
-			case "display":
-				m.Display = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// AlertTypeRule implement urlenc.URLValuesUnmarshaler.
-func (m *AlertTypeRule) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "alertType":
-				if m.AlertType == nil {
-					m.AlertType = &DisplayKey{}
-				}
-			case "alertType.key":
-				if m.AlertType == nil {
-					m.AlertType = &DisplayKey{}
-				}
-				m.AlertType.Key = vals[0]
-			case "alertType.display":
-				if m.AlertType == nil {
-					m.AlertType = &DisplayKey{}
-				}
-				m.AlertType.Display = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// AlertRule implement urlenc.URLValuesUnmarshaler.
-func (m *AlertRule) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "alertScope":
-				m.AlertScope = vals[0]
-			case "alertType":
-				m.AlertType = vals[0]
-			case "alertIndex":
-				if m.AlertIndex == nil {
-					m.AlertIndex = &DisplayKey{}
-				}
-			case "alertIndex.key":
-				if m.AlertIndex == nil {
-					m.AlertIndex = &DisplayKey{}
-				}
-				m.AlertIndex.Key = vals[0]
-			case "alertIndex.display":
-				if m.AlertIndex == nil {
-					m.AlertIndex = &DisplayKey{}
-				}
-				m.AlertIndex.Display = vals[0]
-			case "window":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Window = val
-			case "isRecover":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.IsRecover = val
-			case "version":
-				m.Version = vals[0]
-			case "enable":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Enable = val
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// AlertRuleFunction implement urlenc.URLValuesUnmarshaler.
-func (m *AlertRuleFunction) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "field":
-				if m.Field == nil {
-					m.Field = &DisplayKey{}
-				}
-			case "field.key":
-				if m.Field == nil {
-					m.Field = &DisplayKey{}
-				}
-				m.Field.Key = vals[0]
-			case "field.display":
-				if m.Field == nil {
-					m.Field = &DisplayKey{}
-				}
-				m.Field.Display = vals[0]
-			case "aggregator":
-				m.Aggregator = vals[0]
-			case "operator":
-				m.Operator = vals[0]
-			case "value":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Value = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Value = val
-					} else {
-						m.Value = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "dataType":
-				m.DataType = vals[0]
-			case "unit":
-				m.Unit = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// Operator implement urlenc.URLValuesUnmarshaler.
-func (m *Operator) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "key":
-				m.Key = vals[0]
-			case "display":
-				m.Display = vals[0]
-			case "type":
-				m.Type = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// NotifySilence implement urlenc.URLValuesUnmarshaler.
-func (m *NotifySilence) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "value":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Value = val
-			case "unit":
-				if m.Unit == nil {
-					m.Unit = &DisplayKey{}
-				}
-			case "unit.key":
-				if m.Unit == nil {
-					m.Unit = &DisplayKey{}
-				}
-				m.Unit.Key = vals[0]
-			case "unit.display":
-				if m.Unit == nil {
-					m.Unit = &DisplayKey{}
-				}
-				m.Unit.Display = vals[0]
 			}
 		}
 	}
@@ -441,365 +173,6 @@ func (m *QueryAlertData) UnmarshalURLValues(prefix string, values url.Values) er
 	return nil
 }
 
-// Alert implement urlenc.URLValuesUnmarshaler.
-func (m *Alert) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "alertScope":
-				m.AlertScope = vals[0]
-			case "alertScopeId":
-				m.AlertScopeId = vals[0]
-			case "enable":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Enable = val
-			case "clusterNames":
-				m.ClusterNames = vals
-			case "domain":
-				m.Domain = vals[0]
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// AlertExpression implement urlenc.URLValuesUnmarshaler.
-func (m *AlertExpression) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "ruleId":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.RuleId = val
-			case "alertIndex":
-				m.AlertIndex = vals[0]
-			case "window":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Window = val
-			case "isRecover":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.IsRecover = val
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// AlertExpressionFunction implement urlenc.URLValuesUnmarshaler.
-func (m *AlertExpressionFunction) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "field":
-				m.Field = vals[0]
-			case "aggregator":
-				m.Aggregator = vals[0]
-			case "operator":
-				m.Operator = vals[0]
-			case "value":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Value = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Value = val
-					} else {
-						m.Value = structpb.NewStringValue(vals[0])
-					}
-				}
-			}
-		}
-	}
-	return nil
-}
-
-// AlertNotify implement urlenc.URLValuesUnmarshaler.
-func (m *AlertNotify) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "type":
-				m.Type = vals[0]
-			case "groupId":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.GroupId = val
-			case "groupType":
-				m.GroupType = vals[0]
-			case "notifyGroup":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-			case "notifyGroup.id":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.NotifyGroup.Id = val
-			case "notifyGroup.name":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				m.NotifyGroup.Name = vals[0]
-			case "notifyGroup.scopeType":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				m.NotifyGroup.ScopeType = vals[0]
-			case "notifyGroup.scopeId":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				m.NotifyGroup.ScopeId = vals[0]
-			case "notifyGroup.createdAt":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				if m.NotifyGroup.CreatedAt == nil {
-					m.NotifyGroup.CreatedAt = &timestamppb.Timestamp{}
-				}
-			case "notifyGroup.createdAt.seconds":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				if m.NotifyGroup.CreatedAt == nil {
-					m.NotifyGroup.CreatedAt = &timestamppb.Timestamp{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.NotifyGroup.CreatedAt.Seconds = val
-			case "notifyGroup.createdAt.nanos":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				if m.NotifyGroup.CreatedAt == nil {
-					m.NotifyGroup.CreatedAt = &timestamppb.Timestamp{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 32)
-				if err != nil {
-					return err
-				}
-				m.NotifyGroup.CreatedAt.Nanos = int32(val)
-			case "notifyGroup.creator":
-				if m.NotifyGroup == nil {
-					m.NotifyGroup = &NotifyGroup{}
-				}
-				m.NotifyGroup.Creator = vals[0]
-			case "dingdingUrl":
-				m.DingdingUrl = vals[0]
-			case "silence":
-				if m.Silence == nil {
-					m.Silence = &AlertNotifySilence{}
-				}
-			case "silence.value":
-				if m.Silence == nil {
-					m.Silence = &AlertNotifySilence{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Silence.Value = val
-			case "silence.unit":
-				if m.Silence == nil {
-					m.Silence = &AlertNotifySilence{}
-				}
-				m.Silence.Unit = vals[0]
-			case "silence.policy":
-				if m.Silence == nil {
-					m.Silence = &AlertNotifySilence{}
-				}
-				m.Silence.Policy = vals[0]
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// NotifyGroup implement urlenc.URLValuesUnmarshaler.
-func (m *NotifyGroup) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "scopeType":
-				m.ScopeType = vals[0]
-			case "scopeId":
-				m.ScopeId = vals[0]
-			case "createdAt":
-				if m.CreatedAt == nil {
-					m.CreatedAt = &timestamppb.Timestamp{}
-				}
-			case "createdAt.seconds":
-				if m.CreatedAt == nil {
-					m.CreatedAt = &timestamppb.Timestamp{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreatedAt.Seconds = val
-			case "createdAt.nanos":
-				if m.CreatedAt == nil {
-					m.CreatedAt = &timestamppb.Timestamp{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 32)
-				if err != nil {
-					return err
-				}
-				m.CreatedAt.Nanos = int32(val)
-			case "creator":
-				m.Creator = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// NotifyTarget implement urlenc.URLValuesUnmarshaler.
-func (m *NotifyTarget) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "type":
-				m.Type = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// Target implement urlenc.URLValuesUnmarshaler.
-func (m *Target) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "receiver":
-				m.Receiver = vals[0]
-			case "secret":
-				m.Secret = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// AlertNotifySilence implement urlenc.URLValuesUnmarshaler.
-func (m *AlertNotifySilence) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "value":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Value = val
-			case "unit":
-				m.Unit = vals[0]
-			case "policy":
-				m.Policy = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
 // GetAlertRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetAlertRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
@@ -826,11 +199,11 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 			case "data.id":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
@@ -839,22 +212,22 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 				m.Data.Id = val
 			case "data.name":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				m.Data.Name = vals[0]
 			case "data.alertScope":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				m.Data.AlertScope = vals[0]
 			case "data.alertScopeId":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				m.Data.AlertScopeId = vals[0]
 			case "data.enable":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
@@ -863,17 +236,17 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 				m.Data.Enable = val
 			case "data.clusterNames":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				m.Data.ClusterNames = vals
 			case "data.domain":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				m.Data.Domain = vals[0]
 			case "data.createTime":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -882,7 +255,7 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 				m.Data.CreateTime = val
 			case "data.updateTime":
 				if m.Data == nil {
-					m.Data = &Alert{}
+					m.Data = &pb.Alert{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -1117,105 +490,13 @@ func (m *QueryCustomizeMetricResponse) UnmarshalURLValues(prefix string, values 
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &CustomizeMetricData{}
+					m.Data = &pb.CustomizeMetrics{}
 				}
 			case "data.notifySample":
 				if m.Data == nil {
-					m.Data = &CustomizeMetricData{}
+					m.Data = &pb.CustomizeMetrics{}
 				}
 				m.Data.NotifySample = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeMetricData implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeMetricData) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "notifySample":
-				m.NotifySample = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// MetricMeta implement urlenc.URLValuesUnmarshaler.
-func (m *MetricMeta) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "name":
-				if m.Name == nil {
-					m.Name = &DisplayKey{}
-				}
-			case "name.key":
-				if m.Name == nil {
-					m.Name = &DisplayKey{}
-				}
-				m.Name.Key = vals[0]
-			case "name.display":
-				if m.Name == nil {
-					m.Name = &DisplayKey{}
-				}
-				m.Name.Display = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// FieldMeta implement urlenc.URLValuesUnmarshaler.
-func (m *FieldMeta) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "field":
-				if m.Field == nil {
-					m.Field = &DisplayKey{}
-				}
-			case "field.key":
-				if m.Field == nil {
-					m.Field = &DisplayKey{}
-				}
-				m.Field.Key = vals[0]
-			case "field.display":
-				if m.Field == nil {
-					m.Field = &DisplayKey{}
-				}
-				m.Field.Display = vals[0]
-			case "dataType":
-				m.DataType = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// TagMeta implement urlenc.URLValuesUnmarshaler.
-func (m *TagMeta) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "tag":
-				if m.Tag == nil {
-					m.Tag = &DisplayKey{}
-				}
-			case "tag.key":
-				if m.Tag == nil {
-					m.Tag = &DisplayKey{}
-				}
-				m.Tag.Key = vals[0]
-			case "tag.display":
-				if m.Tag == nil {
-					m.Tag = &DisplayKey{}
-				}
-				m.Tag.Display = vals[0]
-			case "dataType":
-				m.DataType = vals[0]
 			}
 		}
 	}
@@ -1242,16 +523,11 @@ func (m *QueryCustomizeNotifyTargetResponse) UnmarshalURLValues(prefix string, v
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &QueryCustomizeNotifyTargetData{}
+					m.Data = &pb.QueryCustomizeNotifyTargetData{}
 				}
 			}
 		}
 	}
-	return nil
-}
-
-// QueryCustomizeNotifyTargetData implement urlenc.URLValuesUnmarshaler.
-func (m *QueryCustomizeNotifyTargetData) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
@@ -1287,83 +563,17 @@ func (m *QueryCustomizeAlertsResponse) UnmarshalURLValues(prefix string, values 
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &QueryCustomizeAlertsData{}
+					m.Data = &pb.QueryCustomizeAlertData{}
 				}
 			case "data.total":
 				if m.Data == nil {
-					m.Data = &QueryCustomizeAlertsData{}
+					m.Data = &pb.QueryCustomizeAlertData{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.Data.Total = val
-			}
-		}
-	}
-	return nil
-}
-
-// QueryCustomizeAlertsData implement urlenc.URLValuesUnmarshaler.
-func (m *QueryCustomizeAlertsData) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "total":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Total = val
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeAlertOverview implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeAlertOverview) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "metric":
-				m.Metric = vals[0]
-			case "window":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Window = val
-			case "notifyTargets":
-				m.NotifyTargets = vals
-			case "dashboardId":
-				m.DashboardId = vals[0]
-			case "enable":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Enable = val
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
 			}
 		}
 	}
@@ -1396,11 +606,11 @@ func (m *GetCustomizeAlertResponse) UnmarshalURLValues(prefix string, values url
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 			case "data.id":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
@@ -1409,32 +619,32 @@ func (m *GetCustomizeAlertResponse) UnmarshalURLValues(prefix string, values url
 				m.Data.Id = val
 			case "data.clusterName":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				m.Data.ClusterName = vals[0]
 			case "data.name":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				m.Data.Name = vals[0]
 			case "data.alertType":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				m.Data.AlertType = vals[0]
 			case "data.alertScope":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				m.Data.AlertScope = vals[0]
 			case "data.alertScopeId":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				m.Data.AlertScopeId = vals[0]
 			case "data.enable":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
@@ -1443,7 +653,7 @@ func (m *GetCustomizeAlertResponse) UnmarshalURLValues(prefix string, values url
 				m.Data.Enable = val
 			case "data.createTime":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -1452,228 +662,13 @@ func (m *GetCustomizeAlertResponse) UnmarshalURLValues(prefix string, values url
 				m.Data.CreateTime = val
 			case "data.updateTime":
 				if m.Data == nil {
-					m.Data = &CustomizeAlertDetail{}
+					m.Data = &pb.CustomizeAlertDetail{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.Data.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeAlertDetail implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeAlertDetail) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "clusterName":
-				m.ClusterName = vals[0]
-			case "name":
-				m.Name = vals[0]
-			case "alertType":
-				m.AlertType = vals[0]
-			case "alertScope":
-				m.AlertScope = vals[0]
-			case "alertScopeId":
-				m.AlertScopeId = vals[0]
-			case "enable":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Enable = val
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeAlertRule implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeAlertRule) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "metric":
-				m.Metric = vals[0]
-			case "window":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Window = val
-			case "group":
-				m.Group = vals
-			case "outputs":
-				m.Outputs = vals
-			case "activedMetricGroups":
-				m.ActivedMetricGroups = vals
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeAlertRuleFunction implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeAlertRuleFunction) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "field":
-				m.Field = vals[0]
-			case "alias":
-				m.Alias = vals[0]
-			case "aggregator":
-				m.Aggregator = vals[0]
-			case "operator":
-				m.Operator = vals[0]
-			case "value":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Value = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Value = val
-					} else {
-						m.Value = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "dataType":
-				m.DataType = vals[0]
-			case "unit":
-				m.Unit = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeAlertRuleFilter implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeAlertRuleFilter) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "tag":
-				m.Tag = vals[0]
-			case "operator":
-				m.Operator = vals[0]
-			case "value":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Value = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Value = val
-					} else {
-						m.Value = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "dataType":
-				m.DataType = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// CustomizeAlertNotifyTemplates implement urlenc.URLValuesUnmarshaler.
-func (m *CustomizeAlertNotifyTemplates) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "targets":
-				m.Targets = vals
-			case "title":
-				m.Title = vals[0]
-			case "content":
-				m.Content = vals[0]
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
 			}
 		}
 	}
@@ -1922,16 +917,11 @@ func (m *GetAlertRecordAttrsResponse) UnmarshalURLValues(prefix string, values u
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &AlertRecordAttr{}
+					m.Data = &pb.AlertRecordAttr{}
 				}
 			}
 		}
 	}
-	return nil
-}
-
-// AlertRecordAttr implement urlenc.URLValuesUnmarshaler.
-func (m *AlertRecordAttr) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
@@ -2018,89 +1008,6 @@ func (m *GetAlertRecordsData) UnmarshalURLValues(prefix string, values url.Value
 	return nil
 }
 
-// AlertRecord implement urlenc.URLValuesUnmarshaler.
-func (m *AlertRecord) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "groupId":
-				m.GroupId = vals[0]
-			case "scope":
-				m.Scope = vals[0]
-			case "scopeKey":
-				m.ScopeKey = vals[0]
-			case "alertGroup":
-				m.AlertGroup = vals[0]
-			case "title":
-				m.Title = vals[0]
-			case "alertState":
-				m.AlertState = vals[0]
-			case "alertType":
-				m.AlertType = vals[0]
-			case "alertIndex":
-				m.AlertIndex = vals[0]
-			case "expressionKey":
-				m.ExpressionKey = vals[0]
-			case "alertId":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.AlertId = val
-			case "alertName":
-				m.AlertName = vals[0]
-			case "ruleId":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.RuleId = val
-			case "projectId":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectId = val
-			case "issueId":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.IssueId = val
-			case "handleState":
-				m.HandleState = vals[0]
-			case "handlerId":
-				m.HandlerId = vals[0]
-			case "alertTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.AlertTime = val
-			case "handleTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.HandleTime = val
-			case "createTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.CreateTime = val
-			case "updateTime":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.UpdateTime = val
-			}
-		}
-	}
-	return nil
-}
-
 // GetAlertRecordRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetAlertRecordRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
@@ -2123,56 +1030,56 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 			case "data.groupId":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.GroupId = vals[0]
 			case "data.scope":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.Scope = vals[0]
 			case "data.scopeKey":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.ScopeKey = vals[0]
 			case "data.alertGroup":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.AlertGroup = vals[0]
 			case "data.title":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.Title = vals[0]
 			case "data.alertState":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.AlertState = vals[0]
 			case "data.alertType":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.AlertType = vals[0]
 			case "data.alertIndex":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.AlertIndex = vals[0]
 			case "data.expressionKey":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.ExpressionKey = vals[0]
 			case "data.alertId":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
@@ -2181,12 +1088,12 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.AlertId = val
 			case "data.alertName":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.AlertName = vals[0]
 			case "data.ruleId":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
@@ -2195,7 +1102,7 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.RuleId = val
 			case "data.projectId":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
@@ -2204,7 +1111,7 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.ProjectId = val
 			case "data.issueId":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
@@ -2213,17 +1120,17 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.IssueId = val
 			case "data.handleState":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.HandleState = vals[0]
 			case "data.handlerId":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				m.Data.HandlerId = vals[0]
 			case "data.alertTime":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -2232,7 +1139,7 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.AlertTime = val
 			case "data.handleTime":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -2241,7 +1148,7 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.HandleTime = val
 			case "data.createTime":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -2250,7 +1157,7 @@ func (m *GetAlertRecordResponse) UnmarshalURLValues(prefix string, values url.Va
 				m.Data.CreateTime = val
 			case "data.updateTime":
 				if m.Data == nil {
-					m.Data = &AlertRecord{}
+					m.Data = &pb.AlertRecord{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -2298,33 +1205,6 @@ func (m *GetAlertHistoriesRequest) UnmarshalURLValues(prefix string, values url.
 
 // GetAlertHistoriesResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetAlertHistoriesResponse) UnmarshalURLValues(prefix string, values url.Values) error {
-	return nil
-}
-
-// AlertHistory implement urlenc.URLValuesUnmarshaler.
-func (m *AlertHistory) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "groupId":
-				m.GroupId = vals[0]
-			case "timestamp":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Timestamp = val
-			case "alertState":
-				m.AlertState = vals[0]
-			case "title":
-				m.Title = vals[0]
-			case "content":
-				m.Content = vals[0]
-			case "displayUrl":
-				m.DisplayUrl = vals[0]
-			}
-		}
-	}
 	return nil
 }
 
@@ -2422,31 +1302,31 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 			case "data.title":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				m.Data.Title = vals[0]
 			case "data.description":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				m.Data.Description = vals[0]
 			case "data.chartType":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				m.Data.ChartType = vals[0]
 			case "data.dataSourceType":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				m.Data.DataSourceType = vals[0]
 			case "data.staticData":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2473,7 +1353,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.staticData.null_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2500,7 +1380,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.staticData.number_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2527,7 +1407,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.staticData.string_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2554,7 +1434,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.staticData.bool_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2581,7 +1461,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.staticData.struct_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2608,7 +1488,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.staticData.list_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2635,17 +1515,17 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 			case "data.config.dataSourceConfig":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2672,10 +1552,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.dataSourceConfig.null_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2702,10 +1582,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.dataSourceConfig.number_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2732,10 +1612,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.dataSourceConfig.string_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2762,10 +1642,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.dataSourceConfig.bool_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2792,10 +1672,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.dataSourceConfig.struct_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2822,10 +1702,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.dataSourceConfig.list_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2852,10 +1732,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2882,10 +1762,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option.null_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2912,10 +1792,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option.number_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2942,10 +1822,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option.string_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -2972,10 +1852,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option.bool_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3002,10 +1882,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option.struct_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3032,10 +1912,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.config.option.list_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Config == nil {
-					m.Data.Config = &Config{}
+					m.Data.Config = &pb.Config{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3062,30 +1942,30 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.api":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Api == nil {
-					m.Data.Api = &API{}
+					m.Data.Api = &pb.API{}
 				}
 			case "data.api.url":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Api == nil {
-					m.Data.Api = &API{}
+					m.Data.Api = &pb.API{}
 				}
 				m.Data.Api.Url = vals[0]
 			case "data.api.method":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if m.Data.Api == nil {
-					m.Data.Api = &API{}
+					m.Data.Api = &pb.API{}
 				}
 				m.Data.Api.Method = vals[0]
 			case "data.controls":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3112,7 +1992,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.controls.null_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3139,7 +2019,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.controls.number_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3166,7 +2046,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.controls.string_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3193,7 +2073,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.controls.bool_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3220,7 +2100,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.controls.struct_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3247,7 +2127,7 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				}
 			case "data.controls.list_value":
 				if m.Data == nil {
-					m.Data = &View{}
+					m.Data = &pb.View{}
 				}
 				if len(vals) > 1 {
 					var list []interface{}
@@ -3272,543 +2152,6 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 						m.Data.Controls = structpb.NewStringValue(vals[0])
 					}
 				}
-			}
-		}
-	}
-	return nil
-}
-
-// View implement urlenc.URLValuesUnmarshaler.
-func (m *View) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "title":
-				m.Title = vals[0]
-			case "description":
-				m.Description = vals[0]
-			case "chartType":
-				m.ChartType = vals[0]
-			case "dataSourceType":
-				m.DataSourceType = vals[0]
-			case "staticData":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.StaticData = val
-					} else {
-						m.StaticData = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-			case "config.dataSourceConfig":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.dataSourceConfig.null_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.dataSourceConfig.number_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.dataSourceConfig.string_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.dataSourceConfig.bool_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.dataSourceConfig.struct_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.dataSourceConfig.list_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.DataSourceConfig = val
-					} else {
-						m.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option.null_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option.number_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option.string_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option.bool_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option.struct_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "config.option.list_value":
-				if m.Config == nil {
-					m.Config = &Config{}
-				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Config.Option = val
-					} else {
-						m.Config.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "api":
-				if m.Api == nil {
-					m.Api = &API{}
-				}
-			case "api.url":
-				if m.Api == nil {
-					m.Api = &API{}
-				}
-				m.Api.Url = vals[0]
-			case "api.method":
-				if m.Api == nil {
-					m.Api = &API{}
-				}
-				m.Api.Method = vals[0]
-			case "controls":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Controls = val
-					} else {
-						m.Controls = structpb.NewStringValue(vals[0])
-					}
-				}
-			}
-		}
-	}
-	return nil
-}
-
-// Config implement urlenc.URLValuesUnmarshaler.
-func (m *Config) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "dataSourceConfig":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.DataSourceConfig = val
-					} else {
-						m.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
-				}
-			case "option":
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Option = val
-					} else {
-						m.Option = structpb.NewStringValue(vals[0])
-					}
-				}
-			}
-		}
-	}
-	return nil
-}
-
-// API implement urlenc.URLValuesUnmarshaler.
-func (m *API) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "url":
-				m.Url = vals[0]
-			case "method":
-				m.Method = vals[0]
 			}
 		}
 	}
