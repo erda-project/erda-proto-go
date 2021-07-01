@@ -9,6 +9,7 @@ import (
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	http1 "net/http"
+	strconv "strconv"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -65,6 +66,24 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["startTime"]; len(vals) > 0 {
+					val, err := strconv.ParseInt(vals[0], 10, 64)
+					if err != nil {
+						return nil, err
+					}
+					in.StartTime = val
+				}
+				if vals := params["endTime"]; len(vals) > 0 {
+					val, err := strconv.ParseInt(vals[0], 10, 64)
+					if err != nil {
+						return nil, err
+					}
+					in.EndTime = val
+				}
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
@@ -100,6 +119,13 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["exceptionId"]; len(vals) > 0 {
+					in.ExceptionID = vals[0]
+				}
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
@@ -134,6 +160,13 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
+				}
+				params := r.URL.Query()
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
+				if vals := params["exceptionEventId"]; len(vals) > 0 {
+					in.ExceptionEventID = vals[0]
 				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
