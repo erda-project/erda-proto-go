@@ -1334,71 +1334,34 @@ func (m *UpdateOrgCustomizeAlertRequest) UnmarshalURLValues(prefix string, value
 					return err
 				}
 				m.Id = val
-			case "newAlert":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-			case "newAlert.id":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.NewAlert.Id = val
-			case "newAlert.clusterName":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-				m.NewAlert.ClusterName = vals[0]
-			case "newAlert.name":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-				m.NewAlert.Name = vals[0]
-			case "newAlert.alertType":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-				m.NewAlert.AlertType = vals[0]
-			case "newAlert.alertScope":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-				m.NewAlert.AlertScope = vals[0]
-			case "newAlert.alertScopeId":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
-				m.NewAlert.AlertScopeId = vals[0]
-			case "newAlert.enable":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
+			case "clusterName":
+				m.ClusterName = vals[0]
+			case "name":
+				m.Name = vals[0]
+			case "alertType":
+				m.AlertType = vals[0]
+			case "alertScope":
+				m.AlertScope = vals[0]
+			case "alertScopeId":
+				m.AlertScopeId = vals[0]
+			case "enable":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
-				m.NewAlert.Enable = val
-			case "newAlert.createTime":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
+				m.Enable = val
+			case "createTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.NewAlert.CreateTime = val
-			case "newAlert.updateTime":
-				if m.NewAlert == nil {
-					m.NewAlert = &CustomizeAlertDetail{}
-				}
+				m.CreateTime = val
+			case "updateTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.NewAlert.UpdateTime = val
+				m.UpdateTime = val
 			}
 		}
 	}
