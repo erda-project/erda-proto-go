@@ -38,8 +38,8 @@ func (m *GetExceptionsRequest) UnmarshalURLValues(prefix string, values url.Valu
 					return err
 				}
 				m.EndTime = val
-			case "scopeId":
-				m.ScopeId = vals[0]
+			case "scopeID":
+				m.ScopeID = vals[0]
 			}
 		}
 	}

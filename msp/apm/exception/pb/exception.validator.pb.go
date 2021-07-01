@@ -5,12 +5,12 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/structpb"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -19,8 +19,8 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *GetExceptionsRequest) Validate() error {
-	if this.ScopeId == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("ScopeId", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeId))
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
 	}
 	return nil
 }
