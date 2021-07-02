@@ -60,6 +60,14 @@ func (s *metricServiceWrapper) SearchWithTableFormat(ctx context.Context, req *p
 	return s.client.SearchWithTableFormat(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *metricServiceWrapper) GeneralQuery(ctx context.Context, req *pb.GeneralQueryRequest) (*pb.GeneralQueryResponse, error) {
+	return s.client.GeneralQuery(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
+func (s *metricServiceWrapper) GeneralSearch(ctx context.Context, req *pb.GeneralQueryRequest) (*pb.GeneralQueryResponse, error) {
+	return s.client.GeneralSearch(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 type metricMetaServiceWrapper struct {
 	client pb.MetricMetaServiceClient
 	opts   []grpc1.CallOption

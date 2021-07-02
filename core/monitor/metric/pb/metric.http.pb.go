@@ -21,10 +21,14 @@ type MetricServiceHandler interface {
 	QueryWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
 	// GET /query
 	SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
-	// POST /api/metric/query-table
+	// POST /api/monitor/metric/query
 	QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
-	// GET /api/metric/query-table
+	// GET /api/monitor/metric/query
 	SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
+	// POST /api/monitor/metric/general-query
+	GeneralQuery(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)
+	// GET /api/monitor/metric/general-query
+	GeneralSearch(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)
 }
 
 // RegisterMetricServiceHandler register MetricServiceHandler to http.Router.
@@ -202,8 +206,88 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		)
 	}
 
+	add_GeneralQuery := func(method, path string, fn func(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GeneralQueryRequest))
+		}
+		var GeneralQuery_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GeneralQuery_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "GeneralQuery", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GeneralQueryRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["q"]; len(vals) > 0 {
+					in.Statement = vals[0]
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GeneralQuery_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GeneralSearch := func(method, path string, fn func(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GeneralQueryRequest))
+		}
+		var GeneralSearch_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GeneralSearch_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "GeneralSearch", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GeneralQueryRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["q"]; len(vals) > 0 {
+					in.Statement = vals[0]
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GeneralSearch_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
 	add_QueryWithInfluxFormat("POST", "/query", srv.QueryWithInfluxFormat)
 	add_SearchWithInfluxFormat("GET", "/query", srv.SearchWithInfluxFormat)
-	add_QueryWithTableFormat("POST", "/api/metric/query-table", srv.QueryWithTableFormat)
-	add_SearchWithTableFormat("GET", "/api/metric/query-table", srv.SearchWithTableFormat)
+	add_QueryWithTableFormat("POST", "/api/monitor/metric/query", srv.QueryWithTableFormat)
+	add_SearchWithTableFormat("GET", "/api/monitor/metric/query", srv.SearchWithTableFormat)
+	add_GeneralQuery("POST", "/api/monitor/metric/general-query", srv.GeneralQuery)
+	add_GeneralSearch("GET", "/api/monitor/metric/general-query", srv.GeneralSearch)
 }

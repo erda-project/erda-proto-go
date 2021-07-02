@@ -24,6 +24,8 @@ var _ urlenc.URLValuesUnmarshaler = (*QueryWithTableFormatResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TableResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TableColumn)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TableRow)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GeneralQueryRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GeneralQueryResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Filter)(nil)
 
 // QueryWithInfluxFormatRequest implement urlenc.URLValuesUnmarshaler.
@@ -162,6 +164,58 @@ func (m *TableColumn) UnmarshalURLValues(prefix string, values url.Values) error
 
 // TableRow implement urlenc.URLValuesUnmarshaler.
 func (m *TableRow) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// GeneralQueryRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GeneralQueryRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "ql":
+				m.Ql = vals[0]
+			case "statement":
+				m.Statement = vals[0]
+			case "format":
+				m.Format = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GeneralQueryResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GeneralQueryResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Data = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Data = val
+					} else {
+						m.Data = structpb.NewStringValue(vals[0])
+					}
+				}
+			}
+		}
+	}
 	return nil
 }
 
