@@ -84,8 +84,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllNotifyTemplates_info)
 				}
@@ -119,8 +118,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetNotifyTemplate_info)
 				}
@@ -154,8 +152,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateNotify_info)
 				}
@@ -216,8 +213,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteNotify_info)
 				}
@@ -278,8 +274,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateNotify_info)
 				}
@@ -313,8 +308,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetUserNotifyList_info)
 				}
@@ -375,8 +369,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, NotifyEnable_info)
 				}
@@ -410,8 +403,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateUserDefineNotifyTemplate_info)
 				}
@@ -472,8 +464,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetNotifyDetail_info)
 				}
@@ -507,8 +498,7 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllGroups_info)
 				}

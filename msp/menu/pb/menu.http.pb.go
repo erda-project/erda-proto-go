@@ -89,8 +89,7 @@ func RegisterMenuServiceHandler(r http.Router, srv MenuServiceHandler, opts ...h
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMenu_info)
 				}
@@ -147,8 +146,7 @@ func RegisterMenuServiceHandler(r http.Router, srv MenuServiceHandler, opts ...h
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSetting_info)
 				}

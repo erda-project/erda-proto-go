@@ -91,8 +91,7 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetGroups_info)
 				}
@@ -151,8 +150,7 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetGroupProperties_info)
 				}
@@ -211,8 +209,7 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SaveGroupProperties_info)
 				}

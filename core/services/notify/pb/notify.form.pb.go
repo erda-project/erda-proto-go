@@ -80,11 +80,6 @@ func (m *Model) UnmarshalURLValues(prefix string, values url.Values) error {
 					m.Metadata = &Metadata{}
 				}
 				m.Metadata.Module = vals[0]
-			case "metadata.scope":
-				if m.Metadata == nil {
-					m.Metadata = &Metadata{}
-				}
-				m.Metadata.Scope = vals
 			case "behavior":
 				if m.Behavior == nil {
 					m.Behavior = &Behavior{}
@@ -111,8 +106,6 @@ func (m *Metadata) UnmarshalURLValues(prefix string, values url.Values) error {
 				m.Type = vals[0]
 			case "module":
 				m.Module = vals[0]
-			case "scope":
-				m.Scope = vals
 			}
 		}
 	}
@@ -137,12 +130,6 @@ func (m *Templates) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "trigger":
-				m.Trigger = vals
-			case "targets":
-				m.Targets = vals
-			case "i18n":
-				m.I18N = vals
 			case "render":
 				if m.Render == nil {
 					m.Render = &Render{}
@@ -226,8 +213,6 @@ func (m *CreateNotifyRequest) UnmarshalURLValues(prefix string, values url.Value
 				m.ScopeId = vals[0]
 			case "scope":
 				m.Scope = vals[0]
-			case "templateId":
-				m.TemplateId = vals
 			case "notifyName":
 				m.NotifyName = vals[0]
 			case "notifyGroupId":
@@ -236,8 +221,6 @@ func (m *CreateNotifyRequest) UnmarshalURLValues(prefix string, values url.Value
 					return err
 				}
 				m.NotifyGroupId = val
-			case "channels":
-				m.Channels = vals
 			}
 		}
 	}
@@ -314,16 +297,12 @@ func (m *UpdateNotifyRequest) UnmarshalURLValues(prefix string, values url.Value
 				m.Scope = vals[0]
 			case "scopeId":
 				m.ScopeId = vals[0]
-			case "channels":
-				m.Channels = vals
 			case "notifyGroupId":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.NotifyGroupId = val
-			case "templateId":
-				m.TemplateId = vals
 			}
 		}
 	}
@@ -412,8 +391,6 @@ func (m *NotifyRes) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Enable = val
-			case "items":
-				m.Items = vals
 			}
 		}
 	}
@@ -483,18 +460,10 @@ func (m *CreateUserDefineNotifyTemplateRequest) UnmarshalURLValues(prefix string
 				m.Name = vals[0]
 			case "group":
 				m.Group = vals[0]
-			case "trigger":
-				m.Trigger = vals
-			case "title":
-				m.Title = vals
-			case "template":
-				m.Template = vals
 			case "scope":
 				m.Scope = vals[0]
 			case "scopeId":
 				m.ScopeId = vals[0]
-			case "targets":
-				m.Targets = vals
 			}
 		}
 	}

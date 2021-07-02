@@ -4,13 +4,11 @@
 package pb
 
 import (
-	json "encoding/json"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	pb "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
 	structpb "google.golang.org/protobuf/types/known/structpb"
 	url "net/url"
 	strconv "strconv"
-	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -88,19 +86,6 @@ func (m *QueryAlertRuleResponse) UnmarshalURLValues(prefix string, values url.Va
 				if m.Data == nil {
 					m.Data = &pb.AlertTypeRuleResp{}
 				}
-			case "data.windows":
-				if m.Data == nil {
-					m.Data = &pb.AlertTypeRuleResp{}
-				}
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Data.Windows = list
 			}
 		}
 	}
@@ -234,11 +219,6 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 					return err
 				}
 				m.Data.Enable = val
-			case "data.clusterNames":
-				if m.Data == nil {
-					m.Data = &pb.Alert{}
-				}
-				m.Data.ClusterNames = vals
 			case "data.domain":
 				if m.Data == nil {
 					m.Data = &pb.Alert{}
@@ -277,8 +257,6 @@ func (m *CreateAlertRequest) UnmarshalURLValues(prefix string, values url.Values
 				m.TenantGroup = vals[0]
 			case "name":
 				m.Name = vals[0]
-			case "appIds":
-				m.AppIds = vals
 			case "domain":
 				m.Domain = vals[0]
 			case "createTime":
@@ -355,8 +333,6 @@ func (m *UpdateAlertRequest) UnmarshalURLValues(prefix string, values url.Values
 				m.TenantGroup = vals[0]
 			case "name":
 				m.Name = vals[0]
-			case "appIds":
-				m.AppIds = vals
 			case "enable":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
@@ -932,16 +908,6 @@ func (m *GetAlertRecordsRequest) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "tenantGroup":
 				m.TenantGroup = vals[0]
-			case "alertGroup":
-				m.AlertGroup = vals
-			case "alertState":
-				m.AlertState = vals
-			case "alertType":
-				m.AlertType = vals
-			case "handleState":
-				m.HandleState = vals
-			case "handlerId":
-				m.HandlerId = vals
 			case "pageNo":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -978,11 +944,6 @@ func (m *GetAlertRecordsResponse) UnmarshalURLValues(prefix string, values url.V
 					return err
 				}
 				m.Data.Total = val
-			case "data.userIds":
-				if m.Data == nil {
-					m.Data = &GetAlertRecordsData{}
-				}
-				m.Data.UserIds = vals
 			}
 		}
 	}
@@ -1000,8 +961,6 @@ func (m *GetAlertRecordsData) UnmarshalURLValues(prefix string, values url.Value
 					return err
 				}
 				m.Total = val
-			case "userIds":
-				m.UserIds = vals
 			}
 		}
 	}
@@ -1328,190 +1287,67 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
 				}
 			case "data.staticData.null_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
 				}
 			case "data.staticData.number_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
 				}
+				val, err := strconv.ParseFloat(vals[0], 64)
+				if err != nil {
+					return err
+				}
+				m.Data.StaticData.NumberValue = val
 			case "data.staticData.string_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
 				}
+				m.Data.StaticData.StringValue = vals[0]
 			case "data.staticData.bool_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
 				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data.StaticData.BoolValue = val
 			case "data.staticData.struct_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
+				}
+				if m.Data.StaticData.StructValue == nil {
+					m.Data.StaticData.StructValue = &structpb.Struct{}
 				}
 			case "data.staticData.list_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.StaticData = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.StaticData = val
-					} else {
-						m.Data.StaticData = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.StaticData == nil {
+					m.Data.StaticData = &structpb.Value{}
+				}
+				if m.Data.StaticData.ListValue == nil {
+					m.Data.StaticData.ListValue = &structpb.ListValue{}
 				}
 			case "data.config":
 				if m.Data == nil {
@@ -1527,28 +1363,8 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
 				}
 			case "data.config.dataSourceConfig.null_value":
 				if m.Data == nil {
@@ -1557,28 +1373,8 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
 				}
 			case "data.config.dataSourceConfig.number_value":
 				if m.Data == nil {
@@ -1587,29 +1383,14 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
 				}
+				val, err := strconv.ParseFloat(vals[0], 64)
+				if err != nil {
+					return err
+				}
+				m.Data.Config.DataSourceConfig.NumberValue = val
 			case "data.config.dataSourceConfig.string_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
@@ -1617,29 +1398,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
 				}
+				m.Data.Config.DataSourceConfig.StringValue = vals[0]
 			case "data.config.dataSourceConfig.bool_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
@@ -1647,29 +1409,14 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
 				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data.Config.DataSourceConfig.BoolValue = val
 			case "data.config.dataSourceConfig.struct_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
@@ -1677,28 +1424,11 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
+				}
+				if m.Data.Config.DataSourceConfig.StructValue == nil {
+					m.Data.Config.DataSourceConfig.StructValue = &structpb.Struct{}
 				}
 			case "data.config.dataSourceConfig.list_value":
 				if m.Data == nil {
@@ -1707,28 +1437,11 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.DataSourceConfig = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.DataSourceConfig = val
-					} else {
-						m.Data.Config.DataSourceConfig = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.DataSourceConfig == nil {
+					m.Data.Config.DataSourceConfig = &structpb.Value{}
+				}
+				if m.Data.Config.DataSourceConfig.ListValue == nil {
+					m.Data.Config.DataSourceConfig.ListValue = &structpb.ListValue{}
 				}
 			case "data.config.option":
 				if m.Data == nil {
@@ -1737,28 +1450,8 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
 				}
 			case "data.config.option.null_value":
 				if m.Data == nil {
@@ -1767,28 +1460,8 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
 				}
 			case "data.config.option.number_value":
 				if m.Data == nil {
@@ -1797,29 +1470,14 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
 				}
+				val, err := strconv.ParseFloat(vals[0], 64)
+				if err != nil {
+					return err
+				}
+				m.Data.Config.Option.NumberValue = val
 			case "data.config.option.string_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
@@ -1827,29 +1485,10 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
 				}
+				m.Data.Config.Option.StringValue = vals[0]
 			case "data.config.option.bool_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
@@ -1857,29 +1496,14 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
 				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data.Config.Option.BoolValue = val
 			case "data.config.option.struct_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
@@ -1887,28 +1511,11 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
+				}
+				if m.Data.Config.Option.StructValue == nil {
+					m.Data.Config.Option.StructValue = &structpb.Struct{}
 				}
 			case "data.config.option.list_value":
 				if m.Data == nil {
@@ -1917,28 +1524,11 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data.Config == nil {
 					m.Data.Config = &pb.Config{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Config.Option = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Config.Option = val
-					} else {
-						m.Data.Config.Option = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Config.Option == nil {
+					m.Data.Config.Option = &structpb.Value{}
+				}
+				if m.Data.Config.Option.ListValue == nil {
+					m.Data.Config.Option.ListValue = &structpb.ListValue{}
 				}
 			case "data.api":
 				if m.Data == nil {
@@ -1967,190 +1557,67 @@ func (m *DashboardPreviewResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
 				}
 			case "data.controls.null_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
 				}
 			case "data.controls.number_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
 				}
+				val, err := strconv.ParseFloat(vals[0], 64)
+				if err != nil {
+					return err
+				}
+				m.Data.Controls.NumberValue = val
 			case "data.controls.string_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
 				}
+				m.Data.Controls.StringValue = vals[0]
 			case "data.controls.bool_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
 				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data.Controls.BoolValue = val
 			case "data.controls.struct_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
+				}
+				if m.Data.Controls.StructValue == nil {
+					m.Data.Controls.StructValue = &structpb.Struct{}
 				}
 			case "data.controls.list_value":
 				if m.Data == nil {
 					m.Data = &pb.View{}
 				}
-				if len(vals) > 1 {
-					var list []interface{}
-					for _, text := range vals {
-						var v interface{}
-						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
-						if err != nil {
-							list = append(list, v)
-						} else {
-							list = append(list, text)
-						}
-					}
-					val, _ := structpb.NewList(list)
-					m.Data.Controls = structpb.NewListValue(val)
-				} else {
-					var v interface{}
-					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
-					if err != nil {
-						val, _ := structpb.NewValue(v)
-						m.Data.Controls = val
-					} else {
-						m.Data.Controls = structpb.NewStringValue(vals[0])
-					}
+				if m.Data.Controls == nil {
+					m.Data.Controls = &structpb.Value{}
+				}
+				if m.Data.Controls.ListValue == nil {
+					m.Data.Controls.ListValue = &structpb.ListValue{}
 				}
 			}
 		}

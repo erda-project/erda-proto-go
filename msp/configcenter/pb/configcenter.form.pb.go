@@ -66,11 +66,6 @@ func (m *GetGroupResponse) UnmarshalURLValues(prefix string, values url.Values) 
 					return err
 				}
 				m.Data.Total = val
-			case "data.list":
-				if m.Data == nil {
-					m.Data = &Groups{}
-				}
-				m.Data.List = vals
 			}
 		}
 	}
@@ -88,8 +83,6 @@ func (m *Groups) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Total = val
-			case "list":
-				m.List = vals
 			}
 		}
 	}

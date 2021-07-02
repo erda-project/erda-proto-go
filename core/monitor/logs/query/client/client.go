@@ -37,13 +37,13 @@ type logQueryServiceWrapper struct {
 }
 
 func (s *logQueryServiceWrapper) GetLog(ctx context.Context, req *pb.GetLogRequest) (*pb.GetLogResponse, error) {
-	return s.client.GetLog(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetLog(ctx, req, s.opts...)
 }
 
 func (s *logQueryServiceWrapper) GetLogByRuntime(ctx context.Context, req *pb.GetLogByRuntimeRequest) (*pb.GetLogByRuntimeResponse, error) {
-	return s.client.GetLogByRuntime(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetLogByRuntime(ctx, req, s.opts...)
 }
 
 func (s *logQueryServiceWrapper) GetLogByOrganization(ctx context.Context, req *pb.GetLogByOrganizationRequest) (*pb.GetLogByOrganizationResponse, error) {
-	return s.client.GetLogByOrganization(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetLogByOrganization(ctx, req, s.opts...)
 }

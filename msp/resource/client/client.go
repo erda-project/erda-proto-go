@@ -37,9 +37,9 @@ type resourceServiceWrapper struct {
 }
 
 func (s *resourceServiceWrapper) CreateResource(ctx context.Context, req *pb.CreateResourceRequest) (*pb.CreateResourceResponse, error) {
-	return s.client.CreateResource(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.CreateResource(ctx, req, s.opts...)
 }
 
 func (s *resourceServiceWrapper) DeleteResource(ctx context.Context, req *pb.DeleteResourceRequest) (*pb.DeleteResourceResponse, error) {
-	return s.client.DeleteResource(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.DeleteResource(ctx, req, s.opts...)
 }

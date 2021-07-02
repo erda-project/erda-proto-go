@@ -142,8 +142,6 @@ func (m *Trace) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Elapsed = val
-			case "services":
-				m.Services = vals
 			case "startTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {

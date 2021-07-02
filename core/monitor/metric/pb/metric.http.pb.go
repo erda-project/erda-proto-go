@@ -71,8 +71,7 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithInfluxFormat_info)
 				}
@@ -110,8 +109,7 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithInfluxFormat_info)
 				}
@@ -149,8 +147,7 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithTableFormat_info)
 				}
@@ -188,8 +185,7 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithTableFormat_info)
 				}

@@ -37,13 +37,13 @@ type exceptionServiceWrapper struct {
 }
 
 func (s *exceptionServiceWrapper) GetExceptions(ctx context.Context, req *pb.GetExceptionsRequest) (*pb.GetExceptionsResponse, error) {
-	return s.client.GetExceptions(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetExceptions(ctx, req, s.opts...)
 }
 
 func (s *exceptionServiceWrapper) GetExceptionEventIds(ctx context.Context, req *pb.GetExceptionEventIdsRequest) (*pb.GetExceptionEventIdsResponse, error) {
-	return s.client.GetExceptionEventIds(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetExceptionEventIds(ctx, req, s.opts...)
 }
 
 func (s *exceptionServiceWrapper) GetExceptionEvent(ctx context.Context, req *pb.GetExceptionEventRequest) (*pb.GetExceptionEventResponse, error) {
-	return s.client.GetExceptionEvent(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetExceptionEvent(ctx, req, s.opts...)
 }

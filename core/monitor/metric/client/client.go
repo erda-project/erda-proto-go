@@ -45,19 +45,19 @@ type metricServiceWrapper struct {
 }
 
 func (s *metricServiceWrapper) QueryWithInfluxFormat(ctx context.Context, req *pb.QueryWithInfluxFormatRequest) (*pb.QueryWithInfluxFormatResponse, error) {
-	return s.client.QueryWithInfluxFormat(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.QueryWithInfluxFormat(ctx, req, s.opts...)
 }
 
 func (s *metricServiceWrapper) SearchWithInfluxFormat(ctx context.Context, req *pb.QueryWithInfluxFormatRequest) (*pb.QueryWithInfluxFormatResponse, error) {
-	return s.client.SearchWithInfluxFormat(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.SearchWithInfluxFormat(ctx, req, s.opts...)
 }
 
 func (s *metricServiceWrapper) QueryWithTableFormat(ctx context.Context, req *pb.QueryWithTableFormatRequest) (*pb.QueryWithTableFormatResponse, error) {
-	return s.client.QueryWithTableFormat(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.QueryWithTableFormat(ctx, req, s.opts...)
 }
 
 func (s *metricServiceWrapper) SearchWithTableFormat(ctx context.Context, req *pb.QueryWithTableFormatRequest) (*pb.QueryWithTableFormatResponse, error) {
-	return s.client.SearchWithTableFormat(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.SearchWithTableFormat(ctx, req, s.opts...)
 }
 
 type metricMetaServiceWrapper struct {
@@ -66,17 +66,17 @@ type metricMetaServiceWrapper struct {
 }
 
 func (s *metricMetaServiceWrapper) ListMetricNames(ctx context.Context, req *pb.ListMetricNamesRequest) (*pb.ListMetricNamesResponse, error) {
-	return s.client.ListMetricNames(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.ListMetricNames(ctx, req, s.opts...)
 }
 
 func (s *metricMetaServiceWrapper) ListMetricMeta(ctx context.Context, req *pb.ListMetricMetaRequest) (*pb.ListMetricMetaResponse, error) {
-	return s.client.ListMetricMeta(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.ListMetricMeta(ctx, req, s.opts...)
 }
 
 func (s *metricMetaServiceWrapper) ListMetricGroups(ctx context.Context, req *pb.ListMetricGroupsRequest) (*pb.ListMetricGroupsResponse, error) {
-	return s.client.ListMetricGroups(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.ListMetricGroups(ctx, req, s.opts...)
 }
 
 func (s *metricMetaServiceWrapper) GetMetricGroup(ctx context.Context, req *pb.GetMetricGroupRequest) (*pb.GetMetricGroupResponse, error) {
-	return s.client.GetMetricGroup(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+	return s.client.GetMetricGroup(ctx, req, s.opts...)
 }

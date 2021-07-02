@@ -68,8 +68,7 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLog_info)
 				}
@@ -103,8 +102,7 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLogByRuntime_info)
 				}
@@ -138,8 +136,7 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 						return nil, err
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLogByOrganization_info)
 				}

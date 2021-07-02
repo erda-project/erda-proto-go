@@ -89,8 +89,7 @@ func RegisterGreeterServiceHandler(r http.Router, srv GreeterServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SayHello_info)
 				}

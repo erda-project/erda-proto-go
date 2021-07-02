@@ -69,8 +69,7 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExceptions_info)
 				}
@@ -111,8 +110,7 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExceptionEventIds_info)
 				}
@@ -153,8 +151,7 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExceptionEvent_info)
 				}

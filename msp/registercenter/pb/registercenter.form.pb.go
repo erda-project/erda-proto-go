@@ -60,6 +60,8 @@ var _ urlenc.URLValuesUnmarshaler = (*DubboInterface)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DubboInterfaceResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DubboMointorMap)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DubboMointor)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ServiceIpRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ServiceIpInfoResponse)(nil)
 
 // ListInterfaceRequest implement urlenc.URLValuesUnmarshaler.
 func (m *ListInterfaceRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -935,19 +937,6 @@ func (m *GetDubboInterfaceQPSResponse) UnmarshalURLValues(prefix string, values 
 					return err
 				}
 				m.Data.Total = val
-			case "data.time":
-				if m.Data == nil {
-					m.Data = &DubboInterface{}
-				}
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Data.Time = list
 			}
 		}
 	}
@@ -1006,19 +995,6 @@ func (m *GetDubboInterfaceFailedResponse) UnmarshalURLValues(prefix string, valu
 					return err
 				}
 				m.Data.Total = val
-			case "data.time":
-				if m.Data == nil {
-					m.Data = &DubboInterface{}
-				}
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Data.Time = list
 			}
 		}
 	}
@@ -1077,19 +1053,6 @@ func (m *GetDubboInterfaceAvgTimeResponse) UnmarshalURLValues(prefix string, val
 					return err
 				}
 				m.Data.Total = val
-			case "data.time":
-				if m.Data == nil {
-					m.Data = &DubboInterface{}
-				}
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Data.Time = list
 			}
 		}
 	}
@@ -1103,10 +1066,6 @@ func (m *Interface) UnmarshalURLValues(prefix string, values url.Values) error {
 			switch prefix + key {
 			case "interfacename":
 				m.Interfacename = vals[0]
-			case "providerlist":
-				m.Providerlist = vals
-			case "consumerlist":
-				m.Consumerlist = vals
 			}
 		}
 	}
@@ -1304,16 +1263,6 @@ func (m *DubboInterface) UnmarshalURLValues(prefix string, values url.Values) er
 					return err
 				}
 				m.Total = val
-			case "time":
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Time = list
 			}
 		}
 	}
@@ -1354,19 +1303,6 @@ func (m *DubboMointorMap) UnmarshalURLValues(prefix string, values url.Values) e
 					m.Value = &DubboMointor{}
 				}
 				m.Value.Tag = vals[0]
-			case "value.data":
-				if m.Value == nil {
-					m.Value = &DubboMointor{}
-				}
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Value.Data = list
 			case "value.unit":
 				if m.Value == nil {
 					m.Value = &DubboMointor{}
@@ -1406,16 +1342,6 @@ func (m *DubboMointor) UnmarshalURLValues(prefix string, values url.Values) erro
 				m.Name = vals[0]
 			case "tag":
 				m.Tag = vals[0]
-			case "data":
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.Data = list
 			case "unit":
 				m.Unit = vals[0]
 			case "unitType":
@@ -1428,6 +1354,40 @@ func (m *DubboMointor) UnmarshalURLValues(prefix string, values url.Values) erro
 					return err
 				}
 				m.AxisIndex = val
+			}
+		}
+	}
+	return nil
+}
+
+// ServiceIpRequest implement urlenc.URLValuesUnmarshaler.
+func (m *ServiceIpRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "projectID":
+				m.ProjectID = vals[0]
+			case "workspace":
+				m.Workspace = vals[0]
+			case "ip":
+				m.Ip = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// ServiceIpInfoResponse implement urlenc.URLValuesUnmarshaler.
+func (m *ServiceIpInfoResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "appID":
+				m.AppID = vals[0]
+			case "runtimeID":
+				m.RuntimeID = vals[0]
+			case "serviceName":
+				m.ServiceName = vals[0]
 			}
 		}
 	}
