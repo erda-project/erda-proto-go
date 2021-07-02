@@ -99,3 +99,7 @@ func (s *registerCenterServiceWrapper) GetDubboInterfaceFailed(ctx context.Conte
 func (s *registerCenterServiceWrapper) GetDubboInterfaceAvgTime(ctx context.Context, req *pb.GetDubboInterfaceAvgTimeRequest) (*pb.GetDubboInterfaceAvgTimeResponse, error) {
 	return s.client.GetDubboInterfaceAvgTime(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *registerCenterServiceWrapper) GetServiceIpInfo(ctx context.Context, req *pb.ServiceIpRequest) (*pb.ServiceIpInfoResponse, error) {
+	return s.client.GetServiceIpInfo(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}

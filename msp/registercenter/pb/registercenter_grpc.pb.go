@@ -49,6 +49,7 @@ type RegisterCenterServiceClient interface {
 	GetDubboInterfaceFailed(ctx context.Context, in *GetDubboInterfaceFailedRequest, opts ...grpc.CallOption) (*GetDubboInterfaceFailedResponse, error)
 	// +depracated
 	GetDubboInterfaceAvgTime(ctx context.Context, in *GetDubboInterfaceAvgTimeRequest, opts ...grpc.CallOption) (*GetDubboInterfaceAvgTimeResponse, error)
+	GetServiceIpInfo(ctx context.Context, in *ServiceIpRequest, opts ...grpc.CallOption) (*ServiceIpInfoResponse, error)
 }
 
 type registerCenterServiceClient struct {
@@ -203,6 +204,15 @@ func (c *registerCenterServiceClient) GetDubboInterfaceAvgTime(ctx context.Conte
 	return out, nil
 }
 
+func (c *registerCenterServiceClient) GetServiceIpInfo(ctx context.Context, in *ServiceIpRequest, opts ...grpc.CallOption) (*ServiceIpInfoResponse, error) {
+	out := new(ServiceIpInfoResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.registercenter.RegisterCenterService/GetServiceIpInfo", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // RegisterCenterServiceServer is the server API for RegisterCenterService service.
 // All implementations should embed UnimplementedRegisterCenterServiceServer
 // for forward compatibility
@@ -236,6 +246,7 @@ type RegisterCenterServiceServer interface {
 	GetDubboInterfaceFailed(context.Context, *GetDubboInterfaceFailedRequest) (*GetDubboInterfaceFailedResponse, error)
 	// +depracated
 	GetDubboInterfaceAvgTime(context.Context, *GetDubboInterfaceAvgTimeRequest) (*GetDubboInterfaceAvgTimeResponse, error)
+	GetServiceIpInfo(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)
 }
 
 // UnimplementedRegisterCenterServiceServer should be embedded to have forward compatible implementations.
@@ -289,6 +300,9 @@ func (*UnimplementedRegisterCenterServiceServer) GetDubboInterfaceFailed(context
 }
 func (*UnimplementedRegisterCenterServiceServer) GetDubboInterfaceAvgTime(context.Context, *GetDubboInterfaceAvgTimeRequest) (*GetDubboInterfaceAvgTimeResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetDubboInterfaceAvgTime not implemented")
+}
+func (*UnimplementedRegisterCenterServiceServer) GetServiceIpInfo(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetServiceIpInfo not implemented")
 }
 
 func RegisterRegisterCenterServiceServer(s grpc1.ServiceRegistrar, srv RegisterCenterServiceServer, opts ...grpc1.HandleOption) {
@@ -451,6 +465,15 @@ func _get_RegisterCenterService_serviceDesc(srv RegisterCenterServiceServer, opt
 	if h.Interceptor != nil {
 		_RegisterCenterService_GetDubboInterfaceAvgTime_info = transport.NewServiceInfo("erda.msp.registercenter.RegisterCenterService", "GetDubboInterfaceAvgTime", srv)
 		_RegisterCenterService_GetDubboInterfaceAvgTime_Handler = h.Interceptor(_RegisterCenterService_GetDubboInterfaceAvgTime_Handler)
+	}
+
+	_RegisterCenterService_GetServiceIpInfo_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetServiceIpInfo(ctx, req.(*ServiceIpRequest))
+	}
+	var _RegisterCenterService_GetServiceIpInfo_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_RegisterCenterService_GetServiceIpInfo_info = transport.NewServiceInfo("erda.msp.registercenter.RegisterCenterService", "GetServiceIpInfo", srv)
+		_RegisterCenterService_GetServiceIpInfo_Handler = h.Interceptor(_RegisterCenterService_GetServiceIpInfo_Handler)
 	}
 
 	var serviceDesc = _RegisterCenterService_serviceDesc
@@ -821,6 +844,29 @@ func _get_RegisterCenterService_serviceDesc(srv RegisterCenterServiceServer, opt
 					FullMethod: "/erda.msp.registercenter.RegisterCenterService/GetDubboInterfaceAvgTime",
 				}
 				return interceptor(ctx, in, info, _RegisterCenterService_GetDubboInterfaceAvgTime_Handler)
+			},
+		},
+		{
+			MethodName: "GetServiceIpInfo",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(ServiceIpRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(RegisterCenterServiceServer).GetServiceIpInfo(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _RegisterCenterService_GetServiceIpInfo_info)
+				}
+				if interceptor == nil {
+					return _RegisterCenterService_GetServiceIpInfo_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.registercenter.RegisterCenterService/GetServiceIpInfo",
+				}
+				return interceptor(ctx, in, info, _RegisterCenterService_GetServiceIpInfo_Handler)
 			},
 		},
 	}

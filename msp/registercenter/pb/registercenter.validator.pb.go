@@ -470,3 +470,9 @@ func (this *DubboMointorMap) Validate() error {
 func (this *DubboMointor) Validate() error {
 	return nil
 }
+func (this *ServiceIpRequest) Validate() error {
+	return nil
+}
+func (this *ServiceIpInfoResponse) Validate() error {
+	return nil
+}

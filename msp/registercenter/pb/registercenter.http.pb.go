@@ -65,6 +65,8 @@ type RegisterCenterServiceHandler interface {
 	// +depracated
 	// GET /api/tmc/mesh/avgtime/{interfaceName}/{projectID}/{env}
 	GetDubboInterfaceAvgTime(context.Context, *GetDubboInterfaceAvgTimeRequest) (*GetDubboInterfaceAvgTimeResponse, error)
+	// GET /api/tmc/service-ip
+	GetServiceIpInfo(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)
 }
 
 // RegisterRegisterCenterServiceHandler register RegisterCenterServiceHandler to http.Router.
@@ -111,6 +113,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
@@ -119,9 +124,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -184,14 +186,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
+				}
 				if vals := params["nacosId"]; len(vals) > 0 {
 					in.NacosID = vals[0]
 				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
-				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -254,11 +256,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["nacosId"]; len(vals) > 0 {
 					in.NacosID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -396,6 +398,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
+				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
@@ -404,9 +409,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
-				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -471,9 +473,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
@@ -482,6 +481,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -546,14 +548,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -618,14 +620,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -690,14 +692,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -762,14 +764,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -906,6 +908,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
@@ -914,9 +919,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
-				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1051,14 +1053,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
-				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1242,6 +1244,41 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		)
 	}
 
+	add_GetServiceIpInfo := func(method, path string, fn func(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*ServiceIpRequest))
+		}
+		var GetServiceIpInfo_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetServiceIpInfo_info = transport.NewServiceInfo("erda.msp.registercenter.RegisterCenterService", "GetServiceIpInfo", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in ServiceIpRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetServiceIpInfo_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
 	add_ListInterface("GET", "/api/tmc/mesh/listinterface/{projectID}/{env}", srv.ListInterface)
 	add_GetHTTPServices("GET", "/api/tmc/mesh/listhttpinterface/{projectID}/{env}", srv.GetHTTPServices)
 	add_EnableHTTPService("POST", "/api/tmc/mesh/enable/{projectID}/{env}", srv.EnableHTTPService)
@@ -1258,4 +1295,5 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 	add_GetDubboInterfaceQPS("GET", "/api/tmc/mesh/qps/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceQPS)
 	add_GetDubboInterfaceFailed("GET", "/api/tmc/mesh/failed/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceFailed)
 	add_GetDubboInterfaceAvgTime("GET", "/api/tmc/mesh/avgtime/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceAvgTime)
+	add_GetServiceIpInfo("GET", "/api/tmc/service-ip", srv.GetServiceIpInfo)
 }

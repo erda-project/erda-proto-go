@@ -60,6 +60,8 @@ var _ urlenc.URLValuesUnmarshaler = (*DubboInterface)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DubboInterfaceResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DubboMointorMap)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DubboMointor)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ServiceIpRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ServiceIpInfoResponse)(nil)
 
 // ListInterfaceRequest implement urlenc.URLValuesUnmarshaler.
 func (m *ListInterfaceRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -1428,6 +1430,40 @@ func (m *DubboMointor) UnmarshalURLValues(prefix string, values url.Values) erro
 					return err
 				}
 				m.AxisIndex = val
+			}
+		}
+	}
+	return nil
+}
+
+// ServiceIpRequest implement urlenc.URLValuesUnmarshaler.
+func (m *ServiceIpRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "projectID":
+				m.ProjectID = vals[0]
+			case "workspace":
+				m.Workspace = vals[0]
+			case "ip":
+				m.Ip = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// ServiceIpInfoResponse implement urlenc.URLValuesUnmarshaler.
+func (m *ServiceIpInfoResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "appID":
+				m.AppID = vals[0]
+			case "runtimeID":
+				m.RuntimeID = vals[0]
+			case "serviceName":
+				m.ServiceName = vals[0]
 			}
 		}
 	}
