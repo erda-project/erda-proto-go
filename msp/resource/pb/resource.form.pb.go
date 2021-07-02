@@ -13,6 +13,7 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*CreateResourceRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateResourceResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ResourceCreateResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteResourceRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteResourceResponse)(nil)
 
@@ -42,6 +43,41 @@ func (m *CreateResourceResponse) UnmarshalURLValues(prefix string, values url.Va
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &ResourceCreateResult{}
+				}
+			case "data.id":
+				if m.Data == nil {
+					m.Data = &ResourceCreateResult{}
+				}
+				m.Data.Id = vals[0]
+			case "data.createdAt":
+				if m.Data == nil {
+					m.Data = &ResourceCreateResult{}
+				}
+				m.Data.CreatedAt = vals[0]
+			case "data.updateAt":
+				if m.Data == nil {
+					m.Data = &ResourceCreateResult{}
+				}
+				m.Data.UpdateAt = vals[0]
+			case "data.status":
+				if m.Data == nil {
+					m.Data = &ResourceCreateResult{}
+				}
+				m.Data.Status = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// ResourceCreateResult implement urlenc.URLValuesUnmarshaler.
+func (m *ResourceCreateResult) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
 			case "id":
 				m.Id = vals[0]
 			case "createdAt":
@@ -49,6 +85,7 @@ func (m *CreateResourceResponse) UnmarshalURLValues(prefix string, values url.Va
 			case "updateAt":
 				m.UpdateAt = vals[0]
 			case "status":
+				m.Status = vals[0]
 			}
 		}
 	}
@@ -75,12 +112,12 @@ func (m *DeleteResourceResponse) UnmarshalURLValues(prefix string, values url.Va
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "result":
+			case "data":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
-				m.Result = val
+				m.Data = val
 			}
 		}
 	}

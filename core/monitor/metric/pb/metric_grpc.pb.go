@@ -24,6 +24,8 @@ type MetricServiceClient interface {
 	SearchWithInfluxFormat(ctx context.Context, in *QueryWithInfluxFormatRequest, opts ...grpc.CallOption) (*QueryWithInfluxFormatResponse, error)
 	QueryWithTableFormat(ctx context.Context, in *QueryWithTableFormatRequest, opts ...grpc.CallOption) (*QueryWithTableFormatResponse, error)
 	SearchWithTableFormat(ctx context.Context, in *QueryWithTableFormatRequest, opts ...grpc.CallOption) (*QueryWithTableFormatResponse, error)
+	GeneralQuery(ctx context.Context, in *GeneralQueryRequest, opts ...grpc.CallOption) (*GeneralQueryResponse, error)
+	GeneralSearch(ctx context.Context, in *GeneralQueryRequest, opts ...grpc.CallOption) (*GeneralQueryResponse, error)
 }
 
 type metricServiceClient struct {
@@ -70,6 +72,24 @@ func (c *metricServiceClient) SearchWithTableFormat(ctx context.Context, in *Que
 	return out, nil
 }
 
+func (c *metricServiceClient) GeneralQuery(ctx context.Context, in *GeneralQueryRequest, opts ...grpc.CallOption) (*GeneralQueryResponse, error) {
+	out := new(GeneralQueryResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/GeneralQuery", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *metricServiceClient) GeneralSearch(ctx context.Context, in *GeneralQueryRequest, opts ...grpc.CallOption) (*GeneralQueryResponse, error) {
+	out := new(GeneralQueryResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.metric.MetricService/GeneralSearch", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // MetricServiceServer is the server API for MetricService service.
 // All implementations should embed UnimplementedMetricServiceServer
 // for forward compatibility
@@ -78,6 +98,8 @@ type MetricServiceServer interface {
 	SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
 	QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
 	SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
+	GeneralQuery(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)
+	GeneralSearch(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)
 }
 
 // UnimplementedMetricServiceServer should be embedded to have forward compatible implementations.
@@ -95,6 +117,12 @@ func (*UnimplementedMetricServiceServer) QueryWithTableFormat(context.Context, *
 }
 func (*UnimplementedMetricServiceServer) SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SearchWithTableFormat not implemented")
+}
+func (*UnimplementedMetricServiceServer) GeneralQuery(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GeneralQuery not implemented")
+}
+func (*UnimplementedMetricServiceServer) GeneralSearch(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GeneralSearch not implemented")
 }
 
 func RegisterMetricServiceServer(s grpc1.ServiceRegistrar, srv MetricServiceServer, opts ...grpc1.HandleOption) {
@@ -149,6 +177,24 @@ func _get_MetricService_serviceDesc(srv MetricServiceServer, opts ...grpc1.Handl
 	if h.Interceptor != nil {
 		_MetricService_SearchWithTableFormat_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "SearchWithTableFormat", srv)
 		_MetricService_SearchWithTableFormat_Handler = h.Interceptor(_MetricService_SearchWithTableFormat_Handler)
+	}
+
+	_MetricService_GeneralQuery_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GeneralQuery(ctx, req.(*GeneralQueryRequest))
+	}
+	var _MetricService_GeneralQuery_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_MetricService_GeneralQuery_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "GeneralQuery", srv)
+		_MetricService_GeneralQuery_Handler = h.Interceptor(_MetricService_GeneralQuery_Handler)
+	}
+
+	_MetricService_GeneralSearch_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GeneralSearch(ctx, req.(*GeneralQueryRequest))
+	}
+	var _MetricService_GeneralSearch_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_MetricService_GeneralSearch_info = transport.NewServiceInfo("erda.core.monitor.metric.MetricService", "GeneralSearch", srv)
+		_MetricService_GeneralSearch_Handler = h.Interceptor(_MetricService_GeneralSearch_Handler)
 	}
 
 	var serviceDesc = _MetricService_serviceDesc
@@ -243,6 +289,52 @@ func _get_MetricService_serviceDesc(srv MetricServiceServer, opts ...grpc1.Handl
 					FullMethod: "/erda.core.monitor.metric.MetricService/SearchWithTableFormat",
 				}
 				return interceptor(ctx, in, info, _MetricService_SearchWithTableFormat_Handler)
+			},
+		},
+		{
+			MethodName: "GeneralQuery",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GeneralQueryRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(MetricServiceServer).GeneralQuery(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_GeneralQuery_info)
+				}
+				if interceptor == nil {
+					return _MetricService_GeneralQuery_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.core.monitor.metric.MetricService/GeneralQuery",
+				}
+				return interceptor(ctx, in, info, _MetricService_GeneralQuery_Handler)
+			},
+		},
+		{
+			MethodName: "GeneralSearch",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GeneralQueryRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(MetricServiceServer).GeneralSearch(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MetricService_GeneralSearch_info)
+				}
+				if interceptor == nil {
+					return _MetricService_GeneralSearch_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.core.monitor.metric.MetricService/GeneralSearch",
+				}
+				return interceptor(ctx, in, info, _MetricService_GeneralSearch_Handler)
 			},
 		},
 	}
