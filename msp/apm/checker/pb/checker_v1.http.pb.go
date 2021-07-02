@@ -105,7 +105,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateCheckerV1_info)
 				}
@@ -166,7 +167,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCheckerV1_info)
 				}
@@ -227,7 +229,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCheckerV1_info)
 				}
@@ -288,7 +291,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DescribeCheckersV1_info)
 				}
@@ -349,7 +353,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DescribeCheckerV1_info)
 				}
@@ -410,7 +415,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCheckerStatusV1_info)
 				}
@@ -471,7 +477,8 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 						}
 					}
 				}
-				ctx := context.WithValue(r.Context(), http.RequestContextKey, r)
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCheckerIssuesV1_info)
 				}

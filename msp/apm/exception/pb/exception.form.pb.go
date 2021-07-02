@@ -68,6 +68,14 @@ func (m *GetExceptionEventIdsRequest) UnmarshalURLValues(prefix string, values u
 
 // GetExceptionEventIdsResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetExceptionEventIdsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				m.Data = vals
+			}
+		}
+	}
 	return nil
 }
 
