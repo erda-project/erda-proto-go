@@ -20,7 +20,6 @@ const _ = http.SupportPackageIsVersion1
 
 // MenuServiceHandler is the server API for MenuService service.
 type MenuServiceHandler interface {
-	// +publish path:"/menu/{tenantGroup}"
 	// GET /api/msp/menu/{tenantGroup}
 	GetMenu(context.Context, *GetMenuRequest) (*GetMenuResponse, error)
 	// GET /api/msp/setting/{tenantGroup}
