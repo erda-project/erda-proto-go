@@ -18,17 +18,17 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *GetSpansRequest) Validate() error {
-	if this.TraceId == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("TraceId", fmt.Errorf(`value '%v' must not be an empty string`, this.TraceId))
+	if this.TraceID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("TraceID", fmt.Errorf(`value '%v' must not be an empty string`, this.TraceID))
 	}
-	if this.ScopeId == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("ScopeId", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeId))
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
 	}
 	return nil
 }
 func (this *GetTracesRequest) Validate() error {
-	if this.ScopeId == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("ScopeId", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeId))
+	if this.ScopeID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
 	}
 	return nil
 }

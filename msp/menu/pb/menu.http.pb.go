@@ -20,9 +20,9 @@ const _ = http.SupportPackageIsVersion1
 
 // MenuServiceHandler is the server API for MenuService service.
 type MenuServiceHandler interface {
-	// GET /api/tmc/micro-service/menu/tenantGroup/{tenantGroup}
+	// GET /api/msp/menu/{tenantGroup}
 	GetMenu(context.Context, *GetMenuRequest) (*GetMenuResponse, error)
-	// GET /api/tmc/micro-service/setting/tenantGroup/{tenantGroup}
+	// GET /api/msp/setting/{tenantGroup}
 	GetSetting(context.Context, *GetSettingRequest) (*GetSettingResponse, error)
 }
 
@@ -161,6 +161,6 @@ func RegisterMenuServiceHandler(r http.Router, srv MenuServiceHandler, opts ...h
 		)
 	}
 
-	add_GetMenu("GET", "/api/tmc/micro-service/menu/tenantGroup/{tenantGroup}", srv.GetMenu)
-	add_GetSetting("GET", "/api/tmc/micro-service/setting/tenantGroup/{tenantGroup}", srv.GetSetting)
+	add_GetMenu("GET", "/api/msp/menu/{tenantGroup}", srv.GetMenu)
+	add_GetSetting("GET", "/api/msp/setting/{tenantGroup}", srv.GetSetting)
 }

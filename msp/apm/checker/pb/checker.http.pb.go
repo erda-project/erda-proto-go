@@ -21,17 +21,17 @@ const _ = http.SupportPackageIsVersion1
 
 // CheckerServiceHandler is the server API for CheckerService service.
 type CheckerServiceHandler interface {
-	// POST /api/tmc/checkers/{scope}/{scopeID}
+	// POST /api/msp/checkers/{scope}/{scopeID}
 	CreateChecker(context.Context, *CreateCheckerRequest) (*CreateCheckerResponse, error)
-	// PUT /api/tmc/checkers/{scope}/{scopeID}/{id}
+	// PUT /api/msp/checkers/{scope}/{scopeID}/{id}
 	UpdateChecker(context.Context, *UpdateCheckerRequest) (*UpdateCheckerResponse, error)
-	// DELETE /api/tmc/checkers/{scope}/{scopeID}/{id}
+	// DELETE /api/msp/checkers/{scope}/{scopeID}/{id}
 	DeleteChecker(context.Context, *UpdateCheckerRequest) (*UpdateCheckerResponse, error)
-	// GET /api/tmc/checkers/{scope}/{scopeID}
+	// GET /api/msp/checkers/{scope}/{scopeID}
 	ListCheckers(context.Context, *ListCheckersRequest) (*ListCheckersResponse, error)
-	// GET /api/tmc/checkers-description/{scope}/{scopeID}
+	// GET /api/msp/checker-descriptions/{scope}/{scopeID}
 	DescribeCheckers(context.Context, *DescribeCheckersRequest) (*DescribeCheckersResponse, error)
-	// GET /api/tmc/checkers-description/{scope}/{scopeID}/{id}
+	// GET /api/msp/checker-descriptions/{scope}/{scopeID}/{id}
 	DescribeChecker(context.Context, *DescribeCheckerRequest) (*DescribeCheckerResponse, error)
 }
 
@@ -424,10 +424,10 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		)
 	}
 
-	add_CreateChecker("POST", "/api/tmc/checkers/{scope}/{scopeID}", srv.CreateChecker)
-	add_UpdateChecker("PUT", "/api/tmc/checkers/{scope}/{scopeID}/{id}", srv.UpdateChecker)
-	add_DeleteChecker("DELETE", "/api/tmc/checkers/{scope}/{scopeID}/{id}", srv.DeleteChecker)
-	add_ListCheckers("GET", "/api/tmc/checkers/{scope}/{scopeID}", srv.ListCheckers)
-	add_DescribeCheckers("GET", "/api/tmc/checkers-description/{scope}/{scopeID}", srv.DescribeCheckers)
-	add_DescribeChecker("GET", "/api/tmc/checkers-description/{scope}/{scopeID}/{id}", srv.DescribeChecker)
+	add_CreateChecker("POST", "/api/msp/checkers/{scope}/{scopeID}", srv.CreateChecker)
+	add_UpdateChecker("PUT", "/api/msp/checkers/{scope}/{scopeID}/{id}", srv.UpdateChecker)
+	add_DeleteChecker("DELETE", "/api/msp/checkers/{scope}/{scopeID}/{id}", srv.DeleteChecker)
+	add_ListCheckers("GET", "/api/msp/checkers/{scope}/{scopeID}", srv.ListCheckers)
+	add_DescribeCheckers("GET", "/api/msp/checker-descriptions/{scope}/{scopeID}", srv.DescribeCheckers)
+	add_DescribeChecker("GET", "/api/msp/checker-descriptions/{scope}/{scopeID}/{id}", srv.DescribeChecker)
 }

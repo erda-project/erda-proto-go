@@ -20,11 +20,11 @@ const _ = http.SupportPackageIsVersion1
 
 // ConfigCenterServiceHandler is the server API for ConfigCenterService service.
 type ConfigCenterServiceHandler interface {
-	// GET /api/tmc/config/tenants/{tenantID}/groups
+	// GET /api/msp/config/tenants/{tenantID}/groups
 	GetGroups(context.Context, *GetGroupRequest) (*GetGroupResponse, error)
-	// GET /api/tmc/config/tenants/{tenantID}/groups/{groupID}
+	// GET /api/msp/config/tenants/{tenantID}/groups/{groupID}
 	GetGroupProperties(context.Context, *GetGroupPropertiesRequest) (*GetGroupPropertiesResponse, error)
-	// POST /api/tmc/config/tenants/{tenantID}/groups/{groupID}
+	// POST /api/msp/config/tenants/{tenantID}/groups/{groupID}
 	SaveGroupProperties(context.Context, *SaveGroupPropertiesRequest) (*SaveGroupPropertiesResponse, error)
 }
 
@@ -225,7 +225,7 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 		)
 	}
 
-	add_GetGroups("GET", "/api/tmc/config/tenants/{tenantID}/groups", srv.GetGroups)
-	add_GetGroupProperties("GET", "/api/tmc/config/tenants/{tenantID}/groups/{groupID}", srv.GetGroupProperties)
-	add_SaveGroupProperties("POST", "/api/tmc/config/tenants/{tenantID}/groups/{groupID}", srv.SaveGroupProperties)
+	add_GetGroups("GET", "/api/msp/config/tenants/{tenantID}/groups", srv.GetGroups)
+	add_GetGroupProperties("GET", "/api/msp/config/tenants/{tenantID}/groups/{groupID}", srv.GetGroupProperties)
+	add_SaveGroupProperties("POST", "/api/msp/config/tenants/{tenantID}/groups/{groupID}", srv.SaveGroupProperties)
 }

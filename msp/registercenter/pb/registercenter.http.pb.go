@@ -20,53 +20,53 @@ const _ = http.SupportPackageIsVersion1
 
 // RegisterCenterServiceHandler is the server API for RegisterCenterService service.
 type RegisterCenterServiceHandler interface {
-	// GET /api/tmc/mesh/listinterface/{projectID}/{env}
+	// GET /api/msp/register/interfaces/{projectID}/{env}
 	ListInterface(context.Context, *ListInterfaceRequest) (*ListInterfaceResponse, error)
-	// GET /api/tmc/mesh/listhttpinterface/{projectID}/{env}
+	// GET /api/msp/register/http-interfaces/{projectID}/{env}
 	GetHTTPServices(context.Context, *GetHTTPServicesRequest) (*GetHTTPServicesResponse, error)
-	// POST /api/tmc/mesh/enable/{projectID}/{env}
+	// POST /api/msp/register/http-interfaces/{projectID}/{env}/enable
 	EnableHTTPService(context.Context, *EnableHTTPServiceRequest) (*EnableHTTPServiceResponse, error)
+	// GET /api/msp/register/service-ip
+	GetServiceIpInfo(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/interface/route/{interfaceName}/{projectID}/{env}
+	// GET /api/msp/mesh/interface/route/{interfaceName}/{projectID}/{env}
 	GetRouteRule(context.Context, *GetRouteRuleRequest) (*GetRouteRuleResponse, error)
 	// +depracated
-	// POST /api/tmc/mesh/interface/route/{interfaceName}/{projectID}/{env}
+	// POST /api/msp/mesh/interface/route/{interfaceName}/{projectID}/{env}
 	CreateRouteRule(context.Context, *CreateRouteRuleRequest) (*CreateRouteRuleResponse, error)
 	// +depracated
-	// DELETE /api/tmc/mesh/interface/route/{interfaceName}/{projectID}/{env}
+	// DELETE /api/msp/mesh/interface/route/{interfaceName}/{projectID}/{env}
 	DeleteRouteRule(context.Context, *DeleteRouteRuleRequest) (*DeleteRouteRuleResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/rule/branch/{projectID}/{env}/{appID}
+	// GET /api/msp/mesh/rule/branch/{projectID}/{env}/{appID}
 	GetHostRule(context.Context, *CetHostRuleRequest) (*CetHostRuleResponse, error)
 	// +depracated
-	// POST /api/tmc/mesh/rule/branch/{projectID}/{env}/{appID}
+	// POST /api/msp/mesh/rule/branch/{projectID}/{env}/{appID}
 	CreateHostRule(context.Context, *CreateHostRuleRequest) (*CreateHostRuleResponse, error)
 	// +depracated
-	// DELETE /api/tmc/mesh/rule/branch/{projectID}/{env}/{appID}
+	// DELETE /api/msp/mesh/rule/branch/{projectID}/{env}/{appID}
 	DeleteHostRule(context.Context, *DeleteHostRuleRequest) (*DeleteHostRuleResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/rule/host/{projectID}/{env}/{host}
+	// GET /api/msp/mesh/rule/host/{projectID}/{env}/{host}
 	GetHostRuntimeRule(context.Context, *GetHostRuntimeRuleRequest) (*GetHostRuntimeRuleResponse, error)
 	// +depracated
-	// POST /api/tmc/mesh/rule/host/{projectID}/{env}/{host}
+	// POST /api/msp/mesh/rule/host/{projectID}/{env}/{host}
 	CreateHostRuntimeRule(context.Context, *CreateHostRuntimeRuleRequest) (*CreateHostRuntimeRuleResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/listhostinterface/{projectID}/{env}
+	// GET /api/msp/mesh/listhostinterface/{projectID}/{env}
 	GetAllHostRuntimeRules(context.Context, *GetAllHostRuntimeRulesRequest) (*GetAllHostRuntimeRulesResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/timestamp/{interfaceName}/{projectID}/{env}
+	// GET /api/msp/mesh/timestamp/{interfaceName}/{projectID}/{env}
 	GetDubboInterfaceTime(context.Context, *GetDubboInterfaceTimeRequest) (*GetDubboInterfaceTimeResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/qps/{interfaceName}/{projectID}/{env}
+	// GET /api/msp/mesh/qps/{interfaceName}/{projectID}/{env}
 	GetDubboInterfaceQPS(context.Context, *GetDubboInterfaceQPSRequest) (*GetDubboInterfaceQPSResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/failed/{interfaceName}/{projectID}/{env}
+	// GET /api/msp/mesh/failed/{interfaceName}/{projectID}/{env}
 	GetDubboInterfaceFailed(context.Context, *GetDubboInterfaceFailedRequest) (*GetDubboInterfaceFailedResponse, error)
 	// +depracated
-	// GET /api/tmc/mesh/avgtime/{interfaceName}/{projectID}/{env}
+	// GET /api/msp/mesh/avgtime/{interfaceName}/{projectID}/{env}
 	GetDubboInterfaceAvgTime(context.Context, *GetDubboInterfaceAvgTimeRequest) (*GetDubboInterfaceAvgTimeResponse, error)
-	// GET /api/tmc/service-ip
-	GetServiceIpInfo(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)
 }
 
 // RegisterRegisterCenterServiceHandler register RegisterCenterServiceHandler to http.Router.
@@ -186,14 +186,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
 				if vals := params["nacosId"]; len(vals) > 0 {
 					in.NacosID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -256,11 +256,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["nacosId"]; len(vals) > 0 {
-					in.NacosID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
+				}
+				if vals := params["nacosId"]; len(vals) > 0 {
+					in.NacosID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -288,6 +288,41 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, EnableHTTPService_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetServiceIpInfo := func(method, path string, fn func(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*ServiceIpRequest))
+		}
+		var GetServiceIpInfo_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetServiceIpInfo_info = transport.NewServiceInfo("erda.msp.registercenter.RegisterCenterService", "GetServiceIpInfo", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in ServiceIpRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetServiceIpInfo_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -398,6 +433,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
@@ -406,9 +444,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -620,14 +655,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -692,14 +727,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -764,14 +799,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -908,17 +943,17 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
-				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -981,14 +1016,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1053,14 +1088,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1125,14 +1160,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
-				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1244,56 +1279,21 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		)
 	}
 
-	add_GetServiceIpInfo := func(method, path string, fn func(context.Context, *ServiceIpRequest) (*ServiceIpInfoResponse, error)) {
-		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*ServiceIpRequest))
-		}
-		var GetServiceIpInfo_info transport.ServiceInfo
-		if h.Interceptor != nil {
-			GetServiceIpInfo_info = transport.NewServiceInfo("erda.msp.registercenter.RegisterCenterService", "GetServiceIpInfo", srv)
-			handler = h.Interceptor(handler)
-		}
-		r.Add(method, path, encodeFunc(
-			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in ServiceIpRequest
-				if err := h.Decode(r, &in); err != nil {
-					return nil, err
-				}
-				var input interface{} = &in
-				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
-					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
-						return nil, err
-					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetServiceIpInfo_info)
-				}
-				out, err := handler(ctx, &in)
-				if err != nil {
-					return out, err
-				}
-				return out, nil
-			}),
-		)
-	}
-
-	add_ListInterface("GET", "/api/tmc/mesh/listinterface/{projectID}/{env}", srv.ListInterface)
-	add_GetHTTPServices("GET", "/api/tmc/mesh/listhttpinterface/{projectID}/{env}", srv.GetHTTPServices)
-	add_EnableHTTPService("POST", "/api/tmc/mesh/enable/{projectID}/{env}", srv.EnableHTTPService)
-	add_GetRouteRule("GET", "/api/tmc/mesh/interface/route/{interfaceName}/{projectID}/{env}", srv.GetRouteRule)
-	add_CreateRouteRule("POST", "/api/tmc/mesh/interface/route/{interfaceName}/{projectID}/{env}", srv.CreateRouteRule)
-	add_DeleteRouteRule("DELETE", "/api/tmc/mesh/interface/route/{interfaceName}/{projectID}/{env}", srv.DeleteRouteRule)
-	add_GetHostRule("GET", "/api/tmc/mesh/rule/branch/{projectID}/{env}/{appID}", srv.GetHostRule)
-	add_CreateHostRule("POST", "/api/tmc/mesh/rule/branch/{projectID}/{env}/{appID}", srv.CreateHostRule)
-	add_DeleteHostRule("DELETE", "/api/tmc/mesh/rule/branch/{projectID}/{env}/{appID}", srv.DeleteHostRule)
-	add_GetHostRuntimeRule("GET", "/api/tmc/mesh/rule/host/{projectID}/{env}/{host}", srv.GetHostRuntimeRule)
-	add_CreateHostRuntimeRule("POST", "/api/tmc/mesh/rule/host/{projectID}/{env}/{host}", srv.CreateHostRuntimeRule)
-	add_GetAllHostRuntimeRules("GET", "/api/tmc/mesh/listhostinterface/{projectID}/{env}", srv.GetAllHostRuntimeRules)
-	add_GetDubboInterfaceTime("GET", "/api/tmc/mesh/timestamp/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceTime)
-	add_GetDubboInterfaceQPS("GET", "/api/tmc/mesh/qps/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceQPS)
-	add_GetDubboInterfaceFailed("GET", "/api/tmc/mesh/failed/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceFailed)
-	add_GetDubboInterfaceAvgTime("GET", "/api/tmc/mesh/avgtime/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceAvgTime)
-	add_GetServiceIpInfo("GET", "/api/tmc/service-ip", srv.GetServiceIpInfo)
+	add_ListInterface("GET", "/api/msp/register/interfaces/{projectID}/{env}", srv.ListInterface)
+	add_GetHTTPServices("GET", "/api/msp/register/http-interfaces/{projectID}/{env}", srv.GetHTTPServices)
+	add_EnableHTTPService("POST", "/api/msp/register/http-interfaces/{projectID}/{env}/enable", srv.EnableHTTPService)
+	add_GetServiceIpInfo("GET", "/api/msp/register/service-ip", srv.GetServiceIpInfo)
+	add_GetRouteRule("GET", "/api/msp/mesh/interface/route/{interfaceName}/{projectID}/{env}", srv.GetRouteRule)
+	add_CreateRouteRule("POST", "/api/msp/mesh/interface/route/{interfaceName}/{projectID}/{env}", srv.CreateRouteRule)
+	add_DeleteRouteRule("DELETE", "/api/msp/mesh/interface/route/{interfaceName}/{projectID}/{env}", srv.DeleteRouteRule)
+	add_GetHostRule("GET", "/api/msp/mesh/rule/branch/{projectID}/{env}/{appID}", srv.GetHostRule)
+	add_CreateHostRule("POST", "/api/msp/mesh/rule/branch/{projectID}/{env}/{appID}", srv.CreateHostRule)
+	add_DeleteHostRule("DELETE", "/api/msp/mesh/rule/branch/{projectID}/{env}/{appID}", srv.DeleteHostRule)
+	add_GetHostRuntimeRule("GET", "/api/msp/mesh/rule/host/{projectID}/{env}/{host}", srv.GetHostRuntimeRule)
+	add_CreateHostRuntimeRule("POST", "/api/msp/mesh/rule/host/{projectID}/{env}/{host}", srv.CreateHostRuntimeRule)
+	add_GetAllHostRuntimeRules("GET", "/api/msp/mesh/listhostinterface/{projectID}/{env}", srv.GetAllHostRuntimeRules)
+	add_GetDubboInterfaceTime("GET", "/api/msp/mesh/timestamp/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceTime)
+	add_GetDubboInterfaceQPS("GET", "/api/msp/mesh/qps/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceQPS)
+	add_GetDubboInterfaceFailed("GET", "/api/msp/mesh/failed/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceFailed)
+	add_GetDubboInterfaceAvgTime("GET", "/api/msp/mesh/avgtime/{interfaceName}/{projectID}/{env}", srv.GetDubboInterfaceAvgTime)
 }

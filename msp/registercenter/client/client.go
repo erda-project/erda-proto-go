@@ -48,6 +48,10 @@ func (s *registerCenterServiceWrapper) EnableHTTPService(ctx context.Context, re
 	return s.client.EnableHTTPService(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *registerCenterServiceWrapper) GetServiceIpInfo(ctx context.Context, req *pb.ServiceIpRequest) (*pb.ServiceIpInfoResponse, error) {
+	return s.client.GetServiceIpInfo(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 func (s *registerCenterServiceWrapper) GetRouteRule(ctx context.Context, req *pb.GetRouteRuleRequest) (*pb.GetRouteRuleResponse, error) {
 	return s.client.GetRouteRule(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
@@ -98,8 +102,4 @@ func (s *registerCenterServiceWrapper) GetDubboInterfaceFailed(ctx context.Conte
 
 func (s *registerCenterServiceWrapper) GetDubboInterfaceAvgTime(ctx context.Context, req *pb.GetDubboInterfaceAvgTimeRequest) (*pb.GetDubboInterfaceAvgTimeResponse, error) {
 	return s.client.GetDubboInterfaceAvgTime(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
-}
-
-func (s *registerCenterServiceWrapper) GetServiceIpInfo(ctx context.Context, req *pb.ServiceIpRequest) (*pb.ServiceIpInfoResponse, error) {
-	return s.client.GetServiceIpInfo(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

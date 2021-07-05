@@ -11,6 +11,7 @@ import (
 	runtime "github.com/erda-project/erda-infra/pkg/transport/http/runtime"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	http1 "net/http"
+	strconv "strconv"
 	strings "strings"
 )
 
@@ -20,9 +21,9 @@ const _ = http.SupportPackageIsVersion1
 
 // TraceServiceHandler is the server API for TraceService service.
 type TraceServiceHandler interface {
-	// GET /api/apm/trace/{traceId}/spans
+	// GET /api/msp/apm/traces/{traceID}/spans
 	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
-	// GET /api/apm/traces
+	// GET /api/msp/apm/traces
 	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
 }
 
@@ -69,6 +70,10 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
 				path := r.URL.Path
 				if len(path) > 0 {
 					components := strings.Split(path[1:], "/")
@@ -84,8 +89,8 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
-						case "traceId":
-							in.TraceId = val
+						case "traceID":
+							in.TraceID = val
 						}
 					}
 				}
@@ -124,6 +129,17 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						return nil, err
 					}
 				}
+				params := r.URL.Query()
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
+				if vals := params["applicationId"]; len(vals) > 0 {
+					val, err := strconv.ParseInt(vals[0], 10, 64)
+					if err != nil {
+						return nil, err
+					}
+					in.ApplicationID = val
+				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
@@ -138,6 +154,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		)
 	}
 
-	add_GetSpans("GET", "/api/apm/trace/{traceId}/spans", srv.GetSpans)
-	add_GetTraces("GET", "/api/apm/traces", srv.GetTraces)
+	add_GetSpans("GET", "/api/msp/apm/traces/{traceID}/spans", srv.GetSpans)
+	add_GetTraces("GET", "/api/msp/apm/traces", srv.GetTraces)
 }
