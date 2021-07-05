@@ -17,6 +17,8 @@ var _ urlenc.URLValuesUnmarshaler = (*UpdateCheckerV1Request)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*UpdateCheckerV1Response)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteCheckerV1Request)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteCheckerV1Response)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetCheckerV1Request)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetCheckerV1Response)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DescribeCheckersV1Request)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DescribeCheckersV1Response)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DescribeCheckerV1Request)(nil)
@@ -36,12 +38,6 @@ func (m *CreateCheckerV1Request) UnmarshalURLValues(prefix string, values url.Va
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
 			case "data":
 				if m.Data == nil {
 					m.Data = &CheckerV1{}
@@ -61,6 +57,15 @@ func (m *CreateCheckerV1Request) UnmarshalURLValues(prefix string, values url.Va
 					m.Data = &CheckerV1{}
 				}
 				m.Data.Url = vals[0]
+			case "data.projectID":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.ProjectID = val
 			case "data.env":
 				if m.Data == nil {
 					m.Data = &CheckerV1{}
@@ -119,6 +124,15 @@ func (m *UpdateCheckerV1Request) UnmarshalURLValues(prefix string, values url.Va
 					m.Data = &CheckerV1{}
 				}
 				m.Data.Url = vals[0]
+			case "data.projectID":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.ProjectID = val
 			case "data.env":
 				if m.Data == nil {
 					m.Data = &CheckerV1{}
@@ -188,6 +202,76 @@ func (m *DeleteCheckerV1Response) UnmarshalURLValues(prefix string, values url.V
 					m.Data = &CheckerV1{}
 				}
 				m.Data.Url = vals[0]
+			case "data.projectID":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.ProjectID = val
+			case "data.env":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				m.Data.Env = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GetCheckerV1Request implement urlenc.URLValuesUnmarshaler.
+func (m *GetCheckerV1Request) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "id":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Id = val
+			}
+		}
+	}
+	return nil
+}
+
+// GetCheckerV1Response implement urlenc.URLValuesUnmarshaler.
+func (m *GetCheckerV1Response) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+			case "data.name":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				m.Data.Name = vals[0]
+			case "data.mode":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				m.Data.Mode = vals[0]
+			case "data.url":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				m.Data.Url = vals[0]
+			case "data.projectID":
+				if m.Data == nil {
+					m.Data = &CheckerV1{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.ProjectID = val
 			case "data.env":
 				if m.Data == nil {
 					m.Data = &CheckerV1{}
@@ -391,6 +475,12 @@ func (m *CheckerV1) UnmarshalURLValues(prefix string, values url.Values) error {
 				m.Mode = vals[0]
 			case "url":
 				m.Url = vals[0]
+			case "projectID":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.ProjectID = val
 			case "env":
 				m.Env = vals[0]
 			}

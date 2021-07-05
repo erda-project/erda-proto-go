@@ -5,13 +5,13 @@ package pb
 
 import (
 	fmt "fmt"
-	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
+	math "math"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/structpb"
-	math "math"
+	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
