@@ -21,20 +21,20 @@ const _ = http.SupportPackageIsVersion1
 
 // CheckerV1ServiceHandler is the server API for CheckerV1Service service.
 type CheckerV1ServiceHandler interface {
-	// POST /api/tmc/status/projects/{projectID}/metrics
+	// POST /api/v1/msp/checkers/projects/{projectID}/metrics
 	CreateCheckerV1(context.Context, *CreateCheckerV1Request) (*CreateCheckerV1Response, error)
-	// POST /api/tmc/status/metrics/{id}
+	// POST /api/v1/msp/checkers/metrics/{id}
 	UpdateCheckerV1(context.Context, *UpdateCheckerV1Request) (*UpdateCheckerV1Response, error)
-	// DELETE /api/tmc/status/metrics/{id}
+	// DELETE /api/v1/msp/checkers/metrics/{id}
 	DeleteCheckerV1(context.Context, *DeleteCheckerV1Request) (*DeleteCheckerV1Response, error)
-	// GET /api/tmc/status/projects/{projectID}/dashboard
+	// GET /api/v1/msp/checkers/projects/{projectID}/dashboard
 	DescribeCheckersV1(context.Context, *DescribeCheckersV1Request) (*DescribeCheckersV1Response, error)
-	// GET /api/tmc/status/metrics/{id}/dashboard
+	// GET /api/v1/msp/checkers/metrics/{id}/dashboard
 	DescribeCheckerV1(context.Context, *DescribeCheckerV1Request) (*DescribeCheckerV1Response, error)
-	// GET /api/tmc/status/metrics/{id}/status
+	// GET /api/v1/msp/checkers/metrics/{id}/status
 	GetCheckerStatusV1(context.Context, *GetCheckerStatusV1Request) (*GetCheckerStatusV1Response, error)
 	// +depracated
-	// GET /api/tmc/status/metrics/{id}/issues
+	// GET /api/v1/msp/checkers/metrics/{id}/issues
 	GetCheckerIssuesV1(context.Context, *GetCheckerIssuesV1Request) (*GetCheckerIssuesV1Response, error)
 }
 
@@ -491,11 +491,11 @@ func RegisterCheckerV1ServiceHandler(r http.Router, srv CheckerV1ServiceHandler,
 		)
 	}
 
-	add_CreateCheckerV1("POST", "/api/tmc/status/projects/{projectID}/metrics", srv.CreateCheckerV1)
-	add_UpdateCheckerV1("POST", "/api/tmc/status/metrics/{id}", srv.UpdateCheckerV1)
-	add_DeleteCheckerV1("DELETE", "/api/tmc/status/metrics/{id}", srv.DeleteCheckerV1)
-	add_DescribeCheckersV1("GET", "/api/tmc/status/projects/{projectID}/dashboard", srv.DescribeCheckersV1)
-	add_DescribeCheckerV1("GET", "/api/tmc/status/metrics/{id}/dashboard", srv.DescribeCheckerV1)
-	add_GetCheckerStatusV1("GET", "/api/tmc/status/metrics/{id}/status", srv.GetCheckerStatusV1)
-	add_GetCheckerIssuesV1("GET", "/api/tmc/status/metrics/{id}/issues", srv.GetCheckerIssuesV1)
+	add_CreateCheckerV1("POST", "/api/v1/msp/checkers/projects/{projectID}/metrics", srv.CreateCheckerV1)
+	add_UpdateCheckerV1("POST", "/api/v1/msp/checkers/metrics/{id}", srv.UpdateCheckerV1)
+	add_DeleteCheckerV1("DELETE", "/api/v1/msp/checkers/metrics/{id}", srv.DeleteCheckerV1)
+	add_DescribeCheckersV1("GET", "/api/v1/msp/checkers/projects/{projectID}/dashboard", srv.DescribeCheckersV1)
+	add_DescribeCheckerV1("GET", "/api/v1/msp/checkers/metrics/{id}/dashboard", srv.DescribeCheckerV1)
+	add_GetCheckerStatusV1("GET", "/api/v1/msp/checkers/metrics/{id}/status", srv.GetCheckerStatusV1)
+	add_GetCheckerIssuesV1("GET", "/api/v1/msp/checkers/metrics/{id}/issues", srv.GetCheckerIssuesV1)
 }

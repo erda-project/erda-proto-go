@@ -21,13 +21,13 @@ type MetricServiceHandler interface {
 	QueryWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
 	// GET /query
 	SearchWithInfluxFormat(context.Context, *QueryWithInfluxFormatRequest) (*QueryWithInfluxFormatResponse, error)
-	// POST /api/monitor/metric/query
+	// POST /api/monitor/metric-query
 	QueryWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
-	// GET /api/monitor/metric/query
+	// GET /api/monitor/metric-query
 	SearchWithTableFormat(context.Context, *QueryWithTableFormatRequest) (*QueryWithTableFormatResponse, error)
-	// POST /api/monitor/metric/general-query
+	// POST /api/monitor/metric-general-query
 	GeneralQuery(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)
-	// GET /api/monitor/metric/general-query
+	// GET /api/monitor/metric-general-query
 	GeneralSearch(context.Context, *GeneralQueryRequest) (*GeneralQueryResponse, error)
 }
 
@@ -286,8 +286,8 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 
 	add_QueryWithInfluxFormat("POST", "/query", srv.QueryWithInfluxFormat)
 	add_SearchWithInfluxFormat("GET", "/query", srv.SearchWithInfluxFormat)
-	add_QueryWithTableFormat("POST", "/api/monitor/metric/query", srv.QueryWithTableFormat)
-	add_SearchWithTableFormat("GET", "/api/monitor/metric/query", srv.SearchWithTableFormat)
-	add_GeneralQuery("POST", "/api/monitor/metric/general-query", srv.GeneralQuery)
-	add_GeneralSearch("GET", "/api/monitor/metric/general-query", srv.GeneralSearch)
+	add_QueryWithTableFormat("POST", "/api/monitor/metric-query", srv.QueryWithTableFormat)
+	add_SearchWithTableFormat("GET", "/api/monitor/metric-query", srv.SearchWithTableFormat)
+	add_GeneralQuery("POST", "/api/monitor/metric-general-query", srv.GeneralQuery)
+	add_GeneralSearch("GET", "/api/monitor/metric-general-query", srv.GeneralSearch)
 }

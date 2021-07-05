@@ -23,10 +23,10 @@ func (m *GetSpansRequest) UnmarshalURLValues(prefix string, values url.Values) e
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "traceId":
-				m.TraceId = vals[0]
-			case "scopeId":
-				m.ScopeId = vals[0]
+			case "traceID":
+				m.TraceID = vals[0]
+			case "scopeID":
+				m.ScopeID = vals[0]
 			case "limit":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -44,14 +44,14 @@ func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) 
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "scopeId":
-				m.ScopeId = vals[0]
-			case "applicationId":
+			case "scopeID":
+				m.ScopeID = vals[0]
+			case "applicationID":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.ApplicationId = val
+				m.ApplicationID = val
 			case "status":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {

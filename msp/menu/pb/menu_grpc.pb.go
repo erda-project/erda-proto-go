@@ -20,6 +20,7 @@ const _ = grpc.SupportPackageIsVersion5
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type MenuServiceClient interface {
+	// +publish path:"/menu/{tenantGroup}"
 	GetMenu(ctx context.Context, in *GetMenuRequest, opts ...grpc.CallOption) (*GetMenuResponse, error)
 	GetSetting(ctx context.Context, in *GetSettingRequest, opts ...grpc.CallOption) (*GetSettingResponse, error)
 }
@@ -54,6 +55,7 @@ func (c *menuServiceClient) GetSetting(ctx context.Context, in *GetSettingReques
 // All implementations should embed UnimplementedMenuServiceServer
 // for forward compatibility
 type MenuServiceServer interface {
+	// +publish path:"/menu/{tenantGroup}"
 	GetMenu(context.Context, *GetMenuRequest) (*GetMenuResponse, error)
 	GetSetting(context.Context, *GetSettingRequest) (*GetSettingResponse, error)
 }

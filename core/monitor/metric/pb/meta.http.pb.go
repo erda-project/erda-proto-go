@@ -20,13 +20,13 @@ const _ = http.SupportPackageIsVersion1
 
 // MetricMetaServiceHandler is the server API for MetricMetaService service.
 type MetricMetaServiceHandler interface {
-	// GET /api/metric/names
+	// GET /api/metric-names
 	ListMetricNames(context.Context, *ListMetricNamesRequest) (*ListMetricNamesResponse, error)
-	// GET /api/metric/meta
+	// GET /api/metric-meta
 	ListMetricMeta(context.Context, *ListMetricMetaRequest) (*ListMetricMetaResponse, error)
-	// GET /api/metric/groups
+	// GET /api/metric-groups
 	ListMetricGroups(context.Context, *ListMetricGroupsRequest) (*ListMetricGroupsResponse, error)
-	// GET /api/metric/groups/{id}
+	// GET /api/metric-groups/{id}
 	GetMetricGroup(context.Context, *GetMetricGroupRequest) (*GetMetricGroupResponse, error)
 }
 
@@ -228,8 +228,8 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 		)
 	}
 
-	add_ListMetricNames("GET", "/api/metric/names", srv.ListMetricNames)
-	add_ListMetricMeta("GET", "/api/metric/meta", srv.ListMetricMeta)
-	add_ListMetricGroups("GET", "/api/metric/groups", srv.ListMetricGroups)
-	add_GetMetricGroup("GET", "/api/metric/groups/{id}", srv.GetMetricGroup)
+	add_ListMetricNames("GET", "/api/metric-names", srv.ListMetricNames)
+	add_ListMetricMeta("GET", "/api/metric-meta", srv.ListMetricMeta)
+	add_ListMetricGroups("GET", "/api/metric-groups", srv.ListMetricGroups)
+	add_GetMetricGroup("GET", "/api/metric-groups/{id}", srv.GetMetricGroup)
 }

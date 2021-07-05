@@ -17,11 +17,11 @@ const _ = http.SupportPackageIsVersion1
 
 // ExceptionServiceHandler is the server API for ExceptionService service.
 type ExceptionServiceHandler interface {
-	// GET /api/apm/exceptions
+	// GET /api/msp/apm/exceptions
 	GetExceptions(context.Context, *GetExceptionsRequest) (*GetExceptionsResponse, error)
-	// GET /api/apm/exception/eventIds
+	// GET /api/msp/apm/exceptions/event-ids
 	GetExceptionEventIds(context.Context, *GetExceptionEventIdsRequest) (*GetExceptionEventIdsResponse, error)
-	// GET /api/apm/exception/event
+	// GET /api/msp/apm/exceptions/events
 	GetExceptionEvent(context.Context, *GetExceptionEventRequest) (*GetExceptionEventResponse, error)
 }
 
@@ -167,7 +167,7 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 		)
 	}
 
-	add_GetExceptions("GET", "/api/apm/exceptions", srv.GetExceptions)
-	add_GetExceptionEventIds("GET", "/api/apm/exception/eventIds", srv.GetExceptionEventIds)
-	add_GetExceptionEvent("GET", "/api/apm/exception/event", srv.GetExceptionEvent)
+	add_GetExceptions("GET", "/api/msp/apm/exceptions", srv.GetExceptions)
+	add_GetExceptionEventIds("GET", "/api/msp/apm/exceptions/event-ids", srv.GetExceptionEventIds)
+	add_GetExceptionEvent("GET", "/api/msp/apm/exceptions/events", srv.GetExceptionEvent)
 }
