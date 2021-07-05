@@ -5,13 +5,13 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
+	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/structpb"
-	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -103,9 +103,6 @@ func (this *CreateAlertData) Validate() error {
 	return nil
 }
 func (this *UpdateAlertRequest) Validate() error {
-	if !(this.Id > 0) {
-		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
-	}
 	for _, item := range this.Rules {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
@@ -120,6 +117,8 @@ func (this *UpdateAlertRequest) Validate() error {
 			}
 		}
 	}
+	// Validation of proto3 map<> fields is unsupported.
+	// Validation of proto3 map<> fields is unsupported.
 	return nil
 }
 func (this *UpdateAlertResponse) Validate() error {
