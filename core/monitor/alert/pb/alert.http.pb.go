@@ -1313,7 +1313,7 @@ func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opt
 					for k, val := range vars {
 						switch k {
 						case "id":
-							val, err := strconv.ParseInt(val, 10, 64)
+							val, err := strconv.ParseUint(val, 10, 64)
 							if err != nil {
 								return nil, err
 							}

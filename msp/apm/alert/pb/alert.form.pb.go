@@ -345,24 +345,28 @@ func (m *UpdateAlertRequest) UnmarshalURLValues(prefix string, values url.Values
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
+			case "tenantGroup":
+				m.TenantGroup = vals[0]
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
+				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.Id = val
-			case "tenantGroup":
-				m.TenantGroup = vals[0]
 			case "name":
 				m.Name = vals[0]
-			case "appIds":
-				m.AppIds = vals
+			case "alertScope":
+				m.AlertScope = vals[0]
+			case "alertScopeId":
+				m.AlertScopeId = vals[0]
 			case "enable":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
 				m.Enable = val
+			case "clusterNames":
+				m.ClusterNames = vals
 			case "domain":
 				m.Domain = vals[0]
 			case "createTime":

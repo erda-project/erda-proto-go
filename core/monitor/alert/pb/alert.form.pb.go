@@ -945,71 +945,34 @@ func (m *UpdateCustomizeAlertRequest) UnmarshalURLValues(prefix string, values u
 					return err
 				}
 				m.Id = val
-			case "alert":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-			case "alert.id":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Alert.Id = val
-			case "alert.clusterName":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-				m.Alert.ClusterName = vals[0]
-			case "alert.name":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-				m.Alert.Name = vals[0]
-			case "alert.alertType":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-				m.Alert.AlertType = vals[0]
-			case "alert.alertScope":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-				m.Alert.AlertScope = vals[0]
-			case "alert.alertScopeId":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
-				m.Alert.AlertScopeId = vals[0]
-			case "alert.enable":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
+			case "clusterName":
+				m.ClusterName = vals[0]
+			case "name":
+				m.Name = vals[0]
+			case "alertType":
+				m.AlertType = vals[0]
+			case "alertScope":
+				m.AlertScope = vals[0]
+			case "alertScopeId":
+				m.AlertScopeId = vals[0]
+			case "enable":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
-				m.Alert.Enable = val
-			case "alert.createTime":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
+				m.Enable = val
+			case "createTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.Alert.CreateTime = val
-			case "alert.updateTime":
-				if m.Alert == nil {
-					m.Alert = &CustomizeAlertDetail{}
-				}
+				m.CreateTime = val
+			case "updateTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.Alert.UpdateTime = val
+				m.UpdateTime = val
 			}
 		}
 	}
@@ -4745,76 +4708,39 @@ func (m *UpdateAlertRequest) UnmarshalURLValues(prefix string, values url.Values
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "alert":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
-			case "alert.id":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.Alert.Id = val
-			case "alert.name":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
-				m.Alert.Name = vals[0]
-			case "alert.alertScope":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
-				m.Alert.AlertScope = vals[0]
-			case "alert.alertScopeId":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
-				m.Alert.AlertScopeId = vals[0]
-			case "alert.enable":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
+				m.Id = val
+			case "name":
+				m.Name = vals[0]
+			case "alertScope":
+				m.AlertScope = vals[0]
+			case "alertScopeId":
+				m.AlertScopeId = vals[0]
+			case "enable":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
-				m.Alert.Enable = val
-			case "alert.clusterNames":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
-				m.Alert.ClusterNames = vals
-			case "alert.domain":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
-				m.Alert.Domain = vals[0]
-			case "alert.createTime":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
+				m.Enable = val
+			case "clusterNames":
+				m.ClusterNames = vals
+			case "domain":
+				m.Domain = vals[0]
+			case "createTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.Alert.CreateTime = val
-			case "alert.updateTime":
-				if m.Alert == nil {
-					m.Alert = &Alert{}
-				}
+				m.CreateTime = val
+			case "updateTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.Alert.UpdateTime = val
+				m.UpdateTime = val
 			}
 		}
 	}
