@@ -5,11 +5,11 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
 	proto "github.com/golang/protobuf/proto"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/wrapperspb"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -38,5 +38,19 @@ func (this *DeleteResourceRequest) Validate() error {
 	return nil
 }
 func (this *DeleteResourceResponse) Validate() error {
+	return nil
+}
+func (this *GetRuntimeRequest) Validate() error {
+	return nil
+}
+func (this *GetRuntimeResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *MonitorRuntime) Validate() error {
 	return nil
 }

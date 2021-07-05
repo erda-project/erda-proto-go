@@ -16,6 +16,9 @@ var _ urlenc.URLValuesUnmarshaler = (*CreateResourceResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ResourceCreateResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteResourceRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteResourceResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetRuntimeRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetRuntimeResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*MonitorRuntime)(nil)
 
 // CreateResourceRequest implement urlenc.URLValuesUnmarshaler.
 func (m *CreateResourceRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -118,6 +121,107 @@ func (m *DeleteResourceResponse) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.Data = val
+			}
+		}
+	}
+	return nil
+}
+
+// GetRuntimeRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetRuntimeRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "terminusKey":
+				m.TerminusKey = vals[0]
+			case "applicationId":
+				m.ApplicationId = vals[0]
+			case "runtimeName":
+				m.RuntimeName = vals[0]
+			case "runtimeId":
+				m.RuntimeId = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GetRuntimeResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetRuntimeResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+			case "data.terminusKey":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.TerminusKey = vals[0]
+			case "data.projectId":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.ProjectId = vals[0]
+			case "data.projectName":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.ProjectName = vals[0]
+			case "data.applicationId":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.ApplicationId = vals[0]
+			case "data.applicationName":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.ApplicationName = vals[0]
+			case "data.workspace":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.Workspace = vals[0]
+			case "data.runtimeId":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.RuntimeId = vals[0]
+			case "data.runtimeName":
+				if m.Data == nil {
+					m.Data = &MonitorRuntime{}
+				}
+				m.Data.RuntimeName = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// MonitorRuntime implement urlenc.URLValuesUnmarshaler.
+func (m *MonitorRuntime) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "terminusKey":
+				m.TerminusKey = vals[0]
+			case "projectId":
+				m.ProjectId = vals[0]
+			case "projectName":
+				m.ProjectName = vals[0]
+			case "applicationId":
+				m.ApplicationId = vals[0]
+			case "applicationName":
+				m.ApplicationName = vals[0]
+			case "workspace":
+				m.Workspace = vals[0]
+			case "runtimeId":
+				m.RuntimeId = vals[0]
+			case "runtimeName":
+				m.RuntimeName = vals[0]
 			}
 		}
 	}
