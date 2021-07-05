@@ -85,6 +85,10 @@ func (s *checkerV1ServiceWrapper) DeleteCheckerV1(ctx context.Context, req *pb.D
 	return s.client.DeleteCheckerV1(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *checkerV1ServiceWrapper) GetCheckerV1(ctx context.Context, req *pb.GetCheckerV1Request) (*pb.GetCheckerV1Response, error) {
+	return s.client.GetCheckerV1(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 func (s *checkerV1ServiceWrapper) DescribeCheckersV1(ctx context.Context, req *pb.DescribeCheckersV1Request) (*pb.DescribeCheckersV1Response, error) {
 	return s.client.DescribeCheckersV1(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

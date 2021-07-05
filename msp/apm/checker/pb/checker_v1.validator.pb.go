@@ -19,9 +19,6 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *CreateCheckerV1Request) Validate() error {
-	if !(this.ProjectID > 0) {
-		return github_com_mwitkow_go_proto_validators.FieldError("ProjectID", fmt.Errorf(`value '%v' must be greater than '0'`, this.ProjectID))
-	}
 	if nil == this.Data {
 		return github_com_mwitkow_go_proto_validators.FieldError("Data", fmt.Errorf("message must exist"))
 	}
@@ -59,6 +56,20 @@ func (this *DeleteCheckerV1Request) Validate() error {
 	return nil
 }
 func (this *DeleteCheckerV1Response) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *GetCheckerV1Request) Validate() error {
+	if !(this.Id > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("Id", fmt.Errorf(`value '%v' must be greater than '0'`, this.Id))
+	}
+	return nil
+}
+func (this *GetCheckerV1Response) Validate() error {
 	if this.Data != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
@@ -139,9 +150,6 @@ func (this *CheckerV1) Validate() error {
 	}
 	if this.Url == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("Url", fmt.Errorf(`value '%v' must not be an empty string`, this.Url))
-	}
-	if this.Env == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("Env", fmt.Errorf(`value '%v' must not be an empty string`, this.Env))
 	}
 	return nil
 }

@@ -23,6 +23,7 @@ type CheckerV1ServiceClient interface {
 	CreateCheckerV1(ctx context.Context, in *CreateCheckerV1Request, opts ...grpc.CallOption) (*CreateCheckerV1Response, error)
 	UpdateCheckerV1(ctx context.Context, in *UpdateCheckerV1Request, opts ...grpc.CallOption) (*UpdateCheckerV1Response, error)
 	DeleteCheckerV1(ctx context.Context, in *DeleteCheckerV1Request, opts ...grpc.CallOption) (*DeleteCheckerV1Response, error)
+	GetCheckerV1(ctx context.Context, in *GetCheckerV1Request, opts ...grpc.CallOption) (*GetCheckerV1Response, error)
 	DescribeCheckersV1(ctx context.Context, in *DescribeCheckersV1Request, opts ...grpc.CallOption) (*DescribeCheckersV1Response, error)
 	DescribeCheckerV1(ctx context.Context, in *DescribeCheckerV1Request, opts ...grpc.CallOption) (*DescribeCheckerV1Response, error)
 	GetCheckerStatusV1(ctx context.Context, in *GetCheckerStatusV1Request, opts ...grpc.CallOption) (*GetCheckerStatusV1Response, error)
@@ -59,6 +60,15 @@ func (c *checkerV1ServiceClient) UpdateCheckerV1(ctx context.Context, in *Update
 func (c *checkerV1ServiceClient) DeleteCheckerV1(ctx context.Context, in *DeleteCheckerV1Request, opts ...grpc.CallOption) (*DeleteCheckerV1Response, error) {
 	out := new(DeleteCheckerV1Response)
 	err := c.cc.Invoke(ctx, "/erda.msp.apm.checker.CheckerV1Service/DeleteCheckerV1", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *checkerV1ServiceClient) GetCheckerV1(ctx context.Context, in *GetCheckerV1Request, opts ...grpc.CallOption) (*GetCheckerV1Response, error) {
+	out := new(GetCheckerV1Response)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.checker.CheckerV1Service/GetCheckerV1", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -108,6 +118,7 @@ type CheckerV1ServiceServer interface {
 	CreateCheckerV1(context.Context, *CreateCheckerV1Request) (*CreateCheckerV1Response, error)
 	UpdateCheckerV1(context.Context, *UpdateCheckerV1Request) (*UpdateCheckerV1Response, error)
 	DeleteCheckerV1(context.Context, *DeleteCheckerV1Request) (*DeleteCheckerV1Response, error)
+	GetCheckerV1(context.Context, *GetCheckerV1Request) (*GetCheckerV1Response, error)
 	DescribeCheckersV1(context.Context, *DescribeCheckersV1Request) (*DescribeCheckersV1Response, error)
 	DescribeCheckerV1(context.Context, *DescribeCheckerV1Request) (*DescribeCheckerV1Response, error)
 	GetCheckerStatusV1(context.Context, *GetCheckerStatusV1Request) (*GetCheckerStatusV1Response, error)
@@ -127,6 +138,9 @@ func (*UnimplementedCheckerV1ServiceServer) UpdateCheckerV1(context.Context, *Up
 }
 func (*UnimplementedCheckerV1ServiceServer) DeleteCheckerV1(context.Context, *DeleteCheckerV1Request) (*DeleteCheckerV1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCheckerV1 not implemented")
+}
+func (*UnimplementedCheckerV1ServiceServer) GetCheckerV1(context.Context, *GetCheckerV1Request) (*GetCheckerV1Response, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetCheckerV1 not implemented")
 }
 func (*UnimplementedCheckerV1ServiceServer) DescribeCheckersV1(context.Context, *DescribeCheckersV1Request) (*DescribeCheckersV1Response, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DescribeCheckersV1 not implemented")
@@ -184,6 +198,15 @@ func _get_CheckerV1Service_serviceDesc(srv CheckerV1ServiceServer, opts ...grpc1
 	if h.Interceptor != nil {
 		_CheckerV1Service_DeleteCheckerV1_info = transport.NewServiceInfo("erda.msp.apm.checker.CheckerV1Service", "DeleteCheckerV1", srv)
 		_CheckerV1Service_DeleteCheckerV1_Handler = h.Interceptor(_CheckerV1Service_DeleteCheckerV1_Handler)
+	}
+
+	_CheckerV1Service_GetCheckerV1_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetCheckerV1(ctx, req.(*GetCheckerV1Request))
+	}
+	var _CheckerV1Service_GetCheckerV1_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_CheckerV1Service_GetCheckerV1_info = transport.NewServiceInfo("erda.msp.apm.checker.CheckerV1Service", "GetCheckerV1", srv)
+		_CheckerV1Service_GetCheckerV1_Handler = h.Interceptor(_CheckerV1Service_GetCheckerV1_Handler)
 	}
 
 	_CheckerV1Service_DescribeCheckersV1_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -291,6 +314,29 @@ func _get_CheckerV1Service_serviceDesc(srv CheckerV1ServiceServer, opts ...grpc1
 					FullMethod: "/erda.msp.apm.checker.CheckerV1Service/DeleteCheckerV1",
 				}
 				return interceptor(ctx, in, info, _CheckerV1Service_DeleteCheckerV1_Handler)
+			},
+		},
+		{
+			MethodName: "GetCheckerV1",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetCheckerV1Request)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(CheckerV1ServiceServer).GetCheckerV1(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _CheckerV1Service_GetCheckerV1_info)
+				}
+				if interceptor == nil {
+					return _CheckerV1Service_GetCheckerV1_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.checker.CheckerV1Service/GetCheckerV1",
+				}
+				return interceptor(ctx, in, info, _CheckerV1Service_GetCheckerV1_Handler)
 			},
 		},
 		{
