@@ -365,8 +365,8 @@ func (m *UpdateAlertRequest) UnmarshalURLValues(prefix string, values url.Values
 					return err
 				}
 				m.Enable = val
-			case "clusterNames":
-				m.ClusterNames = vals
+			case "appIds":
+				m.AppIds = vals
 			case "domain":
 				m.Domain = vals[0]
 			case "createTime":
