@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 type ResourceServiceClient interface {
 	CreateResource(ctx context.Context, in *CreateResourceRequest, opts ...grpc.CallOption) (*CreateResourceResponse, error)
 	DeleteResource(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*DeleteResourceResponse, error)
+	GetRuntime(ctx context.Context, in *GetRuntimeRequest, opts ...grpc.CallOption) (*GetRuntimeResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -50,12 +51,22 @@ func (c *resourceServiceClient) DeleteResource(ctx context.Context, in *DeleteRe
 	return out, nil
 }
 
+func (c *resourceServiceClient) GetRuntime(ctx context.Context, in *GetRuntimeRequest, opts ...grpc.CallOption) (*GetRuntimeResponse, error) {
+	out := new(GetRuntimeResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.resource.ResourceService/GetRuntime", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ResourceServiceServer is the server API for ResourceService service.
 // All implementations should embed UnimplementedResourceServiceServer
 // for forward compatibility
 type ResourceServiceServer interface {
 	CreateResource(context.Context, *CreateResourceRequest) (*CreateResourceResponse, error)
 	DeleteResource(context.Context, *DeleteResourceRequest) (*DeleteResourceResponse, error)
+	GetRuntime(context.Context, *GetRuntimeRequest) (*GetRuntimeResponse, error)
 }
 
 // UnimplementedResourceServiceServer should be embedded to have forward compatible implementations.
@@ -67,6 +78,9 @@ func (*UnimplementedResourceServiceServer) CreateResource(context.Context, *Crea
 }
 func (*UnimplementedResourceServiceServer) DeleteResource(context.Context, *DeleteResourceRequest) (*DeleteResourceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteResource not implemented")
+}
+func (*UnimplementedResourceServiceServer) GetRuntime(context.Context, *GetRuntimeRequest) (*GetRuntimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetRuntime not implemented")
 }
 
 func RegisterResourceServiceServer(s grpc1.ServiceRegistrar, srv ResourceServiceServer, opts ...grpc1.HandleOption) {
@@ -103,6 +117,15 @@ func _get_ResourceService_serviceDesc(srv ResourceServiceServer, opts ...grpc1.H
 	if h.Interceptor != nil {
 		_ResourceService_DeleteResource_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "DeleteResource", srv)
 		_ResourceService_DeleteResource_Handler = h.Interceptor(_ResourceService_DeleteResource_Handler)
+	}
+
+	_ResourceService_GetRuntime_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetRuntime(ctx, req.(*GetRuntimeRequest))
+	}
+	var _ResourceService_GetRuntime_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ResourceService_GetRuntime_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetRuntime", srv)
+		_ResourceService_GetRuntime_Handler = h.Interceptor(_ResourceService_GetRuntime_Handler)
 	}
 
 	var serviceDesc = _ResourceService_serviceDesc
@@ -151,6 +174,29 @@ func _get_ResourceService_serviceDesc(srv ResourceServiceServer, opts ...grpc1.H
 					FullMethod: "/erda.msp.resource.ResourceService/DeleteResource",
 				}
 				return interceptor(ctx, in, info, _ResourceService_DeleteResource_Handler)
+			},
+		},
+		{
+			MethodName: "GetRuntime",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetRuntimeRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ResourceServiceServer).GetRuntime(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ResourceService_GetRuntime_info)
+				}
+				if interceptor == nil {
+					return _ResourceService_GetRuntime_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.resource.ResourceService/GetRuntime",
+				}
+				return interceptor(ctx, in, info, _ResourceService_GetRuntime_Handler)
 			},
 		},
 	}

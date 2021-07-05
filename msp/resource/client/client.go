@@ -43,3 +43,7 @@ func (s *resourceServiceWrapper) CreateResource(ctx context.Context, req *pb.Cre
 func (s *resourceServiceWrapper) DeleteResource(ctx context.Context, req *pb.DeleteResourceRequest) (*pb.DeleteResourceResponse, error) {
 	return s.client.DeleteResource(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *resourceServiceWrapper) GetRuntime(ctx context.Context, req *pb.GetRuntimeRequest) (*pb.GetRuntimeResponse, error) {
+	return s.client.GetRuntime(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
