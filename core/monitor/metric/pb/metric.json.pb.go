@@ -4,7 +4,9 @@
 package pb
 
 import (
+	bytes "bytes"
 	json "encoding/json"
+	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -39,11 +41,13 @@ var _ json.Unmarshaler = (*Filter)(nil)
 
 // QueryWithInfluxFormatRequest implement json.Marshaler.
 func (m *QueryWithInfluxFormatRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // QueryWithInfluxFormatRequest implement json.Marshaler.
@@ -55,11 +59,13 @@ func (m *QueryWithInfluxFormatRequest) UnmarshalJSON(b []byte) error {
 
 // QueryWithInfluxFormatResponse implement json.Marshaler.
 func (m *QueryWithInfluxFormatResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // QueryWithInfluxFormatResponse implement json.Marshaler.
@@ -71,11 +77,13 @@ func (m *QueryWithInfluxFormatResponse) UnmarshalJSON(b []byte) error {
 
 // Serie implement json.Marshaler.
 func (m *Serie) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Serie implement json.Marshaler.
@@ -87,11 +95,13 @@ func (m *Serie) UnmarshalJSON(b []byte) error {
 
 // Row implement json.Marshaler.
 func (m *Row) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Row implement json.Marshaler.
@@ -103,11 +113,13 @@ func (m *Row) UnmarshalJSON(b []byte) error {
 
 // Result implement json.Marshaler.
 func (m *Result) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Result implement json.Marshaler.
@@ -119,11 +131,13 @@ func (m *Result) UnmarshalJSON(b []byte) error {
 
 // QueryWithTableFormatRequest implement json.Marshaler.
 func (m *QueryWithTableFormatRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // QueryWithTableFormatRequest implement json.Marshaler.
@@ -135,11 +149,13 @@ func (m *QueryWithTableFormatRequest) UnmarshalJSON(b []byte) error {
 
 // QueryWithTableFormatResponse implement json.Marshaler.
 func (m *QueryWithTableFormatResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // QueryWithTableFormatResponse implement json.Marshaler.
@@ -151,11 +167,13 @@ func (m *QueryWithTableFormatResponse) UnmarshalJSON(b []byte) error {
 
 // TableResult implement json.Marshaler.
 func (m *TableResult) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // TableResult implement json.Marshaler.
@@ -167,11 +185,13 @@ func (m *TableResult) UnmarshalJSON(b []byte) error {
 
 // TableColumn implement json.Marshaler.
 func (m *TableColumn) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // TableColumn implement json.Marshaler.
@@ -183,11 +203,13 @@ func (m *TableColumn) UnmarshalJSON(b []byte) error {
 
 // TableRow implement json.Marshaler.
 func (m *TableRow) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // TableRow implement json.Marshaler.
@@ -199,11 +221,13 @@ func (m *TableRow) UnmarshalJSON(b []byte) error {
 
 // GeneralQueryRequest implement json.Marshaler.
 func (m *GeneralQueryRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GeneralQueryRequest implement json.Marshaler.
@@ -215,11 +239,13 @@ func (m *GeneralQueryRequest) UnmarshalJSON(b []byte) error {
 
 // GeneralQueryResponse implement json.Marshaler.
 func (m *GeneralQueryResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GeneralQueryResponse implement json.Marshaler.
@@ -231,11 +257,13 @@ func (m *GeneralQueryResponse) UnmarshalJSON(b []byte) error {
 
 // Filter implement json.Marshaler.
 func (m *Filter) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Filter implement json.Marshaler.

@@ -4,7 +4,9 @@
 package pb
 
 import (
+	bytes "bytes"
 	json "encoding/json"
+	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -53,11 +55,13 @@ var _ json.Unmarshaler = (*Operation)(nil)
 
 // ListMetricNamesRequest implement json.Marshaler.
 func (m *ListMetricNamesRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ListMetricNamesRequest implement json.Marshaler.
@@ -69,11 +73,13 @@ func (m *ListMetricNamesRequest) UnmarshalJSON(b []byte) error {
 
 // ListMetricNamesResponse implement json.Marshaler.
 func (m *ListMetricNamesResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ListMetricNamesResponse implement json.Marshaler.
@@ -85,11 +91,13 @@ func (m *ListMetricNamesResponse) UnmarshalJSON(b []byte) error {
 
 // ListMetricMetaRequest implement json.Marshaler.
 func (m *ListMetricMetaRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ListMetricMetaRequest implement json.Marshaler.
@@ -101,11 +109,13 @@ func (m *ListMetricMetaRequest) UnmarshalJSON(b []byte) error {
 
 // ListMetricMetaResponse implement json.Marshaler.
 func (m *ListMetricMetaResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ListMetricMetaResponse implement json.Marshaler.
@@ -117,11 +127,13 @@ func (m *ListMetricMetaResponse) UnmarshalJSON(b []byte) error {
 
 // ListMetricGroupsRequest implement json.Marshaler.
 func (m *ListMetricGroupsRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ListMetricGroupsRequest implement json.Marshaler.
@@ -133,11 +145,13 @@ func (m *ListMetricGroupsRequest) UnmarshalJSON(b []byte) error {
 
 // ListMetricGroupsResponse implement json.Marshaler.
 func (m *ListMetricGroupsResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ListMetricGroupsResponse implement json.Marshaler.
@@ -149,11 +163,13 @@ func (m *ListMetricGroupsResponse) UnmarshalJSON(b []byte) error {
 
 // GetMetricGroupRequest implement json.Marshaler.
 func (m *GetMetricGroupRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetMetricGroupRequest implement json.Marshaler.
@@ -165,11 +181,13 @@ func (m *GetMetricGroupRequest) UnmarshalJSON(b []byte) error {
 
 // GetMetricGroupResponse implement json.Marshaler.
 func (m *GetMetricGroupResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetMetricGroupResponse implement json.Marshaler.
@@ -181,11 +199,13 @@ func (m *GetMetricGroupResponse) UnmarshalJSON(b []byte) error {
 
 // MetricGroup implement json.Marshaler.
 func (m *MetricGroup) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // MetricGroup implement json.Marshaler.
@@ -197,11 +217,13 @@ func (m *MetricGroup) UnmarshalJSON(b []byte) error {
 
 // GroupMetricMeta implement json.Marshaler.
 func (m *GroupMetricMeta) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GroupMetricMeta implement json.Marshaler.
@@ -213,11 +235,13 @@ func (m *GroupMetricMeta) UnmarshalJSON(b []byte) error {
 
 // MetricMeta implement json.Marshaler.
 func (m *MetricMeta) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // MetricMeta implement json.Marshaler.
@@ -229,11 +253,13 @@ func (m *MetricMeta) UnmarshalJSON(b []byte) error {
 
 // NameDefine implement json.Marshaler.
 func (m *NameDefine) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // NameDefine implement json.Marshaler.
@@ -245,11 +271,13 @@ func (m *NameDefine) UnmarshalJSON(b []byte) error {
 
 // TagDefine implement json.Marshaler.
 func (m *TagDefine) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // TagDefine implement json.Marshaler.
@@ -261,11 +289,13 @@ func (m *TagDefine) UnmarshalJSON(b []byte) error {
 
 // FieldDefine implement json.Marshaler.
 func (m *FieldDefine) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // FieldDefine implement json.Marshaler.
@@ -277,11 +307,13 @@ func (m *FieldDefine) UnmarshalJSON(b []byte) error {
 
 // ValueDefine implement json.Marshaler.
 func (m *ValueDefine) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ValueDefine implement json.Marshaler.
@@ -293,11 +325,13 @@ func (m *ValueDefine) UnmarshalJSON(b []byte) error {
 
 // Group implement json.Marshaler.
 func (m *Group) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Group implement json.Marshaler.
@@ -309,11 +343,13 @@ func (m *Group) UnmarshalJSON(b []byte) error {
 
 // MetaMode implement json.Marshaler.
 func (m *MetaMode) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // MetaMode implement json.Marshaler.
@@ -325,11 +361,13 @@ func (m *MetaMode) UnmarshalJSON(b []byte) error {
 
 // TypeDefine implement json.Marshaler.
 func (m *TypeDefine) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // TypeDefine implement json.Marshaler.
@@ -341,11 +379,13 @@ func (m *TypeDefine) UnmarshalJSON(b []byte) error {
 
 // Aggregation implement json.Marshaler.
 func (m *Aggregation) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Aggregation implement json.Marshaler.
@@ -357,11 +397,13 @@ func (m *Aggregation) UnmarshalJSON(b []byte) error {
 
 // Operation implement json.Marshaler.
 func (m *Operation) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Operation implement json.Marshaler.
