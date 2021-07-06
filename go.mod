@@ -3,7 +3,7 @@ module github.com/erda-project/erda-proto-go
 go 1.14
 
 require (
-	github.com/erda-project/erda-infra v0.0.0-20210705164905-688d5712f7f8
+	github.com/erda-project/erda-infra v0.0.0-20210706133120-0a742437972c
 	github.com/golang/protobuf v1.5.2
 	github.com/mwitkow/go-proto-validators v0.3.2
 	google.golang.org/genproto v0.0.0-20210406143921-e86de6bf7a46
@@ -13,7 +13,6 @@ require (
 
 replace (
 	github.com/coreos/bbolt => go.etcd.io/bbolt v1.3.5
-	github.com/erda-project/erda-infra => github.com/recallsong/erda-infra v0.0.0-20210706074640-5a14f357285a
 	google.golang.org/grpc => google.golang.org/grpc v1.26.0
 	k8s.io/api => github.com/kubernetes/api v0.18.3
 	k8s.io/apiextensions-apiserver => github.com/kubernetes/apiextensions-apiserver v0.18.3
