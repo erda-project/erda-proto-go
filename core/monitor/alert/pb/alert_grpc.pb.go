@@ -16,10 +16,10 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion5
 
-// AlertServiceClient is the client API for AlertService service.
+// MonitorServiceClient is the client API for MonitorService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AlertServiceClient interface {
+type MonitorServiceClient interface {
 	QueryCustomizeMetric(ctx context.Context, in *QueryCustomizeMetricRequest, opts ...grpc.CallOption) (*QueryCustomizeMetricResponse, error)
 	QueryCustomizeNotifyTarget(ctx context.Context, in *QueryCustomizeNotifyTargetRequest, opts ...grpc.CallOption) (*QueryCustomizeNotifyTargetResponse, error)
 	QueryOrgCustomizeNotifyTarget(ctx context.Context, in *QueryOrgCustomizeNotifyTargetRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeNotifyTargetResponse, error)
@@ -69,441 +69,441 @@ type AlertServiceClient interface {
 	UpdateOrgAlertIssue(ctx context.Context, in *UpdateOrgAlertIssueRequest, opts ...grpc.CallOption) (*UpdateOrgAlertIssueResponse, error)
 }
 
-type alertServiceClient struct {
+type monitorServiceClient struct {
 	cc grpc1.ClientConnInterface
 }
 
-func NewAlertServiceClient(cc grpc1.ClientConnInterface) AlertServiceClient {
-	return &alertServiceClient{cc}
+func NewMonitorServiceClient(cc grpc1.ClientConnInterface) MonitorServiceClient {
+	return &monitorServiceClient{cc}
 }
 
-func (c *alertServiceClient) QueryCustomizeMetric(ctx context.Context, in *QueryCustomizeMetricRequest, opts ...grpc.CallOption) (*QueryCustomizeMetricResponse, error) {
+func (c *monitorServiceClient) QueryCustomizeMetric(ctx context.Context, in *QueryCustomizeMetricRequest, opts ...grpc.CallOption) (*QueryCustomizeMetricResponse, error) {
 	out := new(QueryCustomizeMetricResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryCustomizeMetric", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryCustomizeMetric", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryCustomizeNotifyTarget(ctx context.Context, in *QueryCustomizeNotifyTargetRequest, opts ...grpc.CallOption) (*QueryCustomizeNotifyTargetResponse, error) {
+func (c *monitorServiceClient) QueryCustomizeNotifyTarget(ctx context.Context, in *QueryCustomizeNotifyTargetRequest, opts ...grpc.CallOption) (*QueryCustomizeNotifyTargetResponse, error) {
 	out := new(QueryCustomizeNotifyTargetResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryCustomizeNotifyTarget", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryCustomizeNotifyTarget", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgCustomizeNotifyTarget(ctx context.Context, in *QueryOrgCustomizeNotifyTargetRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeNotifyTargetResponse, error) {
+func (c *monitorServiceClient) QueryOrgCustomizeNotifyTarget(ctx context.Context, in *QueryOrgCustomizeNotifyTargetRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeNotifyTargetResponse, error) {
 	out := new(QueryOrgCustomizeNotifyTargetResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgCustomizeNotifyTarget", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgCustomizeNotifyTarget", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryCustomizeAlert(ctx context.Context, in *QueryCustomizeAlertRequest, opts ...grpc.CallOption) (*QueryCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) QueryCustomizeAlert(ctx context.Context, in *QueryCustomizeAlertRequest, opts ...grpc.CallOption) (*QueryCustomizeAlertResponse, error) {
 	out := new(QueryCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetCustomizeAlert(ctx context.Context, in *GetCustomizeAlertRequest, opts ...grpc.CallOption) (*GetCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) GetCustomizeAlert(ctx context.Context, in *GetCustomizeAlertRequest, opts ...grpc.CallOption) (*GetCustomizeAlertResponse, error) {
 	out := new(GetCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetCustomizeAlertDetail(ctx context.Context, in *GetCustomizeAlertDetailRequest, opts ...grpc.CallOption) (*GetCustomizeAlertDetailResponse, error) {
+func (c *monitorServiceClient) GetCustomizeAlertDetail(ctx context.Context, in *GetCustomizeAlertDetailRequest, opts ...grpc.CallOption) (*GetCustomizeAlertDetailResponse, error) {
 	out := new(GetCustomizeAlertDetailResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetCustomizeAlertDetail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetCustomizeAlertDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) CreateCustomizeAlert(ctx context.Context, in *CreateCustomizeAlertRequest, opts ...grpc.CallOption) (*CreateCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) CreateCustomizeAlert(ctx context.Context, in *CreateCustomizeAlertRequest, opts ...grpc.CallOption) (*CreateCustomizeAlertResponse, error) {
 	out := new(CreateCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/CreateCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateCustomizeAlert(ctx context.Context, in *UpdateCustomizeAlertRequest, opts ...grpc.CallOption) (*UpdateCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) UpdateCustomizeAlert(ctx context.Context, in *UpdateCustomizeAlertRequest, opts ...grpc.CallOption) (*UpdateCustomizeAlertResponse, error) {
 	out := new(UpdateCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateCustomizeAlertEnable(ctx context.Context, in *UpdateCustomizeAlertEnableRequest, opts ...grpc.CallOption) (*UpdateCustomizeAlertEnableResponse, error) {
+func (c *monitorServiceClient) UpdateCustomizeAlertEnable(ctx context.Context, in *UpdateCustomizeAlertEnableRequest, opts ...grpc.CallOption) (*UpdateCustomizeAlertEnableResponse, error) {
 	out := new(UpdateCustomizeAlertEnableResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateCustomizeAlertEnable", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateCustomizeAlertEnable", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) DeleteCustomizeAlert(ctx context.Context, in *DeleteCustomizeAlertRequest, opts ...grpc.CallOption) (*DeleteCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) DeleteCustomizeAlert(ctx context.Context, in *DeleteCustomizeAlertRequest, opts ...grpc.CallOption) (*DeleteCustomizeAlertResponse, error) {
 	out := new(DeleteCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/DeleteCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/DeleteCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgCustomizeMetric(ctx context.Context, in *QueryOrgCustomizeMetricRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeMetricResponse, error) {
+func (c *monitorServiceClient) QueryOrgCustomizeMetric(ctx context.Context, in *QueryOrgCustomizeMetricRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeMetricResponse, error) {
 	out := new(QueryOrgCustomizeMetricResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgCustomizeMetric", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgCustomizeMetric", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgCustomizeAlerts(ctx context.Context, in *QueryOrgCustomizeAlertsRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeAlertsResponse, error) {
+func (c *monitorServiceClient) QueryOrgCustomizeAlerts(ctx context.Context, in *QueryOrgCustomizeAlertsRequest, opts ...grpc.CallOption) (*QueryOrgCustomizeAlertsResponse, error) {
 	out := new(QueryOrgCustomizeAlertsResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgCustomizeAlerts", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgCustomizeAlerts", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetOrgCustomizeAlertDetail(ctx context.Context, in *GetOrgCustomizeAlertDetailRequest, opts ...grpc.CallOption) (*GetOrgCustomizeAlertDetailResponse, error) {
+func (c *monitorServiceClient) GetOrgCustomizeAlertDetail(ctx context.Context, in *GetOrgCustomizeAlertDetailRequest, opts ...grpc.CallOption) (*GetOrgCustomizeAlertDetailResponse, error) {
 	out := new(GetOrgCustomizeAlertDetailResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetOrgCustomizeAlertDetail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetOrgCustomizeAlertDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) CreateOrgCustomizeAlert(ctx context.Context, in *CreateOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*CreateOrgCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) CreateOrgCustomizeAlert(ctx context.Context, in *CreateOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*CreateOrgCustomizeAlertResponse, error) {
 	out := new(CreateOrgCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/CreateOrgCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateOrgCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateOrgCustomizeAlert(ctx context.Context, in *UpdateOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*UpdateOrgCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) UpdateOrgCustomizeAlert(ctx context.Context, in *UpdateOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*UpdateOrgCustomizeAlertResponse, error) {
 	out := new(UpdateOrgCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateOrgCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateOrgCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateOrgCustomizeAlertEnable(ctx context.Context, in *UpdateOrgCustomizeAlertEnableRequest, opts ...grpc.CallOption) (*UpdateOrgCustomizeAlertEnableResponse, error) {
+func (c *monitorServiceClient) UpdateOrgCustomizeAlertEnable(ctx context.Context, in *UpdateOrgCustomizeAlertEnableRequest, opts ...grpc.CallOption) (*UpdateOrgCustomizeAlertEnableResponse, error) {
 	out := new(UpdateOrgCustomizeAlertEnableResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateOrgCustomizeAlertEnable", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateOrgCustomizeAlertEnable", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) DeleteOrgCustomizeAlert(ctx context.Context, in *DeleteOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*DeleteOrgCustomizeAlertResponse, error) {
+func (c *monitorServiceClient) DeleteOrgCustomizeAlert(ctx context.Context, in *DeleteOrgCustomizeAlertRequest, opts ...grpc.CallOption) (*DeleteOrgCustomizeAlertResponse, error) {
 	out := new(DeleteOrgCustomizeAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/DeleteOrgCustomizeAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/DeleteOrgCustomizeAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryDashboardByAlert(ctx context.Context, in *QueryDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryDashboardByAlertResponse, error) {
+func (c *monitorServiceClient) QueryDashboardByAlert(ctx context.Context, in *QueryDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryDashboardByAlertResponse, error) {
 	out := new(QueryDashboardByAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryDashboardByAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryDashboardByAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgDashboardByAlert(ctx context.Context, in *QueryOrgDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryOrgDashboardByAlertResponse, error) {
+func (c *monitorServiceClient) QueryOrgDashboardByAlert(ctx context.Context, in *QueryOrgDashboardByAlertRequest, opts ...grpc.CallOption) (*QueryOrgDashboardByAlertResponse, error) {
 	out := new(QueryOrgDashboardByAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgDashboardByAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgDashboardByAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryAlertRule(ctx context.Context, in *QueryAlertRuleRequest, opts ...grpc.CallOption) (*QueryAlertRuleResponse, error) {
+func (c *monitorServiceClient) QueryAlertRule(ctx context.Context, in *QueryAlertRuleRequest, opts ...grpc.CallOption) (*QueryAlertRuleResponse, error) {
 	out := new(QueryAlertRuleResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryAlertRule", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryAlertRule", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryAlert(ctx context.Context, in *QueryAlertRequest, opts ...grpc.CallOption) (*QueryAlertsResponse, error) {
+func (c *monitorServiceClient) QueryAlert(ctx context.Context, in *QueryAlertRequest, opts ...grpc.CallOption) (*QueryAlertsResponse, error) {
 	out := new(QueryAlertsResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetAlert(ctx context.Context, in *GetAlertRequest, opts ...grpc.CallOption) (*GetAlertResponse, error) {
+func (c *monitorServiceClient) GetAlert(ctx context.Context, in *GetAlertRequest, opts ...grpc.CallOption) (*GetAlertResponse, error) {
 	out := new(GetAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetAlertDetail(ctx context.Context, in *GetAlertDetailRequest, opts ...grpc.CallOption) (*GetAlertDetailResponse, error) {
+func (c *monitorServiceClient) GetAlertDetail(ctx context.Context, in *GetAlertDetailRequest, opts ...grpc.CallOption) (*GetAlertDetailResponse, error) {
 	out := new(GetAlertDetailResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetAlertDetail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetAlertDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error) {
+func (c *monitorServiceClient) CreateAlert(ctx context.Context, in *CreateAlertRequest, opts ...grpc.CallOption) (*CreateAlertResponse, error) {
 	out := new(CreateAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/CreateAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateAlert(ctx context.Context, in *UpdateAlertRequest, opts ...grpc.CallOption) (*UpdateAlertResponse, error) {
+func (c *monitorServiceClient) UpdateAlert(ctx context.Context, in *UpdateAlertRequest, opts ...grpc.CallOption) (*UpdateAlertResponse, error) {
 	out := new(UpdateAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateAlertEnable(ctx context.Context, in *UpdateAlertEnableRequest, opts ...grpc.CallOption) (*UpdateAlertEnableResponse, error) {
+func (c *monitorServiceClient) UpdateAlertEnable(ctx context.Context, in *UpdateAlertEnableRequest, opts ...grpc.CallOption) (*UpdateAlertEnableResponse, error) {
 	out := new(UpdateAlertEnableResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateAlertEnable", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateAlertEnable", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...grpc.CallOption) (*DeleteAlertResponse, error) {
+func (c *monitorServiceClient) DeleteAlert(ctx context.Context, in *DeleteAlertRequest, opts ...grpc.CallOption) (*DeleteAlertResponse, error) {
 	out := new(DeleteAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/DeleteAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/DeleteAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgAlertRule(ctx context.Context, in *QueryOrgAlertRuleRequest, opts ...grpc.CallOption) (*QueryOrgAlertRuleResponse, error) {
+func (c *monitorServiceClient) QueryOrgAlertRule(ctx context.Context, in *QueryOrgAlertRuleRequest, opts ...grpc.CallOption) (*QueryOrgAlertRuleResponse, error) {
 	out := new(QueryOrgAlertRuleResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgAlertRule", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgAlertRule", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgAlert(ctx context.Context, in *QueryOrgAlertRequest, opts ...grpc.CallOption) (*QueryOrgAlertResponse, error) {
+func (c *monitorServiceClient) QueryOrgAlert(ctx context.Context, in *QueryOrgAlertRequest, opts ...grpc.CallOption) (*QueryOrgAlertResponse, error) {
 	out := new(QueryOrgAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetOrgAlertDetail(ctx context.Context, in *GetOrgAlertDetailRequest, opts ...grpc.CallOption) (*GetOrgAlertDetailResponse, error) {
+func (c *monitorServiceClient) GetOrgAlertDetail(ctx context.Context, in *GetOrgAlertDetailRequest, opts ...grpc.CallOption) (*GetOrgAlertDetailResponse, error) {
 	out := new(GetOrgAlertDetailResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetOrgAlertDetail", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetOrgAlertDetail", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) CreateOrgAlert(ctx context.Context, in *CreateOrgAlertRequest, opts ...grpc.CallOption) (*CreateOrgAlertResponse, error) {
+func (c *monitorServiceClient) CreateOrgAlert(ctx context.Context, in *CreateOrgAlertRequest, opts ...grpc.CallOption) (*CreateOrgAlertResponse, error) {
 	out := new(CreateOrgAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/CreateOrgAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateOrgAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateOrgAlert(ctx context.Context, in *UpdateOrgAlertRequest, opts ...grpc.CallOption) (*UpdateOrgAlertResponse, error) {
+func (c *monitorServiceClient) UpdateOrgAlert(ctx context.Context, in *UpdateOrgAlertRequest, opts ...grpc.CallOption) (*UpdateOrgAlertResponse, error) {
 	out := new(UpdateOrgAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateOrgAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateOrgAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateOrgAlertEnable(ctx context.Context, in *UpdateOrgAlertEnableRequest, opts ...grpc.CallOption) (*UpdateOrgAlertEnableResponse, error) {
+func (c *monitorServiceClient) UpdateOrgAlertEnable(ctx context.Context, in *UpdateOrgAlertEnableRequest, opts ...grpc.CallOption) (*UpdateOrgAlertEnableResponse, error) {
 	out := new(UpdateOrgAlertEnableResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateOrgAlertEnable", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateOrgAlertEnable", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) DeleteOrgAlert(ctx context.Context, in *DeleteOrgAlertRequest, opts ...grpc.CallOption) (*DeleteOrgAlertResponse, error) {
+func (c *monitorServiceClient) DeleteOrgAlert(ctx context.Context, in *DeleteOrgAlertRequest, opts ...grpc.CallOption) (*DeleteOrgAlertResponse, error) {
 	out := new(DeleteOrgAlertResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/DeleteOrgAlert", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/DeleteOrgAlert", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetAlertRecordAttr(ctx context.Context, in *GetAlertRecordAttrRequest, opts ...grpc.CallOption) (*GetAlertRecordAttrResponse, error) {
+func (c *monitorServiceClient) GetAlertRecordAttr(ctx context.Context, in *GetAlertRecordAttrRequest, opts ...grpc.CallOption) (*GetAlertRecordAttrResponse, error) {
 	out := new(GetAlertRecordAttrResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetAlertRecordAttr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetAlertRecordAttr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryAlertRecord(ctx context.Context, in *QueryAlertRecordRequest, opts ...grpc.CallOption) (*QueryAlertRecordResponse, error) {
+func (c *monitorServiceClient) QueryAlertRecord(ctx context.Context, in *QueryAlertRecordRequest, opts ...grpc.CallOption) (*QueryAlertRecordResponse, error) {
 	out := new(QueryAlertRecordResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryAlertRecord", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryAlertRecord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetAlertRecord(ctx context.Context, in *GetAlertRecordRequest, opts ...grpc.CallOption) (*GetAlertRecordResponse, error) {
+func (c *monitorServiceClient) GetAlertRecord(ctx context.Context, in *GetAlertRecordRequest, opts ...grpc.CallOption) (*GetAlertRecordResponse, error) {
 	out := new(GetAlertRecordResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetAlertRecord", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetAlertRecord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryAlertHistory(ctx context.Context, in *QueryAlertHistoryRequest, opts ...grpc.CallOption) (*QueryAlertHistoryResponse, error) {
+func (c *monitorServiceClient) QueryAlertHistory(ctx context.Context, in *QueryAlertHistoryRequest, opts ...grpc.CallOption) (*QueryAlertHistoryResponse, error) {
 	out := new(QueryAlertHistoryResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryAlertHistory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryAlertHistory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) CreateAlertIssue(ctx context.Context, in *CreateAlertIssueRequest, opts ...grpc.CallOption) (*CreateAlertIssueResponse, error) {
+func (c *monitorServiceClient) CreateAlertIssue(ctx context.Context, in *CreateAlertIssueRequest, opts ...grpc.CallOption) (*CreateAlertIssueResponse, error) {
 	out := new(CreateAlertIssueResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/CreateAlertIssue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateAlertIssue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateAlertIssue(ctx context.Context, in *UpdateAlertIssueRequest, opts ...grpc.CallOption) (*UpdateAlertIssueResponse, error) {
+func (c *monitorServiceClient) UpdateAlertIssue(ctx context.Context, in *UpdateAlertIssueRequest, opts ...grpc.CallOption) (*UpdateAlertIssueResponse, error) {
 	out := new(UpdateAlertIssueResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateAlertIssue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateAlertIssue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetOrgAlertRecordAttr(ctx context.Context, in *GetOrgAlertRecordAttrRequest, opts ...grpc.CallOption) (*GetOrgAlertRecordAttrResponse, error) {
+func (c *monitorServiceClient) GetOrgAlertRecordAttr(ctx context.Context, in *GetOrgAlertRecordAttrRequest, opts ...grpc.CallOption) (*GetOrgAlertRecordAttrResponse, error) {
 	out := new(GetOrgAlertRecordAttrResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetOrgAlertRecordAttr", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetOrgAlertRecordAttr", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgAlertRecord(ctx context.Context, in *QueryOrgAlertRecordRequest, opts ...grpc.CallOption) (*QueryOrgAlertRecordResponse, error) {
+func (c *monitorServiceClient) QueryOrgAlertRecord(ctx context.Context, in *QueryOrgAlertRecordRequest, opts ...grpc.CallOption) (*QueryOrgAlertRecordResponse, error) {
 	out := new(QueryOrgAlertRecordResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgAlertRecord", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgAlertRecord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgHostsAlertRecord(ctx context.Context, in *QueryOrgHostsAlertRecordRequest, opts ...grpc.CallOption) (*QueryOrgAlertRecordResponse, error) {
+func (c *monitorServiceClient) QueryOrgHostsAlertRecord(ctx context.Context, in *QueryOrgHostsAlertRecordRequest, opts ...grpc.CallOption) (*QueryOrgAlertRecordResponse, error) {
 	out := new(QueryOrgAlertRecordResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgHostsAlertRecord", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgHostsAlertRecord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) GetOrgAlertRecord(ctx context.Context, in *GetOrgAlertRecordRequest, opts ...grpc.CallOption) (*GetOrgAlertRecordResponse, error) {
+func (c *monitorServiceClient) GetOrgAlertRecord(ctx context.Context, in *GetOrgAlertRecordRequest, opts ...grpc.CallOption) (*GetOrgAlertRecordResponse, error) {
 	out := new(GetOrgAlertRecordResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/GetOrgAlertRecord", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/GetOrgAlertRecord", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) QueryOrgAlertHistory(ctx context.Context, in *QueryOrgAlertHistoryRequest, opts ...grpc.CallOption) (*QueryOrgAlertHistoryResponse, error) {
+func (c *monitorServiceClient) QueryOrgAlertHistory(ctx context.Context, in *QueryOrgAlertHistoryRequest, opts ...grpc.CallOption) (*QueryOrgAlertHistoryResponse, error) {
 	out := new(QueryOrgAlertHistoryResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/QueryOrgAlertHistory", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/QueryOrgAlertHistory", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) CreateOrgAlertIssue(ctx context.Context, in *CreateOrgAlertIssueRequest, opts ...grpc.CallOption) (*CreateOrgAlertIssueResponse, error) {
+func (c *monitorServiceClient) CreateOrgAlertIssue(ctx context.Context, in *CreateOrgAlertIssueRequest, opts ...grpc.CallOption) (*CreateOrgAlertIssueResponse, error) {
 	out := new(CreateOrgAlertIssueResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/CreateOrgAlertIssue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/CreateOrgAlertIssue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *alertServiceClient) UpdateOrgAlertIssue(ctx context.Context, in *UpdateOrgAlertIssueRequest, opts ...grpc.CallOption) (*UpdateOrgAlertIssueResponse, error) {
+func (c *monitorServiceClient) UpdateOrgAlertIssue(ctx context.Context, in *UpdateOrgAlertIssueRequest, opts ...grpc.CallOption) (*UpdateOrgAlertIssueResponse, error) {
 	out := new(UpdateOrgAlertIssueResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.AlertService/UpdateOrgAlertIssue", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.alert.MonitorService/UpdateOrgAlertIssue", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AlertServiceServer is the server API for AlertService service.
-// All implementations should embed UnimplementedAlertServiceServer
+// MonitorServiceServer is the server API for MonitorService service.
+// All implementations should embed UnimplementedMonitorServiceServer
 // for forward compatibility
-type AlertServiceServer interface {
+type MonitorServiceServer interface {
 	QueryCustomizeMetric(context.Context, *QueryCustomizeMetricRequest) (*QueryCustomizeMetricResponse, error)
 	QueryCustomizeNotifyTarget(context.Context, *QueryCustomizeNotifyTargetRequest) (*QueryCustomizeNotifyTargetResponse, error)
 	QueryOrgCustomizeNotifyTarget(context.Context, *QueryOrgCustomizeNotifyTargetRequest) (*QueryOrgCustomizeNotifyTargetResponse, error)
@@ -553,594 +553,594 @@ type AlertServiceServer interface {
 	UpdateOrgAlertIssue(context.Context, *UpdateOrgAlertIssueRequest) (*UpdateOrgAlertIssueResponse, error)
 }
 
-// UnimplementedAlertServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedAlertServiceServer struct {
+// UnimplementedMonitorServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedMonitorServiceServer struct {
 }
 
-func (*UnimplementedAlertServiceServer) QueryCustomizeMetric(context.Context, *QueryCustomizeMetricRequest) (*QueryCustomizeMetricResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryCustomizeMetric(context.Context, *QueryCustomizeMetricRequest) (*QueryCustomizeMetricResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCustomizeMetric not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryCustomizeNotifyTarget(context.Context, *QueryCustomizeNotifyTargetRequest) (*QueryCustomizeNotifyTargetResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryCustomizeNotifyTarget(context.Context, *QueryCustomizeNotifyTargetRequest) (*QueryCustomizeNotifyTargetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCustomizeNotifyTarget not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgCustomizeNotifyTarget(context.Context, *QueryOrgCustomizeNotifyTargetRequest) (*QueryOrgCustomizeNotifyTargetResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgCustomizeNotifyTarget(context.Context, *QueryOrgCustomizeNotifyTargetRequest) (*QueryOrgCustomizeNotifyTargetResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgCustomizeNotifyTarget not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryCustomizeAlert(context.Context, *QueryCustomizeAlertRequest) (*QueryCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryCustomizeAlert(context.Context, *QueryCustomizeAlertRequest) (*QueryCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetCustomizeAlert(context.Context, *GetCustomizeAlertRequest) (*GetCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetCustomizeAlert(context.Context, *GetCustomizeAlertRequest) (*GetCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetCustomizeAlertDetail(context.Context, *GetCustomizeAlertDetailRequest) (*GetCustomizeAlertDetailResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetCustomizeAlertDetail(context.Context, *GetCustomizeAlertDetailRequest) (*GetCustomizeAlertDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetCustomizeAlertDetail not implemented")
 }
-func (*UnimplementedAlertServiceServer) CreateCustomizeAlert(context.Context, *CreateCustomizeAlertRequest) (*CreateCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateCustomizeAlert(context.Context, *CreateCustomizeAlertRequest) (*CreateCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateCustomizeAlert(context.Context, *UpdateCustomizeAlertRequest) (*UpdateCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateCustomizeAlert(context.Context, *UpdateCustomizeAlertRequest) (*UpdateCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateCustomizeAlertEnable(context.Context, *UpdateCustomizeAlertEnableRequest) (*UpdateCustomizeAlertEnableResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateCustomizeAlertEnable(context.Context, *UpdateCustomizeAlertEnableRequest) (*UpdateCustomizeAlertEnableResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateCustomizeAlertEnable not implemented")
 }
-func (*UnimplementedAlertServiceServer) DeleteCustomizeAlert(context.Context, *DeleteCustomizeAlertRequest) (*DeleteCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) DeleteCustomizeAlert(context.Context, *DeleteCustomizeAlertRequest) (*DeleteCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgCustomizeMetric(context.Context, *QueryOrgCustomizeMetricRequest) (*QueryOrgCustomizeMetricResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgCustomizeMetric(context.Context, *QueryOrgCustomizeMetricRequest) (*QueryOrgCustomizeMetricResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgCustomizeMetric not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgCustomizeAlerts(context.Context, *QueryOrgCustomizeAlertsRequest) (*QueryOrgCustomizeAlertsResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgCustomizeAlerts(context.Context, *QueryOrgCustomizeAlertsRequest) (*QueryOrgCustomizeAlertsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgCustomizeAlerts not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetOrgCustomizeAlertDetail(context.Context, *GetOrgCustomizeAlertDetailRequest) (*GetOrgCustomizeAlertDetailResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetOrgCustomizeAlertDetail(context.Context, *GetOrgCustomizeAlertDetailRequest) (*GetOrgCustomizeAlertDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgCustomizeAlertDetail not implemented")
 }
-func (*UnimplementedAlertServiceServer) CreateOrgCustomizeAlert(context.Context, *CreateOrgCustomizeAlertRequest) (*CreateOrgCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateOrgCustomizeAlert(context.Context, *CreateOrgCustomizeAlertRequest) (*CreateOrgCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrgCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateOrgCustomizeAlert(context.Context, *UpdateOrgCustomizeAlertRequest) (*UpdateOrgCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateOrgCustomizeAlert(context.Context, *UpdateOrgCustomizeAlertRequest) (*UpdateOrgCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateOrgCustomizeAlertEnable(context.Context, *UpdateOrgCustomizeAlertEnableRequest) (*UpdateOrgCustomizeAlertEnableResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateOrgCustomizeAlertEnable(context.Context, *UpdateOrgCustomizeAlertEnableRequest) (*UpdateOrgCustomizeAlertEnableResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgCustomizeAlertEnable not implemented")
 }
-func (*UnimplementedAlertServiceServer) DeleteOrgCustomizeAlert(context.Context, *DeleteOrgCustomizeAlertRequest) (*DeleteOrgCustomizeAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) DeleteOrgCustomizeAlert(context.Context, *DeleteOrgCustomizeAlertRequest) (*DeleteOrgCustomizeAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrgCustomizeAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryDashboardByAlert(context.Context, *QueryDashboardByAlertRequest) (*QueryDashboardByAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryDashboardByAlert(context.Context, *QueryDashboardByAlertRequest) (*QueryDashboardByAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryDashboardByAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgDashboardByAlert(context.Context, *QueryOrgDashboardByAlertRequest) (*QueryOrgDashboardByAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgDashboardByAlert(context.Context, *QueryOrgDashboardByAlertRequest) (*QueryOrgDashboardByAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgDashboardByAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryAlertRule(context.Context, *QueryAlertRuleRequest) (*QueryAlertRuleResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryAlertRule(context.Context, *QueryAlertRuleRequest) (*QueryAlertRuleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryAlertRule not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryAlert(context.Context, *QueryAlertRequest) (*QueryAlertsResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryAlert(context.Context, *QueryAlertRequest) (*QueryAlertsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetAlert(context.Context, *GetAlertRequest) (*GetAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetAlert(context.Context, *GetAlertRequest) (*GetAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetAlertDetail(context.Context, *GetAlertDetailRequest) (*GetAlertDetailResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetAlertDetail(context.Context, *GetAlertDetailRequest) (*GetAlertDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlertDetail not implemented")
 }
-func (*UnimplementedAlertServiceServer) CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateAlertEnable(context.Context, *UpdateAlertEnableRequest) (*UpdateAlertEnableResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateAlertEnable(context.Context, *UpdateAlertEnableRequest) (*UpdateAlertEnableResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAlertEnable not implemented")
 }
-func (*UnimplementedAlertServiceServer) DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgAlertRule(context.Context, *QueryOrgAlertRuleRequest) (*QueryOrgAlertRuleResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgAlertRule(context.Context, *QueryOrgAlertRuleRequest) (*QueryOrgAlertRuleResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgAlertRule not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgAlert(context.Context, *QueryOrgAlertRequest) (*QueryOrgAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgAlert(context.Context, *QueryOrgAlertRequest) (*QueryOrgAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetOrgAlertDetail(context.Context, *GetOrgAlertDetailRequest) (*GetOrgAlertDetailResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetOrgAlertDetail(context.Context, *GetOrgAlertDetailRequest) (*GetOrgAlertDetailResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgAlertDetail not implemented")
 }
-func (*UnimplementedAlertServiceServer) CreateOrgAlert(context.Context, *CreateOrgAlertRequest) (*CreateOrgAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateOrgAlert(context.Context, *CreateOrgAlertRequest) (*CreateOrgAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrgAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateOrgAlert(context.Context, *UpdateOrgAlertRequest) (*UpdateOrgAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateOrgAlert(context.Context, *UpdateOrgAlertRequest) (*UpdateOrgAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateOrgAlertEnable(context.Context, *UpdateOrgAlertEnableRequest) (*UpdateOrgAlertEnableResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateOrgAlertEnable(context.Context, *UpdateOrgAlertEnableRequest) (*UpdateOrgAlertEnableResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgAlertEnable not implemented")
 }
-func (*UnimplementedAlertServiceServer) DeleteOrgAlert(context.Context, *DeleteOrgAlertRequest) (*DeleteOrgAlertResponse, error) {
+func (*UnimplementedMonitorServiceServer) DeleteOrgAlert(context.Context, *DeleteOrgAlertRequest) (*DeleteOrgAlertResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteOrgAlert not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetAlertRecordAttr(context.Context, *GetAlertRecordAttrRequest) (*GetAlertRecordAttrResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetAlertRecordAttr(context.Context, *GetAlertRecordAttrRequest) (*GetAlertRecordAttrResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlertRecordAttr not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryAlertRecord(context.Context, *QueryAlertRecordRequest) (*QueryAlertRecordResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryAlertRecord(context.Context, *QueryAlertRecordRequest) (*QueryAlertRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryAlertRecord not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetAlertRecord(context.Context, *GetAlertRecordRequest) (*GetAlertRecordResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetAlertRecord(context.Context, *GetAlertRecordRequest) (*GetAlertRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAlertRecord not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryAlertHistory(context.Context, *QueryAlertHistoryRequest) (*QueryAlertHistoryResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryAlertHistory(context.Context, *QueryAlertHistoryRequest) (*QueryAlertHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryAlertHistory not implemented")
 }
-func (*UnimplementedAlertServiceServer) CreateAlertIssue(context.Context, *CreateAlertIssueRequest) (*CreateAlertIssueResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateAlertIssue(context.Context, *CreateAlertIssueRequest) (*CreateAlertIssueResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateAlertIssue not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateAlertIssue(context.Context, *UpdateAlertIssueRequest) (*UpdateAlertIssueResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateAlertIssue(context.Context, *UpdateAlertIssueRequest) (*UpdateAlertIssueResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateAlertIssue not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetOrgAlertRecordAttr(context.Context, *GetOrgAlertRecordAttrRequest) (*GetOrgAlertRecordAttrResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetOrgAlertRecordAttr(context.Context, *GetOrgAlertRecordAttrRequest) (*GetOrgAlertRecordAttrResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgAlertRecordAttr not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgAlertRecord(context.Context, *QueryOrgAlertRecordRequest) (*QueryOrgAlertRecordResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgAlertRecord(context.Context, *QueryOrgAlertRecordRequest) (*QueryOrgAlertRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgAlertRecord not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgHostsAlertRecord(context.Context, *QueryOrgHostsAlertRecordRequest) (*QueryOrgAlertRecordResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgHostsAlertRecord(context.Context, *QueryOrgHostsAlertRecordRequest) (*QueryOrgAlertRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgHostsAlertRecord not implemented")
 }
-func (*UnimplementedAlertServiceServer) GetOrgAlertRecord(context.Context, *GetOrgAlertRecordRequest) (*GetOrgAlertRecordResponse, error) {
+func (*UnimplementedMonitorServiceServer) GetOrgAlertRecord(context.Context, *GetOrgAlertRecordRequest) (*GetOrgAlertRecordResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetOrgAlertRecord not implemented")
 }
-func (*UnimplementedAlertServiceServer) QueryOrgAlertHistory(context.Context, *QueryOrgAlertHistoryRequest) (*QueryOrgAlertHistoryResponse, error) {
+func (*UnimplementedMonitorServiceServer) QueryOrgAlertHistory(context.Context, *QueryOrgAlertHistoryRequest) (*QueryOrgAlertHistoryResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method QueryOrgAlertHistory not implemented")
 }
-func (*UnimplementedAlertServiceServer) CreateOrgAlertIssue(context.Context, *CreateOrgAlertIssueRequest) (*CreateOrgAlertIssueResponse, error) {
+func (*UnimplementedMonitorServiceServer) CreateOrgAlertIssue(context.Context, *CreateOrgAlertIssueRequest) (*CreateOrgAlertIssueResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateOrgAlertIssue not implemented")
 }
-func (*UnimplementedAlertServiceServer) UpdateOrgAlertIssue(context.Context, *UpdateOrgAlertIssueRequest) (*UpdateOrgAlertIssueResponse, error) {
+func (*UnimplementedMonitorServiceServer) UpdateOrgAlertIssue(context.Context, *UpdateOrgAlertIssueRequest) (*UpdateOrgAlertIssueResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method UpdateOrgAlertIssue not implemented")
 }
 
-func RegisterAlertServiceServer(s grpc1.ServiceRegistrar, srv AlertServiceServer, opts ...grpc1.HandleOption) {
-	s.RegisterService(_get_AlertService_serviceDesc(srv, opts...), srv)
+func RegisterMonitorServiceServer(s grpc1.ServiceRegistrar, srv MonitorServiceServer, opts ...grpc1.HandleOption) {
+	s.RegisterService(_get_MonitorService_serviceDesc(srv, opts...), srv)
 }
 
-var _AlertService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.core.monitor.alert.AlertService",
-	HandlerType: (*AlertServiceServer)(nil),
+var _MonitorService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "erda.core.monitor.alert.MonitorService",
+	HandlerType: (*MonitorServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
 	Metadata:    "alert.proto",
 }
 
-func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleOption) *grpc.ServiceDesc {
+func _get_MonitorService_serviceDesc(srv MonitorServiceServer, opts ...grpc1.HandleOption) *grpc.ServiceDesc {
 	h := grpc1.DefaultHandleOptions()
 	for _, op := range opts {
 		op(h)
 	}
 
-	_AlertService_QueryCustomizeMetric_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryCustomizeMetric_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryCustomizeMetric(ctx, req.(*QueryCustomizeMetricRequest))
 	}
-	var _AlertService_QueryCustomizeMetric_info transport.ServiceInfo
+	var _MonitorService_QueryCustomizeMetric_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryCustomizeMetric", srv)
-		_AlertService_QueryCustomizeMetric_Handler = h.Interceptor(_AlertService_QueryCustomizeMetric_Handler)
+		_MonitorService_QueryCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryCustomizeMetric", srv)
+		_MonitorService_QueryCustomizeMetric_Handler = h.Interceptor(_MonitorService_QueryCustomizeMetric_Handler)
 	}
 
-	_AlertService_QueryCustomizeNotifyTarget_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryCustomizeNotifyTarget_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryCustomizeNotifyTarget(ctx, req.(*QueryCustomizeNotifyTargetRequest))
 	}
-	var _AlertService_QueryCustomizeNotifyTarget_info transport.ServiceInfo
+	var _MonitorService_QueryCustomizeNotifyTarget_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryCustomizeNotifyTarget", srv)
-		_AlertService_QueryCustomizeNotifyTarget_Handler = h.Interceptor(_AlertService_QueryCustomizeNotifyTarget_Handler)
+		_MonitorService_QueryCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryCustomizeNotifyTarget", srv)
+		_MonitorService_QueryCustomizeNotifyTarget_Handler = h.Interceptor(_MonitorService_QueryCustomizeNotifyTarget_Handler)
 	}
 
-	_AlertService_QueryOrgCustomizeNotifyTarget_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgCustomizeNotifyTarget_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgCustomizeNotifyTarget(ctx, req.(*QueryOrgCustomizeNotifyTargetRequest))
 	}
-	var _AlertService_QueryOrgCustomizeNotifyTarget_info transport.ServiceInfo
+	var _MonitorService_QueryOrgCustomizeNotifyTarget_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgCustomizeNotifyTarget", srv)
-		_AlertService_QueryOrgCustomizeNotifyTarget_Handler = h.Interceptor(_AlertService_QueryOrgCustomizeNotifyTarget_Handler)
+		_MonitorService_QueryOrgCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgCustomizeNotifyTarget", srv)
+		_MonitorService_QueryOrgCustomizeNotifyTarget_Handler = h.Interceptor(_MonitorService_QueryOrgCustomizeNotifyTarget_Handler)
 	}
 
-	_AlertService_QueryCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryCustomizeAlert(ctx, req.(*QueryCustomizeAlertRequest))
 	}
-	var _AlertService_QueryCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_QueryCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryCustomizeAlert", srv)
-		_AlertService_QueryCustomizeAlert_Handler = h.Interceptor(_AlertService_QueryCustomizeAlert_Handler)
+		_MonitorService_QueryCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryCustomizeAlert", srv)
+		_MonitorService_QueryCustomizeAlert_Handler = h.Interceptor(_MonitorService_QueryCustomizeAlert_Handler)
 	}
 
-	_AlertService_GetCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetCustomizeAlert(ctx, req.(*GetCustomizeAlertRequest))
 	}
-	var _AlertService_GetCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_GetCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetCustomizeAlert", srv)
-		_AlertService_GetCustomizeAlert_Handler = h.Interceptor(_AlertService_GetCustomizeAlert_Handler)
+		_MonitorService_GetCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetCustomizeAlert", srv)
+		_MonitorService_GetCustomizeAlert_Handler = h.Interceptor(_MonitorService_GetCustomizeAlert_Handler)
 	}
 
-	_AlertService_GetCustomizeAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetCustomizeAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetCustomizeAlertDetail(ctx, req.(*GetCustomizeAlertDetailRequest))
 	}
-	var _AlertService_GetCustomizeAlertDetail_info transport.ServiceInfo
+	var _MonitorService_GetCustomizeAlertDetail_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetCustomizeAlertDetail", srv)
-		_AlertService_GetCustomizeAlertDetail_Handler = h.Interceptor(_AlertService_GetCustomizeAlertDetail_Handler)
+		_MonitorService_GetCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetCustomizeAlertDetail", srv)
+		_MonitorService_GetCustomizeAlertDetail_Handler = h.Interceptor(_MonitorService_GetCustomizeAlertDetail_Handler)
 	}
 
-	_AlertService_CreateCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_CreateCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.CreateCustomizeAlert(ctx, req.(*CreateCustomizeAlertRequest))
 	}
-	var _AlertService_CreateCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_CreateCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_CreateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateCustomizeAlert", srv)
-		_AlertService_CreateCustomizeAlert_Handler = h.Interceptor(_AlertService_CreateCustomizeAlert_Handler)
+		_MonitorService_CreateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateCustomizeAlert", srv)
+		_MonitorService_CreateCustomizeAlert_Handler = h.Interceptor(_MonitorService_CreateCustomizeAlert_Handler)
 	}
 
-	_AlertService_UpdateCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateCustomizeAlert(ctx, req.(*UpdateCustomizeAlertRequest))
 	}
-	var _AlertService_UpdateCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_UpdateCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateCustomizeAlert", srv)
-		_AlertService_UpdateCustomizeAlert_Handler = h.Interceptor(_AlertService_UpdateCustomizeAlert_Handler)
+		_MonitorService_UpdateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateCustomizeAlert", srv)
+		_MonitorService_UpdateCustomizeAlert_Handler = h.Interceptor(_MonitorService_UpdateCustomizeAlert_Handler)
 	}
 
-	_AlertService_UpdateCustomizeAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateCustomizeAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateCustomizeAlertEnable(ctx, req.(*UpdateCustomizeAlertEnableRequest))
 	}
-	var _AlertService_UpdateCustomizeAlertEnable_info transport.ServiceInfo
+	var _MonitorService_UpdateCustomizeAlertEnable_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateCustomizeAlertEnable", srv)
-		_AlertService_UpdateCustomizeAlertEnable_Handler = h.Interceptor(_AlertService_UpdateCustomizeAlertEnable_Handler)
+		_MonitorService_UpdateCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateCustomizeAlertEnable", srv)
+		_MonitorService_UpdateCustomizeAlertEnable_Handler = h.Interceptor(_MonitorService_UpdateCustomizeAlertEnable_Handler)
 	}
 
-	_AlertService_DeleteCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_DeleteCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.DeleteCustomizeAlert(ctx, req.(*DeleteCustomizeAlertRequest))
 	}
-	var _AlertService_DeleteCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_DeleteCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_DeleteCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteCustomizeAlert", srv)
-		_AlertService_DeleteCustomizeAlert_Handler = h.Interceptor(_AlertService_DeleteCustomizeAlert_Handler)
+		_MonitorService_DeleteCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteCustomizeAlert", srv)
+		_MonitorService_DeleteCustomizeAlert_Handler = h.Interceptor(_MonitorService_DeleteCustomizeAlert_Handler)
 	}
 
-	_AlertService_QueryOrgCustomizeMetric_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgCustomizeMetric_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgCustomizeMetric(ctx, req.(*QueryOrgCustomizeMetricRequest))
 	}
-	var _AlertService_QueryOrgCustomizeMetric_info transport.ServiceInfo
+	var _MonitorService_QueryOrgCustomizeMetric_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgCustomizeMetric", srv)
-		_AlertService_QueryOrgCustomizeMetric_Handler = h.Interceptor(_AlertService_QueryOrgCustomizeMetric_Handler)
+		_MonitorService_QueryOrgCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgCustomizeMetric", srv)
+		_MonitorService_QueryOrgCustomizeMetric_Handler = h.Interceptor(_MonitorService_QueryOrgCustomizeMetric_Handler)
 	}
 
-	_AlertService_QueryOrgCustomizeAlerts_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgCustomizeAlerts_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgCustomizeAlerts(ctx, req.(*QueryOrgCustomizeAlertsRequest))
 	}
-	var _AlertService_QueryOrgCustomizeAlerts_info transport.ServiceInfo
+	var _MonitorService_QueryOrgCustomizeAlerts_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgCustomizeAlerts_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgCustomizeAlerts", srv)
-		_AlertService_QueryOrgCustomizeAlerts_Handler = h.Interceptor(_AlertService_QueryOrgCustomizeAlerts_Handler)
+		_MonitorService_QueryOrgCustomizeAlerts_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgCustomizeAlerts", srv)
+		_MonitorService_QueryOrgCustomizeAlerts_Handler = h.Interceptor(_MonitorService_QueryOrgCustomizeAlerts_Handler)
 	}
 
-	_AlertService_GetOrgCustomizeAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetOrgCustomizeAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetOrgCustomizeAlertDetail(ctx, req.(*GetOrgCustomizeAlertDetailRequest))
 	}
-	var _AlertService_GetOrgCustomizeAlertDetail_info transport.ServiceInfo
+	var _MonitorService_GetOrgCustomizeAlertDetail_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetOrgCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgCustomizeAlertDetail", srv)
-		_AlertService_GetOrgCustomizeAlertDetail_Handler = h.Interceptor(_AlertService_GetOrgCustomizeAlertDetail_Handler)
+		_MonitorService_GetOrgCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgCustomizeAlertDetail", srv)
+		_MonitorService_GetOrgCustomizeAlertDetail_Handler = h.Interceptor(_MonitorService_GetOrgCustomizeAlertDetail_Handler)
 	}
 
-	_AlertService_CreateOrgCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_CreateOrgCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.CreateOrgCustomizeAlert(ctx, req.(*CreateOrgCustomizeAlertRequest))
 	}
-	var _AlertService_CreateOrgCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_CreateOrgCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_CreateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateOrgCustomizeAlert", srv)
-		_AlertService_CreateOrgCustomizeAlert_Handler = h.Interceptor(_AlertService_CreateOrgCustomizeAlert_Handler)
+		_MonitorService_CreateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateOrgCustomizeAlert", srv)
+		_MonitorService_CreateOrgCustomizeAlert_Handler = h.Interceptor(_MonitorService_CreateOrgCustomizeAlert_Handler)
 	}
 
-	_AlertService_UpdateOrgCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateOrgCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateOrgCustomizeAlert(ctx, req.(*UpdateOrgCustomizeAlertRequest))
 	}
-	var _AlertService_UpdateOrgCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_UpdateOrgCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgCustomizeAlert", srv)
-		_AlertService_UpdateOrgCustomizeAlert_Handler = h.Interceptor(_AlertService_UpdateOrgCustomizeAlert_Handler)
+		_MonitorService_UpdateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgCustomizeAlert", srv)
+		_MonitorService_UpdateOrgCustomizeAlert_Handler = h.Interceptor(_MonitorService_UpdateOrgCustomizeAlert_Handler)
 	}
 
-	_AlertService_UpdateOrgCustomizeAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateOrgCustomizeAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateOrgCustomizeAlertEnable(ctx, req.(*UpdateOrgCustomizeAlertEnableRequest))
 	}
-	var _AlertService_UpdateOrgCustomizeAlertEnable_info transport.ServiceInfo
+	var _MonitorService_UpdateOrgCustomizeAlertEnable_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateOrgCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgCustomizeAlertEnable", srv)
-		_AlertService_UpdateOrgCustomizeAlertEnable_Handler = h.Interceptor(_AlertService_UpdateOrgCustomizeAlertEnable_Handler)
+		_MonitorService_UpdateOrgCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgCustomizeAlertEnable", srv)
+		_MonitorService_UpdateOrgCustomizeAlertEnable_Handler = h.Interceptor(_MonitorService_UpdateOrgCustomizeAlertEnable_Handler)
 	}
 
-	_AlertService_DeleteOrgCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_DeleteOrgCustomizeAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.DeleteOrgCustomizeAlert(ctx, req.(*DeleteOrgCustomizeAlertRequest))
 	}
-	var _AlertService_DeleteOrgCustomizeAlert_info transport.ServiceInfo
+	var _MonitorService_DeleteOrgCustomizeAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_DeleteOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteOrgCustomizeAlert", srv)
-		_AlertService_DeleteOrgCustomizeAlert_Handler = h.Interceptor(_AlertService_DeleteOrgCustomizeAlert_Handler)
+		_MonitorService_DeleteOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteOrgCustomizeAlert", srv)
+		_MonitorService_DeleteOrgCustomizeAlert_Handler = h.Interceptor(_MonitorService_DeleteOrgCustomizeAlert_Handler)
 	}
 
-	_AlertService_QueryDashboardByAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryDashboardByAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryDashboardByAlert(ctx, req.(*QueryDashboardByAlertRequest))
 	}
-	var _AlertService_QueryDashboardByAlert_info transport.ServiceInfo
+	var _MonitorService_QueryDashboardByAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryDashboardByAlert", srv)
-		_AlertService_QueryDashboardByAlert_Handler = h.Interceptor(_AlertService_QueryDashboardByAlert_Handler)
+		_MonitorService_QueryDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryDashboardByAlert", srv)
+		_MonitorService_QueryDashboardByAlert_Handler = h.Interceptor(_MonitorService_QueryDashboardByAlert_Handler)
 	}
 
-	_AlertService_QueryOrgDashboardByAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgDashboardByAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgDashboardByAlert(ctx, req.(*QueryOrgDashboardByAlertRequest))
 	}
-	var _AlertService_QueryOrgDashboardByAlert_info transport.ServiceInfo
+	var _MonitorService_QueryOrgDashboardByAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgDashboardByAlert", srv)
-		_AlertService_QueryOrgDashboardByAlert_Handler = h.Interceptor(_AlertService_QueryOrgDashboardByAlert_Handler)
+		_MonitorService_QueryOrgDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgDashboardByAlert", srv)
+		_MonitorService_QueryOrgDashboardByAlert_Handler = h.Interceptor(_MonitorService_QueryOrgDashboardByAlert_Handler)
 	}
 
-	_AlertService_QueryAlertRule_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryAlertRule_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryAlertRule(ctx, req.(*QueryAlertRuleRequest))
 	}
-	var _AlertService_QueryAlertRule_info transport.ServiceInfo
+	var _MonitorService_QueryAlertRule_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlertRule", srv)
-		_AlertService_QueryAlertRule_Handler = h.Interceptor(_AlertService_QueryAlertRule_Handler)
+		_MonitorService_QueryAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlertRule", srv)
+		_MonitorService_QueryAlertRule_Handler = h.Interceptor(_MonitorService_QueryAlertRule_Handler)
 	}
 
-	_AlertService_QueryAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryAlert(ctx, req.(*QueryAlertRequest))
 	}
-	var _AlertService_QueryAlert_info transport.ServiceInfo
+	var _MonitorService_QueryAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlert", srv)
-		_AlertService_QueryAlert_Handler = h.Interceptor(_AlertService_QueryAlert_Handler)
+		_MonitorService_QueryAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlert", srv)
+		_MonitorService_QueryAlert_Handler = h.Interceptor(_MonitorService_QueryAlert_Handler)
 	}
 
-	_AlertService_GetAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetAlert(ctx, req.(*GetAlertRequest))
 	}
-	var _AlertService_GetAlert_info transport.ServiceInfo
+	var _MonitorService_GetAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlert", srv)
-		_AlertService_GetAlert_Handler = h.Interceptor(_AlertService_GetAlert_Handler)
+		_MonitorService_GetAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlert", srv)
+		_MonitorService_GetAlert_Handler = h.Interceptor(_MonitorService_GetAlert_Handler)
 	}
 
-	_AlertService_GetAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetAlertDetail(ctx, req.(*GetAlertDetailRequest))
 	}
-	var _AlertService_GetAlertDetail_info transport.ServiceInfo
+	var _MonitorService_GetAlertDetail_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlertDetail", srv)
-		_AlertService_GetAlertDetail_Handler = h.Interceptor(_AlertService_GetAlertDetail_Handler)
+		_MonitorService_GetAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlertDetail", srv)
+		_MonitorService_GetAlertDetail_Handler = h.Interceptor(_MonitorService_GetAlertDetail_Handler)
 	}
 
-	_AlertService_CreateAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_CreateAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.CreateAlert(ctx, req.(*CreateAlertRequest))
 	}
-	var _AlertService_CreateAlert_info transport.ServiceInfo
+	var _MonitorService_CreateAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_CreateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateAlert", srv)
-		_AlertService_CreateAlert_Handler = h.Interceptor(_AlertService_CreateAlert_Handler)
+		_MonitorService_CreateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateAlert", srv)
+		_MonitorService_CreateAlert_Handler = h.Interceptor(_MonitorService_CreateAlert_Handler)
 	}
 
-	_AlertService_UpdateAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateAlert(ctx, req.(*UpdateAlertRequest))
 	}
-	var _AlertService_UpdateAlert_info transport.ServiceInfo
+	var _MonitorService_UpdateAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateAlert", srv)
-		_AlertService_UpdateAlert_Handler = h.Interceptor(_AlertService_UpdateAlert_Handler)
+		_MonitorService_UpdateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateAlert", srv)
+		_MonitorService_UpdateAlert_Handler = h.Interceptor(_MonitorService_UpdateAlert_Handler)
 	}
 
-	_AlertService_UpdateAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateAlertEnable(ctx, req.(*UpdateAlertEnableRequest))
 	}
-	var _AlertService_UpdateAlertEnable_info transport.ServiceInfo
+	var _MonitorService_UpdateAlertEnable_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateAlertEnable", srv)
-		_AlertService_UpdateAlertEnable_Handler = h.Interceptor(_AlertService_UpdateAlertEnable_Handler)
+		_MonitorService_UpdateAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateAlertEnable", srv)
+		_MonitorService_UpdateAlertEnable_Handler = h.Interceptor(_MonitorService_UpdateAlertEnable_Handler)
 	}
 
-	_AlertService_DeleteAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_DeleteAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.DeleteAlert(ctx, req.(*DeleteAlertRequest))
 	}
-	var _AlertService_DeleteAlert_info transport.ServiceInfo
+	var _MonitorService_DeleteAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_DeleteAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteAlert", srv)
-		_AlertService_DeleteAlert_Handler = h.Interceptor(_AlertService_DeleteAlert_Handler)
+		_MonitorService_DeleteAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteAlert", srv)
+		_MonitorService_DeleteAlert_Handler = h.Interceptor(_MonitorService_DeleteAlert_Handler)
 	}
 
-	_AlertService_QueryOrgAlertRule_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgAlertRule_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgAlertRule(ctx, req.(*QueryOrgAlertRuleRequest))
 	}
-	var _AlertService_QueryOrgAlertRule_info transport.ServiceInfo
+	var _MonitorService_QueryOrgAlertRule_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlertRule", srv)
-		_AlertService_QueryOrgAlertRule_Handler = h.Interceptor(_AlertService_QueryOrgAlertRule_Handler)
+		_MonitorService_QueryOrgAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlertRule", srv)
+		_MonitorService_QueryOrgAlertRule_Handler = h.Interceptor(_MonitorService_QueryOrgAlertRule_Handler)
 	}
 
-	_AlertService_QueryOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgAlert(ctx, req.(*QueryOrgAlertRequest))
 	}
-	var _AlertService_QueryOrgAlert_info transport.ServiceInfo
+	var _MonitorService_QueryOrgAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlert", srv)
-		_AlertService_QueryOrgAlert_Handler = h.Interceptor(_AlertService_QueryOrgAlert_Handler)
+		_MonitorService_QueryOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlert", srv)
+		_MonitorService_QueryOrgAlert_Handler = h.Interceptor(_MonitorService_QueryOrgAlert_Handler)
 	}
 
-	_AlertService_GetOrgAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetOrgAlertDetail_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetOrgAlertDetail(ctx, req.(*GetOrgAlertDetailRequest))
 	}
-	var _AlertService_GetOrgAlertDetail_info transport.ServiceInfo
+	var _MonitorService_GetOrgAlertDetail_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetOrgAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgAlertDetail", srv)
-		_AlertService_GetOrgAlertDetail_Handler = h.Interceptor(_AlertService_GetOrgAlertDetail_Handler)
+		_MonitorService_GetOrgAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgAlertDetail", srv)
+		_MonitorService_GetOrgAlertDetail_Handler = h.Interceptor(_MonitorService_GetOrgAlertDetail_Handler)
 	}
 
-	_AlertService_CreateOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_CreateOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.CreateOrgAlert(ctx, req.(*CreateOrgAlertRequest))
 	}
-	var _AlertService_CreateOrgAlert_info transport.ServiceInfo
+	var _MonitorService_CreateOrgAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_CreateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateOrgAlert", srv)
-		_AlertService_CreateOrgAlert_Handler = h.Interceptor(_AlertService_CreateOrgAlert_Handler)
+		_MonitorService_CreateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateOrgAlert", srv)
+		_MonitorService_CreateOrgAlert_Handler = h.Interceptor(_MonitorService_CreateOrgAlert_Handler)
 	}
 
-	_AlertService_UpdateOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateOrgAlert(ctx, req.(*UpdateOrgAlertRequest))
 	}
-	var _AlertService_UpdateOrgAlert_info transport.ServiceInfo
+	var _MonitorService_UpdateOrgAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgAlert", srv)
-		_AlertService_UpdateOrgAlert_Handler = h.Interceptor(_AlertService_UpdateOrgAlert_Handler)
+		_MonitorService_UpdateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgAlert", srv)
+		_MonitorService_UpdateOrgAlert_Handler = h.Interceptor(_MonitorService_UpdateOrgAlert_Handler)
 	}
 
-	_AlertService_UpdateOrgAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateOrgAlertEnable_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateOrgAlertEnable(ctx, req.(*UpdateOrgAlertEnableRequest))
 	}
-	var _AlertService_UpdateOrgAlertEnable_info transport.ServiceInfo
+	var _MonitorService_UpdateOrgAlertEnable_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateOrgAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgAlertEnable", srv)
-		_AlertService_UpdateOrgAlertEnable_Handler = h.Interceptor(_AlertService_UpdateOrgAlertEnable_Handler)
+		_MonitorService_UpdateOrgAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgAlertEnable", srv)
+		_MonitorService_UpdateOrgAlertEnable_Handler = h.Interceptor(_MonitorService_UpdateOrgAlertEnable_Handler)
 	}
 
-	_AlertService_DeleteOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_DeleteOrgAlert_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.DeleteOrgAlert(ctx, req.(*DeleteOrgAlertRequest))
 	}
-	var _AlertService_DeleteOrgAlert_info transport.ServiceInfo
+	var _MonitorService_DeleteOrgAlert_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_DeleteOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteOrgAlert", srv)
-		_AlertService_DeleteOrgAlert_Handler = h.Interceptor(_AlertService_DeleteOrgAlert_Handler)
+		_MonitorService_DeleteOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteOrgAlert", srv)
+		_MonitorService_DeleteOrgAlert_Handler = h.Interceptor(_MonitorService_DeleteOrgAlert_Handler)
 	}
 
-	_AlertService_GetAlertRecordAttr_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetAlertRecordAttr_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetAlertRecordAttr(ctx, req.(*GetAlertRecordAttrRequest))
 	}
-	var _AlertService_GetAlertRecordAttr_info transport.ServiceInfo
+	var _MonitorService_GetAlertRecordAttr_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlertRecordAttr", srv)
-		_AlertService_GetAlertRecordAttr_Handler = h.Interceptor(_AlertService_GetAlertRecordAttr_Handler)
+		_MonitorService_GetAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlertRecordAttr", srv)
+		_MonitorService_GetAlertRecordAttr_Handler = h.Interceptor(_MonitorService_GetAlertRecordAttr_Handler)
 	}
 
-	_AlertService_QueryAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryAlertRecord(ctx, req.(*QueryAlertRecordRequest))
 	}
-	var _AlertService_QueryAlertRecord_info transport.ServiceInfo
+	var _MonitorService_QueryAlertRecord_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlertRecord", srv)
-		_AlertService_QueryAlertRecord_Handler = h.Interceptor(_AlertService_QueryAlertRecord_Handler)
+		_MonitorService_QueryAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlertRecord", srv)
+		_MonitorService_QueryAlertRecord_Handler = h.Interceptor(_MonitorService_QueryAlertRecord_Handler)
 	}
 
-	_AlertService_GetAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetAlertRecord(ctx, req.(*GetAlertRecordRequest))
 	}
-	var _AlertService_GetAlertRecord_info transport.ServiceInfo
+	var _MonitorService_GetAlertRecord_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlertRecord", srv)
-		_AlertService_GetAlertRecord_Handler = h.Interceptor(_AlertService_GetAlertRecord_Handler)
+		_MonitorService_GetAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlertRecord", srv)
+		_MonitorService_GetAlertRecord_Handler = h.Interceptor(_MonitorService_GetAlertRecord_Handler)
 	}
 
-	_AlertService_QueryAlertHistory_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryAlertHistory_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryAlertHistory(ctx, req.(*QueryAlertHistoryRequest))
 	}
-	var _AlertService_QueryAlertHistory_info transport.ServiceInfo
+	var _MonitorService_QueryAlertHistory_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlertHistory", srv)
-		_AlertService_QueryAlertHistory_Handler = h.Interceptor(_AlertService_QueryAlertHistory_Handler)
+		_MonitorService_QueryAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlertHistory", srv)
+		_MonitorService_QueryAlertHistory_Handler = h.Interceptor(_MonitorService_QueryAlertHistory_Handler)
 	}
 
-	_AlertService_CreateAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_CreateAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.CreateAlertIssue(ctx, req.(*CreateAlertIssueRequest))
 	}
-	var _AlertService_CreateAlertIssue_info transport.ServiceInfo
+	var _MonitorService_CreateAlertIssue_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_CreateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateAlertIssue", srv)
-		_AlertService_CreateAlertIssue_Handler = h.Interceptor(_AlertService_CreateAlertIssue_Handler)
+		_MonitorService_CreateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateAlertIssue", srv)
+		_MonitorService_CreateAlertIssue_Handler = h.Interceptor(_MonitorService_CreateAlertIssue_Handler)
 	}
 
-	_AlertService_UpdateAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateAlertIssue(ctx, req.(*UpdateAlertIssueRequest))
 	}
-	var _AlertService_UpdateAlertIssue_info transport.ServiceInfo
+	var _MonitorService_UpdateAlertIssue_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateAlertIssue", srv)
-		_AlertService_UpdateAlertIssue_Handler = h.Interceptor(_AlertService_UpdateAlertIssue_Handler)
+		_MonitorService_UpdateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateAlertIssue", srv)
+		_MonitorService_UpdateAlertIssue_Handler = h.Interceptor(_MonitorService_UpdateAlertIssue_Handler)
 	}
 
-	_AlertService_GetOrgAlertRecordAttr_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetOrgAlertRecordAttr_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetOrgAlertRecordAttr(ctx, req.(*GetOrgAlertRecordAttrRequest))
 	}
-	var _AlertService_GetOrgAlertRecordAttr_info transport.ServiceInfo
+	var _MonitorService_GetOrgAlertRecordAttr_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetOrgAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgAlertRecordAttr", srv)
-		_AlertService_GetOrgAlertRecordAttr_Handler = h.Interceptor(_AlertService_GetOrgAlertRecordAttr_Handler)
+		_MonitorService_GetOrgAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgAlertRecordAttr", srv)
+		_MonitorService_GetOrgAlertRecordAttr_Handler = h.Interceptor(_MonitorService_GetOrgAlertRecordAttr_Handler)
 	}
 
-	_AlertService_QueryOrgAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgAlertRecord(ctx, req.(*QueryOrgAlertRecordRequest))
 	}
-	var _AlertService_QueryOrgAlertRecord_info transport.ServiceInfo
+	var _MonitorService_QueryOrgAlertRecord_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlertRecord", srv)
-		_AlertService_QueryOrgAlertRecord_Handler = h.Interceptor(_AlertService_QueryOrgAlertRecord_Handler)
+		_MonitorService_QueryOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlertRecord", srv)
+		_MonitorService_QueryOrgAlertRecord_Handler = h.Interceptor(_MonitorService_QueryOrgAlertRecord_Handler)
 	}
 
-	_AlertService_QueryOrgHostsAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgHostsAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgHostsAlertRecord(ctx, req.(*QueryOrgHostsAlertRecordRequest))
 	}
-	var _AlertService_QueryOrgHostsAlertRecord_info transport.ServiceInfo
+	var _MonitorService_QueryOrgHostsAlertRecord_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgHostsAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgHostsAlertRecord", srv)
-		_AlertService_QueryOrgHostsAlertRecord_Handler = h.Interceptor(_AlertService_QueryOrgHostsAlertRecord_Handler)
+		_MonitorService_QueryOrgHostsAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgHostsAlertRecord", srv)
+		_MonitorService_QueryOrgHostsAlertRecord_Handler = h.Interceptor(_MonitorService_QueryOrgHostsAlertRecord_Handler)
 	}
 
-	_AlertService_GetOrgAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_GetOrgAlertRecord_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetOrgAlertRecord(ctx, req.(*GetOrgAlertRecordRequest))
 	}
-	var _AlertService_GetOrgAlertRecord_info transport.ServiceInfo
+	var _MonitorService_GetOrgAlertRecord_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_GetOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgAlertRecord", srv)
-		_AlertService_GetOrgAlertRecord_Handler = h.Interceptor(_AlertService_GetOrgAlertRecord_Handler)
+		_MonitorService_GetOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgAlertRecord", srv)
+		_MonitorService_GetOrgAlertRecord_Handler = h.Interceptor(_MonitorService_GetOrgAlertRecord_Handler)
 	}
 
-	_AlertService_QueryOrgAlertHistory_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_QueryOrgAlertHistory_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.QueryOrgAlertHistory(ctx, req.(*QueryOrgAlertHistoryRequest))
 	}
-	var _AlertService_QueryOrgAlertHistory_info transport.ServiceInfo
+	var _MonitorService_QueryOrgAlertHistory_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_QueryOrgAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlertHistory", srv)
-		_AlertService_QueryOrgAlertHistory_Handler = h.Interceptor(_AlertService_QueryOrgAlertHistory_Handler)
+		_MonitorService_QueryOrgAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlertHistory", srv)
+		_MonitorService_QueryOrgAlertHistory_Handler = h.Interceptor(_MonitorService_QueryOrgAlertHistory_Handler)
 	}
 
-	_AlertService_CreateOrgAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_CreateOrgAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.CreateOrgAlertIssue(ctx, req.(*CreateOrgAlertIssueRequest))
 	}
-	var _AlertService_CreateOrgAlertIssue_info transport.ServiceInfo
+	var _MonitorService_CreateOrgAlertIssue_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_CreateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateOrgAlertIssue", srv)
-		_AlertService_CreateOrgAlertIssue_Handler = h.Interceptor(_AlertService_CreateOrgAlertIssue_Handler)
+		_MonitorService_CreateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateOrgAlertIssue", srv)
+		_MonitorService_CreateOrgAlertIssue_Handler = h.Interceptor(_MonitorService_CreateOrgAlertIssue_Handler)
 	}
 
-	_AlertService_UpdateOrgAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+	_MonitorService_UpdateOrgAlertIssue_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.UpdateOrgAlertIssue(ctx, req.(*UpdateOrgAlertIssueRequest))
 	}
-	var _AlertService_UpdateOrgAlertIssue_info transport.ServiceInfo
+	var _MonitorService_UpdateOrgAlertIssue_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AlertService_UpdateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgAlertIssue", srv)
-		_AlertService_UpdateOrgAlertIssue_Handler = h.Interceptor(_AlertService_UpdateOrgAlertIssue_Handler)
+		_MonitorService_UpdateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgAlertIssue", srv)
+		_MonitorService_UpdateOrgAlertIssue_Handler = h.Interceptor(_MonitorService_UpdateOrgAlertIssue_Handler)
 	}
 
-	var serviceDesc = _AlertService_serviceDesc
+	var serviceDesc = _MonitorService_serviceDesc
 	serviceDesc.Methods = []grpc.MethodDesc{
 		{
 			MethodName: "QueryCustomizeMetric",
@@ -1150,19 +1150,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryCustomizeMetric(ctx, in)
+					return srv.(MonitorServiceServer).QueryCustomizeMetric(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryCustomizeMetric_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryCustomizeMetric_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryCustomizeMetric_Handler(ctx, in)
+					return _MonitorService_QueryCustomizeMetric_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryCustomizeMetric",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryCustomizeMetric",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryCustomizeMetric_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryCustomizeMetric_Handler)
 			},
 		},
 		{
@@ -1173,19 +1173,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryCustomizeNotifyTarget(ctx, in)
+					return srv.(MonitorServiceServer).QueryCustomizeNotifyTarget(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryCustomizeNotifyTarget_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryCustomizeNotifyTarget_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryCustomizeNotifyTarget_Handler(ctx, in)
+					return _MonitorService_QueryCustomizeNotifyTarget_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryCustomizeNotifyTarget",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryCustomizeNotifyTarget",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryCustomizeNotifyTarget_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryCustomizeNotifyTarget_Handler)
 			},
 		},
 		{
@@ -1196,19 +1196,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgCustomizeNotifyTarget(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgCustomizeNotifyTarget(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgCustomizeNotifyTarget_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgCustomizeNotifyTarget_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgCustomizeNotifyTarget_Handler(ctx, in)
+					return _MonitorService_QueryOrgCustomizeNotifyTarget_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgCustomizeNotifyTarget",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgCustomizeNotifyTarget",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgCustomizeNotifyTarget_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgCustomizeNotifyTarget_Handler)
 			},
 		},
 		{
@@ -1219,19 +1219,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).QueryCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_QueryCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1242,19 +1242,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).GetCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_GetCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1265,19 +1265,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetCustomizeAlertDetail(ctx, in)
+					return srv.(MonitorServiceServer).GetCustomizeAlertDetail(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetCustomizeAlertDetail_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetCustomizeAlertDetail_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetCustomizeAlertDetail_Handler(ctx, in)
+					return _MonitorService_GetCustomizeAlertDetail_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetCustomizeAlertDetail",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetCustomizeAlertDetail",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetCustomizeAlertDetail_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetCustomizeAlertDetail_Handler)
 			},
 		},
 		{
@@ -1288,19 +1288,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).CreateCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).CreateCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_CreateCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_CreateCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_CreateCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_CreateCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/CreateCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/CreateCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_CreateCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_CreateCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1311,19 +1311,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).UpdateCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_UpdateCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1334,19 +1334,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateCustomizeAlertEnable(ctx, in)
+					return srv.(MonitorServiceServer).UpdateCustomizeAlertEnable(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateCustomizeAlertEnable_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateCustomizeAlertEnable_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateCustomizeAlertEnable_Handler(ctx, in)
+					return _MonitorService_UpdateCustomizeAlertEnable_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateCustomizeAlertEnable",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateCustomizeAlertEnable",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateCustomizeAlertEnable_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateCustomizeAlertEnable_Handler)
 			},
 		},
 		{
@@ -1357,19 +1357,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).DeleteCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).DeleteCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_DeleteCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_DeleteCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_DeleteCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_DeleteCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/DeleteCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/DeleteCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_DeleteCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_DeleteCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1380,19 +1380,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgCustomizeMetric(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgCustomizeMetric(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgCustomizeMetric_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgCustomizeMetric_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgCustomizeMetric_Handler(ctx, in)
+					return _MonitorService_QueryOrgCustomizeMetric_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgCustomizeMetric",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgCustomizeMetric",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgCustomizeMetric_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgCustomizeMetric_Handler)
 			},
 		},
 		{
@@ -1403,19 +1403,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgCustomizeAlerts(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgCustomizeAlerts(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgCustomizeAlerts_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgCustomizeAlerts_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgCustomizeAlerts_Handler(ctx, in)
+					return _MonitorService_QueryOrgCustomizeAlerts_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgCustomizeAlerts",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgCustomizeAlerts",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgCustomizeAlerts_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgCustomizeAlerts_Handler)
 			},
 		},
 		{
@@ -1426,19 +1426,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetOrgCustomizeAlertDetail(ctx, in)
+					return srv.(MonitorServiceServer).GetOrgCustomizeAlertDetail(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetOrgCustomizeAlertDetail_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetOrgCustomizeAlertDetail_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetOrgCustomizeAlertDetail_Handler(ctx, in)
+					return _MonitorService_GetOrgCustomizeAlertDetail_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetOrgCustomizeAlertDetail",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetOrgCustomizeAlertDetail",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetOrgCustomizeAlertDetail_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetOrgCustomizeAlertDetail_Handler)
 			},
 		},
 		{
@@ -1449,19 +1449,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).CreateOrgCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).CreateOrgCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_CreateOrgCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_CreateOrgCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_CreateOrgCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_CreateOrgCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/CreateOrgCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/CreateOrgCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_CreateOrgCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_CreateOrgCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1472,19 +1472,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateOrgCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).UpdateOrgCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateOrgCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateOrgCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateOrgCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_UpdateOrgCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateOrgCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateOrgCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateOrgCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateOrgCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1495,19 +1495,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateOrgCustomizeAlertEnable(ctx, in)
+					return srv.(MonitorServiceServer).UpdateOrgCustomizeAlertEnable(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateOrgCustomizeAlertEnable_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateOrgCustomizeAlertEnable_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateOrgCustomizeAlertEnable_Handler(ctx, in)
+					return _MonitorService_UpdateOrgCustomizeAlertEnable_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateOrgCustomizeAlertEnable",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateOrgCustomizeAlertEnable",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateOrgCustomizeAlertEnable_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateOrgCustomizeAlertEnable_Handler)
 			},
 		},
 		{
@@ -1518,19 +1518,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).DeleteOrgCustomizeAlert(ctx, in)
+					return srv.(MonitorServiceServer).DeleteOrgCustomizeAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_DeleteOrgCustomizeAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_DeleteOrgCustomizeAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_DeleteOrgCustomizeAlert_Handler(ctx, in)
+					return _MonitorService_DeleteOrgCustomizeAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/DeleteOrgCustomizeAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/DeleteOrgCustomizeAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_DeleteOrgCustomizeAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_DeleteOrgCustomizeAlert_Handler)
 			},
 		},
 		{
@@ -1541,19 +1541,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryDashboardByAlert(ctx, in)
+					return srv.(MonitorServiceServer).QueryDashboardByAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryDashboardByAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryDashboardByAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryDashboardByAlert_Handler(ctx, in)
+					return _MonitorService_QueryDashboardByAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryDashboardByAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryDashboardByAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryDashboardByAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryDashboardByAlert_Handler)
 			},
 		},
 		{
@@ -1564,19 +1564,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgDashboardByAlert(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgDashboardByAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgDashboardByAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgDashboardByAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgDashboardByAlert_Handler(ctx, in)
+					return _MonitorService_QueryOrgDashboardByAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgDashboardByAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgDashboardByAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgDashboardByAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgDashboardByAlert_Handler)
 			},
 		},
 		{
@@ -1587,19 +1587,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryAlertRule(ctx, in)
+					return srv.(MonitorServiceServer).QueryAlertRule(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryAlertRule_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryAlertRule_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryAlertRule_Handler(ctx, in)
+					return _MonitorService_QueryAlertRule_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryAlertRule",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryAlertRule",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryAlertRule_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryAlertRule_Handler)
 			},
 		},
 		{
@@ -1610,19 +1610,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryAlert(ctx, in)
+					return srv.(MonitorServiceServer).QueryAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryAlert_Handler(ctx, in)
+					return _MonitorService_QueryAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryAlert_Handler)
 			},
 		},
 		{
@@ -1633,19 +1633,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetAlert(ctx, in)
+					return srv.(MonitorServiceServer).GetAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetAlert_Handler(ctx, in)
+					return _MonitorService_GetAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetAlert_Handler)
 			},
 		},
 		{
@@ -1656,19 +1656,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetAlertDetail(ctx, in)
+					return srv.(MonitorServiceServer).GetAlertDetail(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetAlertDetail_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetAlertDetail_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetAlertDetail_Handler(ctx, in)
+					return _MonitorService_GetAlertDetail_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetAlertDetail",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetAlertDetail",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetAlertDetail_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetAlertDetail_Handler)
 			},
 		},
 		{
@@ -1679,19 +1679,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).CreateAlert(ctx, in)
+					return srv.(MonitorServiceServer).CreateAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_CreateAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_CreateAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_CreateAlert_Handler(ctx, in)
+					return _MonitorService_CreateAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/CreateAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/CreateAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_CreateAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_CreateAlert_Handler)
 			},
 		},
 		{
@@ -1702,19 +1702,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateAlert(ctx, in)
+					return srv.(MonitorServiceServer).UpdateAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateAlert_Handler(ctx, in)
+					return _MonitorService_UpdateAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateAlert_Handler)
 			},
 		},
 		{
@@ -1725,19 +1725,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateAlertEnable(ctx, in)
+					return srv.(MonitorServiceServer).UpdateAlertEnable(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateAlertEnable_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateAlertEnable_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateAlertEnable_Handler(ctx, in)
+					return _MonitorService_UpdateAlertEnable_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateAlertEnable",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateAlertEnable",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateAlertEnable_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateAlertEnable_Handler)
 			},
 		},
 		{
@@ -1748,19 +1748,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).DeleteAlert(ctx, in)
+					return srv.(MonitorServiceServer).DeleteAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_DeleteAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_DeleteAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_DeleteAlert_Handler(ctx, in)
+					return _MonitorService_DeleteAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/DeleteAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/DeleteAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_DeleteAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_DeleteAlert_Handler)
 			},
 		},
 		{
@@ -1771,19 +1771,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgAlertRule(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgAlertRule(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgAlertRule_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgAlertRule_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgAlertRule_Handler(ctx, in)
+					return _MonitorService_QueryOrgAlertRule_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgAlertRule",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgAlertRule",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgAlertRule_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgAlertRule_Handler)
 			},
 		},
 		{
@@ -1794,19 +1794,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgAlert(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgAlert_Handler(ctx, in)
+					return _MonitorService_QueryOrgAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgAlert_Handler)
 			},
 		},
 		{
@@ -1817,19 +1817,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetOrgAlertDetail(ctx, in)
+					return srv.(MonitorServiceServer).GetOrgAlertDetail(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetOrgAlertDetail_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetOrgAlertDetail_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetOrgAlertDetail_Handler(ctx, in)
+					return _MonitorService_GetOrgAlertDetail_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetOrgAlertDetail",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetOrgAlertDetail",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetOrgAlertDetail_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetOrgAlertDetail_Handler)
 			},
 		},
 		{
@@ -1840,19 +1840,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).CreateOrgAlert(ctx, in)
+					return srv.(MonitorServiceServer).CreateOrgAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_CreateOrgAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_CreateOrgAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_CreateOrgAlert_Handler(ctx, in)
+					return _MonitorService_CreateOrgAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/CreateOrgAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/CreateOrgAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_CreateOrgAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_CreateOrgAlert_Handler)
 			},
 		},
 		{
@@ -1863,19 +1863,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateOrgAlert(ctx, in)
+					return srv.(MonitorServiceServer).UpdateOrgAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateOrgAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateOrgAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateOrgAlert_Handler(ctx, in)
+					return _MonitorService_UpdateOrgAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateOrgAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateOrgAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateOrgAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateOrgAlert_Handler)
 			},
 		},
 		{
@@ -1886,19 +1886,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateOrgAlertEnable(ctx, in)
+					return srv.(MonitorServiceServer).UpdateOrgAlertEnable(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateOrgAlertEnable_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateOrgAlertEnable_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateOrgAlertEnable_Handler(ctx, in)
+					return _MonitorService_UpdateOrgAlertEnable_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateOrgAlertEnable",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateOrgAlertEnable",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateOrgAlertEnable_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateOrgAlertEnable_Handler)
 			},
 		},
 		{
@@ -1909,19 +1909,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).DeleteOrgAlert(ctx, in)
+					return srv.(MonitorServiceServer).DeleteOrgAlert(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_DeleteOrgAlert_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_DeleteOrgAlert_info)
 				}
 				if interceptor == nil {
-					return _AlertService_DeleteOrgAlert_Handler(ctx, in)
+					return _MonitorService_DeleteOrgAlert_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/DeleteOrgAlert",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/DeleteOrgAlert",
 				}
-				return interceptor(ctx, in, info, _AlertService_DeleteOrgAlert_Handler)
+				return interceptor(ctx, in, info, _MonitorService_DeleteOrgAlert_Handler)
 			},
 		},
 		{
@@ -1932,19 +1932,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetAlertRecordAttr(ctx, in)
+					return srv.(MonitorServiceServer).GetAlertRecordAttr(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetAlertRecordAttr_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetAlertRecordAttr_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetAlertRecordAttr_Handler(ctx, in)
+					return _MonitorService_GetAlertRecordAttr_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetAlertRecordAttr",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetAlertRecordAttr",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetAlertRecordAttr_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetAlertRecordAttr_Handler)
 			},
 		},
 		{
@@ -1955,19 +1955,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryAlertRecord(ctx, in)
+					return srv.(MonitorServiceServer).QueryAlertRecord(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryAlertRecord_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryAlertRecord_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryAlertRecord_Handler(ctx, in)
+					return _MonitorService_QueryAlertRecord_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryAlertRecord",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryAlertRecord",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryAlertRecord_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryAlertRecord_Handler)
 			},
 		},
 		{
@@ -1978,19 +1978,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetAlertRecord(ctx, in)
+					return srv.(MonitorServiceServer).GetAlertRecord(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetAlertRecord_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetAlertRecord_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetAlertRecord_Handler(ctx, in)
+					return _MonitorService_GetAlertRecord_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetAlertRecord",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetAlertRecord",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetAlertRecord_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetAlertRecord_Handler)
 			},
 		},
 		{
@@ -2001,19 +2001,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryAlertHistory(ctx, in)
+					return srv.(MonitorServiceServer).QueryAlertHistory(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryAlertHistory_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryAlertHistory_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryAlertHistory_Handler(ctx, in)
+					return _MonitorService_QueryAlertHistory_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryAlertHistory",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryAlertHistory",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryAlertHistory_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryAlertHistory_Handler)
 			},
 		},
 		{
@@ -2024,19 +2024,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).CreateAlertIssue(ctx, in)
+					return srv.(MonitorServiceServer).CreateAlertIssue(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_CreateAlertIssue_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_CreateAlertIssue_info)
 				}
 				if interceptor == nil {
-					return _AlertService_CreateAlertIssue_Handler(ctx, in)
+					return _MonitorService_CreateAlertIssue_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/CreateAlertIssue",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/CreateAlertIssue",
 				}
-				return interceptor(ctx, in, info, _AlertService_CreateAlertIssue_Handler)
+				return interceptor(ctx, in, info, _MonitorService_CreateAlertIssue_Handler)
 			},
 		},
 		{
@@ -2047,19 +2047,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateAlertIssue(ctx, in)
+					return srv.(MonitorServiceServer).UpdateAlertIssue(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateAlertIssue_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateAlertIssue_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateAlertIssue_Handler(ctx, in)
+					return _MonitorService_UpdateAlertIssue_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateAlertIssue",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateAlertIssue",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateAlertIssue_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateAlertIssue_Handler)
 			},
 		},
 		{
@@ -2070,19 +2070,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetOrgAlertRecordAttr(ctx, in)
+					return srv.(MonitorServiceServer).GetOrgAlertRecordAttr(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetOrgAlertRecordAttr_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetOrgAlertRecordAttr_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetOrgAlertRecordAttr_Handler(ctx, in)
+					return _MonitorService_GetOrgAlertRecordAttr_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetOrgAlertRecordAttr",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetOrgAlertRecordAttr",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetOrgAlertRecordAttr_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetOrgAlertRecordAttr_Handler)
 			},
 		},
 		{
@@ -2093,19 +2093,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgAlertRecord(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgAlertRecord(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgAlertRecord_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgAlertRecord_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgAlertRecord_Handler(ctx, in)
+					return _MonitorService_QueryOrgAlertRecord_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgAlertRecord",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgAlertRecord",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgAlertRecord_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgAlertRecord_Handler)
 			},
 		},
 		{
@@ -2116,19 +2116,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgHostsAlertRecord(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgHostsAlertRecord(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgHostsAlertRecord_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgHostsAlertRecord_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgHostsAlertRecord_Handler(ctx, in)
+					return _MonitorService_QueryOrgHostsAlertRecord_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgHostsAlertRecord",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgHostsAlertRecord",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgHostsAlertRecord_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgHostsAlertRecord_Handler)
 			},
 		},
 		{
@@ -2139,19 +2139,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).GetOrgAlertRecord(ctx, in)
+					return srv.(MonitorServiceServer).GetOrgAlertRecord(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_GetOrgAlertRecord_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_GetOrgAlertRecord_info)
 				}
 				if interceptor == nil {
-					return _AlertService_GetOrgAlertRecord_Handler(ctx, in)
+					return _MonitorService_GetOrgAlertRecord_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/GetOrgAlertRecord",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/GetOrgAlertRecord",
 				}
-				return interceptor(ctx, in, info, _AlertService_GetOrgAlertRecord_Handler)
+				return interceptor(ctx, in, info, _MonitorService_GetOrgAlertRecord_Handler)
 			},
 		},
 		{
@@ -2162,19 +2162,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).QueryOrgAlertHistory(ctx, in)
+					return srv.(MonitorServiceServer).QueryOrgAlertHistory(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_QueryOrgAlertHistory_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_QueryOrgAlertHistory_info)
 				}
 				if interceptor == nil {
-					return _AlertService_QueryOrgAlertHistory_Handler(ctx, in)
+					return _MonitorService_QueryOrgAlertHistory_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/QueryOrgAlertHistory",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/QueryOrgAlertHistory",
 				}
-				return interceptor(ctx, in, info, _AlertService_QueryOrgAlertHistory_Handler)
+				return interceptor(ctx, in, info, _MonitorService_QueryOrgAlertHistory_Handler)
 			},
 		},
 		{
@@ -2185,19 +2185,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).CreateOrgAlertIssue(ctx, in)
+					return srv.(MonitorServiceServer).CreateOrgAlertIssue(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_CreateOrgAlertIssue_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_CreateOrgAlertIssue_info)
 				}
 				if interceptor == nil {
-					return _AlertService_CreateOrgAlertIssue_Handler(ctx, in)
+					return _MonitorService_CreateOrgAlertIssue_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/CreateOrgAlertIssue",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/CreateOrgAlertIssue",
 				}
-				return interceptor(ctx, in, info, _AlertService_CreateOrgAlertIssue_Handler)
+				return interceptor(ctx, in, info, _MonitorService_CreateOrgAlertIssue_Handler)
 			},
 		},
 		{
@@ -2208,19 +2208,19 @@ func _get_AlertService_serviceDesc(srv AlertServiceServer, opts ...grpc1.HandleO
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AlertServiceServer).UpdateOrgAlertIssue(ctx, in)
+					return srv.(MonitorServiceServer).UpdateOrgAlertIssue(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AlertService_UpdateOrgAlertIssue_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _MonitorService_UpdateOrgAlertIssue_info)
 				}
 				if interceptor == nil {
-					return _AlertService_UpdateOrgAlertIssue_Handler(ctx, in)
+					return _MonitorService_UpdateOrgAlertIssue_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.alert.AlertService/UpdateOrgAlertIssue",
+					FullMethod: "/erda.core.monitor.alert.MonitorService/UpdateOrgAlertIssue",
 				}
-				return interceptor(ctx, in, info, _AlertService_UpdateOrgAlertIssue_Handler)
+				return interceptor(ctx, in, info, _MonitorService_UpdateOrgAlertIssue_Handler)
 			},
 		},
 	}

@@ -63,7 +63,7 @@ func (m *ListMetricNamesRequest) MarshalJSON() ([]byte, error) {
 // ListMetricNamesRequest implement json.Marshaler.
 func (m *ListMetricNamesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -79,7 +79,7 @@ func (m *ListMetricNamesResponse) MarshalJSON() ([]byte, error) {
 // ListMetricNamesResponse implement json.Marshaler.
 func (m *ListMetricNamesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -95,7 +95,7 @@ func (m *ListMetricMetaRequest) MarshalJSON() ([]byte, error) {
 // ListMetricMetaRequest implement json.Marshaler.
 func (m *ListMetricMetaRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -111,7 +111,7 @@ func (m *ListMetricMetaResponse) MarshalJSON() ([]byte, error) {
 // ListMetricMetaResponse implement json.Marshaler.
 func (m *ListMetricMetaResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -127,7 +127,7 @@ func (m *ListMetricGroupsRequest) MarshalJSON() ([]byte, error) {
 // ListMetricGroupsRequest implement json.Marshaler.
 func (m *ListMetricGroupsRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -143,7 +143,7 @@ func (m *ListMetricGroupsResponse) MarshalJSON() ([]byte, error) {
 // ListMetricGroupsResponse implement json.Marshaler.
 func (m *ListMetricGroupsResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -159,7 +159,7 @@ func (m *GetMetricGroupRequest) MarshalJSON() ([]byte, error) {
 // GetMetricGroupRequest implement json.Marshaler.
 func (m *GetMetricGroupRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -175,7 +175,7 @@ func (m *GetMetricGroupResponse) MarshalJSON() ([]byte, error) {
 // GetMetricGroupResponse implement json.Marshaler.
 func (m *GetMetricGroupResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -191,7 +191,7 @@ func (m *MetricGroup) MarshalJSON() ([]byte, error) {
 // MetricGroup implement json.Marshaler.
 func (m *MetricGroup) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -207,7 +207,7 @@ func (m *GroupMetricMeta) MarshalJSON() ([]byte, error) {
 // GroupMetricMeta implement json.Marshaler.
 func (m *GroupMetricMeta) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -223,7 +223,7 @@ func (m *MetricMeta) MarshalJSON() ([]byte, error) {
 // MetricMeta implement json.Marshaler.
 func (m *MetricMeta) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -239,7 +239,7 @@ func (m *NameDefine) MarshalJSON() ([]byte, error) {
 // NameDefine implement json.Marshaler.
 func (m *NameDefine) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -255,7 +255,7 @@ func (m *TagDefine) MarshalJSON() ([]byte, error) {
 // TagDefine implement json.Marshaler.
 func (m *TagDefine) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -271,7 +271,7 @@ func (m *FieldDefine) MarshalJSON() ([]byte, error) {
 // FieldDefine implement json.Marshaler.
 func (m *FieldDefine) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -287,7 +287,7 @@ func (m *ValueDefine) MarshalJSON() ([]byte, error) {
 // ValueDefine implement json.Marshaler.
 func (m *ValueDefine) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -303,7 +303,7 @@ func (m *Group) MarshalJSON() ([]byte, error) {
 // Group implement json.Marshaler.
 func (m *Group) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -319,7 +319,7 @@ func (m *MetaMode) MarshalJSON() ([]byte, error) {
 // MetaMode implement json.Marshaler.
 func (m *MetaMode) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -335,7 +335,7 @@ func (m *TypeDefine) MarshalJSON() ([]byte, error) {
 // TypeDefine implement json.Marshaler.
 func (m *TypeDefine) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -351,7 +351,7 @@ func (m *Aggregation) MarshalJSON() ([]byte, error) {
 // Aggregation implement json.Marshaler.
 func (m *Aggregation) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -367,6 +367,6 @@ func (m *Operation) MarshalJSON() ([]byte, error) {
 // Operation implement json.Marshaler.
 func (m *Operation) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

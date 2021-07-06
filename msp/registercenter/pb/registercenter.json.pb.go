@@ -125,7 +125,7 @@ func (m *ListInterfaceRequest) MarshalJSON() ([]byte, error) {
 // ListInterfaceRequest implement json.Marshaler.
 func (m *ListInterfaceRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -141,7 +141,7 @@ func (m *ListInterfaceResponse) MarshalJSON() ([]byte, error) {
 // ListInterfaceResponse implement json.Marshaler.
 func (m *ListInterfaceResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -157,7 +157,7 @@ func (m *GetHTTPServicesRequest) MarshalJSON() ([]byte, error) {
 // GetHTTPServicesRequest implement json.Marshaler.
 func (m *GetHTTPServicesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -173,7 +173,7 @@ func (m *GetHTTPServicesResponse) MarshalJSON() ([]byte, error) {
 // GetHTTPServicesResponse implement json.Marshaler.
 func (m *GetHTTPServicesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -189,7 +189,7 @@ func (m *EnableHTTPServiceRequest) MarshalJSON() ([]byte, error) {
 // EnableHTTPServiceRequest implement json.Marshaler.
 func (m *EnableHTTPServiceRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -205,7 +205,7 @@ func (m *EnableHTTPServiceResponse) MarshalJSON() ([]byte, error) {
 // EnableHTTPServiceResponse implement json.Marshaler.
 func (m *EnableHTTPServiceResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -221,7 +221,7 @@ func (m *EnableHTTPService) MarshalJSON() ([]byte, error) {
 // EnableHTTPService implement json.Marshaler.
 func (m *EnableHTTPService) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -237,7 +237,7 @@ func (m *GetRouteRuleRequest) MarshalJSON() ([]byte, error) {
 // GetRouteRuleRequest implement json.Marshaler.
 func (m *GetRouteRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -253,7 +253,7 @@ func (m *GetRouteRuleResponse) MarshalJSON() ([]byte, error) {
 // GetRouteRuleResponse implement json.Marshaler.
 func (m *GetRouteRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -269,7 +269,7 @@ func (m *CreateRouteRuleRequest) MarshalJSON() ([]byte, error) {
 // CreateRouteRuleRequest implement json.Marshaler.
 func (m *CreateRouteRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -285,7 +285,7 @@ func (m *CreateRouteRuleResponse) MarshalJSON() ([]byte, error) {
 // CreateRouteRuleResponse implement json.Marshaler.
 func (m *CreateRouteRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -301,7 +301,7 @@ func (m *DeleteRouteRuleRequest) MarshalJSON() ([]byte, error) {
 // DeleteRouteRuleRequest implement json.Marshaler.
 func (m *DeleteRouteRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -317,7 +317,7 @@ func (m *DeleteRouteRuleResponse) MarshalJSON() ([]byte, error) {
 // DeleteRouteRuleResponse implement json.Marshaler.
 func (m *DeleteRouteRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -333,7 +333,7 @@ func (m *CetHostRuleRequest) MarshalJSON() ([]byte, error) {
 // CetHostRuleRequest implement json.Marshaler.
 func (m *CetHostRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -349,7 +349,7 @@ func (m *CetHostRuleResponse) MarshalJSON() ([]byte, error) {
 // CetHostRuleResponse implement json.Marshaler.
 func (m *CetHostRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -365,7 +365,7 @@ func (m *CreateHostRuleRequest) MarshalJSON() ([]byte, error) {
 // CreateHostRuleRequest implement json.Marshaler.
 func (m *CreateHostRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -381,7 +381,7 @@ func (m *CreateHostRuleResponse) MarshalJSON() ([]byte, error) {
 // CreateHostRuleResponse implement json.Marshaler.
 func (m *CreateHostRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -397,7 +397,7 @@ func (m *DeleteHostRuleRequest) MarshalJSON() ([]byte, error) {
 // DeleteHostRuleRequest implement json.Marshaler.
 func (m *DeleteHostRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -413,7 +413,7 @@ func (m *DeleteHostRuleResponse) MarshalJSON() ([]byte, error) {
 // DeleteHostRuleResponse implement json.Marshaler.
 func (m *DeleteHostRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -429,7 +429,7 @@ func (m *GetHostRuntimeRuleRequest) MarshalJSON() ([]byte, error) {
 // GetHostRuntimeRuleRequest implement json.Marshaler.
 func (m *GetHostRuntimeRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -445,7 +445,7 @@ func (m *GetHostRuntimeRuleResponse) MarshalJSON() ([]byte, error) {
 // GetHostRuntimeRuleResponse implement json.Marshaler.
 func (m *GetHostRuntimeRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -461,7 +461,7 @@ func (m *CreateHostRuntimeRuleRequest) MarshalJSON() ([]byte, error) {
 // CreateHostRuntimeRuleRequest implement json.Marshaler.
 func (m *CreateHostRuntimeRuleRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -477,7 +477,7 @@ func (m *CreateHostRuntimeRuleResponse) MarshalJSON() ([]byte, error) {
 // CreateHostRuntimeRuleResponse implement json.Marshaler.
 func (m *CreateHostRuntimeRuleResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -493,7 +493,7 @@ func (m *GetAllHostRuntimeRulesRequest) MarshalJSON() ([]byte, error) {
 // GetAllHostRuntimeRulesRequest implement json.Marshaler.
 func (m *GetAllHostRuntimeRulesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -509,7 +509,7 @@ func (m *GetAllHostRuntimeRulesResponse) MarshalJSON() ([]byte, error) {
 // GetAllHostRuntimeRulesResponse implement json.Marshaler.
 func (m *GetAllHostRuntimeRulesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -525,7 +525,7 @@ func (m *GetDubboInterfaceTimeRequest) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceTimeRequest implement json.Marshaler.
 func (m *GetDubboInterfaceTimeRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -541,7 +541,7 @@ func (m *GetDubboInterfaceTimeResponse) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceTimeResponse implement json.Marshaler.
 func (m *GetDubboInterfaceTimeResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -557,7 +557,7 @@ func (m *DubboInterfaceTime) MarshalJSON() ([]byte, error) {
 // DubboInterfaceTime implement json.Marshaler.
 func (m *DubboInterfaceTime) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -573,7 +573,7 @@ func (m *GetDubboInterfaceQPSRequest) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceQPSRequest implement json.Marshaler.
 func (m *GetDubboInterfaceQPSRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -589,7 +589,7 @@ func (m *GetDubboInterfaceQPSResponse) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceQPSResponse implement json.Marshaler.
 func (m *GetDubboInterfaceQPSResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -605,7 +605,7 @@ func (m *GetDubboInterfaceFailedRequest) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceFailedRequest implement json.Marshaler.
 func (m *GetDubboInterfaceFailedRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -621,7 +621,7 @@ func (m *GetDubboInterfaceFailedResponse) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceFailedResponse implement json.Marshaler.
 func (m *GetDubboInterfaceFailedResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -637,7 +637,7 @@ func (m *GetDubboInterfaceAvgTimeRequest) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceAvgTimeRequest implement json.Marshaler.
 func (m *GetDubboInterfaceAvgTimeRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -653,7 +653,7 @@ func (m *GetDubboInterfaceAvgTimeResponse) MarshalJSON() ([]byte, error) {
 // GetDubboInterfaceAvgTimeResponse implement json.Marshaler.
 func (m *GetDubboInterfaceAvgTimeResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -669,7 +669,7 @@ func (m *Interface) MarshalJSON() ([]byte, error) {
 // Interface implement json.Marshaler.
 func (m *Interface) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -685,7 +685,7 @@ func (m *InterfaceOwner) MarshalJSON() ([]byte, error) {
 // InterfaceOwner implement json.Marshaler.
 func (m *InterfaceOwner) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -701,7 +701,7 @@ func (m *RequestRule) MarshalJSON() ([]byte, error) {
 // RequestRule implement json.Marshaler.
 func (m *RequestRule) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -717,7 +717,7 @@ func (m *HostRules) MarshalJSON() ([]byte, error) {
 // HostRules implement json.Marshaler.
 func (m *HostRules) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -733,7 +733,7 @@ func (m *HostRoute) MarshalJSON() ([]byte, error) {
 // HostRoute implement json.Marshaler.
 func (m *HostRoute) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -749,7 +749,7 @@ func (m *HostRuntimeRules) MarshalJSON() ([]byte, error) {
 // HostRuntimeRules implement json.Marshaler.
 func (m *HostRuntimeRules) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -765,7 +765,7 @@ func (m *HostRuntimeRule) MarshalJSON() ([]byte, error) {
 // HostRuntimeRule implement json.Marshaler.
 func (m *HostRuntimeRule) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -781,7 +781,7 @@ func (m *HostRuntimeInterfaces) MarshalJSON() ([]byte, error) {
 // HostRuntimeInterfaces implement json.Marshaler.
 func (m *HostRuntimeInterfaces) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -797,7 +797,7 @@ func (m *HTTPServices) MarshalJSON() ([]byte, error) {
 // HTTPServices implement json.Marshaler.
 func (m *HTTPServices) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -813,7 +813,7 @@ func (m *HTTPService) MarshalJSON() ([]byte, error) {
 // HTTPService implement json.Marshaler.
 func (m *HTTPService) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -829,7 +829,7 @@ func (m *HTTPServiceItem) MarshalJSON() ([]byte, error) {
 // HTTPServiceItem implement json.Marshaler.
 func (m *HTTPServiceItem) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -845,7 +845,7 @@ func (m *DubboInterface) MarshalJSON() ([]byte, error) {
 // DubboInterface implement json.Marshaler.
 func (m *DubboInterface) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -861,7 +861,7 @@ func (m *DubboInterfaceResult) MarshalJSON() ([]byte, error) {
 // DubboInterfaceResult implement json.Marshaler.
 func (m *DubboInterfaceResult) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -877,7 +877,7 @@ func (m *DubboMointorMap) MarshalJSON() ([]byte, error) {
 // DubboMointorMap implement json.Marshaler.
 func (m *DubboMointorMap) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -893,7 +893,7 @@ func (m *DubboMointor) MarshalJSON() ([]byte, error) {
 // DubboMointor implement json.Marshaler.
 func (m *DubboMointor) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -909,7 +909,7 @@ func (m *ServiceIpRequest) MarshalJSON() ([]byte, error) {
 // ServiceIpRequest implement json.Marshaler.
 func (m *ServiceIpRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -925,6 +925,6 @@ func (m *ServiceIpInfoResponse) MarshalJSON() ([]byte, error) {
 // ServiceIpInfoResponse implement json.Marshaler.
 func (m *ServiceIpInfoResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

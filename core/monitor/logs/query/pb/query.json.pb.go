@@ -37,7 +37,7 @@ func (m *LogItem) MarshalJSON() ([]byte, error) {
 // LogItem implement json.Marshaler.
 func (m *LogItem) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -53,7 +53,7 @@ func (m *GetLogRequest) MarshalJSON() ([]byte, error) {
 // GetLogRequest implement json.Marshaler.
 func (m *GetLogRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -69,7 +69,7 @@ func (m *GetLogByRuntimeRequest) MarshalJSON() ([]byte, error) {
 // GetLogByRuntimeRequest implement json.Marshaler.
 func (m *GetLogByRuntimeRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -85,7 +85,7 @@ func (m *GetLogByOrganizationRequest) MarshalJSON() ([]byte, error) {
 // GetLogByOrganizationRequest implement json.Marshaler.
 func (m *GetLogByOrganizationRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -101,7 +101,7 @@ func (m *GetLogResponse) MarshalJSON() ([]byte, error) {
 // GetLogResponse implement json.Marshaler.
 func (m *GetLogResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -117,7 +117,7 @@ func (m *GetLogByRuntimeResponse) MarshalJSON() ([]byte, error) {
 // GetLogByRuntimeResponse implement json.Marshaler.
 func (m *GetLogByRuntimeResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -133,6 +133,6 @@ func (m *GetLogByOrganizationResponse) MarshalJSON() ([]byte, error) {
 // GetLogByOrganizationResponse implement json.Marshaler.
 func (m *GetLogByOrganizationResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

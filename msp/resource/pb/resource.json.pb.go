@@ -39,7 +39,7 @@ func (m *CreateResourceRequest) MarshalJSON() ([]byte, error) {
 // CreateResourceRequest implement json.Marshaler.
 func (m *CreateResourceRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -55,7 +55,7 @@ func (m *CreateResourceResponse) MarshalJSON() ([]byte, error) {
 // CreateResourceResponse implement json.Marshaler.
 func (m *CreateResourceResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -71,7 +71,7 @@ func (m *ResourceCreateResult) MarshalJSON() ([]byte, error) {
 // ResourceCreateResult implement json.Marshaler.
 func (m *ResourceCreateResult) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -87,7 +87,7 @@ func (m *DeleteResourceRequest) MarshalJSON() ([]byte, error) {
 // DeleteResourceRequest implement json.Marshaler.
 func (m *DeleteResourceRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -103,7 +103,7 @@ func (m *DeleteResourceResponse) MarshalJSON() ([]byte, error) {
 // DeleteResourceResponse implement json.Marshaler.
 func (m *DeleteResourceResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -119,7 +119,7 @@ func (m *GetRuntimeRequest) MarshalJSON() ([]byte, error) {
 // GetRuntimeRequest implement json.Marshaler.
 func (m *GetRuntimeRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -135,7 +135,7 @@ func (m *GetRuntimeResponse) MarshalJSON() ([]byte, error) {
 // GetRuntimeResponse implement json.Marshaler.
 func (m *GetRuntimeResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -151,6 +151,6 @@ func (m *MonitorRuntime) MarshalJSON() ([]byte, error) {
 // MonitorRuntime implement json.Marshaler.
 func (m *MonitorRuntime) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

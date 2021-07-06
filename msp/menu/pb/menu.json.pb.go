@@ -35,7 +35,7 @@ func (m *GetMenuRequest) MarshalJSON() ([]byte, error) {
 // GetMenuRequest implement json.Marshaler.
 func (m *GetMenuRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -51,7 +51,7 @@ func (m *GetMenuResponse) MarshalJSON() ([]byte, error) {
 // GetMenuResponse implement json.Marshaler.
 func (m *GetMenuResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -67,7 +67,7 @@ func (m *MenuItem) MarshalJSON() ([]byte, error) {
 // MenuItem implement json.Marshaler.
 func (m *MenuItem) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -83,7 +83,7 @@ func (m *GetSettingRequest) MarshalJSON() ([]byte, error) {
 // GetSettingRequest implement json.Marshaler.
 func (m *GetSettingRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -99,7 +99,7 @@ func (m *GetSettingResponse) MarshalJSON() ([]byte, error) {
 // GetSettingResponse implement json.Marshaler.
 func (m *GetSettingResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -115,6 +115,6 @@ func (m *EngineSetting) MarshalJSON() ([]byte, error) {
 // EngineSetting implement json.Marshaler.
 func (m *EngineSetting) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

@@ -85,7 +85,7 @@ func (m *GetAllNotifyTemplatesRequest) MarshalJSON() ([]byte, error) {
 // GetAllNotifyTemplatesRequest implement json.Marshaler.
 func (m *GetAllNotifyTemplatesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -101,7 +101,7 @@ func (m *GetAllNotifyTemplatesResponse) MarshalJSON() ([]byte, error) {
 // GetAllNotifyTemplatesResponse implement json.Marshaler.
 func (m *GetAllNotifyTemplatesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -117,7 +117,7 @@ func (m *Model) MarshalJSON() ([]byte, error) {
 // Model implement json.Marshaler.
 func (m *Model) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -133,7 +133,7 @@ func (m *Metadata) MarshalJSON() ([]byte, error) {
 // Metadata implement json.Marshaler.
 func (m *Metadata) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -149,7 +149,7 @@ func (m *Behavior) MarshalJSON() ([]byte, error) {
 // Behavior implement json.Marshaler.
 func (m *Behavior) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -165,7 +165,7 @@ func (m *Templates) MarshalJSON() ([]byte, error) {
 // Templates implement json.Marshaler.
 func (m *Templates) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -181,7 +181,7 @@ func (m *Render) MarshalJSON() ([]byte, error) {
 // Render implement json.Marshaler.
 func (m *Render) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -197,7 +197,7 @@ func (m *GetNotifyTemplateRequest) MarshalJSON() ([]byte, error) {
 // GetNotifyTemplateRequest implement json.Marshaler.
 func (m *GetNotifyTemplateRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -213,7 +213,7 @@ func (m *GetNotifyTemplateResponse) MarshalJSON() ([]byte, error) {
 // GetNotifyTemplateResponse implement json.Marshaler.
 func (m *GetNotifyTemplateResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -229,7 +229,7 @@ func (m *GetNotifyRes) MarshalJSON() ([]byte, error) {
 // GetNotifyRes implement json.Marshaler.
 func (m *GetNotifyRes) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -245,7 +245,7 @@ func (m *CreateNotifyRequest) MarshalJSON() ([]byte, error) {
 // CreateNotifyRequest implement json.Marshaler.
 func (m *CreateNotifyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -261,7 +261,7 @@ func (m *CreateNotifyResponse) MarshalJSON() ([]byte, error) {
 // CreateNotifyResponse implement json.Marshaler.
 func (m *CreateNotifyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -277,7 +277,7 @@ func (m *DeleteNotifyRequest) MarshalJSON() ([]byte, error) {
 // DeleteNotifyRequest implement json.Marshaler.
 func (m *DeleteNotifyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -293,7 +293,7 @@ func (m *DeleteNotifyResponse) MarshalJSON() ([]byte, error) {
 // DeleteNotifyResponse implement json.Marshaler.
 func (m *DeleteNotifyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -309,7 +309,7 @@ func (m *UpdateNotifyRequest) MarshalJSON() ([]byte, error) {
 // UpdateNotifyRequest implement json.Marshaler.
 func (m *UpdateNotifyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -325,7 +325,7 @@ func (m *UpdateNotifyResponse) MarshalJSON() ([]byte, error) {
 // UpdateNotifyResponse implement json.Marshaler.
 func (m *UpdateNotifyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -341,7 +341,7 @@ func (m *GetUserNotifyListRequest) MarshalJSON() ([]byte, error) {
 // GetUserNotifyListRequest implement json.Marshaler.
 func (m *GetUserNotifyListRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -357,7 +357,7 @@ func (m *GetUserNotifyListResponse) MarshalJSON() ([]byte, error) {
 // GetUserNotifyListResponse implement json.Marshaler.
 func (m *GetUserNotifyListResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -373,7 +373,7 @@ func (m *NotifyRes) MarshalJSON() ([]byte, error) {
 // NotifyRes implement json.Marshaler.
 func (m *NotifyRes) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -389,7 +389,7 @@ func (m *NotifyTarget) MarshalJSON() ([]byte, error) {
 // NotifyTarget implement json.Marshaler.
 func (m *NotifyTarget) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -405,7 +405,7 @@ func (m *TargetValue) MarshalJSON() ([]byte, error) {
 // TargetValue implement json.Marshaler.
 func (m *TargetValue) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -421,7 +421,7 @@ func (m *NotifyEnableRequest) MarshalJSON() ([]byte, error) {
 // NotifyEnableRequest implement json.Marshaler.
 func (m *NotifyEnableRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -437,7 +437,7 @@ func (m *NotifyEnableResponse) MarshalJSON() ([]byte, error) {
 // NotifyEnableResponse implement json.Marshaler.
 func (m *NotifyEnableResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -453,7 +453,7 @@ func (m *CreateUserDefineNotifyTemplateRequest) MarshalJSON() ([]byte, error) {
 // CreateUserDefineNotifyTemplateRequest implement json.Marshaler.
 func (m *CreateUserDefineNotifyTemplateRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -469,7 +469,7 @@ func (m *CreateUserDefineNotifyTemplateResponse) MarshalJSON() ([]byte, error) {
 // CreateUserDefineNotifyTemplateResponse implement json.Marshaler.
 func (m *CreateUserDefineNotifyTemplateResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -485,7 +485,7 @@ func (m *GetNotifyDetailRequest) MarshalJSON() ([]byte, error) {
 // GetNotifyDetailRequest implement json.Marshaler.
 func (m *GetNotifyDetailRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -501,7 +501,7 @@ func (m *GetNotifyDetailResponse) MarshalJSON() ([]byte, error) {
 // GetNotifyDetailResponse implement json.Marshaler.
 func (m *GetNotifyDetailResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -517,7 +517,7 @@ func (m *NotifyDetailResponse) MarshalJSON() ([]byte, error) {
 // NotifyDetailResponse implement json.Marshaler.
 func (m *NotifyDetailResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -533,7 +533,7 @@ func (m *GetAllGroupsRequest) MarshalJSON() ([]byte, error) {
 // GetAllGroupsRequest implement json.Marshaler.
 func (m *GetAllGroupsRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -549,7 +549,7 @@ func (m *GetAllGroupsResponse) MarshalJSON() ([]byte, error) {
 // GetAllGroupsResponse implement json.Marshaler.
 func (m *GetAllGroupsResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -565,6 +565,6 @@ func (m *GetAllGroupData) MarshalJSON() ([]byte, error) {
 // GetAllGroupData implement json.Marshaler.
 func (m *GetAllGroupData) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

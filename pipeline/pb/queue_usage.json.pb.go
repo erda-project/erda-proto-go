@@ -27,7 +27,7 @@ func (m *QueueUsage) MarshalJSON() ([]byte, error) {
 // QueueUsage implement json.Marshaler.
 func (m *QueueUsage) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -43,6 +43,6 @@ func (m *QueueUsageItem) MarshalJSON() ([]byte, error) {
 // QueueUsageItem implement json.Marshaler.
 func (m *QueueUsageItem) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

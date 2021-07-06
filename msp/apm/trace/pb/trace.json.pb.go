@@ -35,7 +35,7 @@ func (m *GetSpansRequest) MarshalJSON() ([]byte, error) {
 // GetSpansRequest implement json.Marshaler.
 func (m *GetSpansRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -51,7 +51,7 @@ func (m *GetTracesRequest) MarshalJSON() ([]byte, error) {
 // GetTracesRequest implement json.Marshaler.
 func (m *GetTracesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -67,7 +67,7 @@ func (m *GetSpansResponse) MarshalJSON() ([]byte, error) {
 // GetSpansResponse implement json.Marshaler.
 func (m *GetSpansResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -83,7 +83,7 @@ func (m *GetTracesResponse) MarshalJSON() ([]byte, error) {
 // GetTracesResponse implement json.Marshaler.
 func (m *GetTracesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -99,7 +99,7 @@ func (m *Span) MarshalJSON() ([]byte, error) {
 // Span implement json.Marshaler.
 func (m *Span) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -115,6 +115,6 @@ func (m *Trace) MarshalJSON() ([]byte, error) {
 // Trace implement json.Marshaler.
 func (m *Trace) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

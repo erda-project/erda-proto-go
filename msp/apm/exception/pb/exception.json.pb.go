@@ -41,7 +41,7 @@ func (m *GetExceptionsRequest) MarshalJSON() ([]byte, error) {
 // GetExceptionsRequest implement json.Marshaler.
 func (m *GetExceptionsRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -57,7 +57,7 @@ func (m *GetExceptionsResponse) MarshalJSON() ([]byte, error) {
 // GetExceptionsResponse implement json.Marshaler.
 func (m *GetExceptionsResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -73,7 +73,7 @@ func (m *GetExceptionEventIdsRequest) MarshalJSON() ([]byte, error) {
 // GetExceptionEventIdsRequest implement json.Marshaler.
 func (m *GetExceptionEventIdsRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -89,7 +89,7 @@ func (m *GetExceptionEventIdsResponse) MarshalJSON() ([]byte, error) {
 // GetExceptionEventIdsResponse implement json.Marshaler.
 func (m *GetExceptionEventIdsResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -105,7 +105,7 @@ func (m *GetExceptionEventRequest) MarshalJSON() ([]byte, error) {
 // GetExceptionEventRequest implement json.Marshaler.
 func (m *GetExceptionEventRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -121,7 +121,7 @@ func (m *GetExceptionEventResponse) MarshalJSON() ([]byte, error) {
 // GetExceptionEventResponse implement json.Marshaler.
 func (m *GetExceptionEventResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -137,7 +137,7 @@ func (m *Exception) MarshalJSON() ([]byte, error) {
 // Exception implement json.Marshaler.
 func (m *Exception) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -153,7 +153,7 @@ func (m *Stacks) MarshalJSON() ([]byte, error) {
 // Stacks implement json.Marshaler.
 func (m *Stacks) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -169,6 +169,6 @@ func (m *ExceptionEvent) MarshalJSON() ([]byte, error) {
 // ExceptionEvent implement json.Marshaler.
 func (m *ExceptionEvent) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

@@ -19,8 +19,8 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/transport/http" package it is being compiled against.
 const _ = http.SupportPackageIsVersion1
 
-// AlertServiceHandler is the server API for AlertService service.
-type AlertServiceHandler interface {
+// MonitorServiceHandler is the server API for MonitorService service.
+type MonitorServiceHandler interface {
 	// GET /api/customize/alerts/metrics
 	QueryCustomizeMetric(context.Context, *QueryCustomizeMetricRequest) (*QueryCustomizeMetricResponse, error)
 	// GET /api/customize/alerts/notifies/targets
@@ -117,8 +117,8 @@ type AlertServiceHandler interface {
 	UpdateOrgAlertIssue(context.Context, *UpdateOrgAlertIssueRequest) (*UpdateOrgAlertIssueResponse, error)
 }
 
-// RegisterAlertServiceHandler register AlertServiceHandler to http.Router.
-func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ...http.HandleOption) {
+// RegisterMonitorServiceHandler register MonitorServiceHandler to http.Router.
+func RegisterMonitorServiceHandler(r http.Router, srv MonitorServiceHandler, opts ...http.HandleOption) {
 	h := http.DefaultHandleOptions()
 	for _, op := range opts {
 		op(h)
@@ -142,7 +142,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryCustomizeMetric_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryCustomizeMetric", srv)
+			QueryCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryCustomizeMetric", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -177,7 +177,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryCustomizeNotifyTarget_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryCustomizeNotifyTarget", srv)
+			QueryCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryCustomizeNotifyTarget", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -212,7 +212,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgCustomizeNotifyTarget_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgCustomizeNotifyTarget", srv)
+			QueryOrgCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgCustomizeNotifyTarget", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -247,7 +247,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryCustomizeAlert", srv)
+			QueryCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -282,7 +282,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetCustomizeAlert", srv)
+			GetCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -344,7 +344,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetCustomizeAlertDetail_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetCustomizeAlertDetail", srv)
+			GetCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetCustomizeAlertDetail", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -406,7 +406,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var CreateCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateCustomizeAlert", srv)
+			CreateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -441,7 +441,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateCustomizeAlert", srv)
+			UpdateCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -503,7 +503,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateCustomizeAlertEnable_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateCustomizeAlertEnable", srv)
+			UpdateCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateCustomizeAlertEnable", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -565,7 +565,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var DeleteCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			DeleteCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteCustomizeAlert", srv)
+			DeleteCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -627,7 +627,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgCustomizeMetric_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgCustomizeMetric", srv)
+			QueryOrgCustomizeMetric_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgCustomizeMetric", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -662,7 +662,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgCustomizeAlerts_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgCustomizeAlerts_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgCustomizeAlerts", srv)
+			QueryOrgCustomizeAlerts_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgCustomizeAlerts", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -697,7 +697,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetOrgCustomizeAlertDetail_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetOrgCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgCustomizeAlertDetail", srv)
+			GetOrgCustomizeAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgCustomizeAlertDetail", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -759,7 +759,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var CreateOrgCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateOrgCustomizeAlert", srv)
+			CreateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateOrgCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -794,7 +794,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateOrgCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgCustomizeAlert", srv)
+			UpdateOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -856,7 +856,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateOrgCustomizeAlertEnable_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateOrgCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgCustomizeAlertEnable", srv)
+			UpdateOrgCustomizeAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgCustomizeAlertEnable", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -918,7 +918,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var DeleteOrgCustomizeAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			DeleteOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteOrgCustomizeAlert", srv)
+			DeleteOrgCustomizeAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteOrgCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -980,7 +980,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryDashboardByAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryDashboardByAlert", srv)
+			QueryDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryDashboardByAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1015,7 +1015,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgDashboardByAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgDashboardByAlert", srv)
+			QueryOrgDashboardByAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgDashboardByAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1050,7 +1050,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryAlertRule_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlertRule", srv)
+			QueryAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlertRule", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1085,7 +1085,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlert", srv)
+			QueryAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1120,7 +1120,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlert", srv)
+			GetAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1182,7 +1182,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetAlertDetail_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlertDetail", srv)
+			GetAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlertDetail", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1244,7 +1244,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var CreateAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateAlert", srv)
+			CreateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1279,7 +1279,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateAlert", srv)
+			UpdateAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1341,7 +1341,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateAlertEnable_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateAlertEnable", srv)
+			UpdateAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateAlertEnable", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1403,7 +1403,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var DeleteAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			DeleteAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteAlert", srv)
+			DeleteAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1465,7 +1465,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgAlertRule_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlertRule", srv)
+			QueryOrgAlertRule_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlertRule", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1500,7 +1500,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlert", srv)
+			QueryOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1535,7 +1535,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetOrgAlertDetail_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetOrgAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgAlertDetail", srv)
+			GetOrgAlertDetail_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgAlertDetail", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1597,7 +1597,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var CreateOrgAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateOrgAlert", srv)
+			CreateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateOrgAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1632,7 +1632,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateOrgAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgAlert", srv)
+			UpdateOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1694,7 +1694,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateOrgAlertEnable_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateOrgAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgAlertEnable", srv)
+			UpdateOrgAlertEnable_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgAlertEnable", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1756,7 +1756,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var DeleteOrgAlert_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			DeleteOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "DeleteOrgAlert", srv)
+			DeleteOrgAlert_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "DeleteOrgAlert", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1818,7 +1818,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetAlertRecordAttr_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlertRecordAttr", srv)
+			GetAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlertRecordAttr", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1853,7 +1853,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryAlertRecord_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlertRecord", srv)
+			QueryAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlertRecord", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -1888,7 +1888,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetAlertRecord_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetAlertRecord", srv)
+			GetAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetAlertRecord", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -1946,7 +1946,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryAlertHistory_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryAlertHistory", srv)
+			QueryAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryAlertHistory", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -2004,7 +2004,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var CreateAlertIssue_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateAlertIssue", srv)
+			CreateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateAlertIssue", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -2062,7 +2062,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateAlertIssue_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateAlertIssue", srv)
+			UpdateAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateAlertIssue", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -2126,7 +2126,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetOrgAlertRecordAttr_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetOrgAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgAlertRecordAttr", srv)
+			GetOrgAlertRecordAttr_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgAlertRecordAttr", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -2161,7 +2161,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgAlertRecord_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlertRecord", srv)
+			QueryOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlertRecord", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -2196,7 +2196,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgHostsAlertRecord_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgHostsAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgHostsAlertRecord", srv)
+			QueryOrgHostsAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgHostsAlertRecord", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -2231,7 +2231,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var GetOrgAlertRecord_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "GetOrgAlertRecord", srv)
+			GetOrgAlertRecord_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "GetOrgAlertRecord", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -2289,7 +2289,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var QueryOrgAlertHistory_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryOrgAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "QueryOrgAlertHistory", srv)
+			QueryOrgAlertHistory_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "QueryOrgAlertHistory", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -2347,7 +2347,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var CreateOrgAlertIssue_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "CreateOrgAlertIssue", srv)
+			CreateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "CreateOrgAlertIssue", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -2405,7 +2405,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		}
 		var UpdateOrgAlertIssue_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.AlertService", "UpdateOrgAlertIssue", srv)
+			UpdateOrgAlertIssue_info = transport.NewServiceInfo("erda.core.monitor.alert.MonitorService", "UpdateOrgAlertIssue", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
