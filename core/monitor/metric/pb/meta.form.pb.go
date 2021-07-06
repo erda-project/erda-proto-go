@@ -34,6 +34,7 @@ var _ urlenc.URLValuesUnmarshaler = (*MetaMode)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TypeDefine)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Aggregation)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Operation)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*TagFilter)(nil)
 
 // ListMetricNamesRequest implement urlenc.URLValuesUnmarshaler.
 func (m *ListMetricNamesRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -361,6 +362,23 @@ func (m *Operation) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Multi = val
+			}
+		}
+	}
+	return nil
+}
+
+// TagFilter implement urlenc.URLValuesUnmarshaler.
+func (m *TagFilter) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "tag":
+				m.Tag = vals[0]
+			case "op":
+				m.Op = vals[0]
+			case "value":
+				m.Value = vals[0]
 			}
 		}
 	}

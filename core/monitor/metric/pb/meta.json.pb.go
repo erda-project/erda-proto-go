@@ -52,6 +52,8 @@ var _ json.Marshaler = (*Aggregation)(nil)
 var _ json.Unmarshaler = (*Aggregation)(nil)
 var _ json.Marshaler = (*Operation)(nil)
 var _ json.Unmarshaler = (*Operation)(nil)
+var _ json.Marshaler = (*TagFilter)(nil)
+var _ json.Unmarshaler = (*TagFilter)(nil)
 
 // ListMetricNamesRequest implement json.Marshaler.
 func (m *ListMetricNamesRequest) MarshalJSON() ([]byte, error) {
@@ -408,6 +410,24 @@ func (m *Operation) MarshalJSON() ([]byte, error) {
 
 // Operation implement json.Marshaler.
 func (m *Operation) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TagFilter implement json.Marshaler.
+func (m *TagFilter) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TagFilter implement json.Marshaler.
+func (m *TagFilter) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

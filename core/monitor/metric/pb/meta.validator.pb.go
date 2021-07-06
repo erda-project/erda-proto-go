@@ -228,3 +228,6 @@ func (this *Aggregation) Validate() error {
 func (this *Operation) Validate() error {
 	return nil
 }
+func (this *TagFilter) Validate() error {
+	return nil
+}
