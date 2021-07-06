@@ -8,45 +8,45 @@ import (
 	reflect "reflect"
 )
 
-// RegisterMonitorServiceImp alert.proto
-func RegisterMonitorServiceImp(regester transport.Register, srv MonitorServiceServer, opts ...transport.ServiceOption) {
+// RegisterAlertServiceImp alert.proto
+func RegisterAlertServiceImp(regester transport.Register, srv AlertServiceServer, opts ...transport.ServiceOption) {
 	_ops := transport.DefaultServiceOptions()
 	for _, op := range opts {
 		op(_ops)
 	}
-	RegisterMonitorServiceHandler(regester, MonitorServiceHandler(srv), _ops.HTTP...)
-	RegisterMonitorServiceServer(regester, srv, _ops.GRPC...)
+	RegisterAlertServiceHandler(regester, AlertServiceHandler(srv), _ops.HTTP...)
+	RegisterAlertServiceServer(regester, srv, _ops.GRPC...)
 }
 
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.core.monitor.alert.MonitorService",
+		"erda.core.monitor.alert.AlertService",
 	)
 }
 
 var (
-	monitorServiceClientType  = reflect.TypeOf((*MonitorServiceClient)(nil)).Elem()
-	monitorServiceServerType  = reflect.TypeOf((*MonitorServiceServer)(nil)).Elem()
-	monitorServiceHandlerType = reflect.TypeOf((*MonitorServiceHandler)(nil)).Elem()
+	alertServiceClientType  = reflect.TypeOf((*AlertServiceClient)(nil)).Elem()
+	alertServiceServerType  = reflect.TypeOf((*AlertServiceServer)(nil)).Elem()
+	alertServiceHandlerType = reflect.TypeOf((*AlertServiceHandler)(nil)).Elem()
 )
 
-// MonitorServiceClientType .
-func MonitorServiceClientType() reflect.Type { return monitorServiceClientType }
+// AlertServiceClientType .
+func AlertServiceClientType() reflect.Type { return alertServiceClientType }
 
-// MonitorServiceServerType .
-func MonitorServiceServerType() reflect.Type { return monitorServiceServerType }
+// AlertServiceServerType .
+func AlertServiceServerType() reflect.Type { return alertServiceServerType }
 
-// MonitorServiceHandlerType .
-func MonitorServiceHandlerType() reflect.Type { return monitorServiceHandlerType }
+// AlertServiceHandlerType .
+func AlertServiceHandlerType() reflect.Type { return alertServiceHandlerType }
 
 func Types() []reflect.Type {
 	return []reflect.Type{
 		// client types
-		monitorServiceClientType,
+		alertServiceClientType,
 		// server types
-		monitorServiceServerType,
+		alertServiceServerType,
 		// handler types
-		monitorServiceHandlerType,
+		alertServiceHandlerType,
 	}
 }
