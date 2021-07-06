@@ -40,9 +40,9 @@ func (p *provider) Init(ctx servicehub.Context) error {
 }
 
 var (
-	clientsType              = reflect.TypeOf((*Client)(nil)).Elem()
-	monitorServiceClientType = reflect.TypeOf((*pb.MonitorServiceClient)(nil)).Elem()
-	monitorServiceServerType = reflect.TypeOf((*pb.MonitorServiceServer)(nil)).Elem()
+	clientsType            = reflect.TypeOf((*Client)(nil)).Elem()
+	alertServiceClientType = reflect.TypeOf((*pb.AlertServiceClient)(nil)).Elem()
+	alertServiceServerType = reflect.TypeOf((*pb.AlertServiceServer)(nil)).Elem()
 )
 
 func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}) interface{} {
@@ -55,18 +55,18 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 	switch ctx.Service() {
 	case "erda.core.monitor.alert-client":
 		return p.client
-	case "erda.core.monitor.alert.MonitorService":
-		return &monitorServiceWrapper{client: p.client.MonitorService(), opts: opts}
-	case "erda.core.monitor.alert.MonitorService.client":
-		return p.client.MonitorService()
+	case "erda.core.monitor.alert.AlertService":
+		return &alertServiceWrapper{client: p.client.AlertService(), opts: opts}
+	case "erda.core.monitor.alert.AlertService.client":
+		return p.client.AlertService()
 	}
 	switch ctx.Type() {
 	case clientsType:
 		return p.client
-	case monitorServiceClientType:
-		return p.client.MonitorService()
-	case monitorServiceServerType:
-		return &monitorServiceWrapper{client: p.client.MonitorService(), opts: opts}
+	case alertServiceClientType:
+		return p.client.AlertService()
+	case alertServiceServerType:
+		return &alertServiceWrapper{client: p.client.AlertService(), opts: opts}
 	}
 	return p
 }
@@ -74,15 +74,15 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 func init() {
 	servicehub.Register("erda.core.monitor.alert-client", &servicehub.Spec{
 		Services: []string{
-			"erda.core.monitor.alert.MonitorService",
+			"erda.core.monitor.alert.AlertService",
 			"erda.core.monitor.alert-client",
 		},
 		Types: []reflect.Type{
 			clientsType,
 			// client types
-			monitorServiceClientType,
+			alertServiceClientType,
 			// server types
-			monitorServiceServerType,
+			alertServiceServerType,
 		},
 		OptionalDependencies: dependencies,
 		Creator: func() servicehub.Provider {
