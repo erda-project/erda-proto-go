@@ -27,7 +27,7 @@ func (m *HelloRequest) MarshalJSON() ([]byte, error) {
 // HelloRequest implement json.Marshaler.
 func (m *HelloRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -43,6 +43,6 @@ func (m *HelloResponse) MarshalJSON() ([]byte, error) {
 // HelloResponse implement json.Marshaler.
 func (m *HelloResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

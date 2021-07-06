@@ -49,7 +49,7 @@ func (m *CreateCheckerRequest) MarshalJSON() ([]byte, error) {
 // CreateCheckerRequest implement json.Marshaler.
 func (m *CreateCheckerRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -65,7 +65,7 @@ func (m *CreateCheckerResponse) MarshalJSON() ([]byte, error) {
 // CreateCheckerResponse implement json.Marshaler.
 func (m *CreateCheckerResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -81,7 +81,7 @@ func (m *UpdateCheckerRequest) MarshalJSON() ([]byte, error) {
 // UpdateCheckerRequest implement json.Marshaler.
 func (m *UpdateCheckerRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -97,7 +97,7 @@ func (m *UpdateCheckerResponse) MarshalJSON() ([]byte, error) {
 // UpdateCheckerResponse implement json.Marshaler.
 func (m *UpdateCheckerResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -113,7 +113,7 @@ func (m *DeleteCheckerRequest) MarshalJSON() ([]byte, error) {
 // DeleteCheckerRequest implement json.Marshaler.
 func (m *DeleteCheckerRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -129,7 +129,7 @@ func (m *DeleteCheckerResponse) MarshalJSON() ([]byte, error) {
 // DeleteCheckerResponse implement json.Marshaler.
 func (m *DeleteCheckerResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -145,7 +145,7 @@ func (m *ListCheckersRequest) MarshalJSON() ([]byte, error) {
 // ListCheckersRequest implement json.Marshaler.
 func (m *ListCheckersRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -161,7 +161,7 @@ func (m *ListCheckersResponse) MarshalJSON() ([]byte, error) {
 // ListCheckersResponse implement json.Marshaler.
 func (m *ListCheckersResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -177,7 +177,7 @@ func (m *DescribeCheckersRequest) MarshalJSON() ([]byte, error) {
 // DescribeCheckersRequest implement json.Marshaler.
 func (m *DescribeCheckersRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -193,7 +193,7 @@ func (m *DescribeCheckersResponse) MarshalJSON() ([]byte, error) {
 // DescribeCheckersResponse implement json.Marshaler.
 func (m *DescribeCheckersResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -209,7 +209,7 @@ func (m *DescribeCheckerRequest) MarshalJSON() ([]byte, error) {
 // DescribeCheckerRequest implement json.Marshaler.
 func (m *DescribeCheckerRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -225,7 +225,7 @@ func (m *DescribeCheckerResponse) MarshalJSON() ([]byte, error) {
 // DescribeCheckerResponse implement json.Marshaler.
 func (m *DescribeCheckerResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -241,6 +241,6 @@ func (m *Checker) MarshalJSON() ([]byte, error) {
 // Checker implement json.Marshaler.
 func (m *Checker) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

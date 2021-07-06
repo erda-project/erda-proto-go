@@ -41,7 +41,7 @@ func (m *GetGroupRequest) MarshalJSON() ([]byte, error) {
 // GetGroupRequest implement json.Marshaler.
 func (m *GetGroupRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -57,7 +57,7 @@ func (m *GetGroupResponse) MarshalJSON() ([]byte, error) {
 // GetGroupResponse implement json.Marshaler.
 func (m *GetGroupResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -73,7 +73,7 @@ func (m *Groups) MarshalJSON() ([]byte, error) {
 // Groups implement json.Marshaler.
 func (m *Groups) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -89,7 +89,7 @@ func (m *GetGroupPropertiesRequest) MarshalJSON() ([]byte, error) {
 // GetGroupPropertiesRequest implement json.Marshaler.
 func (m *GetGroupPropertiesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -105,7 +105,7 @@ func (m *GetGroupPropertiesResponse) MarshalJSON() ([]byte, error) {
 // GetGroupPropertiesResponse implement json.Marshaler.
 func (m *GetGroupPropertiesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -121,7 +121,7 @@ func (m *SaveGroupPropertiesRequest) MarshalJSON() ([]byte, error) {
 // SaveGroupPropertiesRequest implement json.Marshaler.
 func (m *SaveGroupPropertiesRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -137,7 +137,7 @@ func (m *SaveGroupPropertiesResponse) MarshalJSON() ([]byte, error) {
 // SaveGroupPropertiesResponse implement json.Marshaler.
 func (m *SaveGroupPropertiesResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -153,7 +153,7 @@ func (m *GroupProperties) MarshalJSON() ([]byte, error) {
 // GroupProperties implement json.Marshaler.
 func (m *GroupProperties) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -169,6 +169,6 @@ func (m *Property) MarshalJSON() ([]byte, error) {
 // Property implement json.Marshaler.
 func (m *Property) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

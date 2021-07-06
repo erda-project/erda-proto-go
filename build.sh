@@ -35,6 +35,7 @@ build_protocol() {
                  --validate=true \
                  --json=true \
                  --json_opt=emit_defaults=true \
+                 --json_opt=allow_unknown_fields=true \
                  ${path}/*.proto
         fi;
     done;

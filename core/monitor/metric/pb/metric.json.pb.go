@@ -49,7 +49,7 @@ func (m *QueryWithInfluxFormatRequest) MarshalJSON() ([]byte, error) {
 // QueryWithInfluxFormatRequest implement json.Marshaler.
 func (m *QueryWithInfluxFormatRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -65,7 +65,7 @@ func (m *QueryWithInfluxFormatResponse) MarshalJSON() ([]byte, error) {
 // QueryWithInfluxFormatResponse implement json.Marshaler.
 func (m *QueryWithInfluxFormatResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -81,7 +81,7 @@ func (m *Serie) MarshalJSON() ([]byte, error) {
 // Serie implement json.Marshaler.
 func (m *Serie) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -97,7 +97,7 @@ func (m *Row) MarshalJSON() ([]byte, error) {
 // Row implement json.Marshaler.
 func (m *Row) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -113,7 +113,7 @@ func (m *Result) MarshalJSON() ([]byte, error) {
 // Result implement json.Marshaler.
 func (m *Result) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -129,7 +129,7 @@ func (m *QueryWithTableFormatRequest) MarshalJSON() ([]byte, error) {
 // QueryWithTableFormatRequest implement json.Marshaler.
 func (m *QueryWithTableFormatRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -145,7 +145,7 @@ func (m *QueryWithTableFormatResponse) MarshalJSON() ([]byte, error) {
 // QueryWithTableFormatResponse implement json.Marshaler.
 func (m *QueryWithTableFormatResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -161,7 +161,7 @@ func (m *TableResult) MarshalJSON() ([]byte, error) {
 // TableResult implement json.Marshaler.
 func (m *TableResult) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -177,7 +177,7 @@ func (m *TableColumn) MarshalJSON() ([]byte, error) {
 // TableColumn implement json.Marshaler.
 func (m *TableColumn) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -193,7 +193,7 @@ func (m *TableRow) MarshalJSON() ([]byte, error) {
 // TableRow implement json.Marshaler.
 func (m *TableRow) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -209,7 +209,7 @@ func (m *GeneralQueryRequest) MarshalJSON() ([]byte, error) {
 // GeneralQueryRequest implement json.Marshaler.
 func (m *GeneralQueryRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -225,7 +225,7 @@ func (m *GeneralQueryResponse) MarshalJSON() ([]byte, error) {
 // GeneralQueryResponse implement json.Marshaler.
 func (m *GeneralQueryResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -241,6 +241,6 @@ func (m *Filter) MarshalJSON() ([]byte, error) {
 // Filter implement json.Marshaler.
 func (m *Filter) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

@@ -190,14 +190,14 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["runtime_name"]; len(vals) > 0 {
+					in.RuntimeName = vals[0]
+				}
 				if vals := params["terminus_key"]; len(vals) > 0 {
 					in.TerminusKey = vals[0]
 				}
 				if vals := params["application_id"]; len(vals) > 0 {
 					in.ApplicationId = vals[0]
-				}
-				if vals := params["runtime_name"]; len(vals) > 0 {
-					in.RuntimeName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {

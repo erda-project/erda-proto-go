@@ -65,7 +65,7 @@ func (m *CreateCheckerV1Request) MarshalJSON() ([]byte, error) {
 // CreateCheckerV1Request implement json.Marshaler.
 func (m *CreateCheckerV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -81,7 +81,7 @@ func (m *CreateCheckerV1Response) MarshalJSON() ([]byte, error) {
 // CreateCheckerV1Response implement json.Marshaler.
 func (m *CreateCheckerV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -97,7 +97,7 @@ func (m *UpdateCheckerV1Request) MarshalJSON() ([]byte, error) {
 // UpdateCheckerV1Request implement json.Marshaler.
 func (m *UpdateCheckerV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -113,7 +113,7 @@ func (m *UpdateCheckerV1Response) MarshalJSON() ([]byte, error) {
 // UpdateCheckerV1Response implement json.Marshaler.
 func (m *UpdateCheckerV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -129,7 +129,7 @@ func (m *DeleteCheckerV1Request) MarshalJSON() ([]byte, error) {
 // DeleteCheckerV1Request implement json.Marshaler.
 func (m *DeleteCheckerV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -145,7 +145,7 @@ func (m *DeleteCheckerV1Response) MarshalJSON() ([]byte, error) {
 // DeleteCheckerV1Response implement json.Marshaler.
 func (m *DeleteCheckerV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -161,7 +161,7 @@ func (m *GetCheckerV1Request) MarshalJSON() ([]byte, error) {
 // GetCheckerV1Request implement json.Marshaler.
 func (m *GetCheckerV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -177,7 +177,7 @@ func (m *GetCheckerV1Response) MarshalJSON() ([]byte, error) {
 // GetCheckerV1Response implement json.Marshaler.
 func (m *GetCheckerV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -193,7 +193,7 @@ func (m *DescribeCheckersV1Request) MarshalJSON() ([]byte, error) {
 // DescribeCheckersV1Request implement json.Marshaler.
 func (m *DescribeCheckersV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -209,7 +209,7 @@ func (m *DescribeCheckersV1Response) MarshalJSON() ([]byte, error) {
 // DescribeCheckersV1Response implement json.Marshaler.
 func (m *DescribeCheckersV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -225,7 +225,7 @@ func (m *DescribeCheckerV1Request) MarshalJSON() ([]byte, error) {
 // DescribeCheckerV1Request implement json.Marshaler.
 func (m *DescribeCheckerV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -241,7 +241,7 @@ func (m *DescribeCheckerV1Response) MarshalJSON() ([]byte, error) {
 // DescribeCheckerV1Response implement json.Marshaler.
 func (m *DescribeCheckerV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -257,7 +257,7 @@ func (m *GetCheckerStatusV1Request) MarshalJSON() ([]byte, error) {
 // GetCheckerStatusV1Request implement json.Marshaler.
 func (m *GetCheckerStatusV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -273,7 +273,7 @@ func (m *GetCheckerStatusV1Response) MarshalJSON() ([]byte, error) {
 // GetCheckerStatusV1Response implement json.Marshaler.
 func (m *GetCheckerStatusV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -289,7 +289,7 @@ func (m *CheckerStatusV1) MarshalJSON() ([]byte, error) {
 // CheckerStatusV1 implement json.Marshaler.
 func (m *CheckerStatusV1) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -305,7 +305,7 @@ func (m *GetCheckerIssuesV1Request) MarshalJSON() ([]byte, error) {
 // GetCheckerIssuesV1Request implement json.Marshaler.
 func (m *GetCheckerIssuesV1Request) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -321,7 +321,7 @@ func (m *GetCheckerIssuesV1Response) MarshalJSON() ([]byte, error) {
 // GetCheckerIssuesV1Response implement json.Marshaler.
 func (m *GetCheckerIssuesV1Response) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -337,7 +337,7 @@ func (m *CheckerV1) MarshalJSON() ([]byte, error) {
 // CheckerV1 implement json.Marshaler.
 func (m *CheckerV1) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -353,7 +353,7 @@ func (m *DescribeResultV1) MarshalJSON() ([]byte, error) {
 // DescribeResultV1 implement json.Marshaler.
 func (m *DescribeResultV1) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -369,7 +369,7 @@ func (m *DescribeItemV1) MarshalJSON() ([]byte, error) {
 // DescribeItemV1 implement json.Marshaler.
 func (m *DescribeItemV1) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -385,6 +385,6 @@ func (m *CheckerChartV1) MarshalJSON() ([]byte, error) {
 // CheckerChartV1 implement json.Marshaler.
 func (m *CheckerChartV1) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

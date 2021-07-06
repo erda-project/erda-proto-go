@@ -33,7 +33,7 @@ func (m *User) MarshalJSON() ([]byte, error) {
 // User implement json.Marshaler.
 func (m *User) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -49,7 +49,7 @@ func (m *GetUserRequest) MarshalJSON() ([]byte, error) {
 // GetUserRequest implement json.Marshaler.
 func (m *GetUserRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -65,7 +65,7 @@ func (m *GetUserResponse) MarshalJSON() ([]byte, error) {
 // GetUserResponse implement json.Marshaler.
 func (m *GetUserResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -81,7 +81,7 @@ func (m *UpdateUserRequest) MarshalJSON() ([]byte, error) {
 // UpdateUserRequest implement json.Marshaler.
 func (m *UpdateUserRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -97,6 +97,6 @@ func (m *UpdateUserResponse) MarshalJSON() ([]byte, error) {
 // UpdateUserResponse implement json.Marshaler.
 func (m *UpdateUserResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
