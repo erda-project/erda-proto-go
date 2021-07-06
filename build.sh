@@ -33,6 +33,8 @@ build_protocol() {
                  --service_out="${MODULE_PATH}/pb" \
                  --client_out="${MODULE_PATH}/client" \
                  --validate=true \
+                 --json=true \
+                 --json_opt=emit_defaults=true \
                  ${path}/*.proto
         fi;
     done;
