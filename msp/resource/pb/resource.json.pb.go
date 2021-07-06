@@ -4,7 +4,9 @@
 package pb
 
 import (
+	bytes "bytes"
 	json "encoding/json"
+	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -29,11 +31,13 @@ var _ json.Unmarshaler = (*MonitorRuntime)(nil)
 
 // CreateResourceRequest implement json.Marshaler.
 func (m *CreateResourceRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // CreateResourceRequest implement json.Marshaler.
@@ -45,11 +49,13 @@ func (m *CreateResourceRequest) UnmarshalJSON(b []byte) error {
 
 // CreateResourceResponse implement json.Marshaler.
 func (m *CreateResourceResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // CreateResourceResponse implement json.Marshaler.
@@ -61,11 +67,13 @@ func (m *CreateResourceResponse) UnmarshalJSON(b []byte) error {
 
 // ResourceCreateResult implement json.Marshaler.
 func (m *ResourceCreateResult) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ResourceCreateResult implement json.Marshaler.
@@ -77,11 +85,13 @@ func (m *ResourceCreateResult) UnmarshalJSON(b []byte) error {
 
 // DeleteResourceRequest implement json.Marshaler.
 func (m *DeleteResourceRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // DeleteResourceRequest implement json.Marshaler.
@@ -93,11 +103,13 @@ func (m *DeleteResourceRequest) UnmarshalJSON(b []byte) error {
 
 // DeleteResourceResponse implement json.Marshaler.
 func (m *DeleteResourceResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // DeleteResourceResponse implement json.Marshaler.
@@ -109,11 +121,13 @@ func (m *DeleteResourceResponse) UnmarshalJSON(b []byte) error {
 
 // GetRuntimeRequest implement json.Marshaler.
 func (m *GetRuntimeRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetRuntimeRequest implement json.Marshaler.
@@ -125,11 +139,13 @@ func (m *GetRuntimeRequest) UnmarshalJSON(b []byte) error {
 
 // GetRuntimeResponse implement json.Marshaler.
 func (m *GetRuntimeResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetRuntimeResponse implement json.Marshaler.
@@ -141,11 +157,13 @@ func (m *GetRuntimeResponse) UnmarshalJSON(b []byte) error {
 
 // MonitorRuntime implement json.Marshaler.
 func (m *MonitorRuntime) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // MonitorRuntime implement json.Marshaler.

@@ -4,7 +4,9 @@
 package pb
 
 import (
+	bytes "bytes"
 	json "encoding/json"
+	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -25,11 +27,13 @@ var _ json.Unmarshaler = (*Trace)(nil)
 
 // GetSpansRequest implement json.Marshaler.
 func (m *GetSpansRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetSpansRequest implement json.Marshaler.
@@ -41,11 +45,13 @@ func (m *GetSpansRequest) UnmarshalJSON(b []byte) error {
 
 // GetTracesRequest implement json.Marshaler.
 func (m *GetTracesRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetTracesRequest implement json.Marshaler.
@@ -57,11 +63,13 @@ func (m *GetTracesRequest) UnmarshalJSON(b []byte) error {
 
 // GetSpansResponse implement json.Marshaler.
 func (m *GetSpansResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetSpansResponse implement json.Marshaler.
@@ -73,11 +81,13 @@ func (m *GetSpansResponse) UnmarshalJSON(b []byte) error {
 
 // GetTracesResponse implement json.Marshaler.
 func (m *GetTracesResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetTracesResponse implement json.Marshaler.
@@ -89,11 +99,13 @@ func (m *GetTracesResponse) UnmarshalJSON(b []byte) error {
 
 // Span implement json.Marshaler.
 func (m *Span) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Span implement json.Marshaler.
@@ -105,11 +117,13 @@ func (m *Span) UnmarshalJSON(b []byte) error {
 
 // Trace implement json.Marshaler.
 func (m *Trace) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Trace implement json.Marshaler.

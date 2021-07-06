@@ -4,7 +4,9 @@
 package pb
 
 import (
+	bytes "bytes"
 	json "encoding/json"
+	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -31,11 +33,13 @@ var _ json.Unmarshaler = (*ExceptionEvent)(nil)
 
 // GetExceptionsRequest implement json.Marshaler.
 func (m *GetExceptionsRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetExceptionsRequest implement json.Marshaler.
@@ -47,11 +51,13 @@ func (m *GetExceptionsRequest) UnmarshalJSON(b []byte) error {
 
 // GetExceptionsResponse implement json.Marshaler.
 func (m *GetExceptionsResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetExceptionsResponse implement json.Marshaler.
@@ -63,11 +69,13 @@ func (m *GetExceptionsResponse) UnmarshalJSON(b []byte) error {
 
 // GetExceptionEventIdsRequest implement json.Marshaler.
 func (m *GetExceptionEventIdsRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetExceptionEventIdsRequest implement json.Marshaler.
@@ -79,11 +87,13 @@ func (m *GetExceptionEventIdsRequest) UnmarshalJSON(b []byte) error {
 
 // GetExceptionEventIdsResponse implement json.Marshaler.
 func (m *GetExceptionEventIdsResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetExceptionEventIdsResponse implement json.Marshaler.
@@ -95,11 +105,13 @@ func (m *GetExceptionEventIdsResponse) UnmarshalJSON(b []byte) error {
 
 // GetExceptionEventRequest implement json.Marshaler.
 func (m *GetExceptionEventRequest) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetExceptionEventRequest implement json.Marshaler.
@@ -111,11 +123,13 @@ func (m *GetExceptionEventRequest) UnmarshalJSON(b []byte) error {
 
 // GetExceptionEventResponse implement json.Marshaler.
 func (m *GetExceptionEventResponse) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // GetExceptionEventResponse implement json.Marshaler.
@@ -127,11 +141,13 @@ func (m *GetExceptionEventResponse) UnmarshalJSON(b []byte) error {
 
 // Exception implement json.Marshaler.
 func (m *Exception) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Exception implement json.Marshaler.
@@ -143,11 +159,13 @@ func (m *Exception) UnmarshalJSON(b []byte) error {
 
 // Stacks implement json.Marshaler.
 func (m *Stacks) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // Stacks implement json.Marshaler.
@@ -159,11 +177,13 @@ func (m *Stacks) UnmarshalJSON(b []byte) error {
 
 // ExceptionEvent implement json.Marshaler.
 func (m *ExceptionEvent) MarshalJSON() ([]byte, error) {
-	return (&protojson.MarshalOptions{
-		UseProtoNames:   false,
-		UseEnumNumbers:  false,
-		EmitUnpopulated: true,
-	}).Marshal(m)
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
 }
 
 // ExceptionEvent implement json.Marshaler.
