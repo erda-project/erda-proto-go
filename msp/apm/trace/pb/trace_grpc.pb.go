@@ -22,6 +22,11 @@ const _ = grpc.SupportPackageIsVersion5
 type TraceServiceClient interface {
 	GetSpans(ctx context.Context, in *GetSpansRequest, opts ...grpc.CallOption) (*GetSpansResponse, error)
 	GetTraces(ctx context.Context, in *GetTracesRequest, opts ...grpc.CallOption) (*GetTracesResponse, error)
+	GetTraceDebugHistories(ctx context.Context, in *GetTraceDebugHistoriesRequest, opts ...grpc.CallOption) (*GetTraceDebugHistoriesResponse, error)
+	GetTraceDebugByRequestID(ctx context.Context, in *GetTraceDebugRequest, opts ...grpc.CallOption) (*GetTraceDebugResponse, error)
+	CreateTraceDebug(ctx context.Context, in *CreateTraceDebugRequest, opts ...grpc.CallOption) (*CreateTraceDebugResponse, error)
+	StopTraceDebug(ctx context.Context, in *StopTraceDebugRequest, opts ...grpc.CallOption) (*StopTraceDebugResponse, error)
+	GetTraceDebugHistoryStatusByRequestID(ctx context.Context, in *GetTraceDebugStatusByRequestIDRequest, opts ...grpc.CallOption) (*GetTraceDebugStatusByRequestIDResponse, error)
 }
 
 type traceServiceClient struct {
@@ -50,12 +55,62 @@ func (c *traceServiceClient) GetTraces(ctx context.Context, in *GetTracesRequest
 	return out, nil
 }
 
+func (c *traceServiceClient) GetTraceDebugHistories(ctx context.Context, in *GetTraceDebugHistoriesRequest, opts ...grpc.CallOption) (*GetTraceDebugHistoriesResponse, error) {
+	out := new(GetTraceDebugHistoriesResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetTraceDebugHistories", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *traceServiceClient) GetTraceDebugByRequestID(ctx context.Context, in *GetTraceDebugRequest, opts ...grpc.CallOption) (*GetTraceDebugResponse, error) {
+	out := new(GetTraceDebugResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetTraceDebugByRequestID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *traceServiceClient) CreateTraceDebug(ctx context.Context, in *CreateTraceDebugRequest, opts ...grpc.CallOption) (*CreateTraceDebugResponse, error) {
+	out := new(CreateTraceDebugResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/CreateTraceDebug", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *traceServiceClient) StopTraceDebug(ctx context.Context, in *StopTraceDebugRequest, opts ...grpc.CallOption) (*StopTraceDebugResponse, error) {
+	out := new(StopTraceDebugResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/StopTraceDebug", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *traceServiceClient) GetTraceDebugHistoryStatusByRequestID(ctx context.Context, in *GetTraceDebugStatusByRequestIDRequest, opts ...grpc.CallOption) (*GetTraceDebugStatusByRequestIDResponse, error) {
+	out := new(GetTraceDebugStatusByRequestIDResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetTraceDebugHistoryStatusByRequestID", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TraceServiceServer is the server API for TraceService service.
 // All implementations should embed UnimplementedTraceServiceServer
 // for forward compatibility
 type TraceServiceServer interface {
 	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
 	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
+	GetTraceDebugHistories(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error)
+	GetTraceDebugByRequestID(context.Context, *GetTraceDebugRequest) (*GetTraceDebugResponse, error)
+	CreateTraceDebug(context.Context, *CreateTraceDebugRequest) (*CreateTraceDebugResponse, error)
+	StopTraceDebug(context.Context, *StopTraceDebugRequest) (*StopTraceDebugResponse, error)
+	GetTraceDebugHistoryStatusByRequestID(context.Context, *GetTraceDebugStatusByRequestIDRequest) (*GetTraceDebugStatusByRequestIDResponse, error)
 }
 
 // UnimplementedTraceServiceServer should be embedded to have forward compatible implementations.
@@ -67,6 +122,21 @@ func (*UnimplementedTraceServiceServer) GetSpans(context.Context, *GetSpansReque
 }
 func (*UnimplementedTraceServiceServer) GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTraces not implemented")
+}
+func (*UnimplementedTraceServiceServer) GetTraceDebugHistories(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTraceDebugHistories not implemented")
+}
+func (*UnimplementedTraceServiceServer) GetTraceDebugByRequestID(context.Context, *GetTraceDebugRequest) (*GetTraceDebugResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTraceDebugByRequestID not implemented")
+}
+func (*UnimplementedTraceServiceServer) CreateTraceDebug(context.Context, *CreateTraceDebugRequest) (*CreateTraceDebugResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateTraceDebug not implemented")
+}
+func (*UnimplementedTraceServiceServer) StopTraceDebug(context.Context, *StopTraceDebugRequest) (*StopTraceDebugResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method StopTraceDebug not implemented")
+}
+func (*UnimplementedTraceServiceServer) GetTraceDebugHistoryStatusByRequestID(context.Context, *GetTraceDebugStatusByRequestIDRequest) (*GetTraceDebugStatusByRequestIDResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTraceDebugHistoryStatusByRequestID not implemented")
 }
 
 func RegisterTraceServiceServer(s grpc1.ServiceRegistrar, srv TraceServiceServer, opts ...grpc1.HandleOption) {
@@ -103,6 +173,51 @@ func _get_TraceService_serviceDesc(srv TraceServiceServer, opts ...grpc1.HandleO
 	if h.Interceptor != nil {
 		_TraceService_GetTraces_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraces", srv)
 		_TraceService_GetTraces_Handler = h.Interceptor(_TraceService_GetTraces_Handler)
+	}
+
+	_TraceService_GetTraceDebugHistories_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetTraceDebugHistories(ctx, req.(*GetTraceDebugHistoriesRequest))
+	}
+	var _TraceService_GetTraceDebugHistories_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_GetTraceDebugHistories_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceDebugHistories", srv)
+		_TraceService_GetTraceDebugHistories_Handler = h.Interceptor(_TraceService_GetTraceDebugHistories_Handler)
+	}
+
+	_TraceService_GetTraceDebugByRequestID_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetTraceDebugByRequestID(ctx, req.(*GetTraceDebugRequest))
+	}
+	var _TraceService_GetTraceDebugByRequestID_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_GetTraceDebugByRequestID_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceDebugByRequestID", srv)
+		_TraceService_GetTraceDebugByRequestID_Handler = h.Interceptor(_TraceService_GetTraceDebugByRequestID_Handler)
+	}
+
+	_TraceService_CreateTraceDebug_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.CreateTraceDebug(ctx, req.(*CreateTraceDebugRequest))
+	}
+	var _TraceService_CreateTraceDebug_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_CreateTraceDebug_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "CreateTraceDebug", srv)
+		_TraceService_CreateTraceDebug_Handler = h.Interceptor(_TraceService_CreateTraceDebug_Handler)
+	}
+
+	_TraceService_StopTraceDebug_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.StopTraceDebug(ctx, req.(*StopTraceDebugRequest))
+	}
+	var _TraceService_StopTraceDebug_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_StopTraceDebug_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "StopTraceDebug", srv)
+		_TraceService_StopTraceDebug_Handler = h.Interceptor(_TraceService_StopTraceDebug_Handler)
+	}
+
+	_TraceService_GetTraceDebugHistoryStatusByRequestID_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetTraceDebugHistoryStatusByRequestID(ctx, req.(*GetTraceDebugStatusByRequestIDRequest))
+	}
+	var _TraceService_GetTraceDebugHistoryStatusByRequestID_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_GetTraceDebugHistoryStatusByRequestID_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceDebugHistoryStatusByRequestID", srv)
+		_TraceService_GetTraceDebugHistoryStatusByRequestID_Handler = h.Interceptor(_TraceService_GetTraceDebugHistoryStatusByRequestID_Handler)
 	}
 
 	var serviceDesc = _TraceService_serviceDesc
@@ -151,6 +266,121 @@ func _get_TraceService_serviceDesc(srv TraceServiceServer, opts ...grpc1.HandleO
 					FullMethod: "/erda.msp.apm.trace.TraceService/GetTraces",
 				}
 				return interceptor(ctx, in, info, _TraceService_GetTraces_Handler)
+			},
+		},
+		{
+			MethodName: "GetTraceDebugHistories",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetTraceDebugHistoriesRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).GetTraceDebugHistories(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_GetTraceDebugHistories_info)
+				}
+				if interceptor == nil {
+					return _TraceService_GetTraceDebugHistories_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/GetTraceDebugHistories",
+				}
+				return interceptor(ctx, in, info, _TraceService_GetTraceDebugHistories_Handler)
+			},
+		},
+		{
+			MethodName: "GetTraceDebugByRequestID",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetTraceDebugRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).GetTraceDebugByRequestID(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_GetTraceDebugByRequestID_info)
+				}
+				if interceptor == nil {
+					return _TraceService_GetTraceDebugByRequestID_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/GetTraceDebugByRequestID",
+				}
+				return interceptor(ctx, in, info, _TraceService_GetTraceDebugByRequestID_Handler)
+			},
+		},
+		{
+			MethodName: "CreateTraceDebug",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(CreateTraceDebugRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).CreateTraceDebug(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_CreateTraceDebug_info)
+				}
+				if interceptor == nil {
+					return _TraceService_CreateTraceDebug_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/CreateTraceDebug",
+				}
+				return interceptor(ctx, in, info, _TraceService_CreateTraceDebug_Handler)
+			},
+		},
+		{
+			MethodName: "StopTraceDebug",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(StopTraceDebugRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).StopTraceDebug(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_StopTraceDebug_info)
+				}
+				if interceptor == nil {
+					return _TraceService_StopTraceDebug_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/StopTraceDebug",
+				}
+				return interceptor(ctx, in, info, _TraceService_StopTraceDebug_Handler)
+			},
+		},
+		{
+			MethodName: "GetTraceDebugHistoryStatusByRequestID",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetTraceDebugStatusByRequestIDRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).GetTraceDebugHistoryStatusByRequestID(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_GetTraceDebugHistoryStatusByRequestID_info)
+				}
+				if interceptor == nil {
+					return _TraceService_GetTraceDebugHistoryStatusByRequestID_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/GetTraceDebugHistoryStatusByRequestID",
+				}
+				return interceptor(ctx, in, info, _TraceService_GetTraceDebugHistoryStatusByRequestID_Handler)
 			},
 		},
 	}

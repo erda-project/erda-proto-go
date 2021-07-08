@@ -12,6 +12,16 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "encoding/json" package it is being compiled against.
+var _ json.Marshaler = (*GetTraceDebugRequest)(nil)
+var _ json.Unmarshaler = (*GetTraceDebugRequest)(nil)
+var _ json.Marshaler = (*CreateTraceDebugRequest)(nil)
+var _ json.Unmarshaler = (*CreateTraceDebugRequest)(nil)
+var _ json.Marshaler = (*StopTraceDebugRequest)(nil)
+var _ json.Unmarshaler = (*StopTraceDebugRequest)(nil)
+var _ json.Marshaler = (*GetTraceDebugStatusByRequestIDRequest)(nil)
+var _ json.Unmarshaler = (*GetTraceDebugStatusByRequestIDRequest)(nil)
+var _ json.Marshaler = (*GetTraceDebugHistoriesRequest)(nil)
+var _ json.Unmarshaler = (*GetTraceDebugHistoriesRequest)(nil)
 var _ json.Marshaler = (*GetSpansRequest)(nil)
 var _ json.Unmarshaler = (*GetSpansRequest)(nil)
 var _ json.Marshaler = (*GetTracesRequest)(nil)
@@ -20,10 +30,116 @@ var _ json.Marshaler = (*GetSpansResponse)(nil)
 var _ json.Unmarshaler = (*GetSpansResponse)(nil)
 var _ json.Marshaler = (*GetTracesResponse)(nil)
 var _ json.Unmarshaler = (*GetTracesResponse)(nil)
+var _ json.Marshaler = (*GetTraceDebugHistoriesResponse)(nil)
+var _ json.Unmarshaler = (*GetTraceDebugHistoriesResponse)(nil)
+var _ json.Marshaler = (*GetTraceDebugResponse)(nil)
+var _ json.Unmarshaler = (*GetTraceDebugResponse)(nil)
+var _ json.Marshaler = (*CreateTraceDebugResponse)(nil)
+var _ json.Unmarshaler = (*CreateTraceDebugResponse)(nil)
+var _ json.Marshaler = (*StopTraceDebugResponse)(nil)
+var _ json.Unmarshaler = (*StopTraceDebugResponse)(nil)
+var _ json.Marshaler = (*GetTraceDebugStatusByRequestIDResponse)(nil)
+var _ json.Unmarshaler = (*GetTraceDebugStatusByRequestIDResponse)(nil)
+var _ json.Marshaler = (*TraceDebug)(nil)
+var _ json.Unmarshaler = (*TraceDebug)(nil)
+var _ json.Marshaler = (*TraceDebugStatus)(nil)
+var _ json.Unmarshaler = (*TraceDebugStatus)(nil)
+var _ json.Marshaler = (*TraceDebugHistory)(nil)
+var _ json.Unmarshaler = (*TraceDebugHistory)(nil)
 var _ json.Marshaler = (*Span)(nil)
 var _ json.Unmarshaler = (*Span)(nil)
 var _ json.Marshaler = (*Trace)(nil)
 var _ json.Unmarshaler = (*Trace)(nil)
+
+// GetTraceDebugRequest implement json.Marshaler.
+func (m *GetTraceDebugRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceDebugRequest implement json.Marshaler.
+func (m *GetTraceDebugRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// CreateTraceDebugRequest implement json.Marshaler.
+func (m *CreateTraceDebugRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// CreateTraceDebugRequest implement json.Marshaler.
+func (m *CreateTraceDebugRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// StopTraceDebugRequest implement json.Marshaler.
+func (m *StopTraceDebugRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// StopTraceDebugRequest implement json.Marshaler.
+func (m *StopTraceDebugRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetTraceDebugStatusByRequestIDRequest implement json.Marshaler.
+func (m *GetTraceDebugStatusByRequestIDRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceDebugStatusByRequestIDRequest implement json.Marshaler.
+func (m *GetTraceDebugStatusByRequestIDRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetTraceDebugHistoriesRequest implement json.Marshaler.
+func (m *GetTraceDebugHistoriesRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceDebugHistoriesRequest implement json.Marshaler.
+func (m *GetTraceDebugHistoriesRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
 
 // GetSpansRequest implement json.Marshaler.
 func (m *GetSpansRequest) MarshalJSON() ([]byte, error) {
@@ -92,6 +208,150 @@ func (m *GetTracesResponse) MarshalJSON() ([]byte, error) {
 
 // GetTracesResponse implement json.Marshaler.
 func (m *GetTracesResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetTraceDebugHistoriesResponse implement json.Marshaler.
+func (m *GetTraceDebugHistoriesResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceDebugHistoriesResponse implement json.Marshaler.
+func (m *GetTraceDebugHistoriesResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetTraceDebugResponse implement json.Marshaler.
+func (m *GetTraceDebugResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceDebugResponse implement json.Marshaler.
+func (m *GetTraceDebugResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// CreateTraceDebugResponse implement json.Marshaler.
+func (m *CreateTraceDebugResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// CreateTraceDebugResponse implement json.Marshaler.
+func (m *CreateTraceDebugResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// StopTraceDebugResponse implement json.Marshaler.
+func (m *StopTraceDebugResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// StopTraceDebugResponse implement json.Marshaler.
+func (m *StopTraceDebugResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetTraceDebugStatusByRequestIDResponse implement json.Marshaler.
+func (m *GetTraceDebugStatusByRequestIDResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceDebugStatusByRequestIDResponse implement json.Marshaler.
+func (m *GetTraceDebugStatusByRequestIDResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TraceDebug implement json.Marshaler.
+func (m *TraceDebug) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TraceDebug implement json.Marshaler.
+func (m *TraceDebug) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TraceDebugStatus implement json.Marshaler.
+func (m *TraceDebugStatus) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TraceDebugStatus implement json.Marshaler.
+func (m *TraceDebugStatus) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TraceDebugHistory implement json.Marshaler.
+func (m *TraceDebugHistory) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TraceDebugHistory implement json.Marshaler.
+func (m *TraceDebugHistory) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

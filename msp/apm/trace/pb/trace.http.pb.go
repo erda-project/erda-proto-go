@@ -25,6 +25,16 @@ type TraceServiceHandler interface {
 	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
 	// GET /api/msp/apm/traces
 	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
+	// GET /api/msp/apm/trace/debug/histories
+	GetTraceDebugHistories(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error)
+	// GET /api/msp/apm/trace/debug/{requestID}
+	GetTraceDebugByRequestID(context.Context, *GetTraceDebugRequest) (*GetTraceDebugResponse, error)
+	// POST /api/msp/apm/trace/debug
+	CreateTraceDebug(context.Context, *CreateTraceDebugRequest) (*CreateTraceDebugResponse, error)
+	// PUT /api/msp/apm/trace/debug/{requestID}
+	StopTraceDebug(context.Context, *StopTraceDebugRequest) (*StopTraceDebugResponse, error)
+	// GET /api/msp/apm/trace/debug/{requestID}/history/status
+	GetTraceDebugHistoryStatusByRequestID(context.Context, *GetTraceDebugStatusByRequestIDRequest) (*GetTraceDebugStatusByRequestIDResponse, error)
 }
 
 // RegisterTraceServiceHandler register TraceServiceHandler to http.Router.
@@ -154,6 +164,271 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		)
 	}
 
+	add_GetTraceDebugHistories := func(method, path string, fn func(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetTraceDebugHistoriesRequest))
+		}
+		var GetTraceDebugHistories_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetTraceDebugHistories_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceDebugHistories", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GetTraceDebugHistoriesRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["terminusKey"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugHistories_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetTraceDebugByRequestID := func(method, path string, fn func(context.Context, *GetTraceDebugRequest) (*GetTraceDebugResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetTraceDebugRequest))
+		}
+		var GetTraceDebugByRequestID_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetTraceDebugByRequestID_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceDebugByRequestID", srv)
+			handler = h.Interceptor(handler)
+		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GetTraceDebugRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["terminusKey"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "requestID":
+							in.RequestID = val
+						}
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugByRequestID_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_CreateTraceDebug := func(method, path string, fn func(context.Context, *CreateTraceDebugRequest) (*CreateTraceDebugResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*CreateTraceDebugRequest))
+		}
+		var CreateTraceDebug_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			CreateTraceDebug_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "CreateTraceDebug", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in CreateTraceDebugRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateTraceDebug_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_StopTraceDebug := func(method, path string, fn func(context.Context, *StopTraceDebugRequest) (*StopTraceDebugResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*StopTraceDebugRequest))
+		}
+		var StopTraceDebug_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			StopTraceDebug_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "StopTraceDebug", srv)
+			handler = h.Interceptor(handler)
+		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in StopTraceDebugRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["terminusKey"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "requestID":
+							in.RequestID = val
+						}
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, StopTraceDebug_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetTraceDebugHistoryStatusByRequestID := func(method, path string, fn func(context.Context, *GetTraceDebugStatusByRequestIDRequest) (*GetTraceDebugStatusByRequestIDResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetTraceDebugStatusByRequestIDRequest))
+		}
+		var GetTraceDebugHistoryStatusByRequestID_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetTraceDebugHistoryStatusByRequestID_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceDebugHistoryStatusByRequestID", srv)
+			handler = h.Interceptor(handler)
+		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GetTraceDebugStatusByRequestIDRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["terminusKey"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "requestID":
+							in.RequestID = val
+						}
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugHistoryStatusByRequestID_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
 	add_GetSpans("GET", "/api/msp/apm/traces/{traceID}/spans", srv.GetSpans)
 	add_GetTraces("GET", "/api/msp/apm/traces", srv.GetTraces)
+	add_GetTraceDebugHistories("GET", "/api/msp/apm/trace/debug/histories", srv.GetTraceDebugHistories)
+	add_GetTraceDebugByRequestID("GET", "/api/msp/apm/trace/debug/{requestID}", srv.GetTraceDebugByRequestID)
+	add_CreateTraceDebug("POST", "/api/msp/apm/trace/debug", srv.CreateTraceDebug)
+	add_StopTraceDebug("PUT", "/api/msp/apm/trace/debug/{requestID}", srv.StopTraceDebug)
+	add_GetTraceDebugHistoryStatusByRequestID("GET", "/api/msp/apm/trace/debug/{requestID}/history/status", srv.GetTraceDebugHistoryStatusByRequestID)
 }
