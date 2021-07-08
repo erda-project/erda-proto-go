@@ -11,6 +11,7 @@ import (
 	runtime "github.com/erda-project/erda-infra/pkg/transport/http/runtime"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	http1 "net/http"
+	strconv "strconv"
 	strings "strings"
 )
 
@@ -70,6 +71,14 @@ func RegisterConfigCenterServiceHandler(r http.Router, srv ConfigCenterServiceHa
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
+				}
+				params := r.URL.Query()
+				if vals := params["pageNo"]; len(vals) > 0 {
+					val, err := strconv.ParseInt(vals[0], 10, 64)
+					if err != nil {
+						return nil, err
+					}
+					in.PageNum = val
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
