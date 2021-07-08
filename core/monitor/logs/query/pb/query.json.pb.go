@@ -4,9 +4,7 @@
 package pb
 
 import (
-	bytes "bytes"
 	json "encoding/json"
-	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -29,13 +27,11 @@ var _ json.Unmarshaler = (*GetLogByOrganizationResponse)(nil)
 
 // LogItem implement json.Marshaler.
 func (m *LogItem) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // LogItem implement json.Marshaler.
@@ -47,13 +43,11 @@ func (m *LogItem) UnmarshalJSON(b []byte) error {
 
 // GetLogRequest implement json.Marshaler.
 func (m *GetLogRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetLogRequest implement json.Marshaler.
@@ -65,13 +59,11 @@ func (m *GetLogRequest) UnmarshalJSON(b []byte) error {
 
 // GetLogByRuntimeRequest implement json.Marshaler.
 func (m *GetLogByRuntimeRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetLogByRuntimeRequest implement json.Marshaler.
@@ -83,13 +75,11 @@ func (m *GetLogByRuntimeRequest) UnmarshalJSON(b []byte) error {
 
 // GetLogByOrganizationRequest implement json.Marshaler.
 func (m *GetLogByOrganizationRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetLogByOrganizationRequest implement json.Marshaler.
@@ -101,13 +91,11 @@ func (m *GetLogByOrganizationRequest) UnmarshalJSON(b []byte) error {
 
 // GetLogResponse implement json.Marshaler.
 func (m *GetLogResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetLogResponse implement json.Marshaler.
@@ -119,13 +107,11 @@ func (m *GetLogResponse) UnmarshalJSON(b []byte) error {
 
 // GetLogByRuntimeResponse implement json.Marshaler.
 func (m *GetLogByRuntimeResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetLogByRuntimeResponse implement json.Marshaler.
@@ -137,13 +123,11 @@ func (m *GetLogByRuntimeResponse) UnmarshalJSON(b []byte) error {
 
 // GetLogByOrganizationResponse implement json.Marshaler.
 func (m *GetLogByOrganizationResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetLogByOrganizationResponse implement json.Marshaler.

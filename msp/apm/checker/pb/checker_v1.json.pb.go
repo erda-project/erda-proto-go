@@ -4,9 +4,7 @@
 package pb
 
 import (
-	bytes "bytes"
 	json "encoding/json"
-	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -57,13 +55,11 @@ var _ json.Unmarshaler = (*CheckerChartV1)(nil)
 
 // CreateCheckerV1Request implement json.Marshaler.
 func (m *CreateCheckerV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CreateCheckerV1Request implement json.Marshaler.
@@ -75,13 +71,11 @@ func (m *CreateCheckerV1Request) UnmarshalJSON(b []byte) error {
 
 // CreateCheckerV1Response implement json.Marshaler.
 func (m *CreateCheckerV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CreateCheckerV1Response implement json.Marshaler.
@@ -93,13 +87,11 @@ func (m *CreateCheckerV1Response) UnmarshalJSON(b []byte) error {
 
 // UpdateCheckerV1Request implement json.Marshaler.
 func (m *UpdateCheckerV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // UpdateCheckerV1Request implement json.Marshaler.
@@ -111,13 +103,11 @@ func (m *UpdateCheckerV1Request) UnmarshalJSON(b []byte) error {
 
 // UpdateCheckerV1Response implement json.Marshaler.
 func (m *UpdateCheckerV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // UpdateCheckerV1Response implement json.Marshaler.
@@ -129,13 +119,11 @@ func (m *UpdateCheckerV1Response) UnmarshalJSON(b []byte) error {
 
 // DeleteCheckerV1Request implement json.Marshaler.
 func (m *DeleteCheckerV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DeleteCheckerV1Request implement json.Marshaler.
@@ -147,13 +135,11 @@ func (m *DeleteCheckerV1Request) UnmarshalJSON(b []byte) error {
 
 // DeleteCheckerV1Response implement json.Marshaler.
 func (m *DeleteCheckerV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DeleteCheckerV1Response implement json.Marshaler.
@@ -165,13 +151,11 @@ func (m *DeleteCheckerV1Response) UnmarshalJSON(b []byte) error {
 
 // GetCheckerV1Request implement json.Marshaler.
 func (m *GetCheckerV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetCheckerV1Request implement json.Marshaler.
@@ -183,13 +167,11 @@ func (m *GetCheckerV1Request) UnmarshalJSON(b []byte) error {
 
 // GetCheckerV1Response implement json.Marshaler.
 func (m *GetCheckerV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetCheckerV1Response implement json.Marshaler.
@@ -201,13 +183,11 @@ func (m *GetCheckerV1Response) UnmarshalJSON(b []byte) error {
 
 // DescribeCheckersV1Request implement json.Marshaler.
 func (m *DescribeCheckersV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DescribeCheckersV1Request implement json.Marshaler.
@@ -219,13 +199,11 @@ func (m *DescribeCheckersV1Request) UnmarshalJSON(b []byte) error {
 
 // DescribeCheckersV1Response implement json.Marshaler.
 func (m *DescribeCheckersV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DescribeCheckersV1Response implement json.Marshaler.
@@ -237,13 +215,11 @@ func (m *DescribeCheckersV1Response) UnmarshalJSON(b []byte) error {
 
 // DescribeCheckerV1Request implement json.Marshaler.
 func (m *DescribeCheckerV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DescribeCheckerV1Request implement json.Marshaler.
@@ -255,13 +231,11 @@ func (m *DescribeCheckerV1Request) UnmarshalJSON(b []byte) error {
 
 // DescribeCheckerV1Response implement json.Marshaler.
 func (m *DescribeCheckerV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DescribeCheckerV1Response implement json.Marshaler.
@@ -273,13 +247,11 @@ func (m *DescribeCheckerV1Response) UnmarshalJSON(b []byte) error {
 
 // GetCheckerStatusV1Request implement json.Marshaler.
 func (m *GetCheckerStatusV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetCheckerStatusV1Request implement json.Marshaler.
@@ -291,13 +263,11 @@ func (m *GetCheckerStatusV1Request) UnmarshalJSON(b []byte) error {
 
 // GetCheckerStatusV1Response implement json.Marshaler.
 func (m *GetCheckerStatusV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetCheckerStatusV1Response implement json.Marshaler.
@@ -309,13 +279,11 @@ func (m *GetCheckerStatusV1Response) UnmarshalJSON(b []byte) error {
 
 // CheckerStatusV1 implement json.Marshaler.
 func (m *CheckerStatusV1) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CheckerStatusV1 implement json.Marshaler.
@@ -327,13 +295,11 @@ func (m *CheckerStatusV1) UnmarshalJSON(b []byte) error {
 
 // GetCheckerIssuesV1Request implement json.Marshaler.
 func (m *GetCheckerIssuesV1Request) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetCheckerIssuesV1Request implement json.Marshaler.
@@ -345,13 +311,11 @@ func (m *GetCheckerIssuesV1Request) UnmarshalJSON(b []byte) error {
 
 // GetCheckerIssuesV1Response implement json.Marshaler.
 func (m *GetCheckerIssuesV1Response) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetCheckerIssuesV1Response implement json.Marshaler.
@@ -363,13 +327,11 @@ func (m *GetCheckerIssuesV1Response) UnmarshalJSON(b []byte) error {
 
 // CheckerV1 implement json.Marshaler.
 func (m *CheckerV1) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CheckerV1 implement json.Marshaler.
@@ -381,13 +343,11 @@ func (m *CheckerV1) UnmarshalJSON(b []byte) error {
 
 // DescribeResultV1 implement json.Marshaler.
 func (m *DescribeResultV1) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DescribeResultV1 implement json.Marshaler.
@@ -399,13 +359,11 @@ func (m *DescribeResultV1) UnmarshalJSON(b []byte) error {
 
 // DescribeItemV1 implement json.Marshaler.
 func (m *DescribeItemV1) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // DescribeItemV1 implement json.Marshaler.
@@ -417,13 +375,11 @@ func (m *DescribeItemV1) UnmarshalJSON(b []byte) error {
 
 // CheckerChartV1 implement json.Marshaler.
 func (m *CheckerChartV1) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CheckerChartV1 implement json.Marshaler.

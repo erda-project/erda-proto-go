@@ -4,9 +4,7 @@
 package pb
 
 import (
-	bytes "bytes"
 	json "encoding/json"
-	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -19,13 +17,11 @@ var _ json.Unmarshaler = (*QueueUsageItem)(nil)
 
 // QueueUsage implement json.Marshaler.
 func (m *QueueUsage) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // QueueUsage implement json.Marshaler.
@@ -37,13 +33,11 @@ func (m *QueueUsage) UnmarshalJSON(b []byte) error {
 
 // QueueUsageItem implement json.Marshaler.
 func (m *QueueUsageItem) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // QueueUsageItem implement json.Marshaler.

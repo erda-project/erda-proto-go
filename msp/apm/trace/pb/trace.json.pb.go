@@ -4,9 +4,7 @@
 package pb
 
 import (
-	bytes "bytes"
 	json "encoding/json"
-	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
 
@@ -53,13 +51,11 @@ var _ json.Unmarshaler = (*Trace)(nil)
 
 // GetTraceDebugRequest implement json.Marshaler.
 func (m *GetTraceDebugRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTraceDebugRequest implement json.Marshaler.
@@ -71,13 +67,11 @@ func (m *GetTraceDebugRequest) UnmarshalJSON(b []byte) error {
 
 // CreateTraceDebugRequest implement json.Marshaler.
 func (m *CreateTraceDebugRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CreateTraceDebugRequest implement json.Marshaler.
@@ -89,13 +83,11 @@ func (m *CreateTraceDebugRequest) UnmarshalJSON(b []byte) error {
 
 // StopTraceDebugRequest implement json.Marshaler.
 func (m *StopTraceDebugRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // StopTraceDebugRequest implement json.Marshaler.
@@ -107,13 +99,11 @@ func (m *StopTraceDebugRequest) UnmarshalJSON(b []byte) error {
 
 // GetTraceDebugStatusByRequestIDRequest implement json.Marshaler.
 func (m *GetTraceDebugStatusByRequestIDRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTraceDebugStatusByRequestIDRequest implement json.Marshaler.
@@ -125,13 +115,11 @@ func (m *GetTraceDebugStatusByRequestIDRequest) UnmarshalJSON(b []byte) error {
 
 // GetTraceDebugHistoriesRequest implement json.Marshaler.
 func (m *GetTraceDebugHistoriesRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTraceDebugHistoriesRequest implement json.Marshaler.
@@ -143,13 +131,11 @@ func (m *GetTraceDebugHistoriesRequest) UnmarshalJSON(b []byte) error {
 
 // GetSpansRequest implement json.Marshaler.
 func (m *GetSpansRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetSpansRequest implement json.Marshaler.
@@ -161,13 +147,11 @@ func (m *GetSpansRequest) UnmarshalJSON(b []byte) error {
 
 // GetTracesRequest implement json.Marshaler.
 func (m *GetTracesRequest) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTracesRequest implement json.Marshaler.
@@ -179,13 +163,11 @@ func (m *GetTracesRequest) UnmarshalJSON(b []byte) error {
 
 // GetSpansResponse implement json.Marshaler.
 func (m *GetSpansResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetSpansResponse implement json.Marshaler.
@@ -197,13 +179,11 @@ func (m *GetSpansResponse) UnmarshalJSON(b []byte) error {
 
 // GetTracesResponse implement json.Marshaler.
 func (m *GetTracesResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTracesResponse implement json.Marshaler.
@@ -215,13 +195,11 @@ func (m *GetTracesResponse) UnmarshalJSON(b []byte) error {
 
 // GetTraceDebugHistoriesResponse implement json.Marshaler.
 func (m *GetTraceDebugHistoriesResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTraceDebugHistoriesResponse implement json.Marshaler.
@@ -233,13 +211,11 @@ func (m *GetTraceDebugHistoriesResponse) UnmarshalJSON(b []byte) error {
 
 // GetTraceDebugResponse implement json.Marshaler.
 func (m *GetTraceDebugResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTraceDebugResponse implement json.Marshaler.
@@ -251,13 +227,11 @@ func (m *GetTraceDebugResponse) UnmarshalJSON(b []byte) error {
 
 // CreateTraceDebugResponse implement json.Marshaler.
 func (m *CreateTraceDebugResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // CreateTraceDebugResponse implement json.Marshaler.
@@ -269,13 +243,11 @@ func (m *CreateTraceDebugResponse) UnmarshalJSON(b []byte) error {
 
 // StopTraceDebugResponse implement json.Marshaler.
 func (m *StopTraceDebugResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // StopTraceDebugResponse implement json.Marshaler.
@@ -287,13 +259,11 @@ func (m *StopTraceDebugResponse) UnmarshalJSON(b []byte) error {
 
 // GetTraceDebugStatusByRequestIDResponse implement json.Marshaler.
 func (m *GetTraceDebugStatusByRequestIDResponse) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // GetTraceDebugStatusByRequestIDResponse implement json.Marshaler.
@@ -305,13 +275,11 @@ func (m *GetTraceDebugStatusByRequestIDResponse) UnmarshalJSON(b []byte) error {
 
 // TraceDebug implement json.Marshaler.
 func (m *TraceDebug) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // TraceDebug implement json.Marshaler.
@@ -323,13 +291,11 @@ func (m *TraceDebug) UnmarshalJSON(b []byte) error {
 
 // TraceDebugStatus implement json.Marshaler.
 func (m *TraceDebugStatus) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // TraceDebugStatus implement json.Marshaler.
@@ -341,13 +307,11 @@ func (m *TraceDebugStatus) UnmarshalJSON(b []byte) error {
 
 // TraceDebugHistory implement json.Marshaler.
 func (m *TraceDebugHistory) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // TraceDebugHistory implement json.Marshaler.
@@ -359,13 +323,11 @@ func (m *TraceDebugHistory) UnmarshalJSON(b []byte) error {
 
 // Span implement json.Marshaler.
 func (m *Span) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // Span implement json.Marshaler.
@@ -377,13 +339,11 @@ func (m *Span) UnmarshalJSON(b []byte) error {
 
 // Trace implement json.Marshaler.
 func (m *Trace) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
+	return (&protojson.MarshalOptions{
+		UseProtoNames:   false,
+		UseEnumNumbers:  false,
+		EmitUnpopulated: true,
+	}).Marshal(m)
 }
 
 // Trace implement json.Marshaler.

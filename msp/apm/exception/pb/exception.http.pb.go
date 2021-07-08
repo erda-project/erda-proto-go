@@ -147,11 +147,11 @@ func RegisterExceptionServiceHandler(r http.Router, srv ExceptionServiceHandler,
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["scopeId"]; len(vals) > 0 {
-					in.ScopeID = vals[0]
-				}
 				if vals := params["exceptionEventId"]; len(vals) > 0 {
 					in.ExceptionEventID = vals[0]
+				}
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
 				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
