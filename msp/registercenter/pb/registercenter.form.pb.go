@@ -169,16 +169,6 @@ func (m *EnableHTTPServiceRequest) UnmarshalURLValues(prefix string, values url.
 					return err
 				}
 				m.Service.Online = val
-			case "service.ip":
-				if m.Service == nil {
-					m.Service = &EnableHTTPService{}
-				}
-				m.Service.Ip = vals[0]
-			case "service.port":
-				if m.Service == nil {
-					m.Service = &EnableHTTPService{}
-				}
-				m.Service.Port = vals[0]
 			}
 		}
 	}
@@ -213,16 +203,6 @@ func (m *EnableHTTPServiceResponse) UnmarshalURLValues(prefix string, values url
 					return err
 				}
 				m.Data.Online = val
-			case "data.ip":
-				if m.Data == nil {
-					m.Data = &EnableHTTPService{}
-				}
-				m.Data.Ip = vals[0]
-			case "data.port":
-				if m.Data == nil {
-					m.Data = &EnableHTTPService{}
-				}
-				m.Data.Port = vals[0]
 			}
 		}
 	}
@@ -244,10 +224,6 @@ func (m *EnableHTTPService) UnmarshalURLValues(prefix string, values url.Values)
 					return err
 				}
 				m.Online = val
-			case "ip":
-				m.Ip = vals[0]
-			case "port":
-				m.Port = vals[0]
 			}
 		}
 	}
