@@ -43,3 +43,23 @@ func (s *traceServiceWrapper) GetSpans(ctx context.Context, req *pb.GetSpansRequ
 func (s *traceServiceWrapper) GetTraces(ctx context.Context, req *pb.GetTracesRequest) (*pb.GetTracesResponse, error) {
 	return s.client.GetTraces(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *traceServiceWrapper) GetTraceDebugHistories(ctx context.Context, req *pb.GetTraceDebugHistoriesRequest) (*pb.GetTraceDebugHistoriesResponse, error) {
+	return s.client.GetTraceDebugHistories(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
+func (s *traceServiceWrapper) GetTraceDebugByRequestID(ctx context.Context, req *pb.GetTraceDebugRequest) (*pb.GetTraceDebugResponse, error) {
+	return s.client.GetTraceDebugByRequestID(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
+func (s *traceServiceWrapper) CreateTraceDebug(ctx context.Context, req *pb.CreateTraceDebugRequest) (*pb.CreateTraceDebugResponse, error) {
+	return s.client.CreateTraceDebug(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
+func (s *traceServiceWrapper) StopTraceDebug(ctx context.Context, req *pb.StopTraceDebugRequest) (*pb.StopTraceDebugResponse, error) {
+	return s.client.StopTraceDebug(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
+func (s *traceServiceWrapper) GetTraceDebugHistoryStatusByRequestID(ctx context.Context, req *pb.GetTraceDebugStatusByRequestIDRequest) (*pb.GetTraceDebugStatusByRequestIDResponse, error) {
+	return s.client.GetTraceDebugHistoryStatusByRequestID(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
