@@ -22,7 +22,8 @@ const _ = grpc.SupportPackageIsVersion5
 type ResourceServiceClient interface {
 	CreateResource(ctx context.Context, in *CreateResourceRequest, opts ...grpc.CallOption) (*CreateResourceResponse, error)
 	DeleteResource(ctx context.Context, in *DeleteResourceRequest, opts ...grpc.CallOption) (*DeleteResourceResponse, error)
-	GetRuntime(ctx context.Context, in *GetRuntimeRequest, opts ...grpc.CallOption) (*GetRuntimeResponse, error)
+	GetMonitorRuntime(ctx context.Context, in *GetMonitorRuntimeRequest, opts ...grpc.CallOption) (*GetMonitorRuntimeResponse, error)
+	GetMonitorInstance(ctx context.Context, in *GetMonitorInstanceRequest, opts ...grpc.CallOption) (*GetMonitorInstanceResponse, error)
 }
 
 type resourceServiceClient struct {
@@ -51,9 +52,18 @@ func (c *resourceServiceClient) DeleteResource(ctx context.Context, in *DeleteRe
 	return out, nil
 }
 
-func (c *resourceServiceClient) GetRuntime(ctx context.Context, in *GetRuntimeRequest, opts ...grpc.CallOption) (*GetRuntimeResponse, error) {
-	out := new(GetRuntimeResponse)
-	err := c.cc.Invoke(ctx, "/erda.msp.resource.ResourceService/GetRuntime", in, out, opts...)
+func (c *resourceServiceClient) GetMonitorRuntime(ctx context.Context, in *GetMonitorRuntimeRequest, opts ...grpc.CallOption) (*GetMonitorRuntimeResponse, error) {
+	out := new(GetMonitorRuntimeResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.resource.ResourceService/GetMonitorRuntime", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *resourceServiceClient) GetMonitorInstance(ctx context.Context, in *GetMonitorInstanceRequest, opts ...grpc.CallOption) (*GetMonitorInstanceResponse, error) {
+	out := new(GetMonitorInstanceResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.resource.ResourceService/GetMonitorInstance", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -66,7 +76,8 @@ func (c *resourceServiceClient) GetRuntime(ctx context.Context, in *GetRuntimeRe
 type ResourceServiceServer interface {
 	CreateResource(context.Context, *CreateResourceRequest) (*CreateResourceResponse, error)
 	DeleteResource(context.Context, *DeleteResourceRequest) (*DeleteResourceResponse, error)
-	GetRuntime(context.Context, *GetRuntimeRequest) (*GetRuntimeResponse, error)
+	GetMonitorRuntime(context.Context, *GetMonitorRuntimeRequest) (*GetMonitorRuntimeResponse, error)
+	GetMonitorInstance(context.Context, *GetMonitorInstanceRequest) (*GetMonitorInstanceResponse, error)
 }
 
 // UnimplementedResourceServiceServer should be embedded to have forward compatible implementations.
@@ -79,8 +90,11 @@ func (*UnimplementedResourceServiceServer) CreateResource(context.Context, *Crea
 func (*UnimplementedResourceServiceServer) DeleteResource(context.Context, *DeleteResourceRequest) (*DeleteResourceResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteResource not implemented")
 }
-func (*UnimplementedResourceServiceServer) GetRuntime(context.Context, *GetRuntimeRequest) (*GetRuntimeResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetRuntime not implemented")
+func (*UnimplementedResourceServiceServer) GetMonitorRuntime(context.Context, *GetMonitorRuntimeRequest) (*GetMonitorRuntimeResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMonitorRuntime not implemented")
+}
+func (*UnimplementedResourceServiceServer) GetMonitorInstance(context.Context, *GetMonitorInstanceRequest) (*GetMonitorInstanceResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetMonitorInstance not implemented")
 }
 
 func RegisterResourceServiceServer(s grpc1.ServiceRegistrar, srv ResourceServiceServer, opts ...grpc1.HandleOption) {
@@ -119,13 +133,22 @@ func _get_ResourceService_serviceDesc(srv ResourceServiceServer, opts ...grpc1.H
 		_ResourceService_DeleteResource_Handler = h.Interceptor(_ResourceService_DeleteResource_Handler)
 	}
 
-	_ResourceService_GetRuntime_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.GetRuntime(ctx, req.(*GetRuntimeRequest))
+	_ResourceService_GetMonitorRuntime_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetMonitorRuntime(ctx, req.(*GetMonitorRuntimeRequest))
 	}
-	var _ResourceService_GetRuntime_info transport.ServiceInfo
+	var _ResourceService_GetMonitorRuntime_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_ResourceService_GetRuntime_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetRuntime", srv)
-		_ResourceService_GetRuntime_Handler = h.Interceptor(_ResourceService_GetRuntime_Handler)
+		_ResourceService_GetMonitorRuntime_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetMonitorRuntime", srv)
+		_ResourceService_GetMonitorRuntime_Handler = h.Interceptor(_ResourceService_GetMonitorRuntime_Handler)
+	}
+
+	_ResourceService_GetMonitorInstance_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetMonitorInstance(ctx, req.(*GetMonitorInstanceRequest))
+	}
+	var _ResourceService_GetMonitorInstance_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ResourceService_GetMonitorInstance_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetMonitorInstance", srv)
+		_ResourceService_GetMonitorInstance_Handler = h.Interceptor(_ResourceService_GetMonitorInstance_Handler)
 	}
 
 	var serviceDesc = _ResourceService_serviceDesc
@@ -177,26 +200,49 @@ func _get_ResourceService_serviceDesc(srv ResourceServiceServer, opts ...grpc1.H
 			},
 		},
 		{
-			MethodName: "GetRuntime",
+			MethodName: "GetMonitorRuntime",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(GetRuntimeRequest)
+				in := new(GetMonitorRuntimeRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(ResourceServiceServer).GetRuntime(ctx, in)
+					return srv.(ResourceServiceServer).GetMonitorRuntime(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ResourceService_GetRuntime_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ResourceService_GetMonitorRuntime_info)
 				}
 				if interceptor == nil {
-					return _ResourceService_GetRuntime_Handler(ctx, in)
+					return _ResourceService_GetMonitorRuntime_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.msp.resource.ResourceService/GetRuntime",
+					FullMethod: "/erda.msp.resource.ResourceService/GetMonitorRuntime",
 				}
-				return interceptor(ctx, in, info, _ResourceService_GetRuntime_Handler)
+				return interceptor(ctx, in, info, _ResourceService_GetMonitorRuntime_Handler)
+			},
+		},
+		{
+			MethodName: "GetMonitorInstance",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetMonitorInstanceRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ResourceServiceServer).GetMonitorInstance(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ResourceService_GetMonitorInstance_info)
+				}
+				if interceptor == nil {
+					return _ResourceService_GetMonitorInstance_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.resource.ResourceService/GetMonitorInstance",
+				}
+				return interceptor(ctx, in, info, _ResourceService_GetMonitorInstance_Handler)
 			},
 		},
 	}

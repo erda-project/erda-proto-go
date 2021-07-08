@@ -16,9 +16,12 @@ var _ urlenc.URLValuesUnmarshaler = (*CreateResourceResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ResourceCreateResult)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteResourceRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteResourceResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetRuntimeRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetRuntimeResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetMonitorRuntimeRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetMonitorRuntimeResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*MonitorRuntime)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetMonitorInstanceRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetMonitorInstanceResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*MonitorInstance)(nil)
 
 // CreateResourceRequest implement urlenc.URLValuesUnmarshaler.
 func (m *CreateResourceRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -127,8 +130,8 @@ func (m *DeleteResourceResponse) UnmarshalURLValues(prefix string, values url.Va
 	return nil
 }
 
-// GetRuntimeRequest implement urlenc.URLValuesUnmarshaler.
-func (m *GetRuntimeRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetMonitorRuntimeRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetMonitorRuntimeRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -146,8 +149,8 @@ func (m *GetRuntimeRequest) UnmarshalURLValues(prefix string, values url.Values)
 	return nil
 }
 
-// GetRuntimeResponse implement urlenc.URLValuesUnmarshaler.
-func (m *GetRuntimeResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetMonitorRuntimeResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetMonitorRuntimeResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -222,6 +225,101 @@ func (m *MonitorRuntime) UnmarshalURLValues(prefix string, values url.Values) er
 				m.RuntimeId = vals[0]
 			case "runtimeName":
 				m.RuntimeName = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GetMonitorInstanceRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetMonitorInstanceRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "terminusKey":
+				m.TerminusKey = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GetMonitorInstanceResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetMonitorInstanceResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+			case "data.monitorId":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.MonitorId = vals[0]
+			case "data.monitorName":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.MonitorName = vals[0]
+			case "data.terminusKey":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.TerminusKey = vals[0]
+			case "data.projectId":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.ProjectId = vals[0]
+			case "data.projectName":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.ProjectName = vals[0]
+			case "data.workspace":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.Workspace = vals[0]
+			case "data.createTime":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.CreateTime = vals[0]
+			case "data.updateTime":
+				if m.Data == nil {
+					m.Data = &MonitorInstance{}
+				}
+				m.Data.UpdateTime = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// MonitorInstance implement urlenc.URLValuesUnmarshaler.
+func (m *MonitorInstance) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "monitorId":
+				m.MonitorId = vals[0]
+			case "monitorName":
+				m.MonitorName = vals[0]
+			case "terminusKey":
+				m.TerminusKey = vals[0]
+			case "projectId":
+				m.ProjectId = vals[0]
+			case "projectName":
+				m.ProjectName = vals[0]
+			case "workspace":
+				m.Workspace = vals[0]
+			case "createTime":
+				m.CreateTime = vals[0]
+			case "updateTime":
+				m.UpdateTime = vals[0]
 			}
 		}
 	}

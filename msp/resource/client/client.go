@@ -44,6 +44,10 @@ func (s *resourceServiceWrapper) DeleteResource(ctx context.Context, req *pb.Del
 	return s.client.DeleteResource(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
-func (s *resourceServiceWrapper) GetRuntime(ctx context.Context, req *pb.GetRuntimeRequest) (*pb.GetRuntimeResponse, error) {
-	return s.client.GetRuntime(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *resourceServiceWrapper) GetMonitorRuntime(ctx context.Context, req *pb.GetMonitorRuntimeRequest) (*pb.GetMonitorRuntimeResponse, error) {
+	return s.client.GetMonitorRuntime(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
+func (s *resourceServiceWrapper) GetMonitorInstance(ctx context.Context, req *pb.GetMonitorInstanceRequest) (*pb.GetMonitorInstanceResponse, error) {
+	return s.client.GetMonitorInstance(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

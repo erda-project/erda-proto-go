@@ -22,12 +22,18 @@ var _ json.Marshaler = (*DeleteResourceRequest)(nil)
 var _ json.Unmarshaler = (*DeleteResourceRequest)(nil)
 var _ json.Marshaler = (*DeleteResourceResponse)(nil)
 var _ json.Unmarshaler = (*DeleteResourceResponse)(nil)
-var _ json.Marshaler = (*GetRuntimeRequest)(nil)
-var _ json.Unmarshaler = (*GetRuntimeRequest)(nil)
-var _ json.Marshaler = (*GetRuntimeResponse)(nil)
-var _ json.Unmarshaler = (*GetRuntimeResponse)(nil)
+var _ json.Marshaler = (*GetMonitorRuntimeRequest)(nil)
+var _ json.Unmarshaler = (*GetMonitorRuntimeRequest)(nil)
+var _ json.Marshaler = (*GetMonitorRuntimeResponse)(nil)
+var _ json.Unmarshaler = (*GetMonitorRuntimeResponse)(nil)
 var _ json.Marshaler = (*MonitorRuntime)(nil)
 var _ json.Unmarshaler = (*MonitorRuntime)(nil)
+var _ json.Marshaler = (*GetMonitorInstanceRequest)(nil)
+var _ json.Unmarshaler = (*GetMonitorInstanceRequest)(nil)
+var _ json.Marshaler = (*GetMonitorInstanceResponse)(nil)
+var _ json.Unmarshaler = (*GetMonitorInstanceResponse)(nil)
+var _ json.Marshaler = (*MonitorInstance)(nil)
+var _ json.Unmarshaler = (*MonitorInstance)(nil)
 
 // CreateResourceRequest implement json.Marshaler.
 func (m *CreateResourceRequest) MarshalJSON() ([]byte, error) {
@@ -119,8 +125,8 @@ func (m *DeleteResourceResponse) UnmarshalJSON(b []byte) error {
 	}).Unmarshal(b, m)
 }
 
-// GetRuntimeRequest implement json.Marshaler.
-func (m *GetRuntimeRequest) MarshalJSON() ([]byte, error) {
+// GetMonitorRuntimeRequest implement json.Marshaler.
+func (m *GetMonitorRuntimeRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -130,15 +136,15 @@ func (m *GetRuntimeRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetRuntimeRequest implement json.Marshaler.
-func (m *GetRuntimeRequest) UnmarshalJSON(b []byte) error {
+// GetMonitorRuntimeRequest implement json.Marshaler.
+func (m *GetMonitorRuntimeRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// GetRuntimeResponse implement json.Marshaler.
-func (m *GetRuntimeResponse) MarshalJSON() ([]byte, error) {
+// GetMonitorRuntimeResponse implement json.Marshaler.
+func (m *GetMonitorRuntimeResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -148,8 +154,8 @@ func (m *GetRuntimeResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetRuntimeResponse implement json.Marshaler.
-func (m *GetRuntimeResponse) UnmarshalJSON(b []byte) error {
+// GetMonitorRuntimeResponse implement json.Marshaler.
+func (m *GetMonitorRuntimeResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
@@ -168,6 +174,60 @@ func (m *MonitorRuntime) MarshalJSON() ([]byte, error) {
 
 // MonitorRuntime implement json.Marshaler.
 func (m *MonitorRuntime) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetMonitorInstanceRequest implement json.Marshaler.
+func (m *GetMonitorInstanceRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetMonitorInstanceRequest implement json.Marshaler.
+func (m *GetMonitorInstanceRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetMonitorInstanceResponse implement json.Marshaler.
+func (m *GetMonitorInstanceResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetMonitorInstanceResponse implement json.Marshaler.
+func (m *GetMonitorInstanceResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// MonitorInstance implement json.Marshaler.
+func (m *MonitorInstance) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// MonitorInstance implement json.Marshaler.
+func (m *MonitorInstance) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
