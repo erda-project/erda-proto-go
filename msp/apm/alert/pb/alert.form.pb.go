@@ -293,6 +293,16 @@ func (m *CreateAlertRequest) UnmarshalURLValues(prefix string, values url.Values
 					return err
 				}
 				m.UpdateTime = val
+			case "alertScope":
+				m.AlertScope = vals[0]
+			case "alertScopeId":
+				m.AlertScopeId = vals[0]
+			case "enable":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Enable = val
 			}
 		}
 	}
