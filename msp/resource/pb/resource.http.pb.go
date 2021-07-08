@@ -25,7 +25,9 @@ type ResourceServiceHandler interface {
 	// DELETE /{engine}/dice/resources/{id}
 	DeleteResource(context.Context, *DeleteResourceRequest) (*DeleteResourceResponse, error)
 	// GET /api/msp/monitor/runtime/{runtimeId}
-	GetRuntime(context.Context, *GetRuntimeRequest) (*GetRuntimeResponse, error)
+	GetMonitorRuntime(context.Context, *GetMonitorRuntimeRequest) (*GetMonitorRuntimeResponse, error)
+	// GET /api/msp/monitor/instances/{terminusKey}
+	GetMonitorInstance(context.Context, *GetMonitorInstanceRequest) (*GetMonitorInstanceResponse, error)
 }
 
 // RegisterResourceServiceHandler register ResourceServiceHandler to http.Router.
@@ -165,13 +167,13 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 		)
 	}
 
-	add_GetRuntime := func(method, path string, fn func(context.Context, *GetRuntimeRequest) (*GetRuntimeResponse, error)) {
+	add_GetMonitorRuntime := func(method, path string, fn func(context.Context, *GetMonitorRuntimeRequest) (*GetMonitorRuntimeResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*GetRuntimeRequest))
+			return fn(ctx, req.(*GetMonitorRuntimeRequest))
 		}
-		var GetRuntime_info transport.ServiceInfo
+		var GetMonitorRuntime_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetRuntime_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetRuntime", srv)
+			GetMonitorRuntime_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetMonitorRuntime", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -179,7 +181,7 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in GetRuntimeRequest
+				var in GetMonitorRuntimeRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -190,14 +192,14 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["runtime_name"]; len(vals) > 0 {
-					in.RuntimeName = vals[0]
-				}
 				if vals := params["terminus_key"]; len(vals) > 0 {
 					in.TerminusKey = vals[0]
 				}
 				if vals := params["application_id"]; len(vals) > 0 {
 					in.ApplicationId = vals[0]
+				}
+				if vals := params["runtime_name"]; len(vals) > 0 {
+					in.RuntimeName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -222,7 +224,65 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetRuntime_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMonitorRuntime_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetMonitorInstance := func(method, path string, fn func(context.Context, *GetMonitorInstanceRequest) (*GetMonitorInstanceResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetMonitorInstanceRequest))
+		}
+		var GetMonitorInstance_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetMonitorInstance_info = transport.NewServiceInfo("erda.msp.resource.ResourceService", "GetMonitorInstance", srv)
+			handler = h.Interceptor(handler)
+		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GetMonitorInstanceRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "terminusKey":
+							in.TerminusKey = val
+						}
+					}
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMonitorInstance_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -235,5 +295,6 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 
 	add_CreateResource("POST", "/{engine}/dice/resources", srv.CreateResource)
 	add_DeleteResource("DELETE", "/{engine}/dice/resources/{id}", srv.DeleteResource)
-	add_GetRuntime("GET", "/api/msp/monitor/runtime/{runtimeId}", srv.GetRuntime)
+	add_GetMonitorRuntime("GET", "/api/msp/monitor/runtime/{runtimeId}", srv.GetMonitorRuntime)
+	add_GetMonitorInstance("GET", "/api/msp/monitor/instances/{terminusKey}", srv.GetMonitorInstance)
 }
