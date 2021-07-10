@@ -21,49 +21,49 @@ const _ = http.SupportPackageIsVersion1
 
 // AlertServiceHandler is the server API for AlertService service.
 type AlertServiceHandler interface {
-	// GET /api/msp/apm/alert-rules
+	// GET /api/msp/apm/{tenantGroup}/alert-rules
 	QueryAlertRule(context.Context, *QueryAlertRuleRequest) (*QueryAlertRuleResponse, error)
-	// GET /api/msp/apm/alerts
+	// GET /api/msp/apm/{tenantGroup}/alerts
 	QueryAlert(context.Context, *QueryAlertRequest) (*QueryAlertResponse, error)
-	// GET /api/msp/apm/alerts/{id}
+	// GET /api/msp/apm/{tenantGroup}/alerts/{id}
 	GetAlert(context.Context, *GetAlertRequest) (*GetAlertResponse, error)
-	// POST /api/msp/apm/alerts
+	// POST /api/msp/apm/{tenantGroup}/alerts
 	CreateAlert(context.Context, *CreateAlertRequest) (*CreateAlertResponse, error)
-	// PUT /api/msp/apm/alerts/{id}
+	// PUT /api/msp/apm/{tenantGroup}/alerts/{id}
 	UpdateAlert(context.Context, *UpdateAlertRequest) (*UpdateAlertResponse, error)
-	// PUT /api/msp/apm/alerts/{id}/switch
+	// PUT /api/msp/apm/{tenantGroup}/alerts/{id}/switch
 	UpdateAlertEnable(context.Context, *UpdateAlertEnableRequest) (*UpdateAlertEnableResponse, error)
-	// DELETE /api/msp/apm/alerts/{id}
+	// DELETE /api/msp/apm/{tenantGroup}/alerts/{id}
 	DeleteAlert(context.Context, *DeleteAlertRequest) (*DeleteAlertResponse, error)
-	// GET /api/msp/apm/custom-alerts/metrics
+	// GET /api/msp/apm/{tenantGroup}/custom-alerts/metrics
 	QueryCustomizeMetric(context.Context, *QueryCustomizeMetricRequest) (*QueryCustomizeMetricResponse, error)
-	// GET /api/msp/apm/custom-alerts/notifies/targets
+	// GET /api/msp/apm/{tenantGroup}/custom-alerts/notifies/targets
 	QueryCustomizeNotifyTarget(context.Context, *QueryCustomizeNotifyTargetRequest) (*QueryCustomizeNotifyTargetResponse, error)
-	// GET /api/msp/apm/custom-alerts
+	// GET /api/msp/apm/{tenantGroup}/custom-alerts
 	QueryCustomizeAlerts(context.Context, *QueryCustomizeAlertsRequest) (*QueryCustomizeAlertsResponse, error)
-	// GET /api/msp/apm/custom-alerts/{id}
+	// GET /api/msp/apm/{tenantGroup}/custom-alerts/{id}
 	GetCustomizeAlert(context.Context, *GetCustomizeAlertRequest) (*GetCustomizeAlertResponse, error)
-	// POST /api/msp/apm/custom-alerts
+	// POST /api/msp/apm/{tenantGroup}/custom-alerts
 	CreateCustomizeAlert(context.Context, *CreateCustomizeAlertRequest) (*CreateCustomizeAlertResponse, error)
-	// PUT /api/msp/apm/custom-alerts/{id}
+	// PUT /api/msp/apm/{tenantGroup}/custom-alerts/{id}
 	UpdateCustomizeAlert(context.Context, *UpdateCustomizeAlertRequest) (*UpdateCustomizeAlertResponse, error)
-	// PUT /api/msp/apm/custom-alerts/{id}/switch
+	// PUT /api/msp/apm/{tenantGroup}/custom-alerts/{id}/switch
 	UpdateCustomizeAlertEnable(context.Context, *UpdateCustomizeAlertEnableRequest) (*UpdateCustomizeAlertEnableResponse, error)
-	// DELETE /api/msp/apm/custom-alerts/{id}
+	// DELETE /api/msp/apm/{tenantGroup}/custom-alerts/{id}
 	DeleteCustomizeAlert(context.Context, *DeleteCustomizeAlertRequest) (*DeleteCustomizeAlertResponse, error)
-	// GET /api/msp/apm/alert-record-attrs
+	// GET /api/msp/apm/{tenantGroup}/alert-record-attrs
 	GetAlertRecordAttrs(context.Context, *GetAlertRecordAttrsRequest) (*GetAlertRecordAttrsResponse, error)
-	// GET /api/msp/apm/alert-records
+	// GET /api/msp/apm/{tenantGroup}/alert-records
 	GetAlertRecords(context.Context, *GetAlertRecordsRequest) (*GetAlertRecordsResponse, error)
-	// GET /api/msp/apm/alert-records/{groupId}
+	// GET /api/msp/apm/{tenantGroup}/alert-records/{groupId}
 	GetAlertRecord(context.Context, *GetAlertRecordRequest) (*GetAlertRecordResponse, error)
-	// GET /api/msp/apm/alert-records/{groupId}/histories
+	// GET /api/msp/apm/{tenantGroup}/alert-records/{groupId}/histories
 	GetAlertHistories(context.Context, *GetAlertHistoriesRequest) (*GetAlertHistoriesResponse, error)
-	// POST /api/msp/apm/alert-records/{groupId}/issues
+	// POST /api/msp/apm/{tenantGroup}/alert-records/{groupId}/issues
 	CreateAlertRecordIssue(context.Context, *CreateAlertRecordIssueRequest) (*CreateAlertRecordIssueResponse, error)
-	// PUT /api/msp/apm/alert-records/{groupId}/issues
+	// PUT /api/msp/apm/{tenantGroup}/alert-records/{groupId}/issues
 	UpdateAlertRecordIssue(context.Context, *UpdateAlertRecordIssueRequest) (*UpdateAlertRecordIssueResponse, error)
-	// POST /api/msp/apm/alert-records/custom-alerts/dash-preview/query
+	// POST /api/msp/apm/{tenantGroup}/alert-records/custom-alerts/dash-preview/query
 	DashboardPreview(context.Context, *DashboardPreviewRequest) (*DashboardPreviewResponse, error)
 }
 
@@ -95,6 +95,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			QueryAlertRule_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "QueryAlertRule", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in QueryAlertRuleRequest
@@ -105,6 +108,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -130,6 +153,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			QueryAlert_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "QueryAlert", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in QueryAlertRequest
@@ -140,6 +166,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -195,6 +241,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseInt(val, 10, 64)
 							if err != nil {
@@ -227,6 +275,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			CreateAlert_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "CreateAlert", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in CreateAlertRequest
@@ -237,6 +288,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -292,6 +363,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseUint(val, 10, 64)
 							if err != nil {
@@ -354,6 +427,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseInt(val, 10, 64)
 							if err != nil {
@@ -416,6 +491,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseInt(val, 10, 64)
 							if err != nil {
@@ -448,6 +525,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			QueryCustomizeMetric_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "QueryCustomizeMetric", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in QueryCustomizeMetricRequest
@@ -458,6 +538,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -483,6 +583,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			QueryCustomizeNotifyTarget_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "QueryCustomizeNotifyTarget", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in QueryCustomizeNotifyTargetRequest
@@ -493,6 +596,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -518,6 +641,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			QueryCustomizeAlerts_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "QueryCustomizeAlerts", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in QueryCustomizeAlertsRequest
@@ -528,6 +654,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -583,6 +729,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseUint(val, 10, 64)
 							if err != nil {
@@ -615,6 +763,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			CreateCustomizeAlert_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "CreateCustomizeAlert", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in CreateCustomizeAlertRequest
@@ -625,6 +776,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -680,6 +851,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseUint(val, 10, 64)
 							if err != nil {
@@ -742,6 +915,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseUint(val, 10, 64)
 							if err != nil {
@@ -804,6 +979,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "id":
 							val, err := strconv.ParseUint(val, 10, 64)
 							if err != nil {
@@ -836,6 +1013,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			GetAlertRecordAttrs_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "GetAlertRecordAttrs", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in GetAlertRecordAttrsRequest
@@ -846,6 +1026,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -871,6 +1071,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			GetAlertRecords_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "GetAlertRecords", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in GetAlertRecordsRequest
@@ -881,6 +1084,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -936,6 +1159,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "groupId":
 							in.GroupId = val
 						}
@@ -994,6 +1219,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "groupId":
 							in.GroupId = val
 						}
@@ -1052,6 +1279,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "groupId":
 							in.GroupId = val
 						}
@@ -1110,6 +1339,8 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 					}
 					for k, val := range vars {
 						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
 						case "groupId":
 							in.GroupId = val
 						}
@@ -1138,6 +1369,9 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 			DashboardPreview_info = transport.NewServiceInfo("erda.msp.apm.alert.AlertService", "DashboardPreview", srv)
 			handler = h.Interceptor(handler)
 		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				var in DashboardPreviewRequest
@@ -1148,6 +1382,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "tenantGroup":
+							in.TenantGroup = val
+						}
 					}
 				}
 				ctx := http.WithRequest(r.Context(), r)
@@ -1164,26 +1418,26 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		)
 	}
 
-	add_QueryAlertRule("GET", "/api/msp/apm/alert-rules", srv.QueryAlertRule)
-	add_QueryAlert("GET", "/api/msp/apm/alerts", srv.QueryAlert)
-	add_GetAlert("GET", "/api/msp/apm/alerts/{id}", srv.GetAlert)
-	add_CreateAlert("POST", "/api/msp/apm/alerts", srv.CreateAlert)
-	add_UpdateAlert("PUT", "/api/msp/apm/alerts/{id}", srv.UpdateAlert)
-	add_UpdateAlertEnable("PUT", "/api/msp/apm/alerts/{id}/switch", srv.UpdateAlertEnable)
-	add_DeleteAlert("DELETE", "/api/msp/apm/alerts/{id}", srv.DeleteAlert)
-	add_QueryCustomizeMetric("GET", "/api/msp/apm/custom-alerts/metrics", srv.QueryCustomizeMetric)
-	add_QueryCustomizeNotifyTarget("GET", "/api/msp/apm/custom-alerts/notifies/targets", srv.QueryCustomizeNotifyTarget)
-	add_QueryCustomizeAlerts("GET", "/api/msp/apm/custom-alerts", srv.QueryCustomizeAlerts)
-	add_GetCustomizeAlert("GET", "/api/msp/apm/custom-alerts/{id}", srv.GetCustomizeAlert)
-	add_CreateCustomizeAlert("POST", "/api/msp/apm/custom-alerts", srv.CreateCustomizeAlert)
-	add_UpdateCustomizeAlert("PUT", "/api/msp/apm/custom-alerts/{id}", srv.UpdateCustomizeAlert)
-	add_UpdateCustomizeAlertEnable("PUT", "/api/msp/apm/custom-alerts/{id}/switch", srv.UpdateCustomizeAlertEnable)
-	add_DeleteCustomizeAlert("DELETE", "/api/msp/apm/custom-alerts/{id}", srv.DeleteCustomizeAlert)
-	add_GetAlertRecordAttrs("GET", "/api/msp/apm/alert-record-attrs", srv.GetAlertRecordAttrs)
-	add_GetAlertRecords("GET", "/api/msp/apm/alert-records", srv.GetAlertRecords)
-	add_GetAlertRecord("GET", "/api/msp/apm/alert-records/{groupId}", srv.GetAlertRecord)
-	add_GetAlertHistories("GET", "/api/msp/apm/alert-records/{groupId}/histories", srv.GetAlertHistories)
-	add_CreateAlertRecordIssue("POST", "/api/msp/apm/alert-records/{groupId}/issues", srv.CreateAlertRecordIssue)
-	add_UpdateAlertRecordIssue("PUT", "/api/msp/apm/alert-records/{groupId}/issues", srv.UpdateAlertRecordIssue)
-	add_DashboardPreview("POST", "/api/msp/apm/alert-records/custom-alerts/dash-preview/query", srv.DashboardPreview)
+	add_QueryAlertRule("GET", "/api/msp/apm/{tenantGroup}/alert-rules", srv.QueryAlertRule)
+	add_QueryAlert("GET", "/api/msp/apm/{tenantGroup}/alerts", srv.QueryAlert)
+	add_GetAlert("GET", "/api/msp/apm/{tenantGroup}/alerts/{id}", srv.GetAlert)
+	add_CreateAlert("POST", "/api/msp/apm/{tenantGroup}/alerts", srv.CreateAlert)
+	add_UpdateAlert("PUT", "/api/msp/apm/{tenantGroup}/alerts/{id}", srv.UpdateAlert)
+	add_UpdateAlertEnable("PUT", "/api/msp/apm/{tenantGroup}/alerts/{id}/switch", srv.UpdateAlertEnable)
+	add_DeleteAlert("DELETE", "/api/msp/apm/{tenantGroup}/alerts/{id}", srv.DeleteAlert)
+	add_QueryCustomizeMetric("GET", "/api/msp/apm/{tenantGroup}/custom-alerts/metrics", srv.QueryCustomizeMetric)
+	add_QueryCustomizeNotifyTarget("GET", "/api/msp/apm/{tenantGroup}/custom-alerts/notifies/targets", srv.QueryCustomizeNotifyTarget)
+	add_QueryCustomizeAlerts("GET", "/api/msp/apm/{tenantGroup}/custom-alerts", srv.QueryCustomizeAlerts)
+	add_GetCustomizeAlert("GET", "/api/msp/apm/{tenantGroup}/custom-alerts/{id}", srv.GetCustomizeAlert)
+	add_CreateCustomizeAlert("POST", "/api/msp/apm/{tenantGroup}/custom-alerts", srv.CreateCustomizeAlert)
+	add_UpdateCustomizeAlert("PUT", "/api/msp/apm/{tenantGroup}/custom-alerts/{id}", srv.UpdateCustomizeAlert)
+	add_UpdateCustomizeAlertEnable("PUT", "/api/msp/apm/{tenantGroup}/custom-alerts/{id}/switch", srv.UpdateCustomizeAlertEnable)
+	add_DeleteCustomizeAlert("DELETE", "/api/msp/apm/{tenantGroup}/custom-alerts/{id}", srv.DeleteCustomizeAlert)
+	add_GetAlertRecordAttrs("GET", "/api/msp/apm/{tenantGroup}/alert-record-attrs", srv.GetAlertRecordAttrs)
+	add_GetAlertRecords("GET", "/api/msp/apm/{tenantGroup}/alert-records", srv.GetAlertRecords)
+	add_GetAlertRecord("GET", "/api/msp/apm/{tenantGroup}/alert-records/{groupId}", srv.GetAlertRecord)
+	add_GetAlertHistories("GET", "/api/msp/apm/{tenantGroup}/alert-records/{groupId}/histories", srv.GetAlertHistories)
+	add_CreateAlertRecordIssue("POST", "/api/msp/apm/{tenantGroup}/alert-records/{groupId}/issues", srv.CreateAlertRecordIssue)
+	add_UpdateAlertRecordIssue("PUT", "/api/msp/apm/{tenantGroup}/alert-records/{groupId}/issues", srv.UpdateAlertRecordIssue)
+	add_DashboardPreview("POST", "/api/msp/apm/{tenantGroup}/alert-records/custom-alerts/dash-preview/query", srv.DashboardPreview)
 }
