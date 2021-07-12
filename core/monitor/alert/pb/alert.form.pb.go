@@ -6113,8 +6113,6 @@ func (m *QueryOrgAlertRecordResponse) UnmarshalURLValues(prefix string, values u
 					return err
 				}
 				m.Data.Total = val
-			case "userIDs":
-				m.UserIDs = vals
 			}
 		}
 	}
