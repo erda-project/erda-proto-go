@@ -22,6 +22,7 @@ var _ urlenc.URLValuesUnmarshaler = (*QueryAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryAlertData)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAlertResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetAlertData)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAlertRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAlertResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAlertData)(nil)
@@ -199,54 +200,54 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 			switch prefix + key {
 			case "data":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 			case "data.id":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
-				val, err := strconv.ParseUint(vals[0], 10, 64)
+				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.Data.Id = val
 			case "data.name":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				m.Data.Name = vals[0]
 			case "data.alertScope":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				m.Data.AlertScope = vals[0]
 			case "data.alertScopeId":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				m.Data.AlertScopeId = vals[0]
 			case "data.enable":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
 				m.Data.Enable = val
-			case "data.clusterNames":
+			case "data.appIds":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
-				m.Data.ClusterNames = vals
+				m.Data.AppIds = vals
 			case "data.domain":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				m.Data.Domain = vals[0]
 			case "data.createTime":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -255,13 +256,58 @@ func (m *GetAlertResponse) UnmarshalURLValues(prefix string, values url.Values) 
 				m.Data.CreateTime = val
 			case "data.updateTime":
 				if m.Data == nil {
-					m.Data = &pb.Alert{}
+					m.Data = &GetAlertData{}
 				}
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.Data.UpdateTime = val
+			}
+		}
+	}
+	return nil
+}
+
+// GetAlertData implement urlenc.URLValuesUnmarshaler.
+func (m *GetAlertData) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "id":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Id = val
+			case "name":
+				m.Name = vals[0]
+			case "alertScope":
+				m.AlertScope = vals[0]
+			case "alertScopeId":
+				m.AlertScopeId = vals[0]
+			case "enable":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Enable = val
+			case "appIds":
+				m.AppIds = vals
+			case "domain":
+				m.Domain = vals[0]
+			case "createTime":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.CreateTime = val
+			case "updateTime":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.UpdateTime = val
 			}
 		}
 	}

@@ -5,13 +5,13 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
-	proto "github.com/golang/protobuf/proto"
 	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
+	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/structpb"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -72,6 +72,24 @@ func (this *GetAlertResponse) Validate() error {
 			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
 		}
 	}
+	return nil
+}
+func (this *GetAlertData) Validate() error {
+	for _, item := range this.Rules {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Rules", err)
+			}
+		}
+	}
+	for _, item := range this.Notifies {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Notifies", err)
+			}
+		}
+	}
+	// Validation of proto3 map<> fields is unsupported.
 	return nil
 }
 func (this *CreateAlertRequest) Validate() error {
