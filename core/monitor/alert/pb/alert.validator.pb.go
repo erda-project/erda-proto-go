@@ -1050,9 +1050,6 @@ func (this *QueryAlertHistoryRequest) Validate() error {
 	if !(this.End > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("End", fmt.Errorf(`value '%v' must be greater than '0'`, this.End))
 	}
-	if !(this.Limit > 0) {
-		return github_com_mwitkow_go_proto_validators.FieldError("Limit", fmt.Errorf(`value '%v' must be greater than '0'`, this.Limit))
-	}
 	return nil
 }
 func (this *QueryAlertHistoryResponse) Validate() error {
@@ -1183,9 +1180,6 @@ func (this *QueryOrgAlertHistoryRequest) Validate() error {
 	}
 	if !(this.End > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("End", fmt.Errorf(`value '%v' must be greater than '0'`, this.End))
-	}
-	if !(this.Limit > 0) {
-		return github_com_mwitkow_go_proto_validators.FieldError("Limit", fmt.Errorf(`value '%v' must be greater than '0'`, this.Limit))
 	}
 	return nil
 }
