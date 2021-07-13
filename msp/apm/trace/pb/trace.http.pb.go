@@ -140,15 +140,15 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["scopeId"]; len(vals) > 0 {
+					in.ScopeID = vals[0]
+				}
 				if vals := params["applicationId"]; len(vals) > 0 {
 					val, err := strconv.ParseInt(vals[0], 10, 64)
 					if err != nil {
 						return nil, err
 					}
 					in.ApplicationID = val
-				}
-				if vals := params["scopeId"]; len(vals) > 0 {
-					in.ScopeID = vals[0]
 				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
