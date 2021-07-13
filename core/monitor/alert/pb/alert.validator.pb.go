@@ -5,13 +5,13 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/known/timestamppb"
 	_ "github.com/mwitkow/go-proto-validators"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/structpb"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	_ "google.golang.org/protobuf/types/known/timestamppb"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -1049,6 +1049,9 @@ func (this *QueryAlertHistoryRequest) Validate() error {
 	}
 	if !(this.End > 0) {
 		return github_com_mwitkow_go_proto_validators.FieldError("End", fmt.Errorf(`value '%v' must be greater than '0'`, this.End))
+	}
+	if !(this.Limit > 0) {
+		return github_com_mwitkow_go_proto_validators.FieldError("Limit", fmt.Errorf(`value '%v' must be greater than '0'`, this.Limit))
 	}
 	return nil
 }
