@@ -204,6 +204,36 @@ func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) 
 
 // GetSpansResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetSpansResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "duration":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Duration = val
+			case "serviceCount":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.ServiceCount = val
+			case "depth":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Depth = val
+			case "spanCount":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.SpanCount = val
+			}
+		}
+	}
 	return nil
 }
 
@@ -539,6 +569,12 @@ func (m *Span) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Timestamp = val
+			case "duration":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Duration = val
 			}
 		}
 	}
