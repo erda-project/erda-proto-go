@@ -5,13 +5,13 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
+	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/known/structpb"
-	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
-	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -74,7 +74,7 @@ func (this *GetAlertResponse) Validate() error {
 	}
 	return nil
 }
-func (this *GetAlertData) Validate() error {
+func (this *ApmAlertData) Validate() error {
 	for _, item := range this.Rules {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {

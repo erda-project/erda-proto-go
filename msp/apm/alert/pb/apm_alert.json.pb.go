@@ -26,8 +26,8 @@ var _ json.Marshaler = (*GetAlertRequest)(nil)
 var _ json.Unmarshaler = (*GetAlertRequest)(nil)
 var _ json.Marshaler = (*GetAlertResponse)(nil)
 var _ json.Unmarshaler = (*GetAlertResponse)(nil)
-var _ json.Marshaler = (*GetAlertData)(nil)
-var _ json.Unmarshaler = (*GetAlertData)(nil)
+var _ json.Marshaler = (*ApmAlertData)(nil)
+var _ json.Unmarshaler = (*ApmAlertData)(nil)
 var _ json.Marshaler = (*CreateAlertRequest)(nil)
 var _ json.Unmarshaler = (*CreateAlertRequest)(nil)
 var _ json.Marshaler = (*CreateAlertResponse)(nil)
@@ -241,8 +241,8 @@ func (m *GetAlertResponse) UnmarshalJSON(b []byte) error {
 	}).Unmarshal(b, m)
 }
 
-// GetAlertData implement json.Marshaler.
-func (m *GetAlertData) MarshalJSON() ([]byte, error) {
+// ApmAlertData implement json.Marshaler.
+func (m *ApmAlertData) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -252,8 +252,8 @@ func (m *GetAlertData) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAlertData implement json.Marshaler.
-func (m *GetAlertData) UnmarshalJSON(b []byte) error {
+// ApmAlertData implement json.Marshaler.
+func (m *ApmAlertData) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
