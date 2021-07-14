@@ -105,7 +105,7 @@ type AlertServiceHandler interface {
 	GetOrgAlertRecordAttr(context.Context, *GetOrgAlertRecordAttrRequest) (*GetOrgAlertRecordAttrResponse, error)
 	// GET /api/org-alert-records
 	QueryOrgAlertRecord(context.Context, *QueryOrgAlertRecordRequest) (*QueryOrgAlertRecordResponse, error)
-	// POST /api/org-alert-records
+	// POST /api/org-hosts-alert-records
 	QueryOrgHostsAlertRecord(context.Context, *QueryOrgHostsAlertRecordRequest) (*QueryOrgAlertRecordResponse, error)
 	// GET /api/org-alert-records/{groupId}
 	GetOrgAlertRecord(context.Context, *GetOrgAlertRecordRequest) (*GetOrgAlertRecordResponse, error)
@@ -2499,7 +2499,7 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 	add_UpdateAlertIssue("PUT", "/api/alert-records/{groupId}/issues/{issueId}", srv.UpdateAlertIssue)
 	add_GetOrgAlertRecordAttr("GET", "/api/org-alert-record-attrs", srv.GetOrgAlertRecordAttr)
 	add_QueryOrgAlertRecord("GET", "/api/org-alert-records", srv.QueryOrgAlertRecord)
-	add_QueryOrgHostsAlertRecord("POST", "/api/org-alert-records", srv.QueryOrgHostsAlertRecord)
+	add_QueryOrgHostsAlertRecord("POST", "/api/org-hosts-alert-records", srv.QueryOrgHostsAlertRecord)
 	add_GetOrgAlertRecord("GET", "/api/org-alert-records/{groupId}", srv.GetOrgAlertRecord)
 	add_QueryOrgAlertHistory("GET", "/api/org-alert-records/{groupId}/histories", srv.QueryOrgAlertHistory)
 	add_CreateOrgAlertIssue("POST", "/api/org-alert-records/{groupId}/issues", srv.CreateOrgAlertIssue)
