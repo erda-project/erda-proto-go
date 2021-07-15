@@ -196,6 +196,8 @@ func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) 
 					return err
 				}
 				m.Limit = val
+			case "traceID":
+				m.TraceID = vals[0]
 			}
 		}
 	}
