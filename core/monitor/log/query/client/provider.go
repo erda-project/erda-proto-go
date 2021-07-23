@@ -7,14 +7,14 @@ import (
 	fmt "fmt"
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto-go/core/monitor/logs/query/pb"
+	pb "github.com/erda-project/erda-proto-go/core/monitor/log/query/pb"
 	grpc1 "google.golang.org/grpc"
 	reflect "reflect"
 	strings "strings"
 )
 
 var dependencies = []string{
-	"grpc-client@erda.core.monitor.logs.query",
+	"grpc-client@erda.core.monitor.log.query",
 	"grpc-client",
 }
 
@@ -53,11 +53,11 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 		}
 	}
 	switch ctx.Service() {
-	case "erda.core.monitor.logs.query-client":
+	case "erda.core.monitor.log.query-client":
 		return p.client
-	case "erda.core.monitor.logs.query.LogQueryService":
+	case "erda.core.monitor.log.query.LogQueryService":
 		return &logQueryServiceWrapper{client: p.client.LogQueryService(), opts: opts}
-	case "erda.core.monitor.logs.query.LogQueryService.client":
+	case "erda.core.monitor.log.query.LogQueryService.client":
 		return p.client.LogQueryService()
 	}
 	switch ctx.Type() {
@@ -72,10 +72,10 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 }
 
 func init() {
-	servicehub.Register("erda.core.monitor.logs.query-client", &servicehub.Spec{
+	servicehub.Register("erda.core.monitor.log.query-client", &servicehub.Spec{
 		Services: []string{
-			"erda.core.monitor.logs.query.LogQueryService",
-			"erda.core.monitor.logs.query-client",
+			"erda.core.monitor.log.query.LogQueryService",
+			"erda.core.monitor.log.query-client",
 		},
 		Types: []reflect.Type{
 			clientsType,
