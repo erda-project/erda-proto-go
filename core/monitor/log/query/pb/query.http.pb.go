@@ -53,7 +53,7 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 		}
 		var GetLog_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetLog_info = transport.NewServiceInfo("erda.core.monitor.logs.query.LogQueryService", "GetLog", srv)
+			GetLog_info = transport.NewServiceInfo("erda.core.monitor.log.query.LogQueryService", "GetLog", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -88,7 +88,7 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 		}
 		var GetLogByRuntime_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetLogByRuntime_info = transport.NewServiceInfo("erda.core.monitor.logs.query.LogQueryService", "GetLogByRuntime", srv)
+			GetLogByRuntime_info = transport.NewServiceInfo("erda.core.monitor.log.query.LogQueryService", "GetLogByRuntime", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -123,7 +123,7 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 		}
 		var GetLogByOrganization_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetLogByOrganization_info = transport.NewServiceInfo("erda.core.monitor.logs.query.LogQueryService", "GetLogByOrganization", srv)
+			GetLogByOrganization_info = transport.NewServiceInfo("erda.core.monitor.log.query.LogQueryService", "GetLogByOrganization", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(

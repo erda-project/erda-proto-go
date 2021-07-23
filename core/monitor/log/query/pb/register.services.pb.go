@@ -21,7 +21,7 @@ func RegisterLogQueryServiceImp(regester transport.Register, srv LogQueryService
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.core.monitor.logs.query.LogQueryService",
+		"erda.core.monitor.log.query.LogQueryService",
 	)
 }
 

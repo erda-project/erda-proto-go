@@ -38,7 +38,7 @@ func NewLogQueryServiceClient(cc grpc1.ClientConnInterface) LogQueryServiceClien
 
 func (c *logQueryServiceClient) GetLog(ctx context.Context, in *GetLogRequest, opts ...grpc.CallOption) (*GetLogResponse, error) {
 	out := new(GetLogResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.logs.query.LogQueryService/GetLog", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.log.query.LogQueryService/GetLog", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,7 @@ func (c *logQueryServiceClient) GetLog(ctx context.Context, in *GetLogRequest, o
 
 func (c *logQueryServiceClient) GetLogByRuntime(ctx context.Context, in *GetLogByRuntimeRequest, opts ...grpc.CallOption) (*GetLogByRuntimeResponse, error) {
 	out := new(GetLogByRuntimeResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.logs.query.LogQueryService/GetLogByRuntime", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.log.query.LogQueryService/GetLogByRuntime", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -56,7 +56,7 @@ func (c *logQueryServiceClient) GetLogByRuntime(ctx context.Context, in *GetLogB
 
 func (c *logQueryServiceClient) GetLogByOrganization(ctx context.Context, in *GetLogByOrganizationRequest, opts ...grpc.CallOption) (*GetLogByOrganizationResponse, error) {
 	out := new(GetLogByOrganizationResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.monitor.logs.query.LogQueryService/GetLogByOrganization", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.log.query.LogQueryService/GetLogByOrganization", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -94,7 +94,7 @@ func RegisterLogQueryServiceServer(s grpc1.ServiceRegistrar, srv LogQueryService
 }
 
 var _LogQueryService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.core.monitor.logs.query.LogQueryService",
+	ServiceName: "erda.core.monitor.log.query.LogQueryService",
 	HandlerType: (*LogQueryServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
@@ -112,7 +112,7 @@ func _get_LogQueryService_serviceDesc(srv LogQueryServiceServer, opts ...grpc1.H
 	}
 	var _LogQueryService_GetLog_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_LogQueryService_GetLog_info = transport.NewServiceInfo("erda.core.monitor.logs.query.LogQueryService", "GetLog", srv)
+		_LogQueryService_GetLog_info = transport.NewServiceInfo("erda.core.monitor.log.query.LogQueryService", "GetLog", srv)
 		_LogQueryService_GetLog_Handler = h.Interceptor(_LogQueryService_GetLog_Handler)
 	}
 
@@ -121,7 +121,7 @@ func _get_LogQueryService_serviceDesc(srv LogQueryServiceServer, opts ...grpc1.H
 	}
 	var _LogQueryService_GetLogByRuntime_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_LogQueryService_GetLogByRuntime_info = transport.NewServiceInfo("erda.core.monitor.logs.query.LogQueryService", "GetLogByRuntime", srv)
+		_LogQueryService_GetLogByRuntime_info = transport.NewServiceInfo("erda.core.monitor.log.query.LogQueryService", "GetLogByRuntime", srv)
 		_LogQueryService_GetLogByRuntime_Handler = h.Interceptor(_LogQueryService_GetLogByRuntime_Handler)
 	}
 
@@ -130,7 +130,7 @@ func _get_LogQueryService_serviceDesc(srv LogQueryServiceServer, opts ...grpc1.H
 	}
 	var _LogQueryService_GetLogByOrganization_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_LogQueryService_GetLogByOrganization_info = transport.NewServiceInfo("erda.core.monitor.logs.query.LogQueryService", "GetLogByOrganization", srv)
+		_LogQueryService_GetLogByOrganization_info = transport.NewServiceInfo("erda.core.monitor.log.query.LogQueryService", "GetLogByOrganization", srv)
 		_LogQueryService_GetLogByOrganization_Handler = h.Interceptor(_LogQueryService_GetLogByOrganization_Handler)
 	}
 
@@ -154,7 +154,7 @@ func _get_LogQueryService_serviceDesc(srv LogQueryServiceServer, opts ...grpc1.H
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.logs.query.LogQueryService/GetLog",
+					FullMethod: "/erda.core.monitor.log.query.LogQueryService/GetLog",
 				}
 				return interceptor(ctx, in, info, _LogQueryService_GetLog_Handler)
 			},
@@ -177,7 +177,7 @@ func _get_LogQueryService_serviceDesc(srv LogQueryServiceServer, opts ...grpc1.H
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.logs.query.LogQueryService/GetLogByRuntime",
+					FullMethod: "/erda.core.monitor.log.query.LogQueryService/GetLogByRuntime",
 				}
 				return interceptor(ctx, in, info, _LogQueryService_GetLogByRuntime_Handler)
 			},
@@ -200,7 +200,7 @@ func _get_LogQueryService_serviceDesc(srv LogQueryServiceServer, opts ...grpc1.H
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.monitor.logs.query.LogQueryService/GetLogByOrganization",
+					FullMethod: "/erda.core.monitor.log.query.LogQueryService/GetLogByOrganization",
 				}
 				return interceptor(ctx, in, info, _LogQueryService_GetLogByOrganization_Handler)
 			},
