@@ -51,7 +51,7 @@ func RegisterImageServiceHandler(r http.Router, srv ImageServiceHandler, opts ..
 		}
 		var GetImage_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetImage_info = transport.NewServiceInfo("erda.dicehub.image.ImageService", "GetImage", srv)
+			GetImage_info = transport.NewServiceInfo("erda.core.dicehub.image.ImageService", "GetImage", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -109,7 +109,7 @@ func RegisterImageServiceHandler(r http.Router, srv ImageServiceHandler, opts ..
 		}
 		var ListImage_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			ListImage_info = transport.NewServiceInfo("erda.dicehub.image.ImageService", "ListImage", srv)
+			ListImage_info = transport.NewServiceInfo("erda.core.dicehub.image.ImageService", "ListImage", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
