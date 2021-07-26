@@ -7,14 +7,14 @@ import (
 	fmt "fmt"
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto-go/dicehub/image/pb"
+	pb "github.com/erda-project/erda-proto-go/core/dicehub/image/pb"
 	grpc1 "google.golang.org/grpc"
 	reflect "reflect"
 	strings "strings"
 )
 
 var dependencies = []string{
-	"grpc-client@erda.dicehub.image",
+	"grpc-client@erda.core.dicehub.image",
 	"grpc-client",
 }
 
@@ -53,11 +53,11 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 		}
 	}
 	switch ctx.Service() {
-	case "erda.dicehub.image-client":
+	case "erda.core.dicehub.image-client":
 		return p.client
-	case "erda.dicehub.image.ImageService":
+	case "erda.core.dicehub.image.ImageService":
 		return &imageServiceWrapper{client: p.client.ImageService(), opts: opts}
-	case "erda.dicehub.image.ImageService.client":
+	case "erda.core.dicehub.image.ImageService.client":
 		return p.client.ImageService()
 	}
 	switch ctx.Type() {
@@ -72,10 +72,10 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 }
 
 func init() {
-	servicehub.Register("erda.dicehub.image-client", &servicehub.Spec{
+	servicehub.Register("erda.core.dicehub.image-client", &servicehub.Spec{
 		Services: []string{
-			"erda.dicehub.image.ImageService",
-			"erda.dicehub.image-client",
+			"erda.core.dicehub.image.ImageService",
+			"erda.core.dicehub.image-client",
 		},
 		Types: []reflect.Type{
 			clientsType,

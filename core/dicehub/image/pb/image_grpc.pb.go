@@ -34,7 +34,7 @@ func NewImageServiceClient(cc grpc1.ClientConnInterface) ImageServiceClient {
 
 func (c *imageServiceClient) GetImage(ctx context.Context, in *ImageGetRequest, opts ...grpc.CallOption) (*ImageGetResponse, error) {
 	out := new(ImageGetResponse)
-	err := c.cc.Invoke(ctx, "/erda.dicehub.image.ImageService/GetImage", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.dicehub.image.ImageService/GetImage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (c *imageServiceClient) GetImage(ctx context.Context, in *ImageGetRequest, 
 
 func (c *imageServiceClient) ListImage(ctx context.Context, in *ImageListRequest, opts ...grpc.CallOption) (*ImageListResponse, error) {
 	out := new(ImageListResponse)
-	err := c.cc.Invoke(ctx, "/erda.dicehub.image.ImageService/ListImage", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.dicehub.image.ImageService/ListImage", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func RegisterImageServiceServer(s grpc1.ServiceRegistrar, srv ImageServiceServer
 }
 
 var _ImageService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.dicehub.image.ImageService",
+	ServiceName: "erda.core.dicehub.image.ImageService",
 	HandlerType: (*ImageServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
@@ -92,7 +92,7 @@ func _get_ImageService_serviceDesc(srv ImageServiceServer, opts ...grpc1.HandleO
 	}
 	var _ImageService_GetImage_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_ImageService_GetImage_info = transport.NewServiceInfo("erda.dicehub.image.ImageService", "GetImage", srv)
+		_ImageService_GetImage_info = transport.NewServiceInfo("erda.core.dicehub.image.ImageService", "GetImage", srv)
 		_ImageService_GetImage_Handler = h.Interceptor(_ImageService_GetImage_Handler)
 	}
 
@@ -101,7 +101,7 @@ func _get_ImageService_serviceDesc(srv ImageServiceServer, opts ...grpc1.HandleO
 	}
 	var _ImageService_ListImage_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_ImageService_ListImage_info = transport.NewServiceInfo("erda.dicehub.image.ImageService", "ListImage", srv)
+		_ImageService_ListImage_info = transport.NewServiceInfo("erda.core.dicehub.image.ImageService", "ListImage", srv)
 		_ImageService_ListImage_Handler = h.Interceptor(_ImageService_ListImage_Handler)
 	}
 
@@ -125,7 +125,7 @@ func _get_ImageService_serviceDesc(srv ImageServiceServer, opts ...grpc1.HandleO
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.dicehub.image.ImageService/GetImage",
+					FullMethod: "/erda.core.dicehub.image.ImageService/GetImage",
 				}
 				return interceptor(ctx, in, info, _ImageService_GetImage_Handler)
 			},
@@ -148,7 +148,7 @@ func _get_ImageService_serviceDesc(srv ImageServiceServer, opts ...grpc1.HandleO
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.dicehub.image.ImageService/ListImage",
+					FullMethod: "/erda.core.dicehub.image.ImageService/ListImage",
 				}
 				return interceptor(ctx, in, info, _ImageService_ListImage_Handler)
 			},
