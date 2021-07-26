@@ -21,7 +21,7 @@ func RegisterImageServiceImp(regester transport.Register, srv ImageServiceServer
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.dicehub.image.ImageService",
+		"erda.core.dicehub.image.ImageService",
 	)
 }
 

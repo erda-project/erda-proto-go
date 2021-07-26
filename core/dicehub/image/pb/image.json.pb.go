@@ -31,7 +31,7 @@ func (m *ImageGetRequest) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -39,7 +39,7 @@ func (m *ImageGetRequest) MarshalJSON() ([]byte, error) {
 // ImageGetRequest implement json.Marshaler.
 func (m *ImageGetRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -49,7 +49,7 @@ func (m *ImageGetResponse) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -57,7 +57,7 @@ func (m *ImageGetResponse) MarshalJSON() ([]byte, error) {
 // ImageGetResponse implement json.Marshaler.
 func (m *ImageGetResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -67,7 +67,7 @@ func (m *ImageListRequest) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -75,7 +75,7 @@ func (m *ImageListRequest) MarshalJSON() ([]byte, error) {
 // ImageListRequest implement json.Marshaler.
 func (m *ImageListRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -85,7 +85,7 @@ func (m *ImageListResponse) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -93,7 +93,7 @@ func (m *ImageListResponse) MarshalJSON() ([]byte, error) {
 // ImageListResponse implement json.Marshaler.
 func (m *ImageListResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -103,7 +103,7 @@ func (m *ImageListResponseData) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -111,7 +111,7 @@ func (m *ImageListResponseData) MarshalJSON() ([]byte, error) {
 // ImageListResponseData implement json.Marshaler.
 func (m *ImageListResponseData) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -121,7 +121,7 @@ func (m *ImageGetResponseData) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -129,6 +129,6 @@ func (m *ImageGetResponseData) MarshalJSON() ([]byte, error) {
 // ImageGetResponseData implement json.Marshaler.
 func (m *ImageGetResponseData) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
