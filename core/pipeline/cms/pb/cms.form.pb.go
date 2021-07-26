@@ -95,19 +95,19 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "value":
 				m.Value = vals[0]
-			case "encrypt_in_db":
+			case "encryptInDB":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
-				m.EncryptInDb = val
+				m.EncryptInDB = val
 			case "type":
 				m.Type = vals[0]
 			case "operations":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
-			case "operations.can_download":
+			case "operations.canDownload":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
@@ -116,7 +116,7 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.Operations.CanDownload = val
-			case "operations.can_edit":
+			case "operations.canEdit":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
@@ -125,7 +125,7 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.Operations.CanEdit = val
-			case "operations.can_delete":
+			case "operations.canDelete":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
@@ -138,11 +138,11 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 				m.Comment = vals[0]
 			case "from":
 				m.From = vals[0]
-			case "time_created":
+			case "timeCreated":
 				if m.TimeCreated == nil {
 					m.TimeCreated = &timestamppb.Timestamp{}
 				}
-			case "time_created.seconds":
+			case "timeCreated.seconds":
 				if m.TimeCreated == nil {
 					m.TimeCreated = &timestamppb.Timestamp{}
 				}
@@ -151,7 +151,7 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.TimeCreated.Seconds = val
-			case "time_created.nanos":
+			case "timeCreated.nanos":
 				if m.TimeCreated == nil {
 					m.TimeCreated = &timestamppb.Timestamp{}
 				}
@@ -160,11 +160,11 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.TimeCreated.Nanos = int32(val)
-			case "time_updated":
+			case "timeUpdated":
 				if m.TimeUpdated == nil {
 					m.TimeUpdated = &timestamppb.Timestamp{}
 				}
-			case "time_updated.seconds":
+			case "timeUpdated.seconds":
 				if m.TimeUpdated == nil {
 					m.TimeUpdated = &timestamppb.Timestamp{}
 				}
@@ -173,7 +173,7 @@ func (m *PipelineCmsConfigValue) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.TimeUpdated.Seconds = val
-			case "time_updated.nanos":
+			case "timeUpdated.nanos":
 				if m.TimeUpdated == nil {
 					m.TimeUpdated = &timestamppb.Timestamp{}
 				}
@@ -193,19 +193,19 @@ func (m *PipelineCmsConfigOperations) UnmarshalURLValues(prefix string, values u
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "can_download":
+			case "canDownload":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
 				m.CanDownload = val
-			case "can_edit":
+			case "canEdit":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
 				m.CanEdit = val
-			case "can_delete":
+			case "canDelete":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
@@ -230,7 +230,7 @@ func (m *PipelineCmsConfigKey) UnmarshalURLValues(prefix string, values url.Valu
 					return err
 				}
 				m.Decrypt = val
-			case "show_encrypted_value":
+			case "showEncryptedValue":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
@@ -251,19 +251,19 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 				m.Key = vals[0]
 			case "value":
 				m.Value = vals[0]
-			case "encrypt_in_db":
+			case "encryptInDB":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
-				m.EncryptInDb = val
+				m.EncryptInDB = val
 			case "type":
 				m.Type = vals[0]
 			case "operations":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
-			case "operations.can_download":
+			case "operations.canDownload":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
@@ -272,7 +272,7 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 					return err
 				}
 				m.Operations.CanDownload = val
-			case "operations.can_edit":
+			case "operations.canEdit":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
@@ -281,7 +281,7 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 					return err
 				}
 				m.Operations.CanEdit = val
-			case "operations.can_delete":
+			case "operations.canDelete":
 				if m.Operations == nil {
 					m.Operations = &PipelineCmsConfigOperations{}
 				}
@@ -294,11 +294,11 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 				m.Comment = vals[0]
 			case "from":
 				m.From = vals[0]
-			case "time_created":
+			case "timeCreated":
 				if m.TimeCreated == nil {
 					m.TimeCreated = &timestamppb.Timestamp{}
 				}
-			case "time_created.seconds":
+			case "timeCreated.seconds":
 				if m.TimeCreated == nil {
 					m.TimeCreated = &timestamppb.Timestamp{}
 				}
@@ -307,7 +307,7 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 					return err
 				}
 				m.TimeCreated.Seconds = val
-			case "time_created.nanos":
+			case "timeCreated.nanos":
 				if m.TimeCreated == nil {
 					m.TimeCreated = &timestamppb.Timestamp{}
 				}
@@ -316,11 +316,11 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 					return err
 				}
 				m.TimeCreated.Nanos = int32(val)
-			case "time_updated":
+			case "timeUpdated":
 				if m.TimeUpdated == nil {
 					m.TimeUpdated = &timestamppb.Timestamp{}
 				}
-			case "time_updated.seconds":
+			case "timeUpdated.seconds":
 				if m.TimeUpdated == nil {
 					m.TimeUpdated = &timestamppb.Timestamp{}
 				}
@@ -329,7 +329,7 @@ func (m *PipelineCmsConfig) UnmarshalURLValues(prefix string, values url.Values)
 					return err
 				}
 				m.TimeUpdated.Seconds = val
-			case "time_updated.nanos":
+			case "timeUpdated.nanos":
 				if m.TimeUpdated == nil {
 					m.TimeUpdated = &timestamppb.Timestamp{}
 				}
@@ -349,7 +349,7 @@ func (m *CmsCreateNsRequest) UnmarshalURLValues(prefix string, values url.Values
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "pipeline_source":
+			case "pipelineSource":
 				m.PipelineSource = vals[0]
 			case "ns":
 				m.Ns = vals[0]
@@ -369,9 +369,9 @@ func (m *CmsListNsRequest) UnmarshalURLValues(prefix string, values url.Values) 
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "pipeline_source":
+			case "pipelineSource":
 				m.PipelineSource = vals[0]
-			case "ns_prefix":
+			case "nsPrefix":
 				m.NsPrefix = vals[0]
 			}
 		}
@@ -424,21 +424,21 @@ func (m *CmsNsConfigsDeleteRequest) UnmarshalURLValues(prefix string, values url
 			switch prefix + key {
 			case "ns":
 				m.Ns = vals[0]
-			case "pipeline_source":
+			case "pipelineSource":
 				m.PipelineSource = vals[0]
-			case "delete_ns":
+			case "deleteNs":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
 				m.DeleteNs = val
-			case "delete_force":
+			case "deleteForce":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
 				}
 				m.DeleteForce = val
-			case "delete_keys":
+			case "deleteKeys":
 				m.DeleteKeys = vals
 			}
 		}
@@ -458,9 +458,9 @@ func (m *CmsNsConfigsGetRequest) UnmarshalURLValues(prefix string, values url.Va
 			switch prefix + key {
 			case "ns":
 				m.Ns = vals[0]
-			case "pipeline_source":
+			case "pipelineSource":
 				m.PipelineSource = vals[0]
-			case "global_decrypt":
+			case "globalDecrypt":
 				val, err := strconv.ParseBool(vals[0])
 				if err != nil {
 					return err
