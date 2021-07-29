@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion5
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProjectServiceClient interface {
 	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
+	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 }
 
 type projectServiceClient struct {
@@ -40,11 +41,21 @@ func (c *projectServiceClient) GetProjects(ctx context.Context, in *GetProjectsR
 	return out, nil
 }
 
+func (c *projectServiceClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error) {
+	out := new(CreateProjectResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/CreateProject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations should embed UnimplementedProjectServiceServer
 // for forward compatibility
 type ProjectServiceServer interface {
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
+	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 }
 
 // UnimplementedProjectServiceServer should be embedded to have forward compatible implementations.
@@ -53,6 +64,9 @@ type UnimplementedProjectServiceServer struct {
 
 func (*UnimplementedProjectServiceServer) GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProjects not implemented")
+}
+func (*UnimplementedProjectServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
 }
 
 func RegisterProjectServiceServer(s grpc1.ServiceRegistrar, srv ProjectServiceServer, opts ...grpc1.HandleOption) {
@@ -82,6 +96,15 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 		_ProjectService_GetProjects_Handler = h.Interceptor(_ProjectService_GetProjects_Handler)
 	}
 
+	_ProjectService_CreateProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.CreateProject(ctx, req.(*CreateProjectRequest))
+	}
+	var _ProjectService_CreateProject_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ProjectService_CreateProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "CreateProject", srv)
+		_ProjectService_CreateProject_Handler = h.Interceptor(_ProjectService_CreateProject_Handler)
+	}
+
 	var serviceDesc = _ProjectService_serviceDesc
 	serviceDesc.Methods = []grpc.MethodDesc{
 		{
@@ -105,6 +128,29 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.msp.tenant.project.ProjectService/GetProjects",
 				}
 				return interceptor(ctx, in, info, _ProjectService_GetProjects_Handler)
+			},
+		},
+		{
+			MethodName: "CreateProject",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(CreateProjectRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ProjectServiceServer).CreateProject(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ProjectService_CreateProject_info)
+				}
+				if interceptor == nil {
+					return _ProjectService_CreateProject_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.project.ProjectService/CreateProject",
+				}
+				return interceptor(ctx, in, info, _ProjectService_CreateProject_Handler)
 			},
 		},
 	}

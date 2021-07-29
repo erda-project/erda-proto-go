@@ -31,7 +31,27 @@ func (this *GetProjectsResponse) Validate() error {
 	}
 	return nil
 }
+func (this *CreateProjectRequest) Validate() error {
+	return nil
+}
+func (this *CreateProjectResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
 func (this *Project) Validate() error {
-	// Validation of proto3 map<> fields is unsupported.
+	for _, item := range this.Relationship {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Relationship", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *TenantRelationship) Validate() error {
 	return nil
 }
