@@ -16,8 +16,14 @@ var _ json.Marshaler = (*GetProjectsRequest)(nil)
 var _ json.Unmarshaler = (*GetProjectsRequest)(nil)
 var _ json.Marshaler = (*GetProjectsResponse)(nil)
 var _ json.Unmarshaler = (*GetProjectsResponse)(nil)
+var _ json.Marshaler = (*CreateProjectRequest)(nil)
+var _ json.Unmarshaler = (*CreateProjectRequest)(nil)
+var _ json.Marshaler = (*CreateProjectResponse)(nil)
+var _ json.Unmarshaler = (*CreateProjectResponse)(nil)
 var _ json.Marshaler = (*Project)(nil)
 var _ json.Unmarshaler = (*Project)(nil)
+var _ json.Marshaler = (*TenantRelationship)(nil)
+var _ json.Unmarshaler = (*TenantRelationship)(nil)
 
 // GetProjectsRequest implement json.Marshaler.
 func (m *GetProjectsRequest) MarshalJSON() ([]byte, error) {
@@ -55,6 +61,42 @@ func (m *GetProjectsResponse) UnmarshalJSON(b []byte) error {
 	}).Unmarshal(b, m)
 }
 
+// CreateProjectRequest implement json.Marshaler.
+func (m *CreateProjectRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// CreateProjectRequest implement json.Marshaler.
+func (m *CreateProjectRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// CreateProjectResponse implement json.Marshaler.
+func (m *CreateProjectResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// CreateProjectResponse implement json.Marshaler.
+func (m *CreateProjectResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
 // Project implement json.Marshaler.
 func (m *Project) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
@@ -68,6 +110,24 @@ func (m *Project) MarshalJSON() ([]byte, error) {
 
 // Project implement json.Marshaler.
 func (m *Project) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TenantRelationship implement json.Marshaler.
+func (m *TenantRelationship) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TenantRelationship implement json.Marshaler.
+func (m *TenantRelationship) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

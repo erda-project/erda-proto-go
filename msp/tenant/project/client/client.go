@@ -39,3 +39,7 @@ type projectServiceWrapper struct {
 func (s *projectServiceWrapper) GetProjects(ctx context.Context, req *pb.GetProjectsRequest) (*pb.GetProjectsResponse, error) {
 	return s.client.GetProjects(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *projectServiceWrapper) CreateProject(ctx context.Context, req *pb.CreateProjectRequest) (*pb.CreateProjectResponse, error) {
+	return s.client.CreateProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
