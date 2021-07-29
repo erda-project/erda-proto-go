@@ -57,6 +57,8 @@ func (m *CreateProjectRequest) UnmarshalURLValues(prefix string, values url.Valu
 				m.Id = val
 			case "name":
 				m.Name = vals[0]
+			case "displayName":
+				m.DisplayName = vals[0]
 			case "type":
 				m.Type = vals[0]
 			}
@@ -120,6 +122,11 @@ func (m *CreateProjectResponse) UnmarshalURLValues(prefix string, values url.Val
 					return err
 				}
 				m.Data.IsDeleted = val
+			case "data.displayName":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				m.Data.DisplayName = vals[0]
 			}
 		}
 	}
@@ -159,6 +166,8 @@ func (m *Project) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.IsDeleted = val
+			case "displayName":
+				m.DisplayName = vals[0]
 			}
 		}
 	}
