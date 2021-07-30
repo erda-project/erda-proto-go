@@ -7,8 +7,8 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "github.com/mwitkow/go-proto-validators"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
@@ -18,8 +18,11 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *GetMenuRequest) Validate() error {
-	if this.TenantGroup == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("TenantGroup", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantGroup))
+	if this.TenantId == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("TenantId", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantId))
+	}
+	if this.Type == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Type", fmt.Errorf(`value '%v' must not be an empty string`, this.Type))
 	}
 	return nil
 }

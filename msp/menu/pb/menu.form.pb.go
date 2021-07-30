@@ -23,10 +23,10 @@ func (m *GetMenuRequest) UnmarshalURLValues(prefix string, values url.Values) er
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "tenantGroup":
-				m.TenantGroup = vals[0]
 			case "tenantId":
 				m.TenantId = vals[0]
+			case "type":
+				m.Type = vals[0]
 			}
 		}
 	}

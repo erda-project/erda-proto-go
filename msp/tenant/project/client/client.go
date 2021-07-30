@@ -43,3 +43,7 @@ func (s *projectServiceWrapper) GetProjects(ctx context.Context, req *pb.GetProj
 func (s *projectServiceWrapper) CreateProject(ctx context.Context, req *pb.CreateProjectRequest) (*pb.CreateProjectResponse, error) {
 	return s.client.CreateProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *projectServiceWrapper) GetProject(ctx context.Context, req *pb.GetProjectRequest) (*pb.GetProjectResponse, error) {
+	return s.client.GetProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
