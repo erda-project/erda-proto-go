@@ -51,7 +51,7 @@ func RegisterMenuServiceHandler(r http.Router, srv MenuServiceHandler, opts ...h
 		}
 		var GetMenu_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetMenu_info = transport.NewServiceInfo("erda.msp.menu.MenuService", "GetMenu", srv)
+			GetMenu_info = transport.NewServiceInfo("erda.msp.tenant.menu.MenuService", "GetMenu", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -86,7 +86,7 @@ func RegisterMenuServiceHandler(r http.Router, srv MenuServiceHandler, opts ...h
 		}
 		var GetSetting_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetSetting_info = transport.NewServiceInfo("erda.msp.menu.MenuService", "GetSetting", srv)
+			GetSetting_info = transport.NewServiceInfo("erda.msp.tenant.menu.MenuService", "GetSetting", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)

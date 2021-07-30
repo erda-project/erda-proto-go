@@ -12,6 +12,10 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "encoding/json" package it is being compiled against.
+var _ json.Marshaler = (*GetProjectRequest)(nil)
+var _ json.Unmarshaler = (*GetProjectRequest)(nil)
+var _ json.Marshaler = (*GetProjectResponse)(nil)
+var _ json.Unmarshaler = (*GetProjectResponse)(nil)
 var _ json.Marshaler = (*GetProjectsRequest)(nil)
 var _ json.Unmarshaler = (*GetProjectsRequest)(nil)
 var _ json.Marshaler = (*GetProjectsResponse)(nil)
@@ -24,6 +28,42 @@ var _ json.Marshaler = (*Project)(nil)
 var _ json.Unmarshaler = (*Project)(nil)
 var _ json.Marshaler = (*TenantRelationship)(nil)
 var _ json.Unmarshaler = (*TenantRelationship)(nil)
+
+// GetProjectRequest implement json.Marshaler.
+func (m *GetProjectRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetProjectRequest implement json.Marshaler.
+func (m *GetProjectRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetProjectResponse implement json.Marshaler.
+func (m *GetProjectResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetProjectResponse implement json.Marshaler.
+func (m *GetProjectResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
 
 // GetProjectsRequest implement json.Marshaler.
 func (m *GetProjectsRequest) MarshalJSON() ([]byte, error) {

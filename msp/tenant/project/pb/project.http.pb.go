@@ -9,6 +9,7 @@ import (
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	http1 "net/http"
+	strconv "strconv"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -21,6 +22,8 @@ type ProjectServiceHandler interface {
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
 	// POST /api/msp/tenant/project
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
+	// GET /api/msp/tenant/project
+	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
 }
 
 // RegisterProjectServiceHandler register ProjectServiceHandler to http.Router.
@@ -112,6 +115,50 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		)
 	}
 
+	add_GetProject := func(method, path string, fn func(context.Context, *GetProjectRequest) (*GetProjectResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetProjectRequest))
+		}
+		var GetProject_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "GetProject", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in GetProjectRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["projectId"]; len(vals) > 0 {
+					val, err := strconv.ParseInt(vals[0], 10, 64)
+					if err != nil {
+						return nil, err
+					}
+					in.ProjectID = val
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProject_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
 	add_GetProjects("GET", "/api/msp/tenant/projects", srv.GetProjects)
 	add_CreateProject("POST", "/api/msp/tenant/project", srv.CreateProject)
+	add_GetProject("GET", "/api/msp/tenant/project", srv.GetProject)
 }

@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 type ProjectServiceClient interface {
 	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
+	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
 }
 
 type projectServiceClient struct {
@@ -50,12 +51,22 @@ func (c *projectServiceClient) CreateProject(ctx context.Context, in *CreateProj
 	return out, nil
 }
 
+func (c *projectServiceClient) GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error) {
+	out := new(GetProjectResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/GetProject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations should embed UnimplementedProjectServiceServer
 // for forward compatibility
 type ProjectServiceServer interface {
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
+	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
 }
 
 // UnimplementedProjectServiceServer should be embedded to have forward compatible implementations.
@@ -67,6 +78,9 @@ func (*UnimplementedProjectServiceServer) GetProjects(context.Context, *GetProje
 }
 func (*UnimplementedProjectServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
+}
+func (*UnimplementedProjectServiceServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProject not implemented")
 }
 
 func RegisterProjectServiceServer(s grpc1.ServiceRegistrar, srv ProjectServiceServer, opts ...grpc1.HandleOption) {
@@ -103,6 +117,15 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 	if h.Interceptor != nil {
 		_ProjectService_CreateProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "CreateProject", srv)
 		_ProjectService_CreateProject_Handler = h.Interceptor(_ProjectService_CreateProject_Handler)
+	}
+
+	_ProjectService_GetProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetProject(ctx, req.(*GetProjectRequest))
+	}
+	var _ProjectService_GetProject_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ProjectService_GetProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "GetProject", srv)
+		_ProjectService_GetProject_Handler = h.Interceptor(_ProjectService_GetProject_Handler)
 	}
 
 	var serviceDesc = _ProjectService_serviceDesc
@@ -151,6 +174,29 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.msp.tenant.project.ProjectService/CreateProject",
 				}
 				return interceptor(ctx, in, info, _ProjectService_CreateProject_Handler)
+			},
+		},
+		{
+			MethodName: "GetProject",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetProjectRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ProjectServiceServer).GetProject(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ProjectService_GetProject_info)
+				}
+				if interceptor == nil {
+					return _ProjectService_GetProject_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.project.ProjectService/GetProject",
+				}
+				return interceptor(ctx, in, info, _ProjectService_GetProject_Handler)
 			},
 		},
 	}
