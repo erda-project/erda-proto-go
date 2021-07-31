@@ -23,11 +23,7 @@ func (m *CreateTenantRequest) UnmarshalURLValues(prefix string, values url.Value
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
+				m.ProjectID = vals[0]
 			case "tenantType":
 				m.TenantType = vals[0]
 			case "workspaces":
@@ -49,11 +45,7 @@ func (m *GetTenantRequest) UnmarshalURLValues(prefix string, values url.Values) 
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
+				m.ProjectID = vals[0]
 			case "tenantType":
 				m.TenantType = vals[0]
 			case "workspace":
@@ -87,11 +79,7 @@ func (m *GetTenantResponse) UnmarshalURLValues(prefix string, values url.Values)
 				if m.Data == nil {
 					m.Data = &Tenant{}
 				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Data.ProjectID = val
+				m.Data.ProjectID = vals[0]
 			case "data.workspace":
 				if m.Data == nil {
 					m.Data = &Tenant{}
@@ -140,11 +128,7 @@ func (m *Tenant) UnmarshalURLValues(prefix string, values url.Values) error {
 			case "type":
 				m.Type = vals[0]
 			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
+				m.ProjectID = vals[0]
 			case "workspace":
 				m.Workspace = vals[0]
 			case "createTime":

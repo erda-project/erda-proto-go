@@ -9,7 +9,6 @@ import (
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	http1 "net/http"
-	strconv "strconv"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -66,11 +65,7 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 				}
 				params := r.URL.Query()
 				if vals := params["projectId"]; len(vals) > 0 {
-					val, err := strconv.ParseInt(vals[0], 10, 64)
-					if err != nil {
-						return nil, err
-					}
-					in.ProjectID = val
+					in.ProjectID = vals[0]
 				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
@@ -109,11 +104,7 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 				}
 				params := r.URL.Query()
 				if vals := params["projectId"]; len(vals) > 0 {
-					val, err := strconv.ParseInt(vals[0], 10, 64)
-					if err != nil {
-						return nil, err
-					}
-					in.ProjectID = val
+					in.ProjectID = vals[0]
 				}
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)

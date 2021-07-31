@@ -19,6 +19,9 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *CreateTenantRequest) Validate() error {
+	if this.ProjectID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ProjectID", fmt.Errorf(`value '%v' must not be an empty string`, this.ProjectID))
+	}
 	if this.TenantType == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("TenantType", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantType))
 	}
@@ -40,6 +43,9 @@ func (this *CreateTenantResponse) Validate() error {
 	return nil
 }
 func (this *GetTenantRequest) Validate() error {
+	if this.ProjectID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ProjectID", fmt.Errorf(`value '%v' must not be an empty string`, this.ProjectID))
+	}
 	if this.TenantType == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("TenantType", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantType))
 	}
