@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/descriptorpb"
 	_ "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "google.golang.org/protobuf/types/descriptorpb"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
@@ -19,6 +19,9 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *GetProjectRequest) Validate() error {
+	if this.ProjectID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ProjectID", fmt.Errorf(`value '%v' must not be an empty string`, this.ProjectID))
+	}
 	return nil
 }
 func (this *GetProjectResponse) Validate() error {

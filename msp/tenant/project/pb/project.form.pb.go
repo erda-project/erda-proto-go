@@ -26,11 +26,7 @@ func (m *GetProjectRequest) UnmarshalURLValues(prefix string, values url.Values)
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
+				m.ProjectID = vals[0]
 			}
 		}
 	}
@@ -50,11 +46,7 @@ func (m *GetProjectResponse) UnmarshalURLValues(prefix string, values url.Values
 				if m.Data == nil {
 					m.Data = &Project{}
 				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Data.Id = val
+				m.Data.Id = vals[0]
 			case "data.name":
 				if m.Data == nil {
 					m.Data = &Project{}
@@ -114,15 +106,7 @@ func (m *GetProjectsRequest) UnmarshalURLValues(prefix string, values url.Values
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "projectId":
-				list := make([]int64, 0, len(vals))
-				for _, text := range vals {
-					val, err := strconv.ParseInt(text, 10, 64)
-					if err != nil {
-						return err
-					}
-					list = append(list, val)
-				}
-				m.ProjectId = list
+				m.ProjectId = vals
 			}
 		}
 	}
@@ -140,11 +124,7 @@ func (m *CreateProjectRequest) UnmarshalURLValues(prefix string, values url.Valu
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
+				m.Id = vals[0]
 			case "name":
 				m.Name = vals[0]
 			case "displayName":
@@ -170,11 +150,7 @@ func (m *CreateProjectResponse) UnmarshalURLValues(prefix string, values url.Val
 				if m.Data == nil {
 					m.Data = &Project{}
 				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Data.Id = val
+				m.Data.Id = vals[0]
 			case "data.name":
 				if m.Data == nil {
 					m.Data = &Project{}
@@ -234,11 +210,7 @@ func (m *Project) UnmarshalURLValues(prefix string, values url.Values) error {
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
+				m.Id = vals[0]
 			case "name":
 				m.Name = vals[0]
 			case "type":
