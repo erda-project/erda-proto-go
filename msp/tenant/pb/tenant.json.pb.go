@@ -20,6 +20,10 @@ var _ json.Marshaler = (*GetTenantRequest)(nil)
 var _ json.Unmarshaler = (*GetTenantRequest)(nil)
 var _ json.Marshaler = (*GetTenantResponse)(nil)
 var _ json.Unmarshaler = (*GetTenantResponse)(nil)
+var _ json.Marshaler = (*DeleteTenantRequest)(nil)
+var _ json.Unmarshaler = (*DeleteTenantRequest)(nil)
+var _ json.Marshaler = (*DeleteTenantResponse)(nil)
+var _ json.Unmarshaler = (*DeleteTenantResponse)(nil)
 var _ json.Marshaler = (*Tenant)(nil)
 var _ json.Unmarshaler = (*Tenant)(nil)
 
@@ -90,6 +94,42 @@ func (m *GetTenantResponse) MarshalJSON() ([]byte, error) {
 
 // GetTenantResponse implement json.Marshaler.
 func (m *GetTenantResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// DeleteTenantRequest implement json.Marshaler.
+func (m *DeleteTenantRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// DeleteTenantRequest implement json.Marshaler.
+func (m *DeleteTenantRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// DeleteTenantResponse implement json.Marshaler.
+func (m *DeleteTenantResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// DeleteTenantResponse implement json.Marshaler.
+func (m *DeleteTenantResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

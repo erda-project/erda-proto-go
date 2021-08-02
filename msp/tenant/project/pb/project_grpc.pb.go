@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 type ProjectServiceClient interface {
 	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
+	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
 	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
 }
 
@@ -51,6 +52,15 @@ func (c *projectServiceClient) CreateProject(ctx context.Context, in *CreateProj
 	return out, nil
 }
 
+func (c *projectServiceClient) DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error) {
+	out := new(DeleteProjectResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/DeleteProject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 func (c *projectServiceClient) GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error) {
 	out := new(GetProjectResponse)
 	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/GetProject", in, out, opts...)
@@ -66,6 +76,7 @@ func (c *projectServiceClient) GetProject(ctx context.Context, in *GetProjectReq
 type ProjectServiceServer interface {
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
+	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
 	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
 }
 
@@ -78,6 +89,9 @@ func (*UnimplementedProjectServiceServer) GetProjects(context.Context, *GetProje
 }
 func (*UnimplementedProjectServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
+}
+func (*UnimplementedProjectServiceServer) DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteProject not implemented")
 }
 func (*UnimplementedProjectServiceServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProject not implemented")
@@ -117,6 +131,15 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 	if h.Interceptor != nil {
 		_ProjectService_CreateProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "CreateProject", srv)
 		_ProjectService_CreateProject_Handler = h.Interceptor(_ProjectService_CreateProject_Handler)
+	}
+
+	_ProjectService_DeleteProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.DeleteProject(ctx, req.(*DeleteProjectRequest))
+	}
+	var _ProjectService_DeleteProject_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ProjectService_DeleteProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "DeleteProject", srv)
+		_ProjectService_DeleteProject_Handler = h.Interceptor(_ProjectService_DeleteProject_Handler)
 	}
 
 	_ProjectService_GetProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -174,6 +197,29 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.msp.tenant.project.ProjectService/CreateProject",
 				}
 				return interceptor(ctx, in, info, _ProjectService_CreateProject_Handler)
+			},
+		},
+		{
+			MethodName: "DeleteProject",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(DeleteProjectRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ProjectServiceServer).DeleteProject(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ProjectService_DeleteProject_info)
+				}
+				if interceptor == nil {
+					return _ProjectService_DeleteProject_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.project.ProjectService/DeleteProject",
+				}
+				return interceptor(ctx, in, info, _ProjectService_DeleteProject_Handler)
 			},
 		},
 		{

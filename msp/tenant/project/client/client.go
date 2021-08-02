@@ -44,6 +44,10 @@ func (s *projectServiceWrapper) CreateProject(ctx context.Context, req *pb.Creat
 	return s.client.CreateProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *projectServiceWrapper) DeleteProject(ctx context.Context, req *pb.DeleteProjectRequest) (*pb.DeleteProjectResponse, error) {
+	return s.client.DeleteProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 func (s *projectServiceWrapper) GetProject(ctx context.Context, req *pb.GetProjectRequest) (*pb.GetProjectResponse, error) {
 	return s.client.GetProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

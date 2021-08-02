@@ -20,6 +20,10 @@ var _ json.Marshaler = (*GetProjectsRequest)(nil)
 var _ json.Unmarshaler = (*GetProjectsRequest)(nil)
 var _ json.Marshaler = (*GetProjectsResponse)(nil)
 var _ json.Unmarshaler = (*GetProjectsResponse)(nil)
+var _ json.Marshaler = (*DeleteProjectRequest)(nil)
+var _ json.Unmarshaler = (*DeleteProjectRequest)(nil)
+var _ json.Marshaler = (*DeleteProjectResponse)(nil)
+var _ json.Unmarshaler = (*DeleteProjectResponse)(nil)
 var _ json.Marshaler = (*CreateProjectRequest)(nil)
 var _ json.Unmarshaler = (*CreateProjectRequest)(nil)
 var _ json.Marshaler = (*CreateProjectResponse)(nil)
@@ -96,6 +100,42 @@ func (m *GetProjectsResponse) MarshalJSON() ([]byte, error) {
 
 // GetProjectsResponse implement json.Marshaler.
 func (m *GetProjectsResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// DeleteProjectRequest implement json.Marshaler.
+func (m *DeleteProjectRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// DeleteProjectRequest implement json.Marshaler.
+func (m *DeleteProjectRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// DeleteProjectResponse implement json.Marshaler.
+func (m *DeleteProjectResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// DeleteProjectResponse implement json.Marshaler.
+func (m *DeleteProjectResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

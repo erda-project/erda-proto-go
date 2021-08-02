@@ -15,6 +15,8 @@ var _ urlenc.URLValuesUnmarshaler = (*CreateTenantRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateTenantResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTenantRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTenantResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*DeleteTenantRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*DeleteTenantResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Tenant)(nil)
 
 // CreateTenantRequest implement urlenc.URLValuesUnmarshaler.
@@ -58,6 +60,85 @@ func (m *GetTenantRequest) UnmarshalURLValues(prefix string, values url.Values) 
 
 // GetTenantResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetTenantResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+			case "data.id":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				m.Data.Id = vals[0]
+			case "data.type":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				m.Data.Type = vals[0]
+			case "data.projectID":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				m.Data.ProjectID = vals[0]
+			case "data.workspace":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				m.Data.Workspace = vals[0]
+			case "data.createTime":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.CreateTime = val
+			case "data.updateTime":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.UpdateTime = val
+			case "data.isDeleted":
+				if m.Data == nil {
+					m.Data = &Tenant{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data.IsDeleted = val
+			}
+		}
+	}
+	return nil
+}
+
+// DeleteTenantRequest implement urlenc.URLValuesUnmarshaler.
+func (m *DeleteTenantRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "projectID":
+				m.ProjectID = vals[0]
+			case "tenantType":
+				m.TenantType = vals[0]
+			case "workspace":
+				m.Workspace = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// DeleteTenantResponse implement urlenc.URLValuesUnmarshaler.
+func (m *DeleteTenantResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
