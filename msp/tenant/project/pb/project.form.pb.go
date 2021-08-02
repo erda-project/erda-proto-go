@@ -126,7 +126,7 @@ func (m *DeleteProjectRequest) UnmarshalURLValues(prefix string, values url.Valu
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "projectId":
-				m.ProjectId = vals
+				m.ProjectId = vals[0]
 			}
 		}
 	}
