@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 type TenantServiceClient interface {
 	CreateTenant(ctx context.Context, in *CreateTenantRequest, opts ...grpc.CallOption) (*CreateTenantResponse, error)
 	GetTenant(ctx context.Context, in *GetTenantRequest, opts ...grpc.CallOption) (*GetTenantResponse, error)
+	DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*DeleteTenantResponse, error)
 }
 
 type tenantServiceClient struct {
@@ -50,12 +51,22 @@ func (c *tenantServiceClient) GetTenant(ctx context.Context, in *GetTenantReques
 	return out, nil
 }
 
+func (c *tenantServiceClient) DeleteTenant(ctx context.Context, in *DeleteTenantRequest, opts ...grpc.CallOption) (*DeleteTenantResponse, error) {
+	out := new(DeleteTenantResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.TenantService/DeleteTenant", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // TenantServiceServer is the server API for TenantService service.
 // All implementations should embed UnimplementedTenantServiceServer
 // for forward compatibility
 type TenantServiceServer interface {
 	CreateTenant(context.Context, *CreateTenantRequest) (*CreateTenantResponse, error)
 	GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error)
+	DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error)
 }
 
 // UnimplementedTenantServiceServer should be embedded to have forward compatible implementations.
@@ -67,6 +78,9 @@ func (*UnimplementedTenantServiceServer) CreateTenant(context.Context, *CreateTe
 }
 func (*UnimplementedTenantServiceServer) GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTenant not implemented")
+}
+func (*UnimplementedTenantServiceServer) DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method DeleteTenant not implemented")
 }
 
 func RegisterTenantServiceServer(s grpc1.ServiceRegistrar, srv TenantServiceServer, opts ...grpc1.HandleOption) {
@@ -103,6 +117,15 @@ func _get_TenantService_serviceDesc(srv TenantServiceServer, opts ...grpc1.Handl
 	if h.Interceptor != nil {
 		_TenantService_GetTenant_info = transport.NewServiceInfo("erda.msp.tenant.TenantService", "GetTenant", srv)
 		_TenantService_GetTenant_Handler = h.Interceptor(_TenantService_GetTenant_Handler)
+	}
+
+	_TenantService_DeleteTenant_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.DeleteTenant(ctx, req.(*DeleteTenantRequest))
+	}
+	var _TenantService_DeleteTenant_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TenantService_DeleteTenant_info = transport.NewServiceInfo("erda.msp.tenant.TenantService", "DeleteTenant", srv)
+		_TenantService_DeleteTenant_Handler = h.Interceptor(_TenantService_DeleteTenant_Handler)
 	}
 
 	var serviceDesc = _TenantService_serviceDesc
@@ -151,6 +174,29 @@ func _get_TenantService_serviceDesc(srv TenantServiceServer, opts ...grpc1.Handl
 					FullMethod: "/erda.msp.tenant.TenantService/GetTenant",
 				}
 				return interceptor(ctx, in, info, _TenantService_GetTenant_Handler)
+			},
+		},
+		{
+			MethodName: "DeleteTenant",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(DeleteTenantRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TenantServiceServer).DeleteTenant(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TenantService_DeleteTenant_info)
+				}
+				if interceptor == nil {
+					return _TenantService_DeleteTenant_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.TenantService/DeleteTenant",
+				}
+				return interceptor(ctx, in, info, _TenantService_DeleteTenant_Handler)
 			},
 		},
 	}

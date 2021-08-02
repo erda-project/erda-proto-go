@@ -21,6 +21,8 @@ type TenantServiceHandler interface {
 	CreateTenant(context.Context, *CreateTenantRequest) (*CreateTenantResponse, error)
 	// GET /api/msp/tenant
 	GetTenant(context.Context, *GetTenantRequest) (*GetTenantResponse, error)
+	// DELETE /api/msp/tenant
+	DeleteTenant(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error)
 }
 
 // RegisterTenantServiceHandler register TenantServiceHandler to http.Router.
@@ -120,6 +122,46 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 		)
 	}
 
+	add_DeleteTenant := func(method, path string, fn func(context.Context, *DeleteTenantRequest) (*DeleteTenantResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*DeleteTenantRequest))
+		}
+		var DeleteTenant_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			DeleteTenant_info = transport.NewServiceInfo("erda.msp.tenant.TenantService", "DeleteTenant", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				var in DeleteTenantRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["projectId"]; len(vals) > 0 {
+					in.ProjectID = vals[0]
+				}
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteTenant_info)
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
 	add_CreateTenant("POST", "/api/msp/tenant", srv.CreateTenant)
 	add_GetTenant("GET", "/api/msp/tenant", srv.GetTenant)
+	add_DeleteTenant("DELETE", "/api/msp/tenant", srv.DeleteTenant)
 }

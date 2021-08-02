@@ -43,3 +43,7 @@ func (s *tenantServiceWrapper) CreateTenant(ctx context.Context, req *pb.CreateT
 func (s *tenantServiceWrapper) GetTenant(ctx context.Context, req *pb.GetTenantRequest) (*pb.GetTenantResponse, error) {
 	return s.client.GetTenant(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *tenantServiceWrapper) DeleteTenant(ctx context.Context, req *pb.DeleteTenantRequest) (*pb.DeleteTenantResponse, error) {
+	return s.client.DeleteTenant(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}

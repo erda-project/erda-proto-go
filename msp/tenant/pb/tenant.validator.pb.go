@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/protobuf/types/descriptorpb"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "github.com/mwitkow/go-proto-validators"
-	_ "google.golang.org/protobuf/types/descriptorpb"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
@@ -55,6 +55,26 @@ func (this *GetTenantRequest) Validate() error {
 	return nil
 }
 func (this *GetTenantResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *DeleteTenantRequest) Validate() error {
+	if this.ProjectID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ProjectID", fmt.Errorf(`value '%v' must not be an empty string`, this.ProjectID))
+	}
+	if this.TenantType == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("TenantType", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantType))
+	}
+	if this.Workspace == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Workspace", fmt.Errorf(`value '%v' must not be an empty string`, this.Workspace))
+	}
+	return nil
+}
+func (this *DeleteTenantResponse) Validate() error {
 	if this.Data != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
