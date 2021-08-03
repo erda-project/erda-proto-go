@@ -13,6 +13,8 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectOverviewRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectOverviewResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ProjectOverviewList)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*ProjectOverview)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectsRequest)(nil)
@@ -39,6 +41,26 @@ func (m *GetProjectOverviewRequest) UnmarshalURLValues(prefix string, values url
 
 // GetProjectOverviewResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetProjectOverviewResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &ProjectOverviewList{}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+// ProjectOverviewList implement urlenc.URLValuesUnmarshaler.
+func (m *ProjectOverviewList) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// ProjectOverview implement urlenc.URLValuesUnmarshaler.
+func (m *ProjectOverview) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
