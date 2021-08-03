@@ -51,3 +51,7 @@ func (s *projectServiceWrapper) DeleteProject(ctx context.Context, req *pb.Delet
 func (s *projectServiceWrapper) GetProject(ctx context.Context, req *pb.GetProjectRequest) (*pb.GetProjectResponse, error) {
 	return s.client.GetProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *projectServiceWrapper) GetProjectOverview(ctx context.Context, req *pb.GetProjectOverviewRequest) (*pb.GetProjectOverviewResponse, error) {
+	return s.client.GetProjectOverview(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}

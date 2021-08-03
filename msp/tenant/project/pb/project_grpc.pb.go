@@ -24,6 +24,7 @@ type ProjectServiceClient interface {
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
 	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
+	GetProjectOverview(ctx context.Context, in *GetProjectOverviewRequest, opts ...grpc.CallOption) (*GetProjectOverviewResponse, error)
 }
 
 type projectServiceClient struct {
@@ -70,6 +71,15 @@ func (c *projectServiceClient) GetProject(ctx context.Context, in *GetProjectReq
 	return out, nil
 }
 
+func (c *projectServiceClient) GetProjectOverview(ctx context.Context, in *GetProjectOverviewRequest, opts ...grpc.CallOption) (*GetProjectOverviewResponse, error) {
+	out := new(GetProjectOverviewResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/GetProjectOverview", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // ProjectServiceServer is the server API for ProjectService service.
 // All implementations should embed UnimplementedProjectServiceServer
 // for forward compatibility
@@ -78,6 +88,7 @@ type ProjectServiceServer interface {
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
 	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
+	GetProjectOverview(context.Context, *GetProjectOverviewRequest) (*GetProjectOverviewResponse, error)
 }
 
 // UnimplementedProjectServiceServer should be embedded to have forward compatible implementations.
@@ -95,6 +106,9 @@ func (*UnimplementedProjectServiceServer) DeleteProject(context.Context, *Delete
 }
 func (*UnimplementedProjectServiceServer) GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProject not implemented")
+}
+func (*UnimplementedProjectServiceServer) GetProjectOverview(context.Context, *GetProjectOverviewRequest) (*GetProjectOverviewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProjectOverview not implemented")
 }
 
 func RegisterProjectServiceServer(s grpc1.ServiceRegistrar, srv ProjectServiceServer, opts ...grpc1.HandleOption) {
@@ -149,6 +163,15 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 	if h.Interceptor != nil {
 		_ProjectService_GetProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "GetProject", srv)
 		_ProjectService_GetProject_Handler = h.Interceptor(_ProjectService_GetProject_Handler)
+	}
+
+	_ProjectService_GetProjectOverview_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetProjectOverview(ctx, req.(*GetProjectOverviewRequest))
+	}
+	var _ProjectService_GetProjectOverview_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ProjectService_GetProjectOverview_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "GetProjectOverview", srv)
+		_ProjectService_GetProjectOverview_Handler = h.Interceptor(_ProjectService_GetProjectOverview_Handler)
 	}
 
 	var serviceDesc = _ProjectService_serviceDesc
@@ -243,6 +266,29 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.msp.tenant.project.ProjectService/GetProject",
 				}
 				return interceptor(ctx, in, info, _ProjectService_GetProject_Handler)
+			},
+		},
+		{
+			MethodName: "GetProjectOverview",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetProjectOverviewRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ProjectServiceServer).GetProjectOverview(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ProjectService_GetProjectOverview_info)
+				}
+				if interceptor == nil {
+					return _ProjectService_GetProjectOverview_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.project.ProjectService/GetProjectOverview",
+				}
+				return interceptor(ctx, in, info, _ProjectService_GetProjectOverview_Handler)
 			},
 		},
 	}

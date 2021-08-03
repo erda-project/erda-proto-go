@@ -11,6 +11,8 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
+var _ urlenc.URLValuesUnmarshaler = (*GetProjectOverviewRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetProjectOverviewResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectsRequest)(nil)
@@ -21,6 +23,42 @@ var _ urlenc.URLValuesUnmarshaler = (*CreateProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Project)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TenantRelationship)(nil)
+
+// GetProjectOverviewRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetProjectOverviewRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "projectId":
+				m.ProjectId = vals
+			}
+		}
+	}
+	return nil
+}
+
+// GetProjectOverviewResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetProjectOverviewResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "projectCount":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.ProjectCount = val
+			case "workspaceCount":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.WorkspaceCount = val
+			}
+		}
+	}
+	return nil
+}
 
 // GetProjectRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetProjectRequest) UnmarshalURLValues(prefix string, values url.Values) error {
