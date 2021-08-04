@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 type ProjectServiceClient interface {
 	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
+	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
 	GetProject(ctx context.Context, in *GetProjectRequest, opts ...grpc.CallOption) (*GetProjectResponse, error)
 	GetProjectOverview(ctx context.Context, in *GetProjectOverviewRequest, opts ...grpc.CallOption) (*GetProjectOverviewResponse, error)
@@ -47,6 +48,15 @@ func (c *projectServiceClient) GetProjects(ctx context.Context, in *GetProjectsR
 func (c *projectServiceClient) CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error) {
 	out := new(CreateProjectResponse)
 	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/CreateProject", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error) {
+	out := new(UpdateProjectResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/UpdateProject", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -86,6 +96,7 @@ func (c *projectServiceClient) GetProjectOverview(ctx context.Context, in *GetPr
 type ProjectServiceServer interface {
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
+	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
 	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
 	GetProject(context.Context, *GetProjectRequest) (*GetProjectResponse, error)
 	GetProjectOverview(context.Context, *GetProjectOverviewRequest) (*GetProjectOverviewResponse, error)
@@ -100,6 +111,9 @@ func (*UnimplementedProjectServiceServer) GetProjects(context.Context, *GetProje
 }
 func (*UnimplementedProjectServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
+}
+func (*UnimplementedProjectServiceServer) UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method UpdateProject not implemented")
 }
 func (*UnimplementedProjectServiceServer) DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DeleteProject not implemented")
@@ -145,6 +159,15 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 	if h.Interceptor != nil {
 		_ProjectService_CreateProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "CreateProject", srv)
 		_ProjectService_CreateProject_Handler = h.Interceptor(_ProjectService_CreateProject_Handler)
+	}
+
+	_ProjectService_UpdateProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.UpdateProject(ctx, req.(*UpdateProjectRequest))
+	}
+	var _ProjectService_UpdateProject_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ProjectService_UpdateProject_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "UpdateProject", srv)
+		_ProjectService_UpdateProject_Handler = h.Interceptor(_ProjectService_UpdateProject_Handler)
 	}
 
 	_ProjectService_DeleteProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -220,6 +243,29 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.msp.tenant.project.ProjectService/CreateProject",
 				}
 				return interceptor(ctx, in, info, _ProjectService_CreateProject_Handler)
+			},
+		},
+		{
+			MethodName: "UpdateProject",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(UpdateProjectRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ProjectServiceServer).UpdateProject(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ProjectService_UpdateProject_info)
+				}
+				if interceptor == nil {
+					return _ProjectService_UpdateProject_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.project.ProjectService/UpdateProject",
+				}
+				return interceptor(ctx, in, info, _ProjectService_UpdateProject_Handler)
 			},
 		},
 		{

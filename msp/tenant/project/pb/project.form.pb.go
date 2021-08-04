@@ -23,6 +23,8 @@ var _ urlenc.URLValuesUnmarshaler = (*DeleteProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateProjectResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*UpdateProjectRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*UpdateProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Project)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TenantRelationship)(nil)
 
@@ -219,6 +221,92 @@ func (m *CreateProjectRequest) UnmarshalURLValues(prefix string, values url.Valu
 
 // CreateProjectResponse implement urlenc.URLValuesUnmarshaler.
 func (m *CreateProjectResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+			case "data.id":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				m.Data.Id = vals[0]
+			case "data.name":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				m.Data.Name = vals[0]
+			case "data.type":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				m.Data.Type = vals[0]
+			case "data.createTime":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.CreateTime = val
+			case "data.updateTime":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.UpdateTime = val
+			case "data.isDeleted":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data.IsDeleted = val
+			case "data.displayName":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				m.Data.DisplayName = vals[0]
+			case "data.displayType":
+				if m.Data == nil {
+					m.Data = &Project{}
+				}
+				m.Data.DisplayType = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// UpdateProjectRequest implement urlenc.URLValuesUnmarshaler.
+func (m *UpdateProjectRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "id":
+				m.Id = vals[0]
+			case "name":
+				m.Name = vals[0]
+			case "displayName":
+				m.DisplayName = vals[0]
+			case "type":
+				m.Type = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// UpdateProjectResponse implement urlenc.URLValuesUnmarshaler.
+func (m *UpdateProjectResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
