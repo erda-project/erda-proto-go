@@ -40,6 +40,10 @@ func (s *projectServiceWrapper) GetProjects(ctx context.Context, req *pb.GetProj
 	return s.client.GetProjects(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *projectServiceWrapper) GetProjectsTenantsIDs(ctx context.Context, req *pb.GetProjectsTenantsIDsRequest) (*pb.GetProjectsTenantsIDsResponse, error) {
+	return s.client.GetProjectsTenantsIDs(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 func (s *projectServiceWrapper) CreateProject(ctx context.Context, req *pb.CreateProjectRequest) (*pb.CreateProjectResponse, error) {
 	return s.client.CreateProject(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

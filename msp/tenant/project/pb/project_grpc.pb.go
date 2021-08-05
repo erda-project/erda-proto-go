@@ -21,6 +21,7 @@ const _ = grpc.SupportPackageIsVersion5
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type ProjectServiceClient interface {
 	GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error)
+	GetProjectsTenantsIDs(ctx context.Context, in *GetProjectsTenantsIDsRequest, opts ...grpc.CallOption) (*GetProjectsTenantsIDsResponse, error)
 	CreateProject(ctx context.Context, in *CreateProjectRequest, opts ...grpc.CallOption) (*CreateProjectResponse, error)
 	UpdateProject(ctx context.Context, in *UpdateProjectRequest, opts ...grpc.CallOption) (*UpdateProjectResponse, error)
 	DeleteProject(ctx context.Context, in *DeleteProjectRequest, opts ...grpc.CallOption) (*DeleteProjectResponse, error)
@@ -39,6 +40,15 @@ func NewProjectServiceClient(cc grpc1.ClientConnInterface) ProjectServiceClient 
 func (c *projectServiceClient) GetProjects(ctx context.Context, in *GetProjectsRequest, opts ...grpc.CallOption) (*GetProjectsResponse, error) {
 	out := new(GetProjectsResponse)
 	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/GetProjects", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *projectServiceClient) GetProjectsTenantsIDs(ctx context.Context, in *GetProjectsTenantsIDsRequest, opts ...grpc.CallOption) (*GetProjectsTenantsIDsResponse, error) {
+	out := new(GetProjectsTenantsIDsResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.tenant.project.ProjectService/GetProjectsTenantsIDs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -95,6 +105,7 @@ func (c *projectServiceClient) GetProjectOverview(ctx context.Context, in *GetPr
 // for forward compatibility
 type ProjectServiceServer interface {
 	GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error)
+	GetProjectsTenantsIDs(context.Context, *GetProjectsTenantsIDsRequest) (*GetProjectsTenantsIDsResponse, error)
 	CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error)
 	UpdateProject(context.Context, *UpdateProjectRequest) (*UpdateProjectResponse, error)
 	DeleteProject(context.Context, *DeleteProjectRequest) (*DeleteProjectResponse, error)
@@ -108,6 +119,9 @@ type UnimplementedProjectServiceServer struct {
 
 func (*UnimplementedProjectServiceServer) GetProjects(context.Context, *GetProjectsRequest) (*GetProjectsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetProjects not implemented")
+}
+func (*UnimplementedProjectServiceServer) GetProjectsTenantsIDs(context.Context, *GetProjectsTenantsIDsRequest) (*GetProjectsTenantsIDsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetProjectsTenantsIDs not implemented")
 }
 func (*UnimplementedProjectServiceServer) CreateProject(context.Context, *CreateProjectRequest) (*CreateProjectResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method CreateProject not implemented")
@@ -150,6 +164,15 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 	if h.Interceptor != nil {
 		_ProjectService_GetProjects_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "GetProjects", srv)
 		_ProjectService_GetProjects_Handler = h.Interceptor(_ProjectService_GetProjects_Handler)
+	}
+
+	_ProjectService_GetProjectsTenantsIDs_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetProjectsTenantsIDs(ctx, req.(*GetProjectsTenantsIDsRequest))
+	}
+	var _ProjectService_GetProjectsTenantsIDs_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_ProjectService_GetProjectsTenantsIDs_info = transport.NewServiceInfo("erda.msp.tenant.project.ProjectService", "GetProjectsTenantsIDs", srv)
+		_ProjectService_GetProjectsTenantsIDs_Handler = h.Interceptor(_ProjectService_GetProjectsTenantsIDs_Handler)
 	}
 
 	_ProjectService_CreateProject_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -220,6 +243,29 @@ func _get_ProjectService_serviceDesc(srv ProjectServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.msp.tenant.project.ProjectService/GetProjects",
 				}
 				return interceptor(ctx, in, info, _ProjectService_GetProjects_Handler)
+			},
+		},
+		{
+			MethodName: "GetProjectsTenantsIDs",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetProjectsTenantsIDsRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(ProjectServiceServer).GetProjectsTenantsIDs(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _ProjectService_GetProjectsTenantsIDs_info)
+				}
+				if interceptor == nil {
+					return _ProjectService_GetProjectsTenantsIDs_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.tenant.project.ProjectService/GetProjectsTenantsIDs",
+				}
+				return interceptor(ctx, in, info, _ProjectService_GetProjectsTenantsIDs_Handler)
 			},
 		},
 		{
