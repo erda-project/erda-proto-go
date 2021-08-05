@@ -7,9 +7,9 @@ import (
 	fmt "fmt"
 	math "math"
 	proto "github.com/golang/protobuf/proto"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
 	_ "google.golang.org/protobuf/types/descriptorpb"
 	_ "github.com/mwitkow/go-proto-validators"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 )
 
@@ -67,6 +67,12 @@ func (this *GetProjectsResponse) Validate() error {
 			}
 		}
 	}
+	return nil
+}
+func (this *GetProjectsTenantsIDsRequest) Validate() error {
+	return nil
+}
+func (this *GetProjectsTenantsIDsResponse) Validate() error {
 	return nil
 }
 func (this *DeleteProjectRequest) Validate() error {

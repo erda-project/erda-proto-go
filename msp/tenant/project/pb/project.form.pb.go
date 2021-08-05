@@ -19,6 +19,8 @@ var _ urlenc.URLValuesUnmarshaler = (*GetProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetProjectsResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetProjectsTenantsIDsRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetProjectsTenantsIDsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteProjectRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteProjectResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateProjectRequest)(nil)
@@ -179,6 +181,32 @@ func (m *GetProjectsRequest) UnmarshalURLValues(prefix string, values url.Values
 
 // GetProjectsResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetProjectsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// GetProjectsTenantsIDsRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetProjectsTenantsIDsRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "projectId":
+				m.ProjectId = vals
+			}
+		}
+	}
+	return nil
+}
+
+// GetProjectsTenantsIDsResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetProjectsTenantsIDsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				m.Data = vals
+			}
+		}
+	}
 	return nil
 }
 
