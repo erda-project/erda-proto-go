@@ -83,6 +83,8 @@ func (m *CreateTraceDebugRequest) UnmarshalURLValues(prefix string, values url.V
 				m.UpdateTime = vals[0]
 			case "projectID":
 				m.ProjectID = vals[0]
+			case "name":
+				m.Name = vals[0]
 			}
 		}
 	}
@@ -358,6 +360,11 @@ func (m *GetTraceDebugResponse) UnmarshalURLValues(prefix string, values url.Val
 					m.Data = &TraceDebugHistory{}
 				}
 				m.Data.UpdateTime = vals[0]
+			case "data.name":
+				if m.Data == nil {
+					m.Data = &TraceDebugHistory{}
+				}
+				m.Data.Name = vals[0]
 			}
 		}
 	}
@@ -534,6 +541,8 @@ func (m *TraceDebugHistory) UnmarshalURLValues(prefix string, values url.Values)
 				m.CreateTime = vals[0]
 			case "updateTime":
 				m.UpdateTime = vals[0]
+			case "name":
+				m.Name = vals[0]
 			}
 		}
 	}
