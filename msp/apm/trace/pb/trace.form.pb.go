@@ -83,6 +83,8 @@ func (m *CreateTraceDebugRequest) UnmarshalURLValues(prefix string, values url.V
 				m.UpdateTime = vals[0]
 			case "projectID":
 				m.ProjectID = vals[0]
+			case "name":
+				m.Name = vals[0]
 			}
 		}
 	}
