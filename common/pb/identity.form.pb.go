@@ -21,6 +21,8 @@ func (m *IdentityInfo) UnmarshalURLValues(prefix string, values url.Values) erro
 				m.UserID = vals[0]
 			case "internalClient":
 				m.InternalClient = vals[0]
+			case "orgID":
+				m.OrgID = vals[0]
 			}
 		}
 	}
