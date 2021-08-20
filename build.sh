@@ -16,7 +16,12 @@ fi
 
 # build protocol
 build_protocol() {
-    MODULES=$(find ".proto" -type d);
+    BASE_PATH=".proto"
+    if [ -n "${MODULE_PATH}" ]; then
+      BASE_PATH="${BASE_PATH}/${MODULE_PATH}"
+      echo "BASE_PATH: $BASE_PATH"
+    fi
+    MODULES=$(find "${BASE_PATH}" -type d); # MODULE_PATH=cp ; MODULE_PATH=core/monitor
     for path in ${MODULES}; do
         HAS_PROTO_FILE=$(eval echo $(bash -c "find "${path}" -maxdepth 1 -name *.proto 2>/dev/null" | wc -l));
         if [ ${HAS_PROTO_FILE} -gt 0 ]; then
