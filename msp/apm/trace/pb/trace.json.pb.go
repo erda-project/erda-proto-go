@@ -12,6 +12,16 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "encoding/json" package it is being compiled against.
+var _ json.Marshaler = (*GetTraceQueryConditionsRequest)(nil)
+var _ json.Unmarshaler = (*GetTraceQueryConditionsRequest)(nil)
+var _ json.Marshaler = (*GetTraceQueryConditionsResponse)(nil)
+var _ json.Unmarshaler = (*GetTraceQueryConditionsResponse)(nil)
+var _ json.Marshaler = (*TraceQueryConditions)(nil)
+var _ json.Unmarshaler = (*TraceQueryConditions)(nil)
+var _ json.Marshaler = (*TraceQueryCondition)(nil)
+var _ json.Unmarshaler = (*TraceQueryCondition)(nil)
+var _ json.Marshaler = (*OtherTraceQueryCondition)(nil)
+var _ json.Unmarshaler = (*OtherTraceQueryCondition)(nil)
 var _ json.Marshaler = (*GetTraceDebugRequest)(nil)
 var _ json.Unmarshaler = (*GetTraceDebugRequest)(nil)
 var _ json.Marshaler = (*CreateTraceDebugRequest)(nil)
@@ -50,6 +60,96 @@ var _ json.Marshaler = (*Span)(nil)
 var _ json.Unmarshaler = (*Span)(nil)
 var _ json.Marshaler = (*Trace)(nil)
 var _ json.Unmarshaler = (*Trace)(nil)
+
+// GetTraceQueryConditionsRequest implement json.Marshaler.
+func (m *GetTraceQueryConditionsRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceQueryConditionsRequest implement json.Marshaler.
+func (m *GetTraceQueryConditionsRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetTraceQueryConditionsResponse implement json.Marshaler.
+func (m *GetTraceQueryConditionsResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetTraceQueryConditionsResponse implement json.Marshaler.
+func (m *GetTraceQueryConditionsResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TraceQueryConditions implement json.Marshaler.
+func (m *TraceQueryConditions) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TraceQueryConditions implement json.Marshaler.
+func (m *TraceQueryConditions) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// TraceQueryCondition implement json.Marshaler.
+func (m *TraceQueryCondition) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// TraceQueryCondition implement json.Marshaler.
+func (m *TraceQueryCondition) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// OtherTraceQueryCondition implement json.Marshaler.
+func (m *OtherTraceQueryCondition) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// OtherTraceQueryCondition implement json.Marshaler.
+func (m *OtherTraceQueryCondition) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
 
 // GetTraceDebugRequest implement json.Marshaler.
 func (m *GetTraceDebugRequest) MarshalJSON() ([]byte, error) {

@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 type TraceServiceClient interface {
 	GetSpans(ctx context.Context, in *GetSpansRequest, opts ...grpc.CallOption) (*GetSpansResponse, error)
 	GetTraces(ctx context.Context, in *GetTracesRequest, opts ...grpc.CallOption) (*GetTracesResponse, error)
+	GetTraceQueryConditions(ctx context.Context, in *GetTraceQueryConditionsRequest, opts ...grpc.CallOption) (*GetTraceQueryConditionsResponse, error)
 	GetTraceDebugHistories(ctx context.Context, in *GetTraceDebugHistoriesRequest, opts ...grpc.CallOption) (*GetTraceDebugHistoriesResponse, error)
 	GetTraceDebugByRequestID(ctx context.Context, in *GetTraceDebugRequest, opts ...grpc.CallOption) (*GetTraceDebugResponse, error)
 	CreateTraceDebug(ctx context.Context, in *CreateTraceDebugRequest, opts ...grpc.CallOption) (*CreateTraceDebugResponse, error)
@@ -49,6 +50,15 @@ func (c *traceServiceClient) GetSpans(ctx context.Context, in *GetSpansRequest, 
 func (c *traceServiceClient) GetTraces(ctx context.Context, in *GetTracesRequest, opts ...grpc.CallOption) (*GetTracesResponse, error) {
 	out := new(GetTracesResponse)
 	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetTraces", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *traceServiceClient) GetTraceQueryConditions(ctx context.Context, in *GetTraceQueryConditionsRequest, opts ...grpc.CallOption) (*GetTraceQueryConditionsResponse, error) {
+	out := new(GetTraceQueryConditionsResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetTraceQueryConditions", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -106,6 +116,7 @@ func (c *traceServiceClient) GetTraceDebugHistoryStatusByRequestID(ctx context.C
 type TraceServiceServer interface {
 	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
 	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
+	GetTraceQueryConditions(context.Context, *GetTraceQueryConditionsRequest) (*GetTraceQueryConditionsResponse, error)
 	GetTraceDebugHistories(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error)
 	GetTraceDebugByRequestID(context.Context, *GetTraceDebugRequest) (*GetTraceDebugResponse, error)
 	CreateTraceDebug(context.Context, *CreateTraceDebugRequest) (*CreateTraceDebugResponse, error)
@@ -122,6 +133,9 @@ func (*UnimplementedTraceServiceServer) GetSpans(context.Context, *GetSpansReque
 }
 func (*UnimplementedTraceServiceServer) GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTraces not implemented")
+}
+func (*UnimplementedTraceServiceServer) GetTraceQueryConditions(context.Context, *GetTraceQueryConditionsRequest) (*GetTraceQueryConditionsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetTraceQueryConditions not implemented")
 }
 func (*UnimplementedTraceServiceServer) GetTraceDebugHistories(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTraceDebugHistories not implemented")
@@ -173,6 +187,15 @@ func _get_TraceService_serviceDesc(srv TraceServiceServer, opts ...grpc1.HandleO
 	if h.Interceptor != nil {
 		_TraceService_GetTraces_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraces", srv)
 		_TraceService_GetTraces_Handler = h.Interceptor(_TraceService_GetTraces_Handler)
+	}
+
+	_TraceService_GetTraceQueryConditions_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetTraceQueryConditions(ctx, req.(*GetTraceQueryConditionsRequest))
+	}
+	var _TraceService_GetTraceQueryConditions_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_GetTraceQueryConditions_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceQueryConditions", srv)
+		_TraceService_GetTraceQueryConditions_Handler = h.Interceptor(_TraceService_GetTraceQueryConditions_Handler)
 	}
 
 	_TraceService_GetTraceDebugHistories_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -266,6 +289,29 @@ func _get_TraceService_serviceDesc(srv TraceServiceServer, opts ...grpc1.HandleO
 					FullMethod: "/erda.msp.apm.trace.TraceService/GetTraces",
 				}
 				return interceptor(ctx, in, info, _TraceService_GetTraces_Handler)
+			},
+		},
+		{
+			MethodName: "GetTraceQueryConditions",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetTraceQueryConditionsRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).GetTraceQueryConditions(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_GetTraceQueryConditions_info)
+				}
+				if interceptor == nil {
+					return _TraceService_GetTraceQueryConditions_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/GetTraceQueryConditions",
+				}
+				return interceptor(ctx, in, info, _TraceService_GetTraceQueryConditions_Handler)
 			},
 		},
 		{
