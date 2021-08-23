@@ -11,6 +11,11 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
+var _ urlenc.URLValuesUnmarshaler = (*GetTraceQueryConditionsRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetTraceQueryConditionsResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*TraceQueryConditions)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*TraceQueryCondition)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*OtherTraceQueryCondition)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTraceDebugRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateTraceDebugRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*StopTraceDebugRequest)(nil)
@@ -30,6 +35,77 @@ var _ urlenc.URLValuesUnmarshaler = (*TraceDebugStatus)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*TraceDebugHistory)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Span)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Trace)(nil)
+
+// GetTraceQueryConditionsRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetTraceQueryConditionsRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "tenantID":
+				m.TenantID = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GetTraceQueryConditionsResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetTraceQueryConditionsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &TraceQueryConditions{}
+				}
+			}
+		}
+	}
+	return nil
+}
+
+// TraceQueryConditions implement urlenc.URLValuesUnmarshaler.
+func (m *TraceQueryConditions) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// TraceQueryCondition implement urlenc.URLValuesUnmarshaler.
+func (m *TraceQueryCondition) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "key":
+				m.Key = vals[0]
+			case "value":
+				m.Value = vals[0]
+			case "displayName":
+				m.DisplayName = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// OtherTraceQueryCondition implement urlenc.URLValuesUnmarshaler.
+func (m *OtherTraceQueryCondition) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "key":
+				m.Key = vals[0]
+			case "value":
+				m.Value = vals[0]
+			case "displayName":
+				m.DisplayName = vals[0]
+			case "type":
+				m.Type = vals[0]
+			case "paramKey":
+				m.ParamKey = vals[0]
+			}
+		}
+	}
+	return nil
+}
 
 // GetTraceDebugRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetTraceDebugRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -166,20 +242,10 @@ func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) 
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "scopeID":
-				m.ScopeID = vals[0]
-			case "applicationID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ApplicationID = val
+			case "tenantID":
+				m.TenantID = vals[0]
 			case "status":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Status = val
+				m.Status = vals[0]
 			case "startTime":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
@@ -200,6 +266,26 @@ func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) 
 				m.Limit = val
 			case "traceID":
 				m.TraceID = vals[0]
+			case "durationMin":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.DurationMin = val
+			case "durationMax":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.DurationMax = val
+			case "sort":
+				m.Sort = vals[0]
+			case "serviceName":
+				m.ServiceName = vals[0]
+			case "dubboMethod":
+				m.DubboMethod = vals[0]
+			case "httpPath":
+				m.HttpPath = vals[0]
 			}
 		}
 	}
@@ -586,6 +672,12 @@ func (m *Span) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.Duration = val
+			case "selfDuration":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.SelfDuration = val
 			}
 		}
 	}
@@ -599,12 +691,12 @@ func (m *Trace) UnmarshalURLValues(prefix string, values url.Values) error {
 			switch prefix + key {
 			case "id":
 				m.Id = vals[0]
-			case "elapsed":
+			case "duration":
 				val, err := strconv.ParseFloat(vals[0], 64)
 				if err != nil {
 					return err
 				}
-				m.Elapsed = val
+				m.Duration = val
 			case "services":
 				m.Services = vals
 			case "startTime":

@@ -18,6 +18,54 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
+func (this *GetTraceQueryConditionsRequest) Validate() error {
+	return nil
+}
+func (this *GetTraceQueryConditionsResponse) Validate() error {
+	if this.Data != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+		}
+	}
+	return nil
+}
+func (this *TraceQueryConditions) Validate() error {
+	for _, item := range this.Sort {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Sort", err)
+			}
+		}
+	}
+	for _, item := range this.Limit {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Limit", err)
+			}
+		}
+	}
+	for _, item := range this.TraceStatus {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("TraceStatus", err)
+			}
+		}
+	}
+	for _, item := range this.Others {
+		if item != nil {
+			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
+				return github_com_mwitkow_go_proto_validators.FieldError("Others", err)
+			}
+		}
+	}
+	return nil
+}
+func (this *TraceQueryCondition) Validate() error {
+	return nil
+}
+func (this *OtherTraceQueryCondition) Validate() error {
+	return nil
+}
 func (this *GetTraceDebugRequest) Validate() error {
 	if this.RequestID == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("RequestID", fmt.Errorf(`value '%v' must not be an empty string`, this.RequestID))
@@ -66,8 +114,8 @@ func (this *GetSpansRequest) Validate() error {
 	return nil
 }
 func (this *GetTracesRequest) Validate() error {
-	if this.ScopeID == "" {
-		return github_com_mwitkow_go_proto_validators.FieldError("ScopeID", fmt.Errorf(`value '%v' must not be an empty string`, this.ScopeID))
+	if this.TenantID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("TenantID", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantID))
 	}
 	return nil
 }

@@ -44,6 +44,10 @@ func (s *traceServiceWrapper) GetTraces(ctx context.Context, req *pb.GetTracesRe
 	return s.client.GetTraces(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *traceServiceWrapper) GetTraceQueryConditions(ctx context.Context, req *pb.GetTraceQueryConditionsRequest) (*pb.GetTraceQueryConditionsResponse, error) {
+	return s.client.GetTraceQueryConditions(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 func (s *traceServiceWrapper) GetTraceDebugHistories(ctx context.Context, req *pb.GetTraceDebugHistoriesRequest) (*pb.GetTraceDebugHistoriesResponse, error) {
 	return s.client.GetTraceDebugHistories(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
