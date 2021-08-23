@@ -59,6 +59,12 @@ func RegisterImageServiceHandler(r http.Router, srv ImageServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetImage_info)
+				}
+				r = r.WithContext(ctx)
 				var in ImageGetRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -89,11 +95,6 @@ func RegisterImageServiceHandler(r http.Router, srv ImageServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetImage_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -114,6 +115,12 @@ func RegisterImageServiceHandler(r http.Router, srv ImageServiceHandler, opts ..
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListImage_info)
+				}
+				r = r.WithContext(ctx)
 				var in ImageListRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -123,11 +130,6 @@ func RegisterImageServiceHandler(r http.Router, srv ImageServiceHandler, opts ..
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListImage_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

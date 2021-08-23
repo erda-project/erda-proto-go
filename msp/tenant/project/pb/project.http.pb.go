@@ -63,6 +63,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProjects_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetProjectsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -72,11 +78,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProjects_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -98,6 +99,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProjectsTenantsIDs_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetProjectsTenantsIDsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -107,11 +114,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProjectsTenantsIDs_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -133,6 +135,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateProject_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateProjectRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -142,11 +150,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateProject_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -168,6 +171,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateProject_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateProjectRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -177,11 +186,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateProject_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -203,6 +207,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteProject_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteProjectRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -212,11 +222,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteProject_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -238,6 +243,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProject_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetProjectRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -251,11 +262,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 				params := r.URL.Query()
 				if vals := params["projectId"]; len(vals) > 0 {
 					in.ProjectID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProject_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -277,6 +283,12 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProjectOverview_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetProjectOverviewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -286,11 +298,6 @@ func RegisterProjectServiceHandler(r http.Router, srv ProjectServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetProjectOverview_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

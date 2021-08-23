@@ -63,6 +63,12 @@ func RegisterUserServiceHandler(r http.Router, srv UserServiceHandler, opts ...h
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetUser_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetUserRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -92,11 +98,6 @@ func RegisterUserServiceHandler(r http.Router, srv UserServiceHandler, opts ...h
 							in.Id = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetUser_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -121,6 +122,12 @@ func RegisterUserServiceHandler(r http.Router, srv UserServiceHandler, opts ...h
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateUser_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetUserRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -150,11 +157,6 @@ func RegisterUserServiceHandler(r http.Router, srv UserServiceHandler, opts ...h
 							in.Id = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateUser_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

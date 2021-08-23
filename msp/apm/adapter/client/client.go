@@ -12,34 +12,34 @@ import (
 
 // Client provide all service clients.
 type Client interface {
-	// AdapterService adapter.proto
-	AdapterService() pb.AdapterServiceClient
+	// InstrumentationLibraryService adapter.proto
+	InstrumentationLibraryService() pb.InstrumentationLibraryServiceClient
 }
 
 // New create client
 func New(cc grpc.ClientConnInterface) Client {
 	return &serviceClients{
-		adapterService: pb.NewAdapterServiceClient(cc),
+		instrumentationLibraryService: pb.NewInstrumentationLibraryServiceClient(cc),
 	}
 }
 
 type serviceClients struct {
-	adapterService pb.AdapterServiceClient
+	instrumentationLibraryService pb.InstrumentationLibraryServiceClient
 }
 
-func (c *serviceClients) AdapterService() pb.AdapterServiceClient {
-	return c.adapterService
+func (c *serviceClients) InstrumentationLibraryService() pb.InstrumentationLibraryServiceClient {
+	return c.instrumentationLibraryService
 }
 
-type adapterServiceWrapper struct {
-	client pb.AdapterServiceClient
+type instrumentationLibraryServiceWrapper struct {
+	client pb.InstrumentationLibraryServiceClient
 	opts   []grpc1.CallOption
 }
 
-func (s *adapterServiceWrapper) GetAdapters(ctx context.Context, req *pb.GetAdaptersRequest) (*pb.GetAdaptersResponse, error) {
-	return s.client.GetAdapters(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *instrumentationLibraryServiceWrapper) GetInstrumentationLibrary(ctx context.Context, req *pb.GetInstrumentationLibraryRequest) (*pb.GetInstrumentationLibraryResponse, error) {
+	return s.client.GetInstrumentationLibrary(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
-func (s *adapterServiceWrapper) GetAdapterDocs(ctx context.Context, req *pb.GetAdapterDocsRequest) (*pb.GetAdapterDocsResponse, error) {
-	return s.client.GetAdapterDocs(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *instrumentationLibraryServiceWrapper) GetInstrumentationLibraryDocs(ctx context.Context, req *pb.GetInstrumentationLibraryDocsRequest) (*pb.GetInstrumentationLibraryDocsResponse, error) {
+	return s.client.GetInstrumentationLibraryDocs(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

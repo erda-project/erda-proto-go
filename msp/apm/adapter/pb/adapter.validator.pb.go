@@ -5,13 +5,12 @@ package pb
 
 import (
 	fmt "fmt"
-	math "math"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
-	_ "google.golang.org/protobuf/types/descriptorpb"
-	_ "google.golang.org/protobuf/types/known/structpb"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "google.golang.org/protobuf/types/descriptorpb"
+	math "math"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -19,10 +18,10 @@ var _ = proto.Marshal
 var _ = fmt.Errorf
 var _ = math.Inf
 
-func (this *GetAdaptersRequest) Validate() error {
+func (this *GetInstrumentationLibraryRequest) Validate() error {
 	return nil
 }
-func (this *GetAdaptersResponse) Validate() error {
+func (this *GetInstrumentationLibraryResponse) Validate() error {
 	for _, item := range this.Data {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
@@ -32,32 +31,22 @@ func (this *GetAdaptersResponse) Validate() error {
 	}
 	return nil
 }
-func (this *GetAdapterDocsRequest) Validate() error {
+func (this *GetInstrumentationLibraryDocsRequest) Validate() error {
 	return nil
 }
-func (this *GetAdapterDocsResponse) Validate() error {
-	for _, item := range this.Data {
+func (this *GetInstrumentationLibraryDocsResponse) Validate() error {
+	return nil
+}
+func (this *Language) Validate() error {
+	return nil
+}
+func (this *InstrumentationLibrary) Validate() error {
+	for _, item := range this.Languages {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
-				return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+				return github_com_mwitkow_go_proto_validators.FieldError("Languages", err)
 			}
 		}
 	}
-	return nil
-}
-func (this *AdapterStrategy) Validate() error {
-	return nil
-}
-func (this *Adapters) Validate() error {
-	for _, item := range this.Strategies {
-		if item != nil {
-			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
-				return github_com_mwitkow_go_proto_validators.FieldError("Strategies", err)
-			}
-		}
-	}
-	return nil
-}
-func (this *AdapterDocs) Validate() error {
 	return nil
 }

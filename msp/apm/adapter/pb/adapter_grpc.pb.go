@@ -16,141 +16,141 @@ import (
 // is compatible with the grpc package it is being compiled against.
 const _ = grpc.SupportPackageIsVersion5
 
-// AdapterServiceClient is the client API for AdapterService service.
+// InstrumentationLibraryServiceClient is the client API for InstrumentationLibraryService service.
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
-type AdapterServiceClient interface {
-	GetAdapters(ctx context.Context, in *GetAdaptersRequest, opts ...grpc.CallOption) (*GetAdaptersResponse, error)
-	GetAdapterDocs(ctx context.Context, in *GetAdapterDocsRequest, opts ...grpc.CallOption) (*GetAdapterDocsResponse, error)
+type InstrumentationLibraryServiceClient interface {
+	GetInstrumentationLibrary(ctx context.Context, in *GetInstrumentationLibraryRequest, opts ...grpc.CallOption) (*GetInstrumentationLibraryResponse, error)
+	GetInstrumentationLibraryDocs(ctx context.Context, in *GetInstrumentationLibraryDocsRequest, opts ...grpc.CallOption) (*GetInstrumentationLibraryDocsResponse, error)
 }
 
-type adapterServiceClient struct {
+type instrumentationLibraryServiceClient struct {
 	cc grpc1.ClientConnInterface
 }
 
-func NewAdapterServiceClient(cc grpc1.ClientConnInterface) AdapterServiceClient {
-	return &adapterServiceClient{cc}
+func NewInstrumentationLibraryServiceClient(cc grpc1.ClientConnInterface) InstrumentationLibraryServiceClient {
+	return &instrumentationLibraryServiceClient{cc}
 }
 
-func (c *adapterServiceClient) GetAdapters(ctx context.Context, in *GetAdaptersRequest, opts ...grpc.CallOption) (*GetAdaptersResponse, error) {
-	out := new(GetAdaptersResponse)
-	err := c.cc.Invoke(ctx, "/erda.msp.apm.adapter.AdapterService/GetAdapters", in, out, opts...)
+func (c *instrumentationLibraryServiceClient) GetInstrumentationLibrary(ctx context.Context, in *GetInstrumentationLibraryRequest, opts ...grpc.CallOption) (*GetInstrumentationLibraryResponse, error) {
+	out := new(GetInstrumentationLibraryResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.adapter.InstrumentationLibraryService/GetInstrumentationLibrary", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-func (c *adapterServiceClient) GetAdapterDocs(ctx context.Context, in *GetAdapterDocsRequest, opts ...grpc.CallOption) (*GetAdapterDocsResponse, error) {
-	out := new(GetAdapterDocsResponse)
-	err := c.cc.Invoke(ctx, "/erda.msp.apm.adapter.AdapterService/GetAdapterDocs", in, out, opts...)
+func (c *instrumentationLibraryServiceClient) GetInstrumentationLibraryDocs(ctx context.Context, in *GetInstrumentationLibraryDocsRequest, opts ...grpc.CallOption) (*GetInstrumentationLibraryDocsResponse, error) {
+	out := new(GetInstrumentationLibraryDocsResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.adapter.InstrumentationLibraryService/GetInstrumentationLibraryDocs", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
 	return out, nil
 }
 
-// AdapterServiceServer is the server API for AdapterService service.
-// All implementations should embed UnimplementedAdapterServiceServer
+// InstrumentationLibraryServiceServer is the server API for InstrumentationLibraryService service.
+// All implementations should embed UnimplementedInstrumentationLibraryServiceServer
 // for forward compatibility
-type AdapterServiceServer interface {
-	GetAdapters(context.Context, *GetAdaptersRequest) (*GetAdaptersResponse, error)
-	GetAdapterDocs(context.Context, *GetAdapterDocsRequest) (*GetAdapterDocsResponse, error)
+type InstrumentationLibraryServiceServer interface {
+	GetInstrumentationLibrary(context.Context, *GetInstrumentationLibraryRequest) (*GetInstrumentationLibraryResponse, error)
+	GetInstrumentationLibraryDocs(context.Context, *GetInstrumentationLibraryDocsRequest) (*GetInstrumentationLibraryDocsResponse, error)
 }
 
-// UnimplementedAdapterServiceServer should be embedded to have forward compatible implementations.
-type UnimplementedAdapterServiceServer struct {
+// UnimplementedInstrumentationLibraryServiceServer should be embedded to have forward compatible implementations.
+type UnimplementedInstrumentationLibraryServiceServer struct {
 }
 
-func (*UnimplementedAdapterServiceServer) GetAdapters(context.Context, *GetAdaptersRequest) (*GetAdaptersResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAdapters not implemented")
+func (*UnimplementedInstrumentationLibraryServiceServer) GetInstrumentationLibrary(context.Context, *GetInstrumentationLibraryRequest) (*GetInstrumentationLibraryResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInstrumentationLibrary not implemented")
 }
-func (*UnimplementedAdapterServiceServer) GetAdapterDocs(context.Context, *GetAdapterDocsRequest) (*GetAdapterDocsResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method GetAdapterDocs not implemented")
-}
-
-func RegisterAdapterServiceServer(s grpc1.ServiceRegistrar, srv AdapterServiceServer, opts ...grpc1.HandleOption) {
-	s.RegisterService(_get_AdapterService_serviceDesc(srv, opts...), srv)
+func (*UnimplementedInstrumentationLibraryServiceServer) GetInstrumentationLibraryDocs(context.Context, *GetInstrumentationLibraryDocsRequest) (*GetInstrumentationLibraryDocsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInstrumentationLibraryDocs not implemented")
 }
 
-var _AdapterService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.msp.apm.adapter.AdapterService",
-	HandlerType: (*AdapterServiceServer)(nil),
+func RegisterInstrumentationLibraryServiceServer(s grpc1.ServiceRegistrar, srv InstrumentationLibraryServiceServer, opts ...grpc1.HandleOption) {
+	s.RegisterService(_get_InstrumentationLibraryService_serviceDesc(srv, opts...), srv)
+}
+
+var _InstrumentationLibraryService_serviceDesc = grpc.ServiceDesc{
+	ServiceName: "erda.msp.apm.adapter.InstrumentationLibraryService",
+	HandlerType: (*InstrumentationLibraryServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
 	Metadata:    "adapter.proto",
 }
 
-func _get_AdapterService_serviceDesc(srv AdapterServiceServer, opts ...grpc1.HandleOption) *grpc.ServiceDesc {
+func _get_InstrumentationLibraryService_serviceDesc(srv InstrumentationLibraryServiceServer, opts ...grpc1.HandleOption) *grpc.ServiceDesc {
 	h := grpc1.DefaultHandleOptions()
 	for _, op := range opts {
 		op(h)
 	}
 
-	_AdapterService_GetAdapters_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.GetAdapters(ctx, req.(*GetAdaptersRequest))
+	_InstrumentationLibraryService_GetInstrumentationLibrary_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetInstrumentationLibrary(ctx, req.(*GetInstrumentationLibraryRequest))
 	}
-	var _AdapterService_GetAdapters_info transport.ServiceInfo
+	var _InstrumentationLibraryService_GetInstrumentationLibrary_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AdapterService_GetAdapters_info = transport.NewServiceInfo("erda.msp.apm.adapter.AdapterService", "GetAdapters", srv)
-		_AdapterService_GetAdapters_Handler = h.Interceptor(_AdapterService_GetAdapters_Handler)
+		_InstrumentationLibraryService_GetInstrumentationLibrary_info = transport.NewServiceInfo("erda.msp.apm.adapter.InstrumentationLibraryService", "GetInstrumentationLibrary", srv)
+		_InstrumentationLibraryService_GetInstrumentationLibrary_Handler = h.Interceptor(_InstrumentationLibraryService_GetInstrumentationLibrary_Handler)
 	}
 
-	_AdapterService_GetAdapterDocs_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.GetAdapterDocs(ctx, req.(*GetAdapterDocsRequest))
+	_InstrumentationLibraryService_GetInstrumentationLibraryDocs_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetInstrumentationLibraryDocs(ctx, req.(*GetInstrumentationLibraryDocsRequest))
 	}
-	var _AdapterService_GetAdapterDocs_info transport.ServiceInfo
+	var _InstrumentationLibraryService_GetInstrumentationLibraryDocs_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AdapterService_GetAdapterDocs_info = transport.NewServiceInfo("erda.msp.apm.adapter.AdapterService", "GetAdapterDocs", srv)
-		_AdapterService_GetAdapterDocs_Handler = h.Interceptor(_AdapterService_GetAdapterDocs_Handler)
+		_InstrumentationLibraryService_GetInstrumentationLibraryDocs_info = transport.NewServiceInfo("erda.msp.apm.adapter.InstrumentationLibraryService", "GetInstrumentationLibraryDocs", srv)
+		_InstrumentationLibraryService_GetInstrumentationLibraryDocs_Handler = h.Interceptor(_InstrumentationLibraryService_GetInstrumentationLibraryDocs_Handler)
 	}
 
-	var serviceDesc = _AdapterService_serviceDesc
+	var serviceDesc = _InstrumentationLibraryService_serviceDesc
 	serviceDesc.Methods = []grpc.MethodDesc{
 		{
-			MethodName: "GetAdapters",
+			MethodName: "GetInstrumentationLibrary",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(GetAdaptersRequest)
+				in := new(GetInstrumentationLibraryRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AdapterServiceServer).GetAdapters(ctx, in)
+					return srv.(InstrumentationLibraryServiceServer).GetInstrumentationLibrary(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AdapterService_GetAdapters_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _InstrumentationLibraryService_GetInstrumentationLibrary_info)
 				}
 				if interceptor == nil {
-					return _AdapterService_GetAdapters_Handler(ctx, in)
+					return _InstrumentationLibraryService_GetInstrumentationLibrary_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.msp.apm.adapter.AdapterService/GetAdapters",
+					FullMethod: "/erda.msp.apm.adapter.InstrumentationLibraryService/GetInstrumentationLibrary",
 				}
-				return interceptor(ctx, in, info, _AdapterService_GetAdapters_Handler)
+				return interceptor(ctx, in, info, _InstrumentationLibraryService_GetInstrumentationLibrary_Handler)
 			},
 		},
 		{
-			MethodName: "GetAdapterDocs",
+			MethodName: "GetInstrumentationLibraryDocs",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(GetAdapterDocsRequest)
+				in := new(GetInstrumentationLibraryDocsRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AdapterServiceServer).GetAdapterDocs(ctx, in)
+					return srv.(InstrumentationLibraryServiceServer).GetInstrumentationLibraryDocs(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AdapterService_GetAdapterDocs_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _InstrumentationLibraryService_GetInstrumentationLibraryDocs_info)
 				}
 				if interceptor == nil {
-					return _AdapterService_GetAdapterDocs_Handler(ctx, in)
+					return _InstrumentationLibraryService_GetInstrumentationLibraryDocs_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.msp.apm.adapter.AdapterService/GetAdapterDocs",
+					FullMethod: "/erda.msp.apm.adapter.InstrumentationLibraryService/GetInstrumentationLibraryDocs",
 				}
-				return interceptor(ctx, in, info, _AdapterService_GetAdapterDocs_Handler)
+				return interceptor(ctx, in, info, _InstrumentationLibraryService_GetInstrumentationLibraryDocs_Handler)
 			},
 		},
 	}

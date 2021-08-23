@@ -57,6 +57,12 @@ func RegisterExpressionServiceHandler(r http.Router, srv ExpressionServiceHandle
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExpression_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetExpressionRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -86,11 +92,6 @@ func RegisterExpressionServiceHandler(r http.Router, srv ExpressionServiceHandle
 							in.Type = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExpression_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

@@ -74,6 +74,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllNotifyTemplates_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAllNotifyTemplatesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -83,11 +89,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllNotifyTemplates_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -109,6 +110,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetNotifyTemplate_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetNotifyTemplateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -118,11 +125,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetNotifyTemplate_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -144,6 +146,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateNotify_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateNotifyRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -153,11 +161,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateNotify_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -182,6 +185,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteNotify_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteNotifyRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -216,11 +225,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteNotify_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -244,6 +248,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateNotify_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateNotifyRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -278,11 +288,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateNotify_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -303,6 +308,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetUserNotifyList_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetUserNotifyListRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -312,11 +323,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetUserNotifyList_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -341,6 +347,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, NotifyEnable_info)
+				}
+				r = r.WithContext(ctx)
 				var in NotifyEnableRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -375,11 +387,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, NotifyEnable_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -400,6 +407,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateUserDefineNotifyTemplate_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateUserDefineNotifyTemplateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -409,11 +422,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateUserDefineNotifyTemplate_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -438,6 +446,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetNotifyDetail_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetNotifyDetailRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -472,11 +486,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetNotifyDetail_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -497,6 +506,12 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllGroups_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAllGroupsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -506,11 +521,6 @@ func RegisterNotifyServiceHandler(r http.Router, srv NotifyServiceHandler, opts 
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllGroups_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

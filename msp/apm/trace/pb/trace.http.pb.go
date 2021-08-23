@@ -71,6 +71,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSpans_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetSpansRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -105,11 +111,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSpans_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -130,6 +131,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraces_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetTracesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -147,10 +154,45 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 				if vals := params["traceId"]; len(vals) > 0 {
 					in.TraceID = vals[0]
 				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetTraceQueryConditions := func(method, path string, fn func(context.Context, *GetTraceQueryConditionsRequest) (*GetTraceQueryConditionsResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetTraceQueryConditionsRequest))
+		}
+		var GetTraceQueryConditions_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetTraceQueryConditions_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceQueryConditions", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraces_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceQueryConditions_info)
+				}
+				r = r.WithContext(ctx)
+				var in GetTraceQueryConditionsRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -211,6 +253,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugHistories_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetTraceDebugHistoriesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -224,11 +272,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 				params := r.URL.Query()
 				if vals := params["terminusKey"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugHistories_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -253,6 +296,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugByRequestID_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetTraceDebugRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -287,11 +336,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugByRequestID_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -312,6 +356,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateTraceDebug_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateTraceDebugRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -321,11 +371,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateTraceDebug_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -350,6 +395,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, StopTraceDebug_info)
+				}
+				r = r.WithContext(ctx)
 				var in StopTraceDebugRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -384,11 +435,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, StopTraceDebug_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -412,6 +458,12 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugHistoryStatusByRequestID_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetTraceDebugStatusByRequestIDRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -445,11 +497,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 							in.RequestID = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceDebugHistoryStatusByRequestID_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
