@@ -55,6 +55,12 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateTenant_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateTenantRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -68,11 +74,6 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["projectId"]; len(vals) > 0 {
 					in.ProjectID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateTenant_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -94,6 +95,12 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTenant_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetTenantRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -107,11 +114,6 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["projectId"]; len(vals) > 0 {
 					in.ProjectID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTenant_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -133,6 +135,12 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteTenant_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteTenantRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -146,11 +154,6 @@ func RegisterTenantServiceHandler(r http.Router, srv TenantServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["projectId"]; len(vals) > 0 {
 					in.ProjectID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteTenant_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

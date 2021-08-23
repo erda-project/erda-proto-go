@@ -11,38 +11,25 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
-var _ urlenc.URLValuesUnmarshaler = (*GetAdaptersRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetAdaptersResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetAdapterDocsRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetAdapterDocsResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AdapterStrategy)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Adapters)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AdapterDocs)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetInstrumentationLibraryRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetInstrumentationLibraryResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetInstrumentationLibraryDocsRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetInstrumentationLibraryDocsResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*Language)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*InstrumentationLibrary)(nil)
 
-// GetAdaptersRequest implement urlenc.URLValuesUnmarshaler.
-func (m *GetAdaptersRequest) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
-			}
-		}
-	}
+// GetInstrumentationLibraryRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetInstrumentationLibraryRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
-// GetAdaptersResponse implement urlenc.URLValuesUnmarshaler.
-func (m *GetAdaptersResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetInstrumentationLibraryResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetInstrumentationLibraryResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
-// GetAdapterDocsRequest implement urlenc.URLValuesUnmarshaler.
-func (m *GetAdapterDocsRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetInstrumentationLibraryDocsRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetInstrumentationLibraryDocsRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -56,40 +43,31 @@ func (m *GetAdapterDocsRequest) UnmarshalURLValues(prefix string, values url.Val
 				m.ServiceName = vals[0]
 			case "type":
 				m.Type = vals[0]
+			case "language":
+				m.Language = vals[0]
+			case "strategy":
+				m.Strategy = vals[0]
 			}
 		}
 	}
 	return nil
 }
 
-// GetAdapterDocsResponse implement urlenc.URLValuesUnmarshaler.
-func (m *GetAdapterDocsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
-	return nil
-}
-
-// AdapterStrategy implement urlenc.URLValuesUnmarshaler.
-func (m *AdapterStrategy) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetInstrumentationLibraryDocsResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetInstrumentationLibraryDocsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "displayName":
-				m.DisplayName = vals[0]
-			case "strategy":
-				m.Strategy = vals[0]
-			case "enable":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Enable = val
+			case "data":
+				m.Data = vals[0]
 			}
 		}
 	}
 	return nil
 }
 
-// Adapters implement urlenc.URLValuesUnmarshaler.
-func (m *Adapters) UnmarshalURLValues(prefix string, values url.Values) error {
+// Language implement urlenc.URLValuesUnmarshaler.
+func (m *Language) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -103,21 +81,15 @@ func (m *Adapters) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
-// AdapterDocs implement urlenc.URLValuesUnmarshaler.
-func (m *AdapterDocs) UnmarshalURLValues(prefix string, values url.Values) error {
+// InstrumentationLibrary implement urlenc.URLValuesUnmarshaler.
+func (m *InstrumentationLibrary) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "serviceName":
-				m.ServiceName = vals[0]
-			case "type":
-				m.Type = vals[0]
-			case "content":
-				m.Content = vals[0]
-			case "adapterLanguage":
-				m.AdapterLanguage = vals[0]
-			case "adapterStrategy":
-				m.AdapterStrategy = vals[0]
+			case "displayName":
+				m.DisplayName = vals[0]
+			case "strategy":
+				m.Strategy = vals[0]
 			}
 		}
 	}

@@ -60,6 +60,12 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricNames_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListMetricNamesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -73,11 +79,6 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 				params := r.URL.Query()
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricNames_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -99,6 +100,12 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricMeta_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListMetricMetaRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -112,11 +119,6 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 				params := r.URL.Query()
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricMeta_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -138,6 +140,12 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricGroups_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListMetricGroupsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -151,11 +159,6 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 				params := r.URL.Query()
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListMetricGroups_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -180,6 +183,12 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMetricGroup_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetMetricGroupRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -213,11 +222,6 @@ func RegisterMetricMetaServiceHandler(r http.Router, srv MetricMetaServiceHandle
 							in.Id = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMetricGroup_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

@@ -100,6 +100,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlertRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryAlertRuleRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -130,11 +136,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlertRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -158,6 +159,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -188,11 +195,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -216,6 +218,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -252,11 +260,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -280,6 +283,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -310,11 +319,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -338,6 +342,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -374,11 +384,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -402,6 +407,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlertEnable_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateAlertEnableRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -438,11 +449,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlertEnable_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -466,6 +472,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -502,11 +514,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -530,6 +537,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeMetric_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryCustomizeMetricRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -560,11 +573,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeMetric_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -588,6 +596,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeNotifyTarget_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryCustomizeNotifyTargetRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -618,11 +632,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeNotifyTarget_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -646,6 +655,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeAlerts_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryCustomizeAlertsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -676,11 +691,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryCustomizeAlerts_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -704,6 +714,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCustomizeAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetCustomizeAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -740,11 +756,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCustomizeAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -768,6 +779,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateCustomizeAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateCustomizeAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -798,11 +815,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateCustomizeAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -826,6 +838,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomizeAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateCustomizeAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -862,11 +880,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomizeAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -890,6 +903,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomizeAlertEnable_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateCustomizeAlertEnableRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -926,11 +945,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomizeAlertEnable_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -954,6 +968,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCustomizeAlert_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteCustomizeAlertRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -990,11 +1010,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCustomizeAlert_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1018,6 +1033,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecordAttrs_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAlertRecordAttrsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1048,11 +1069,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecordAttrs_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1076,6 +1092,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecords_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAlertRecordsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1106,11 +1128,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecords_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1134,6 +1151,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecord_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAlertRecordRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1166,11 +1189,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertRecord_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1194,6 +1212,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertHistories_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAlertHistoriesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1226,11 +1250,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAlertHistories_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1254,6 +1273,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAlertRecordIssue_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateAlertRecordIssueRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1286,11 +1311,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAlertRecordIssue_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1314,6 +1334,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlertRecordIssue_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateAlertRecordIssueRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1346,11 +1372,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAlertRecordIssue_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1374,6 +1395,12 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DashboardPreview_info)
+				}
+				r = r.WithContext(ctx)
 				var in DashboardPreviewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1403,11 +1430,6 @@ func RegisterAlertServiceHandler(r http.Router, srv AlertServiceHandler, opts ..
 							in.TenantGroup = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DashboardPreview_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

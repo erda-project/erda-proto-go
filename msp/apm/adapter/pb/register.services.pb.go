@@ -8,45 +8,51 @@ import (
 	reflect "reflect"
 )
 
-// RegisterAdapterServiceImp adapter.proto
-func RegisterAdapterServiceImp(regester transport.Register, srv AdapterServiceServer, opts ...transport.ServiceOption) {
+// RegisterInstrumentationLibraryServiceImp adapter.proto
+func RegisterInstrumentationLibraryServiceImp(regester transport.Register, srv InstrumentationLibraryServiceServer, opts ...transport.ServiceOption) {
 	_ops := transport.DefaultServiceOptions()
 	for _, op := range opts {
 		op(_ops)
 	}
-	RegisterAdapterServiceHandler(regester, AdapterServiceHandler(srv), _ops.HTTP...)
-	RegisterAdapterServiceServer(regester, srv, _ops.GRPC...)
+	RegisterInstrumentationLibraryServiceHandler(regester, InstrumentationLibraryServiceHandler(srv), _ops.HTTP...)
+	RegisterInstrumentationLibraryServiceServer(regester, srv, _ops.GRPC...)
 }
 
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.msp.apm.adapter.AdapterService",
+		"erda.msp.apm.adapter.InstrumentationLibraryService",
 	)
 }
 
 var (
-	adapterServiceClientType  = reflect.TypeOf((*AdapterServiceClient)(nil)).Elem()
-	adapterServiceServerType  = reflect.TypeOf((*AdapterServiceServer)(nil)).Elem()
-	adapterServiceHandlerType = reflect.TypeOf((*AdapterServiceHandler)(nil)).Elem()
+	instrumentationLibraryServiceClientType  = reflect.TypeOf((*InstrumentationLibraryServiceClient)(nil)).Elem()
+	instrumentationLibraryServiceServerType  = reflect.TypeOf((*InstrumentationLibraryServiceServer)(nil)).Elem()
+	instrumentationLibraryServiceHandlerType = reflect.TypeOf((*InstrumentationLibraryServiceHandler)(nil)).Elem()
 )
 
-// AdapterServiceClientType .
-func AdapterServiceClientType() reflect.Type { return adapterServiceClientType }
+// InstrumentationLibraryServiceClientType .
+func InstrumentationLibraryServiceClientType() reflect.Type {
+	return instrumentationLibraryServiceClientType
+}
 
-// AdapterServiceServerType .
-func AdapterServiceServerType() reflect.Type { return adapterServiceServerType }
+// InstrumentationLibraryServiceServerType .
+func InstrumentationLibraryServiceServerType() reflect.Type {
+	return instrumentationLibraryServiceServerType
+}
 
-// AdapterServiceHandlerType .
-func AdapterServiceHandlerType() reflect.Type { return adapterServiceHandlerType }
+// InstrumentationLibraryServiceHandlerType .
+func InstrumentationLibraryServiceHandlerType() reflect.Type {
+	return instrumentationLibraryServiceHandlerType
+}
 
 func Types() []reflect.Type {
 	return []reflect.Type{
 		// client types
-		adapterServiceClientType,
+		instrumentationLibraryServiceClientType,
 		// server types
-		adapterServiceServerType,
+		instrumentationLibraryServiceServerType,
 		// handler types
-		adapterServiceHandlerType,
+		instrumentationLibraryServiceHandlerType,
 	}
 }

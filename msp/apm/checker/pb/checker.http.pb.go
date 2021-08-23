@@ -68,6 +68,12 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateChecker_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateCheckerRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -100,11 +106,6 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateChecker_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -128,6 +129,12 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateChecker_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateCheckerRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -161,11 +168,6 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 							in.Id = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateChecker_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -190,6 +192,12 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteChecker_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateCheckerRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -224,11 +232,6 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteChecker_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -252,6 +255,12 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListCheckers_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListCheckersRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -284,11 +293,6 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListCheckers_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -312,6 +316,12 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DescribeCheckers_info)
+				}
+				r = r.WithContext(ctx)
 				var in DescribeCheckersRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -344,11 +354,6 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DescribeCheckers_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -372,6 +377,12 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DescribeChecker_info)
+				}
+				r = r.WithContext(ctx)
 				var in DescribeCheckerRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -409,11 +420,6 @@ func RegisterCheckerServiceHandler(r http.Router, srv CheckerServiceHandler, opt
 							in.Id = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DescribeChecker_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

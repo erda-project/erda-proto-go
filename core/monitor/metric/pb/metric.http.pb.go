@@ -61,6 +61,12 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithInfluxFormat_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryWithInfluxFormatRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -74,11 +80,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithInfluxFormat_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -100,6 +101,12 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithInfluxFormat_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryWithInfluxFormatRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -113,11 +120,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithInfluxFormat_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -139,6 +141,12 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithTableFormat_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryWithTableFormatRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -152,11 +160,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryWithTableFormat_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -178,6 +181,12 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithTableFormat_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryWithTableFormatRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -191,11 +200,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchWithTableFormat_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -217,6 +221,12 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GeneralQuery_info)
+				}
+				r = r.WithContext(ctx)
 				var in GeneralQueryRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -230,11 +240,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GeneralQuery_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -256,6 +261,12 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GeneralSearch_info)
+				}
+				r = r.WithContext(ctx)
 				var in GeneralQueryRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -269,11 +280,6 @@ func RegisterMetricServiceHandler(r http.Router, srv MetricServiceHandler, opts 
 				params := r.URL.Query()
 				if vals := params["q"]; len(vals) > 0 {
 					in.Statement = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GeneralSearch_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

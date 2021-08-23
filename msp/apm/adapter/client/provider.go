@@ -40,9 +40,9 @@ func (p *provider) Init(ctx servicehub.Context) error {
 }
 
 var (
-	clientsType              = reflect.TypeOf((*Client)(nil)).Elem()
-	adapterServiceClientType = reflect.TypeOf((*pb.AdapterServiceClient)(nil)).Elem()
-	adapterServiceServerType = reflect.TypeOf((*pb.AdapterServiceServer)(nil)).Elem()
+	clientsType                             = reflect.TypeOf((*Client)(nil)).Elem()
+	instrumentationLibraryServiceClientType = reflect.TypeOf((*pb.InstrumentationLibraryServiceClient)(nil)).Elem()
+	instrumentationLibraryServiceServerType = reflect.TypeOf((*pb.InstrumentationLibraryServiceServer)(nil)).Elem()
 )
 
 func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}) interface{} {
@@ -55,18 +55,18 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 	switch ctx.Service() {
 	case "erda.msp.apm.adapter-client":
 		return p.client
-	case "erda.msp.apm.adapter.AdapterService":
-		return &adapterServiceWrapper{client: p.client.AdapterService(), opts: opts}
-	case "erda.msp.apm.adapter.AdapterService.client":
-		return p.client.AdapterService()
+	case "erda.msp.apm.adapter.InstrumentationLibraryService":
+		return &instrumentationLibraryServiceWrapper{client: p.client.InstrumentationLibraryService(), opts: opts}
+	case "erda.msp.apm.adapter.InstrumentationLibraryService.client":
+		return p.client.InstrumentationLibraryService()
 	}
 	switch ctx.Type() {
 	case clientsType:
 		return p.client
-	case adapterServiceClientType:
-		return p.client.AdapterService()
-	case adapterServiceServerType:
-		return &adapterServiceWrapper{client: p.client.AdapterService(), opts: opts}
+	case instrumentationLibraryServiceClientType:
+		return p.client.InstrumentationLibraryService()
+	case instrumentationLibraryServiceServerType:
+		return &instrumentationLibraryServiceWrapper{client: p.client.InstrumentationLibraryService(), opts: opts}
 	}
 	return p
 }
@@ -74,15 +74,15 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 func init() {
 	servicehub.Register("erda.msp.apm.adapter-client", &servicehub.Spec{
 		Services: []string{
-			"erda.msp.apm.adapter.AdapterService",
+			"erda.msp.apm.adapter.InstrumentationLibraryService",
 			"erda.msp.apm.adapter-client",
 		},
 		Types: []reflect.Type{
 			clientsType,
 			// client types
-			adapterServiceClientType,
+			instrumentationLibraryServiceClientType,
 			// server types
-			adapterServiceServerType,
+			instrumentationLibraryServiceServerType,
 		},
 		OptionalDependencies: dependencies,
 		Creator: func() servicehub.Provider {

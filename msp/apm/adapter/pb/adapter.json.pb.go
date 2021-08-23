@@ -12,23 +12,21 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "encoding/json" package it is being compiled against.
-var _ json.Marshaler = (*GetAdaptersRequest)(nil)
-var _ json.Unmarshaler = (*GetAdaptersRequest)(nil)
-var _ json.Marshaler = (*GetAdaptersResponse)(nil)
-var _ json.Unmarshaler = (*GetAdaptersResponse)(nil)
-var _ json.Marshaler = (*GetAdapterDocsRequest)(nil)
-var _ json.Unmarshaler = (*GetAdapterDocsRequest)(nil)
-var _ json.Marshaler = (*GetAdapterDocsResponse)(nil)
-var _ json.Unmarshaler = (*GetAdapterDocsResponse)(nil)
-var _ json.Marshaler = (*AdapterStrategy)(nil)
-var _ json.Unmarshaler = (*AdapterStrategy)(nil)
-var _ json.Marshaler = (*Adapters)(nil)
-var _ json.Unmarshaler = (*Adapters)(nil)
-var _ json.Marshaler = (*AdapterDocs)(nil)
-var _ json.Unmarshaler = (*AdapterDocs)(nil)
+var _ json.Marshaler = (*GetInstrumentationLibraryRequest)(nil)
+var _ json.Unmarshaler = (*GetInstrumentationLibraryRequest)(nil)
+var _ json.Marshaler = (*GetInstrumentationLibraryResponse)(nil)
+var _ json.Unmarshaler = (*GetInstrumentationLibraryResponse)(nil)
+var _ json.Marshaler = (*GetInstrumentationLibraryDocsRequest)(nil)
+var _ json.Unmarshaler = (*GetInstrumentationLibraryDocsRequest)(nil)
+var _ json.Marshaler = (*GetInstrumentationLibraryDocsResponse)(nil)
+var _ json.Unmarshaler = (*GetInstrumentationLibraryDocsResponse)(nil)
+var _ json.Marshaler = (*Language)(nil)
+var _ json.Unmarshaler = (*Language)(nil)
+var _ json.Marshaler = (*InstrumentationLibrary)(nil)
+var _ json.Unmarshaler = (*InstrumentationLibrary)(nil)
 
-// GetAdaptersRequest implement json.Marshaler.
-func (m *GetAdaptersRequest) MarshalJSON() ([]byte, error) {
+// GetInstrumentationLibraryRequest implement json.Marshaler.
+func (m *GetInstrumentationLibraryRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -38,15 +36,15 @@ func (m *GetAdaptersRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAdaptersRequest implement json.Marshaler.
-func (m *GetAdaptersRequest) UnmarshalJSON(b []byte) error {
+// GetInstrumentationLibraryRequest implement json.Marshaler.
+func (m *GetInstrumentationLibraryRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// GetAdaptersResponse implement json.Marshaler.
-func (m *GetAdaptersResponse) MarshalJSON() ([]byte, error) {
+// GetInstrumentationLibraryResponse implement json.Marshaler.
+func (m *GetInstrumentationLibraryResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -56,15 +54,15 @@ func (m *GetAdaptersResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAdaptersResponse implement json.Marshaler.
-func (m *GetAdaptersResponse) UnmarshalJSON(b []byte) error {
+// GetInstrumentationLibraryResponse implement json.Marshaler.
+func (m *GetInstrumentationLibraryResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// GetAdapterDocsRequest implement json.Marshaler.
-func (m *GetAdapterDocsRequest) MarshalJSON() ([]byte, error) {
+// GetInstrumentationLibraryDocsRequest implement json.Marshaler.
+func (m *GetInstrumentationLibraryDocsRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -74,15 +72,15 @@ func (m *GetAdapterDocsRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAdapterDocsRequest implement json.Marshaler.
-func (m *GetAdapterDocsRequest) UnmarshalJSON(b []byte) error {
+// GetInstrumentationLibraryDocsRequest implement json.Marshaler.
+func (m *GetInstrumentationLibraryDocsRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// GetAdapterDocsResponse implement json.Marshaler.
-func (m *GetAdapterDocsResponse) MarshalJSON() ([]byte, error) {
+// GetInstrumentationLibraryDocsResponse implement json.Marshaler.
+func (m *GetInstrumentationLibraryDocsResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -92,15 +90,15 @@ func (m *GetAdapterDocsResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAdapterDocsResponse implement json.Marshaler.
-func (m *GetAdapterDocsResponse) UnmarshalJSON(b []byte) error {
+// GetInstrumentationLibraryDocsResponse implement json.Marshaler.
+func (m *GetInstrumentationLibraryDocsResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// AdapterStrategy implement json.Marshaler.
-func (m *AdapterStrategy) MarshalJSON() ([]byte, error) {
+// Language implement json.Marshaler.
+func (m *Language) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -110,15 +108,15 @@ func (m *AdapterStrategy) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// AdapterStrategy implement json.Marshaler.
-func (m *AdapterStrategy) UnmarshalJSON(b []byte) error {
+// Language implement json.Marshaler.
+func (m *Language) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// Adapters implement json.Marshaler.
-func (m *Adapters) MarshalJSON() ([]byte, error) {
+// InstrumentationLibrary implement json.Marshaler.
+func (m *InstrumentationLibrary) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -128,26 +126,8 @@ func (m *Adapters) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// Adapters implement json.Marshaler.
-func (m *Adapters) UnmarshalJSON(b []byte) error {
-	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: true,
-	}).Unmarshal(b, m)
-}
-
-// AdapterDocs implement json.Marshaler.
-func (m *AdapterDocs) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
-}
-
-// AdapterDocs implement json.Marshaler.
-func (m *AdapterDocs) UnmarshalJSON(b []byte) error {
+// InstrumentationLibrary implement json.Marshaler.
+func (m *InstrumentationLibrary) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

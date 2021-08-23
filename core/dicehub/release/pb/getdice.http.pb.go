@@ -60,6 +60,12 @@ func RegisterReleaseGetDiceServiceHandler(r http.Router, srv ReleaseGetDiceServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, PullDiceYAML_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseGetDiceYmlRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -89,11 +95,6 @@ func RegisterReleaseGetDiceServiceHandler(r http.Router, srv ReleaseGetDiceServi
 							in.ReleaseID = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, PullDiceYAML_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -118,6 +119,12 @@ func RegisterReleaseGetDiceServiceHandler(r http.Router, srv ReleaseGetDiceServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDiceYAML_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseGetDiceYmlRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -147,11 +154,6 @@ func RegisterReleaseGetDiceServiceHandler(r http.Router, srv ReleaseGetDiceServi
 							in.ReleaseID = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDiceYAML_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

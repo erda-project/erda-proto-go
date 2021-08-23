@@ -66,6 +66,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchExtensions_info)
+				}
+				r = r.WithContext(ctx)
 				var in ExtensionSearchRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -75,11 +81,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SearchExtensions_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -101,6 +102,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateExtension_info)
+				}
+				r = r.WithContext(ctx)
 				var in ExtensionCreateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -110,11 +117,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateExtension_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -136,6 +138,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryExtensions_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryExtensionsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -145,11 +153,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryExtensions_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -171,6 +174,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryExtensionsMenu_info)
+				}
+				r = r.WithContext(ctx)
 				var in QueryExtensionsMenuRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -180,11 +189,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryExtensionsMenu_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -209,6 +213,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateExtensionVersion_info)
+				}
+				r = r.WithContext(ctx)
 				var in ExtensionVersionCreateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -239,11 +249,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateExtensionVersion_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -267,6 +272,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExtensionVersion_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetExtensionVersionRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -299,11 +310,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetExtensionVersion_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -327,6 +333,12 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryExtensionVersions_info)
+				}
+				r = r.WithContext(ctx)
 				var in ExtensionVersionQueryRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -356,11 +368,6 @@ func RegisterExtensionServiceHandler(r http.Router, srv ExtensionServiceHandler,
 							in.Name = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryExtensionVersions_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

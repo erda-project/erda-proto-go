@@ -15,16 +15,16 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/transport/http" package it is being compiled against.
 const _ = http.SupportPackageIsVersion1
 
-// AdapterServiceHandler is the server API for AdapterService service.
-type AdapterServiceHandler interface {
-	// GET /api/msp/apm/adapters
-	GetAdapters(context.Context, *GetAdaptersRequest) (*GetAdaptersResponse, error)
-	// GET /api/msp/apm/adapter/docs
-	GetAdapterDocs(context.Context, *GetAdapterDocsRequest) (*GetAdapterDocsResponse, error)
+// InstrumentationLibraryServiceHandler is the server API for InstrumentationLibraryService service.
+type InstrumentationLibraryServiceHandler interface {
+	// GET /api/msp/apm/instrumentation-library
+	GetInstrumentationLibrary(context.Context, *GetInstrumentationLibraryRequest) (*GetInstrumentationLibraryResponse, error)
+	// GET /api/msp/apm/instrumentation-library/config-docs
+	GetInstrumentationLibraryDocs(context.Context, *GetInstrumentationLibraryDocsRequest) (*GetInstrumentationLibraryDocsResponse, error)
 }
 
-// RegisterAdapterServiceHandler register AdapterServiceHandler to http.Router.
-func RegisterAdapterServiceHandler(r http.Router, srv AdapterServiceHandler, opts ...http.HandleOption) {
+// RegisterInstrumentationLibraryServiceHandler register InstrumentationLibraryServiceHandler to http.Router.
+func RegisterInstrumentationLibraryServiceHandler(r http.Router, srv InstrumentationLibraryServiceHandler, opts ...http.HandleOption) {
 	h := http.DefaultHandleOptions()
 	for _, op := range opts {
 		op(h)
@@ -42,18 +42,24 @@ func RegisterAdapterServiceHandler(r http.Router, srv AdapterServiceHandler, opt
 		}
 	}
 
-	add_GetAdapters := func(method, path string, fn func(context.Context, *GetAdaptersRequest) (*GetAdaptersResponse, error)) {
+	add_GetInstrumentationLibrary := func(method, path string, fn func(context.Context, *GetInstrumentationLibraryRequest) (*GetInstrumentationLibraryResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*GetAdaptersRequest))
+			return fn(ctx, req.(*GetInstrumentationLibraryRequest))
 		}
-		var GetAdapters_info transport.ServiceInfo
+		var GetInstrumentationLibrary_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAdapters_info = transport.NewServiceInfo("erda.msp.apm.adapter.AdapterService", "GetAdapters", srv)
+			GetInstrumentationLibrary_info = transport.NewServiceInfo("erda.msp.apm.adapter.InstrumentationLibraryService", "GetInstrumentationLibrary", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in GetAdaptersRequest
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetInstrumentationLibrary_info)
+				}
+				r = r.WithContext(ctx)
+				var in GetInstrumentationLibraryRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -62,11 +68,6 @@ func RegisterAdapterServiceHandler(r http.Router, srv AdapterServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAdapters_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -77,18 +78,24 @@ func RegisterAdapterServiceHandler(r http.Router, srv AdapterServiceHandler, opt
 		)
 	}
 
-	add_GetAdapterDocs := func(method, path string, fn func(context.Context, *GetAdapterDocsRequest) (*GetAdapterDocsResponse, error)) {
+	add_GetInstrumentationLibraryDocs := func(method, path string, fn func(context.Context, *GetInstrumentationLibraryDocsRequest) (*GetInstrumentationLibraryDocsResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*GetAdapterDocsRequest))
+			return fn(ctx, req.(*GetInstrumentationLibraryDocsRequest))
 		}
-		var GetAdapterDocs_info transport.ServiceInfo
+		var GetInstrumentationLibraryDocs_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAdapterDocs_info = transport.NewServiceInfo("erda.msp.apm.adapter.AdapterService", "GetAdapterDocs", srv)
+			GetInstrumentationLibraryDocs_info = transport.NewServiceInfo("erda.msp.apm.adapter.InstrumentationLibraryService", "GetInstrumentationLibraryDocs", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in GetAdapterDocsRequest
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetInstrumentationLibraryDocs_info)
+				}
+				r = r.WithContext(ctx)
+				var in GetInstrumentationLibraryDocsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -97,11 +104,6 @@ func RegisterAdapterServiceHandler(r http.Router, srv AdapterServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAdapterDocs_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -112,6 +114,6 @@ func RegisterAdapterServiceHandler(r http.Router, srv AdapterServiceHandler, opt
 		)
 	}
 
-	add_GetAdapters("GET", "/api/msp/apm/adapters", srv.GetAdapters)
-	add_GetAdapterDocs("GET", "/api/msp/apm/adapter/docs", srv.GetAdapterDocs)
+	add_GetInstrumentationLibrary("GET", "/api/msp/apm/instrumentation-library", srv.GetInstrumentationLibrary)
+	add_GetInstrumentationLibraryDocs("GET", "/api/msp/apm/instrumentation-library/config-docs", srv.GetInstrumentationLibraryDocs)
 }

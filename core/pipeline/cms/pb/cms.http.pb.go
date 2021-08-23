@@ -62,6 +62,12 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateNs_info)
+				}
+				r = r.WithContext(ctx)
 				var in CmsCreateNsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -71,11 +77,6 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateNs_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -97,6 +98,12 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListCmsNs_info)
+				}
+				r = r.WithContext(ctx)
 				var in CmsListNsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -106,11 +113,6 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListCmsNs_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -135,6 +137,12 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCmsNsConfigs_info)
+				}
+				r = r.WithContext(ctx)
 				var in CmsNsConfigsUpdateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -165,11 +173,6 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCmsNsConfigs_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -193,6 +196,12 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCmsNsConfigs_info)
+				}
+				r = r.WithContext(ctx)
 				var in CmsNsConfigsDeleteRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -223,11 +232,6 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCmsNsConfigs_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -251,6 +255,12 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCmsNsConfigs_info)
+				}
+				r = r.WithContext(ctx)
 				var in CmsNsConfigsGetRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -280,11 +290,6 @@ func RegisterCmsServiceHandler(r http.Router, srv CmsServiceHandler, opts ...htt
 							in.Ns = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCmsNsConfigs_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

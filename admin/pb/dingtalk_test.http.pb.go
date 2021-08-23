@@ -51,6 +51,12 @@ func RegisterDingTalkTestServiceHandler(r http.Router, srv DingTalkTestServiceHa
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SendTestMessage_info)
+				}
+				r = r.WithContext(ctx)
 				var in DingTalkTestRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -60,11 +66,6 @@ func RegisterDingTalkTestServiceHandler(r http.Router, srv DingTalkTestServiceHa
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SendTestMessage_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

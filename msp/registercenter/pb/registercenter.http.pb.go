@@ -102,6 +102,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListInterface_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListInterfaceRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -113,17 +119,17 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
-				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -146,11 +152,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 							in.Env = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListInterface_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -175,6 +176,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHTTPServices_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetHTTPServicesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -217,11 +224,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHTTPServices_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -245,6 +247,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, EnableHTTPService_info)
+				}
+				r = r.WithContext(ctx)
 				var in EnableHTTPServiceRequest
 				if err := h.Decode(r, &in.Service); err != nil {
 					return nil, err
@@ -284,11 +292,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, EnableHTTPService_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -309,6 +312,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetServiceIpInfo_info)
+				}
+				r = r.WithContext(ctx)
 				var in ServiceIpRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -318,11 +327,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetServiceIpInfo_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -347,6 +351,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetRouteRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetRouteRuleRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -394,11 +404,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetRouteRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -422,6 +427,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateRouteRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateRouteRuleRequest
 				if err := h.Decode(r, &in.Rule); err != nil {
 					return nil, err
@@ -469,11 +480,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateRouteRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -497,6 +503,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteRouteRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteRouteRuleRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -508,9 +520,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
@@ -519,6 +528,9 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -544,11 +556,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteRouteRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -572,6 +579,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHostRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in CetHostRuleRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -616,11 +629,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHostRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -644,6 +652,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateHostRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateHostRuleRequest
 				if err := h.Decode(r, &in.Rules); err != nil {
 					return nil, err
@@ -688,11 +702,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateHostRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -716,6 +725,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteHostRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteHostRuleRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -727,14 +742,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -760,11 +775,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteHostRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -788,6 +798,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHostRuntimeRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetHostRuntimeRuleRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -799,14 +815,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
+				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -832,11 +848,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetHostRuntimeRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -860,6 +871,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateHostRuntimeRule_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateHostRuntimeRuleRequest
 				if err := h.Decode(r, &in.Rules); err != nil {
 					return nil, err
@@ -904,11 +921,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateHostRuntimeRule_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -932,6 +944,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllHostRuntimeRules_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetAllHostRuntimeRulesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -943,17 +961,17 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
+				}
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -976,11 +994,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 							in.Env = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAllHostRuntimeRules_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -1005,6 +1018,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceTime_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetDubboInterfaceTimeRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1016,14 +1035,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
+				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
-				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1048,11 +1067,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 							in.Env = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceTime_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -1077,6 +1091,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceQPS_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetDubboInterfaceQPSRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1088,14 +1108,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1121,11 +1141,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceQPS_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1149,6 +1164,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceFailed_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetDubboInterfaceFailedRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1193,11 +1214,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceFailed_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -1221,6 +1237,12 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceAvgTime_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetDubboInterfaceAvgTimeRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -1264,11 +1286,6 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 							in.Env = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetDubboInterfaceAvgTime_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

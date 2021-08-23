@@ -58,6 +58,12 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLog_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetLogRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -67,11 +73,6 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLog_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -93,6 +94,12 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLogByRuntime_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetLogByRuntimeRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -102,11 +109,6 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLogByRuntime_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -128,6 +130,12 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLogByOrganization_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetLogByOrganizationRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -137,11 +145,6 @@ func RegisterLogQueryServiceHandler(r http.Router, srv LogQueryServiceHandler, o
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLogByOrganization_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

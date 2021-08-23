@@ -72,6 +72,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateRelease_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseCreateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -81,11 +87,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateRelease_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -110,6 +111,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateRelease_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseUpdateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -140,11 +147,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateRelease_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -168,6 +170,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateReleaseReference_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseReferenceUpdateRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -198,11 +206,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateReleaseReference_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -226,6 +229,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetIosPlist_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetIosPlistRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -255,11 +264,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 							in.ReleaseID = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetIosPlist_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -284,6 +288,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetRelease_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetIosPlistRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -313,11 +323,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 							in.ReleaseID = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetRelease_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -342,6 +347,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteRelease_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetIosPlistRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -372,11 +383,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteRelease_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -397,6 +403,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListRelease_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseListRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -406,11 +418,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListRelease_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -432,6 +439,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListReleaseName_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListReleaseNameRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -441,11 +454,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListReleaseName_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -467,6 +475,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLatestReleases_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetLatestReleasesRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -476,11 +490,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetLatestReleases_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -502,6 +511,12 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ReleaseGC_info)
+				}
+				r = r.WithContext(ctx)
 				var in ReleaseGCRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -511,11 +526,6 @@ func RegisterReleaseServiceHandler(r http.Router, srv ReleaseServiceHandler, opt
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ReleaseGC_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

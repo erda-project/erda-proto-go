@@ -63,6 +63,12 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateResource_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateResourceRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -93,11 +99,6 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateResource_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -121,6 +122,12 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteResource_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteResourceRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -153,11 +160,6 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteResource_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -181,6 +183,12 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMonitorRuntime_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetMonitorRuntimeRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -192,14 +200,14 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["application_id"]; len(vals) > 0 {
+					in.ApplicationId = vals[0]
+				}
 				if vals := params["runtime_name"]; len(vals) > 0 {
 					in.RuntimeName = vals[0]
 				}
 				if vals := params["terminus_key"]; len(vals) > 0 {
 					in.TerminusKey = vals[0]
-				}
-				if vals := params["application_id"]; len(vals) > 0 {
-					in.ApplicationId = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -220,11 +228,6 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 							in.RuntimeId = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMonitorRuntime_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -249,6 +252,12 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMonitorInstance_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetMonitorInstanceRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -278,11 +287,6 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 							in.TerminusKey = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetMonitorInstance_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

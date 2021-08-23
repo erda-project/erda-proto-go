@@ -66,6 +66,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListSystemViews_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListSystemViewsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -79,11 +85,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 				params := r.URL.Query()
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListSystemViews_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -108,6 +109,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSystemView_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetSystemViewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -138,11 +145,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSystemView_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -163,6 +165,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListCustomViews_info)
+				}
+				r = r.WithContext(ctx)
 				var in ListCustomViewsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -176,11 +184,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 				params := r.URL.Query()
 				if vals := params["scopeId"]; len(vals) > 0 {
 					in.ScopeID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListCustomViews_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -205,6 +208,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCustomView_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetCustomViewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -235,11 +244,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetCustomView_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -260,6 +264,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateCustomView_info)
+				}
+				r = r.WithContext(ctx)
 				var in CreateCustomViewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -269,11 +279,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateCustomView_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -298,6 +303,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomView_info)
+				}
+				r = r.WithContext(ctx)
 				var in UpdateCustomViewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -328,11 +339,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 						}
 					}
 				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateCustomView_info)
-				}
 				out, err := handler(ctx, &in)
 				if err != nil {
 					return out, err
@@ -356,6 +362,12 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCustomView_info)
+				}
+				r = r.WithContext(ctx)
 				var in DeleteCustomViewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -385,11 +397,6 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 							in.Id = val
 						}
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteCustomView_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

@@ -56,6 +56,12 @@ func RegisterSettingsServiceHandler(r http.Router, srv SettingsServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSettings_info)
+				}
+				r = r.WithContext(ctx)
 				var in GetSettingsRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -73,11 +79,6 @@ func RegisterSettingsServiceHandler(r http.Router, srv SettingsServiceHandler, o
 						return nil, err
 					}
 					in.OrgID = val
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSettings_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -99,6 +100,12 @@ func RegisterSettingsServiceHandler(r http.Router, srv SettingsServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, PutSettings_info)
+				}
+				r = r.WithContext(ctx)
 				var in PutSettingsRequest
 				if err := h.Decode(r, &in.Data); err != nil {
 					return nil, err
@@ -116,11 +123,6 @@ func RegisterSettingsServiceHandler(r http.Router, srv SettingsServiceHandler, o
 						return nil, err
 					}
 					in.OrgID = val
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, PutSettings_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -142,6 +144,12 @@ func RegisterSettingsServiceHandler(r http.Router, srv SettingsServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, RegisterMonitorConfig_info)
+				}
+				r = r.WithContext(ctx)
 				var in RegisterMonitorConfigRequest
 				if err := h.Decode(r, &in.Data); err != nil {
 					return nil, err
@@ -151,11 +159,6 @@ func RegisterSettingsServiceHandler(r http.Router, srv SettingsServiceHandler, o
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, RegisterMonitorConfig_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
