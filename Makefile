@@ -2,8 +2,7 @@
 build:
 	@./build.sh build
 	@go mod tidy
-	@echo ""
-	@make format;
+	@echo "" && make format
 clean:
 	@./build.sh clean
 
