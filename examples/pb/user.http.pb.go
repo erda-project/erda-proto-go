@@ -5,13 +5,14 @@ package pb
 
 import (
 	context "context"
+	http1 "net/http"
+	strings "strings"
+
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	httprule "github.com/erda-project/erda-infra/pkg/transport/http/httprule"
 	runtime "github.com/erda-project/erda-infra/pkg/transport/http/runtime"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	http1 "net/http"
-	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -21,11 +22,9 @@ const _ = http.SupportPackageIsVersion1
 // UserServiceHandler is the server API for UserService service.
 type UserServiceHandler interface {
 	// get user
-	// +publish path:"/user/{id}"
 	// GET /api/user/{id}
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// update user
-	// +private
 	// PUT /api/user/{id}
 	UpdateUser(context.Context, *GetUserRequest) (*UpdateUserResponse, error)
 }
@@ -55,7 +54,7 @@ func RegisterUserServiceHandler(r http.Router, srv UserServiceHandler, opts ...h
 		}
 		var GetUser_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetUser_info = transport.NewServiceInfo("erda.example.UserService", "GetUser", srv)
+			GetUser_info = transport.NewServiceInfo("erda.examples.UserService", "GetUser", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -114,7 +113,7 @@ func RegisterUserServiceHandler(r http.Router, srv UserServiceHandler, opts ...h
 		}
 		var UpdateUser_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateUser_info = transport.NewServiceInfo("erda.example.UserService", "UpdateUser", srv)
+			UpdateUser_info = transport.NewServiceInfo("erda.examples.UserService", "UpdateUser", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)

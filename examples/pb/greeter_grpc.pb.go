@@ -5,6 +5,7 @@ package pb
 
 import (
 	context "context"
+
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	grpc1 "github.com/erda-project/erda-infra/pkg/transport/grpc"
 	grpc "google.golang.org/grpc"
@@ -21,7 +22,6 @@ const _ = grpc.SupportPackageIsVersion5
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type GreeterServiceClient interface {
 	// say hello
-	// +publish
 	SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error)
 }
 
@@ -35,7 +35,7 @@ func NewGreeterServiceClient(cc grpc1.ClientConnInterface) GreeterServiceClient 
 
 func (c *greeterServiceClient) SayHello(ctx context.Context, in *HelloRequest, opts ...grpc.CallOption) (*HelloResponse, error) {
 	out := new(HelloResponse)
-	err := c.cc.Invoke(ctx, "/erda.example.GreeterService/SayHello", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.examples.GreeterService/SayHello", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +47,6 @@ func (c *greeterServiceClient) SayHello(ctx context.Context, in *HelloRequest, o
 // for forward compatibility
 type GreeterServiceServer interface {
 	// say hello
-	// +publish
 	SayHello(context.Context, *HelloRequest) (*HelloResponse, error)
 }
 
@@ -64,7 +63,7 @@ func RegisterGreeterServiceServer(s grpc1.ServiceRegistrar, srv GreeterServiceSe
 }
 
 var _GreeterService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.example.GreeterService",
+	ServiceName: "erda.examples.GreeterService",
 	HandlerType: (*GreeterServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
@@ -82,7 +81,7 @@ func _get_GreeterService_serviceDesc(srv GreeterServiceServer, opts ...grpc1.Han
 	}
 	var _GreeterService_SayHello_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_GreeterService_SayHello_info = transport.NewServiceInfo("erda.example.GreeterService", "SayHello", srv)
+		_GreeterService_SayHello_info = transport.NewServiceInfo("erda.examples.GreeterService", "SayHello", srv)
 		_GreeterService_SayHello_Handler = h.Interceptor(_GreeterService_SayHello_Handler)
 	}
 
@@ -106,7 +105,7 @@ func _get_GreeterService_serviceDesc(srv GreeterServiceServer, opts ...grpc1.Han
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.example.GreeterService/SayHello",
+					FullMethod: "/erda.examples.GreeterService/SayHello",
 				}
 				return interceptor(ctx, in, info, _GreeterService_SayHello_Handler)
 			},

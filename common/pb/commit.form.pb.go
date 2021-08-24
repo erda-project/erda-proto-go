@@ -4,10 +4,11 @@
 package pb
 
 import (
-	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 	url "net/url"
 	strconv "strconv"
+
+	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // This is a compile-time assertion to ensure that this generated file

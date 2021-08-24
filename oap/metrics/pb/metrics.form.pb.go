@@ -5,10 +5,11 @@ package pb
 
 import (
 	base64 "encoding/base64"
-	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	pb "github.com/erda-project/erda-proto-go/oap/common/pb"
 	url "net/url"
 	strconv "strconv"
+
+	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
+	pb "github.com/erda-project/erda-proto-go/oap/common/pb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
