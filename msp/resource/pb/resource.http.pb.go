@@ -5,13 +5,14 @@ package pb
 
 import (
 	context "context"
+	http1 "net/http"
+	strings "strings"
+
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	httprule "github.com/erda-project/erda-infra/pkg/transport/http/httprule"
 	runtime "github.com/erda-project/erda-infra/pkg/transport/http/runtime"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	http1 "net/http"
-	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -200,14 +201,14 @@ func RegisterResourceServiceHandler(r http.Router, srv ResourceServiceHandler, o
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["terminus_key"]; len(vals) > 0 {
+					in.TerminusKey = vals[0]
+				}
 				if vals := params["application_id"]; len(vals) > 0 {
 					in.ApplicationId = vals[0]
 				}
 				if vals := params["runtime_name"]; len(vals) > 0 {
 					in.RuntimeName = vals[0]
-				}
-				if vals := params["terminus_key"]; len(vals) > 0 {
-					in.TerminusKey = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {

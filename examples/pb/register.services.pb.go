@@ -4,8 +4,9 @@
 package pb
 
 import (
-	transport "github.com/erda-project/erda-infra/pkg/transport"
 	reflect "reflect"
+
+	transport "github.com/erda-project/erda-infra/pkg/transport"
 )
 
 // RegisterGreeterServiceImp greeter.proto
@@ -31,8 +32,8 @@ func RegisterUserServiceImp(regester transport.Register, srv UserServiceServer, 
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.example.GreeterService",
-		"erda.example.UserService",
+		"erda.examples.GreeterService",
+		"erda.examples.UserService",
 	)
 }
 
