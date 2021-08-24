@@ -24,7 +24,8 @@ var _ urlenc.URLValuesUnmarshaler = (*UpdateAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*AccessKeysItem)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GenericEnum)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*SubjectTypeEnum)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*StatusEnum)(nil)
 
 // QueryAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
 func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -319,7 +320,12 @@ func (m *AccessKeysItem) UnmarshalURLValues(prefix string, values url.Values) er
 	return nil
 }
 
-// GenericEnum implement urlenc.URLValuesUnmarshaler.
-func (m *GenericEnum) UnmarshalURLValues(prefix string, values url.Values) error {
+// SubjectTypeEnum implement urlenc.URLValuesUnmarshaler.
+func (m *SubjectTypeEnum) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// StatusEnum implement urlenc.URLValuesUnmarshaler.
+func (m *StatusEnum) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }

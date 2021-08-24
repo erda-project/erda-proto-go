@@ -73,6 +73,9 @@ func (this *AccessKeysItem) Validate() error {
 	}
 	return nil
 }
-func (this *GenericEnum) Validate() error {
+func (this *SubjectTypeEnum) Validate() error {
+	return nil
+}
+func (this *StatusEnum) Validate() error {
 	return nil
 }
