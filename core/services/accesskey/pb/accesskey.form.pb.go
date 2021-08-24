@@ -23,7 +23,8 @@ var _ urlenc.URLValuesUnmarshaler = (*UpdateAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*AccessKeysItem)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GenericEnum)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*SubjectTypeEnum)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*StatusEnum)(nil)
 
 // QueryAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
 func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -33,9 +34,9 @@ func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Va
 			case "status":
 			case "subjectType":
 			case "subject":
-				m.Subject = &vals[0]
+				m.Subject = vals[0]
 			case "accessKey":
-				m.AccessKey = &vals[0]
+				m.AccessKey = vals[0]
 			}
 		}
 	}
@@ -243,7 +244,7 @@ func (m *UpdateAccessKeysRequest) UnmarshalURLValues(prefix string, values url.V
 				m.Id = vals[0]
 			case "status":
 			case "description":
-				m.Description = &vals[0]
+				m.Description = vals[0]
 			}
 		}
 	}
@@ -318,7 +319,12 @@ func (m *AccessKeysItem) UnmarshalURLValues(prefix string, values url.Values) er
 	return nil
 }
 
-// GenericEnum implement urlenc.URLValuesUnmarshaler.
-func (m *GenericEnum) UnmarshalURLValues(prefix string, values url.Values) error {
+// SubjectTypeEnum implement urlenc.URLValuesUnmarshaler.
+func (m *SubjectTypeEnum) UnmarshalURLValues(prefix string, values url.Values) error {
+	return nil
+}
+
+// StatusEnum implement urlenc.URLValuesUnmarshaler.
+func (m *StatusEnum) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }

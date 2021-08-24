@@ -34,8 +34,10 @@ var _ json.Marshaler = (*DeleteAccessKeysResponse)(nil)
 var _ json.Unmarshaler = (*DeleteAccessKeysResponse)(nil)
 var _ json.Marshaler = (*AccessKeysItem)(nil)
 var _ json.Unmarshaler = (*AccessKeysItem)(nil)
-var _ json.Marshaler = (*GenericEnum)(nil)
-var _ json.Unmarshaler = (*GenericEnum)(nil)
+var _ json.Marshaler = (*SubjectTypeEnum)(nil)
+var _ json.Unmarshaler = (*SubjectTypeEnum)(nil)
+var _ json.Marshaler = (*StatusEnum)(nil)
+var _ json.Unmarshaler = (*StatusEnum)(nil)
 
 // QueryAccessKeysRequest implement json.Marshaler.
 func (m *QueryAccessKeysRequest) MarshalJSON() ([]byte, error) {
@@ -235,8 +237,8 @@ func (m *AccessKeysItem) UnmarshalJSON(b []byte) error {
 	}).Unmarshal(b, m)
 }
 
-// GenericEnum implement json.Marshaler.
-func (m *GenericEnum) MarshalJSON() ([]byte, error) {
+// SubjectTypeEnum implement json.Marshaler.
+func (m *SubjectTypeEnum) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -246,8 +248,26 @@ func (m *GenericEnum) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GenericEnum implement json.Marshaler.
-func (m *GenericEnum) UnmarshalJSON(b []byte) error {
+// SubjectTypeEnum implement json.Marshaler.
+func (m *SubjectTypeEnum) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// StatusEnum implement json.Marshaler.
+func (m *StatusEnum) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// StatusEnum implement json.Marshaler.
+func (m *StatusEnum) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
