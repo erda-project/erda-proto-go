@@ -203,45 +203,6 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		)
 	}
 
-	add_GetTraceQueryConditions := func(method, path string, fn func(context.Context, *GetTraceQueryConditionsRequest) (*GetTraceQueryConditionsResponse, error)) {
-		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*GetTraceQueryConditionsRequest))
-		}
-		var GetTraceQueryConditions_info transport.ServiceInfo
-		if h.Interceptor != nil {
-			GetTraceQueryConditions_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetTraceQueryConditions", srv)
-			handler = h.Interceptor(handler)
-		}
-		r.Add(method, path, encodeFunc(
-			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				var in GetTraceQueryConditionsRequest
-				if err := h.Decode(r, &in); err != nil {
-					return nil, err
-				}
-				var input interface{} = &in
-				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
-					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
-						return nil, err
-					}
-				}
-				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetTraceQueryConditions_info)
-				}
-				out, err := handler(ctx, &in)
-				if err != nil {
-					return out, err
-				}
-				return out, nil
-			}),
-		)
-	}
-
 	add_GetTraceDebugHistories := func(method, path string, fn func(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 			return fn(ctx, req.(*GetTraceDebugHistoriesRequest))
