@@ -12,10 +12,10 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "encoding/json" package it is being compiled against.
-var _ json.Marshaler = (*ListAccessKeysRequest)(nil)
-var _ json.Unmarshaler = (*ListAccessKeysRequest)(nil)
-var _ json.Marshaler = (*ListAccessKeysResponse)(nil)
-var _ json.Unmarshaler = (*ListAccessKeysResponse)(nil)
+var _ json.Marshaler = (*QueryAccessKeysRequest)(nil)
+var _ json.Unmarshaler = (*QueryAccessKeysRequest)(nil)
+var _ json.Marshaler = (*QueryAccessKeysResponse)(nil)
+var _ json.Unmarshaler = (*QueryAccessKeysResponse)(nil)
 var _ json.Marshaler = (*GetAccessKeysRequest)(nil)
 var _ json.Unmarshaler = (*GetAccessKeysRequest)(nil)
 var _ json.Marshaler = (*GetAccessKeysResponse)(nil)
@@ -37,8 +37,8 @@ var _ json.Unmarshaler = (*AccessKeysItem)(nil)
 var _ json.Marshaler = (*GenericEnum)(nil)
 var _ json.Unmarshaler = (*GenericEnum)(nil)
 
-// ListAccessKeysRequest implement json.Marshaler.
-func (m *ListAccessKeysRequest) MarshalJSON() ([]byte, error) {
+// QueryAccessKeysRequest implement json.Marshaler.
+func (m *QueryAccessKeysRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -48,15 +48,15 @@ func (m *ListAccessKeysRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// ListAccessKeysRequest implement json.Marshaler.
-func (m *ListAccessKeysRequest) UnmarshalJSON(b []byte) error {
+// QueryAccessKeysRequest implement json.Marshaler.
+func (m *QueryAccessKeysRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// ListAccessKeysResponse implement json.Marshaler.
-func (m *ListAccessKeysResponse) MarshalJSON() ([]byte, error) {
+// QueryAccessKeysResponse implement json.Marshaler.
+func (m *QueryAccessKeysResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -66,8 +66,8 @@ func (m *ListAccessKeysResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// ListAccessKeysResponse implement json.Marshaler.
-func (m *ListAccessKeysResponse) UnmarshalJSON(b []byte) error {
+// QueryAccessKeysResponse implement json.Marshaler.
+func (m *QueryAccessKeysResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

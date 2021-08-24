@@ -20,7 +20,7 @@ const _ = grpc.SupportPackageIsVersion5
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type AccessKeyServiceClient interface {
-	ListAccessKeys(ctx context.Context, in *ListAccessKeysRequest, opts ...grpc.CallOption) (*ListAccessKeysResponse, error)
+	QueryAccessKeys(ctx context.Context, in *QueryAccessKeysRequest, opts ...grpc.CallOption) (*QueryAccessKeysResponse, error)
 	GetAccessKey(ctx context.Context, in *GetAccessKeysRequest, opts ...grpc.CallOption) (*GetAccessKeysResponse, error)
 	CreateAccessKeys(ctx context.Context, in *CreateAccessKeysRequest, opts ...grpc.CallOption) (*CreateAccessKeysResponse, error)
 	UpdateAccessKeys(ctx context.Context, in *UpdateAccessKeysRequest, opts ...grpc.CallOption) (*UpdateAccessKeysResponse, error)
@@ -35,9 +35,9 @@ func NewAccessKeyServiceClient(cc grpc1.ClientConnInterface) AccessKeyServiceCli
 	return &accessKeyServiceClient{cc}
 }
 
-func (c *accessKeyServiceClient) ListAccessKeys(ctx context.Context, in *ListAccessKeysRequest, opts ...grpc.CallOption) (*ListAccessKeysResponse, error) {
-	out := new(ListAccessKeysResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.services.accesskey.AccessKeyService/ListAccessKeys", in, out, opts...)
+func (c *accessKeyServiceClient) QueryAccessKeys(ctx context.Context, in *QueryAccessKeysRequest, opts ...grpc.CallOption) (*QueryAccessKeysResponse, error) {
+	out := new(QueryAccessKeysResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.services.accesskey.AccessKeyService/QueryAccessKeys", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -84,7 +84,7 @@ func (c *accessKeyServiceClient) DeleteAccessKeys(ctx context.Context, in *Delet
 // All implementations should embed UnimplementedAccessKeyServiceServer
 // for forward compatibility
 type AccessKeyServiceServer interface {
-	ListAccessKeys(context.Context, *ListAccessKeysRequest) (*ListAccessKeysResponse, error)
+	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
 	GetAccessKey(context.Context, *GetAccessKeysRequest) (*GetAccessKeysResponse, error)
 	CreateAccessKeys(context.Context, *CreateAccessKeysRequest) (*CreateAccessKeysResponse, error)
 	UpdateAccessKeys(context.Context, *UpdateAccessKeysRequest) (*UpdateAccessKeysResponse, error)
@@ -95,8 +95,8 @@ type AccessKeyServiceServer interface {
 type UnimplementedAccessKeyServiceServer struct {
 }
 
-func (*UnimplementedAccessKeyServiceServer) ListAccessKeys(context.Context, *ListAccessKeysRequest) (*ListAccessKeysResponse, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method ListAccessKeys not implemented")
+func (*UnimplementedAccessKeyServiceServer) QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryAccessKeys not implemented")
 }
 func (*UnimplementedAccessKeyServiceServer) GetAccessKey(context.Context, *GetAccessKeysRequest) (*GetAccessKeysResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetAccessKey not implemented")
@@ -129,13 +129,13 @@ func _get_AccessKeyService_serviceDesc(srv AccessKeyServiceServer, opts ...grpc1
 		op(h)
 	}
 
-	_AccessKeyService_ListAccessKeys_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.ListAccessKeys(ctx, req.(*ListAccessKeysRequest))
+	_AccessKeyService_QueryAccessKeys_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.QueryAccessKeys(ctx, req.(*QueryAccessKeysRequest))
 	}
-	var _AccessKeyService_ListAccessKeys_info transport.ServiceInfo
+	var _AccessKeyService_QueryAccessKeys_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_AccessKeyService_ListAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "ListAccessKeys", srv)
-		_AccessKeyService_ListAccessKeys_Handler = h.Interceptor(_AccessKeyService_ListAccessKeys_Handler)
+		_AccessKeyService_QueryAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "QueryAccessKeys", srv)
+		_AccessKeyService_QueryAccessKeys_Handler = h.Interceptor(_AccessKeyService_QueryAccessKeys_Handler)
 	}
 
 	_AccessKeyService_GetAccessKey_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -177,26 +177,26 @@ func _get_AccessKeyService_serviceDesc(srv AccessKeyServiceServer, opts ...grpc1
 	var serviceDesc = _AccessKeyService_serviceDesc
 	serviceDesc.Methods = []grpc.MethodDesc{
 		{
-			MethodName: "ListAccessKeys",
+			MethodName: "QueryAccessKeys",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(ListAccessKeysRequest)
+				in := new(QueryAccessKeysRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
 				if interceptor == nil && h.Interceptor == nil {
-					return srv.(AccessKeyServiceServer).ListAccessKeys(ctx, in)
+					return srv.(AccessKeyServiceServer).QueryAccessKeys(ctx, in)
 				}
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AccessKeyService_ListAccessKeys_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AccessKeyService_QueryAccessKeys_info)
 				}
 				if interceptor == nil {
-					return _AccessKeyService_ListAccessKeys_Handler(ctx, in)
+					return _AccessKeyService_QueryAccessKeys_Handler(ctx, in)
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.services.accesskey.AccessKeyService/ListAccessKeys",
+					FullMethod: "/erda.core.services.accesskey.AccessKeyService/QueryAccessKeys",
 				}
-				return interceptor(ctx, in, info, _AccessKeyService_ListAccessKeys_Handler)
+				return interceptor(ctx, in, info, _AccessKeyService_QueryAccessKeys_Handler)
 			},
 		},
 		{

@@ -36,8 +36,8 @@ type accessKeyServiceWrapper struct {
 	opts   []grpc1.CallOption
 }
 
-func (s *accessKeyServiceWrapper) ListAccessKeys(ctx context.Context, req *pb.ListAccessKeysRequest) (*pb.ListAccessKeysResponse, error) {
-	return s.client.ListAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *accessKeyServiceWrapper) QueryAccessKeys(ctx context.Context, req *pb.QueryAccessKeysRequest) (*pb.QueryAccessKeysResponse, error) {
+	return s.client.QueryAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
 func (s *accessKeyServiceWrapper) GetAccessKey(ctx context.Context, req *pb.GetAccessKeysRequest) (*pb.GetAccessKeysResponse, error) {

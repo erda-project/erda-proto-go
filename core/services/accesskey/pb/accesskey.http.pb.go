@@ -11,7 +11,6 @@ import (
 	runtime "github.com/erda-project/erda-infra/pkg/transport/http/runtime"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	http1 "net/http"
-	strconv "strconv"
 	strings "strings"
 )
 
@@ -21,8 +20,8 @@ const _ = http.SupportPackageIsVersion1
 
 // AccessKeyServiceHandler is the server API for AccessKeyService service.
 type AccessKeyServiceHandler interface {
-	// GET /api/credential/access-keys
-	ListAccessKeys(context.Context, *ListAccessKeysRequest) (*ListAccessKeysResponse, error)
+	// POST /api/credential/access-keys/query
+	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
 	// GET /api/credential/access-keys/{id}
 	GetAccessKey(context.Context, *GetAccessKeysRequest) (*GetAccessKeysResponse, error)
 	// POST /api/credential/access-keys
@@ -52,13 +51,13 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		}
 	}
 
-	add_ListAccessKeys := func(method, path string, fn func(context.Context, *ListAccessKeysRequest) (*ListAccessKeysResponse, error)) {
+	add_QueryAccessKeys := func(method, path string, fn func(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*ListAccessKeysRequest))
+			return fn(ctx, req.(*QueryAccessKeysRequest))
 		}
-		var ListAccessKeys_info transport.ServiceInfo
+		var QueryAccessKeys_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			ListAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "ListAccessKeys", srv)
+			QueryAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "QueryAccessKeys", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -66,10 +65,10 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, ListAccessKeys_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAccessKeys_info)
 				}
 				r = r.WithContext(ctx)
-				var in ListAccessKeysRequest
+				var in QueryAccessKeysRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -134,10 +133,6 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 					for k, val := range vars {
 						switch k {
 						case "id":
-							val, err := strconv.ParseInt(val, 10, 64)
-							if err != nil {
-								return nil, err
-							}
 							in.Id = val
 						}
 					}
@@ -233,10 +228,6 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 					for k, val := range vars {
 						switch k {
 						case "id":
-							val, err := strconv.ParseInt(val, 10, 64)
-							if err != nil {
-								return nil, err
-							}
 							in.Id = val
 						}
 					}
@@ -296,10 +287,6 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 					for k, val := range vars {
 						switch k {
 						case "id":
-							val, err := strconv.ParseInt(val, 10, 64)
-							if err != nil {
-								return nil, err
-							}
 							in.Id = val
 						}
 					}
@@ -313,7 +300,7 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		)
 	}
 
-	add_ListAccessKeys("GET", "/api/credential/access-keys", srv.ListAccessKeys)
+	add_QueryAccessKeys("POST", "/api/credential/access-keys/query", srv.QueryAccessKeys)
 	add_GetAccessKey("GET", "/api/credential/access-keys/{id}", srv.GetAccessKey)
 	add_CreateAccessKeys("POST", "/api/credential/access-keys", srv.CreateAccessKeys)
 	add_UpdateAccessKeys("PUT", "/api/credential/access-keys/{id}", srv.UpdateAccessKeys)

@@ -12,8 +12,8 @@ import (
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
-var _ urlenc.URLValuesUnmarshaler = (*ListAccessKeysRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*ListAccessKeysResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*QueryAccessKeysRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*QueryAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAccessKeysRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*CreateAccessKeysRequest)(nil)
@@ -25,8 +25,8 @@ var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*AccessKeysItem)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GenericEnum)(nil)
 
-// ListAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
-func (m *ListAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// QueryAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
+func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -34,14 +34,16 @@ func (m *ListAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Val
 			case "subjectType":
 			case "subject":
 				m.Subject = &vals[0]
+			case "accessKey":
+				m.AccessKey = &vals[0]
 			}
 		}
 	}
 	return nil
 }
 
-// ListAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
-func (m *ListAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// QueryAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
+func (m *QueryAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
@@ -51,11 +53,7 @@ func (m *GetAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Valu
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
+				m.Id = vals[0]
 			}
 		}
 	}
@@ -75,11 +73,7 @@ func (m *GetAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Val
 				if m.Data == nil {
 					m.Data = &AccessKeysItem{}
 				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Data.Id = val
+				m.Data.Id = vals[0]
 			case "data.accessKey":
 				if m.Data == nil {
 					m.Data = &AccessKeysItem{}
@@ -174,11 +168,7 @@ func (m *CreateAccessKeysResponse) UnmarshalURLValues(prefix string, values url.
 				if m.Data == nil {
 					m.Data = &AccessKeysItem{}
 				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Data.Id = val
+				m.Data.Id = vals[0]
 			case "data.accessKey":
 				if m.Data == nil {
 					m.Data = &AccessKeysItem{}
@@ -250,11 +240,7 @@ func (m *UpdateAccessKeysRequest) UnmarshalURLValues(prefix string, values url.V
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
+				m.Id = vals[0]
 			case "status":
 			case "description":
 				m.Description = &vals[0]
@@ -275,11 +261,7 @@ func (m *DeleteAccessKeysRequest) UnmarshalURLValues(prefix string, values url.V
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
+				m.Id = vals[0]
 			}
 		}
 	}
@@ -297,11 +279,7 @@ func (m *AccessKeysItem) UnmarshalURLValues(prefix string, values url.Values) er
 		if len(vals) > 0 {
 			switch prefix + key {
 			case "id":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
+				m.Id = vals[0]
 			case "accessKey":
 				m.AccessKey = vals[0]
 			case "secretKey":
