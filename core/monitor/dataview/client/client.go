@@ -45,6 +45,10 @@ func (s *dataViewServiceWrapper) GetSystemView(ctx context.Context, req *pb.GetS
 	return s.client.GetSystemView(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
+func (s *dataViewServiceWrapper) GetInternalView(ctx context.Context, req *pb.GetInternalViewRequest) (*pb.GetInternalViewResponse, error) {
+	return s.client.GetInternalView(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
+
 func (s *dataViewServiceWrapper) ListCustomViews(ctx context.Context, req *pb.ListCustomViewsRequest) (*pb.ListCustomViewsResponse, error) {
 	return s.client.ListCustomViews(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

@@ -19,6 +19,8 @@ var _ urlenc.URLValuesUnmarshaler = (*ListSystemViewsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ListSystemViewsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetSystemViewRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetSystemViewResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetInternalViewRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetInternalViewResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ListCustomViewsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ListCustomViewsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetCustomViewRequest)(nil)
@@ -89,6 +91,82 @@ func (m *GetSystemViewRequest) UnmarshalURLValues(prefix string, values url.Valu
 
 // GetSystemViewResponse implement urlenc.URLValuesUnmarshaler.
 func (m *GetSystemViewResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+			case "data.id":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				m.Data.Id = vals[0]
+			case "data.scope":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				m.Data.Scope = vals[0]
+			case "data.scopeID":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				m.Data.ScopeID = vals[0]
+			case "data.version":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				m.Data.Version = vals[0]
+			case "data.name":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				m.Data.Name = vals[0]
+			case "data.desc":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				m.Data.Desc = vals[0]
+			case "data.createdAt":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.CreatedAt = val
+			case "data.updatedAt":
+				if m.Data == nil {
+					m.Data = &View{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Data.UpdatedAt = val
+			}
+		}
+	}
+	return nil
+}
+
+// GetInternalViewRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetInternalViewRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "id":
+				m.Id = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
+// GetInternalViewResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetInternalViewResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {

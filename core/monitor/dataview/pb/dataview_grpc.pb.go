@@ -23,6 +23,7 @@ const _ = grpc.SupportPackageIsVersion5
 type DataViewServiceClient interface {
 	ListSystemViews(ctx context.Context, in *ListSystemViewsRequest, opts ...grpc.CallOption) (*ListSystemViewsResponse, error)
 	GetSystemView(ctx context.Context, in *GetSystemViewRequest, opts ...grpc.CallOption) (*GetSystemViewResponse, error)
+	GetInternalView(ctx context.Context, in *GetInternalViewRequest, opts ...grpc.CallOption) (*GetInternalViewResponse, error)
 	ListCustomViews(ctx context.Context, in *ListCustomViewsRequest, opts ...grpc.CallOption) (*ListCustomViewsResponse, error)
 	GetCustomView(ctx context.Context, in *GetCustomViewRequest, opts ...grpc.CallOption) (*GetCustomViewResponse, error)
 	CreateCustomView(ctx context.Context, in *CreateCustomViewRequest, opts ...grpc.CallOption) (*CreateCustomViewResponse, error)
@@ -50,6 +51,15 @@ func (c *dataViewServiceClient) ListSystemViews(ctx context.Context, in *ListSys
 func (c *dataViewServiceClient) GetSystemView(ctx context.Context, in *GetSystemViewRequest, opts ...grpc.CallOption) (*GetSystemViewResponse, error) {
 	out := new(GetSystemViewResponse)
 	err := c.cc.Invoke(ctx, "/erda.core.monitor.dataview.DataViewService/GetSystemView", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *dataViewServiceClient) GetInternalView(ctx context.Context, in *GetInternalViewRequest, opts ...grpc.CallOption) (*GetInternalViewResponse, error) {
+	out := new(GetInternalViewResponse)
+	err := c.cc.Invoke(ctx, "/erda.core.monitor.dataview.DataViewService/GetInternalView", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -107,6 +117,7 @@ func (c *dataViewServiceClient) DeleteCustomView(ctx context.Context, in *Delete
 type DataViewServiceServer interface {
 	ListSystemViews(context.Context, *ListSystemViewsRequest) (*ListSystemViewsResponse, error)
 	GetSystemView(context.Context, *GetSystemViewRequest) (*GetSystemViewResponse, error)
+	GetInternalView(context.Context, *GetInternalViewRequest) (*GetInternalViewResponse, error)
 	ListCustomViews(context.Context, *ListCustomViewsRequest) (*ListCustomViewsResponse, error)
 	GetCustomView(context.Context, *GetCustomViewRequest) (*GetCustomViewResponse, error)
 	CreateCustomView(context.Context, *CreateCustomViewRequest) (*CreateCustomViewResponse, error)
@@ -123,6 +134,9 @@ func (*UnimplementedDataViewServiceServer) ListSystemViews(context.Context, *Lis
 }
 func (*UnimplementedDataViewServiceServer) GetSystemView(context.Context, *GetSystemViewRequest) (*GetSystemViewResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSystemView not implemented")
+}
+func (*UnimplementedDataViewServiceServer) GetInternalView(context.Context, *GetInternalViewRequest) (*GetInternalViewResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetInternalView not implemented")
 }
 func (*UnimplementedDataViewServiceServer) ListCustomViews(context.Context, *ListCustomViewsRequest) (*ListCustomViewsResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method ListCustomViews not implemented")
@@ -174,6 +188,15 @@ func _get_DataViewService_serviceDesc(srv DataViewServiceServer, opts ...grpc1.H
 	if h.Interceptor != nil {
 		_DataViewService_GetSystemView_info = transport.NewServiceInfo("erda.core.monitor.dataview.DataViewService", "GetSystemView", srv)
 		_DataViewService_GetSystemView_Handler = h.Interceptor(_DataViewService_GetSystemView_Handler)
+	}
+
+	_DataViewService_GetInternalView_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetInternalView(ctx, req.(*GetInternalViewRequest))
+	}
+	var _DataViewService_GetInternalView_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_DataViewService_GetInternalView_info = transport.NewServiceInfo("erda.core.monitor.dataview.DataViewService", "GetInternalView", srv)
+		_DataViewService_GetInternalView_Handler = h.Interceptor(_DataViewService_GetInternalView_Handler)
 	}
 
 	_DataViewService_ListCustomViews_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -267,6 +290,29 @@ func _get_DataViewService_serviceDesc(srv DataViewServiceServer, opts ...grpc1.H
 					FullMethod: "/erda.core.monitor.dataview.DataViewService/GetSystemView",
 				}
 				return interceptor(ctx, in, info, _DataViewService_GetSystemView_Handler)
+			},
+		},
+		{
+			MethodName: "GetInternalView",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetInternalViewRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(DataViewServiceServer).GetInternalView(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _DataViewService_GetInternalView_info)
+				}
+				if interceptor == nil {
+					return _DataViewService_GetInternalView_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.core.monitor.dataview.DataViewService/GetInternalView",
+				}
+				return interceptor(ctx, in, info, _DataViewService_GetInternalView_Handler)
 			},
 		},
 		{

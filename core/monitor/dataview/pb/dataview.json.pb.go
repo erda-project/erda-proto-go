@@ -21,6 +21,10 @@ var _ json.Marshaler = (*GetSystemViewRequest)(nil)
 var _ json.Unmarshaler = (*GetSystemViewRequest)(nil)
 var _ json.Marshaler = (*GetSystemViewResponse)(nil)
 var _ json.Unmarshaler = (*GetSystemViewResponse)(nil)
+var _ json.Marshaler = (*GetInternalViewRequest)(nil)
+var _ json.Unmarshaler = (*GetInternalViewRequest)(nil)
+var _ json.Marshaler = (*GetInternalViewResponse)(nil)
+var _ json.Unmarshaler = (*GetInternalViewResponse)(nil)
 var _ json.Marshaler = (*ListCustomViewsRequest)(nil)
 var _ json.Unmarshaler = (*ListCustomViewsRequest)(nil)
 var _ json.Marshaler = (*ListCustomViewsResponse)(nil)
@@ -119,6 +123,42 @@ func (m *GetSystemViewResponse) MarshalJSON() ([]byte, error) {
 
 // GetSystemViewResponse implement json.Marshaler.
 func (m *GetSystemViewResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetInternalViewRequest implement json.Marshaler.
+func (m *GetInternalViewRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetInternalViewRequest implement json.Marshaler.
+func (m *GetInternalViewRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetInternalViewResponse implement json.Marshaler.
+func (m *GetInternalViewResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetInternalViewResponse implement json.Marshaler.
+func (m *GetInternalViewResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

@@ -25,6 +25,8 @@ type DataViewServiceHandler interface {
 	ListSystemViews(context.Context, *ListSystemViewsRequest) (*ListSystemViewsResponse, error)
 	// GET /api/dashboard/system/blocks/{id}
 	GetSystemView(context.Context, *GetSystemViewRequest) (*GetSystemViewResponse, error)
+	// GET /api/dashboard/internal/blocks/{id}
+	GetInternalView(context.Context, *GetInternalViewRequest) (*GetInternalViewResponse, error)
 	// GET /api/dashboard/blocks
 	ListCustomViews(context.Context, *ListCustomViewsRequest) (*ListCustomViewsResponse, error)
 	// GET /api/dashboard/blocks/{id}
@@ -117,6 +119,65 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 				}
 				r = r.WithContext(ctx)
 				var in GetSystemViewRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "id":
+							in.Id = val
+						}
+					}
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetInternalView := func(method, path string, fn func(context.Context, *GetInternalViewRequest) (*GetInternalViewResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetInternalViewRequest))
+		}
+		var GetInternalView_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetInternalView_info = transport.NewServiceInfo("erda.core.monitor.dataview.DataViewService", "GetInternalView", srv)
+			handler = h.Interceptor(handler)
+		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetInternalView_info)
+				}
+				r = r.WithContext(ctx)
+				var in GetInternalViewRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -410,6 +471,7 @@ func RegisterDataViewServiceHandler(r http.Router, srv DataViewServiceHandler, o
 
 	add_ListSystemViews("GET", "/api/dashboard/system/blocks", srv.ListSystemViews)
 	add_GetSystemView("GET", "/api/dashboard/system/blocks/{id}", srv.GetSystemView)
+	add_GetInternalView("GET", "/api/dashboard/internal/blocks/{id}", srv.GetInternalView)
 	add_ListCustomViews("GET", "/api/dashboard/blocks", srv.ListCustomViews)
 	add_GetCustomView("GET", "/api/dashboard/blocks/{id}", srv.GetCustomView)
 	add_CreateCustomView("POST", "/api/dashboard/blocks", srv.CreateCustomView)
