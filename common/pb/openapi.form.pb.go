@@ -13,6 +13,7 @@ import (
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*OpenAPIOption)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*APIAuth)(nil)
 
 // OpenAPIOption implement urlenc.URLValuesUnmarshaler.
 func (m *OpenAPIOption) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -33,6 +34,96 @@ func (m *OpenAPIOption) UnmarshalURLValues(prefix string, values url.Values) err
 					return err
 				}
 				m.Private = val
+			case "auth":
+				if m.Auth == nil {
+					m.Auth = &APIAuth{}
+				}
+			case "auth.no_check":
+				if m.Auth == nil {
+					m.Auth = &APIAuth{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Auth.NoCheck = val
+			case "auth.check_login":
+				if m.Auth == nil {
+					m.Auth = &APIAuth{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Auth.CheckLogin = val
+			case "auth.try_check_login":
+				if m.Auth == nil {
+					m.Auth = &APIAuth{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Auth.TryCheckLogin = val
+			case "auth.check_token":
+				if m.Auth == nil {
+					m.Auth = &APIAuth{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Auth.CheckToken = val
+			case "auth.check_basic_auth":
+				if m.Auth == nil {
+					m.Auth = &APIAuth{}
+				}
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Auth.CheckBasicAuth = val
+			}
+		}
+	}
+	return nil
+}
+
+// APIAuth implement urlenc.URLValuesUnmarshaler.
+func (m *APIAuth) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "no_check":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.NoCheck = val
+			case "check_login":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.CheckLogin = val
+			case "try_check_login":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.TryCheckLogin = val
+			case "check_token":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.CheckToken = val
+			case "check_basic_auth":
+				val, err := strconv.ParseBool(vals[0])
+				if err != nil {
+					return err
+				}
+				m.CheckBasicAuth = val
 			}
 		}
 	}
