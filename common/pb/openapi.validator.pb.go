@@ -8,6 +8,7 @@ import (
 	math "math"
 
 	proto "github.com/golang/protobuf/proto"
+	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
 	_ "google.golang.org/protobuf/types/descriptorpb"
 )
 
@@ -17,5 +18,13 @@ var _ = fmt.Errorf
 var _ = math.Inf
 
 func (this *OpenAPIOption) Validate() error {
+	if this.Auth != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Auth); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Auth", err)
+		}
+	}
+	return nil
+}
+func (this *APIAuth) Validate() error {
 	return nil
 }

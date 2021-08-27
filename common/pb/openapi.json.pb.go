@@ -15,6 +15,8 @@ import (
 // is compatible with the "encoding/json" package it is being compiled against.
 var _ json.Marshaler = (*OpenAPIOption)(nil)
 var _ json.Unmarshaler = (*OpenAPIOption)(nil)
+var _ json.Marshaler = (*APIAuth)(nil)
+var _ json.Unmarshaler = (*APIAuth)(nil)
 
 // OpenAPIOption implement json.Marshaler.
 func (m *OpenAPIOption) MarshalJSON() ([]byte, error) {
@@ -29,6 +31,24 @@ func (m *OpenAPIOption) MarshalJSON() ([]byte, error) {
 
 // OpenAPIOption implement json.Marshaler.
 func (m *OpenAPIOption) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// APIAuth implement json.Marshaler.
+func (m *APIAuth) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// APIAuth implement json.Marshaler.
+func (m *APIAuth) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
