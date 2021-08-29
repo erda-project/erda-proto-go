@@ -267,8 +267,6 @@ func (m *RenderResponse) UnmarshalURLValues(prefix string, values url.Values) er
 					m.Protocol.Hierarchy = &Hierarchy{}
 				}
 				m.Protocol.Hierarchy.Root = vals[0]
-			case "userIDs":
-				m.UserIDs = vals
 			}
 		}
 	}
