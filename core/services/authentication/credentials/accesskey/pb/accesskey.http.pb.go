@@ -21,16 +21,16 @@ const _ = http.SupportPackageIsVersion1
 
 // AccessKeyServiceHandler is the server API for AccessKeyService service.
 type AccessKeyServiceHandler interface {
-	// POST /api/credential/access-keys/query
+	// POST /api/credentials/access-keys/query
 	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
-	// GET /api/credential/access-keys/{id}
-	GetAccessKey(context.Context, *GetAccessKeysRequest) (*GetAccessKeysResponse, error)
-	// POST /api/credential/access-keys
-	CreateAccessKeys(context.Context, *CreateAccessKeysRequest) (*CreateAccessKeysResponse, error)
-	// PUT /api/credential/access-keys/{id}
-	UpdateAccessKeys(context.Context, *UpdateAccessKeysRequest) (*UpdateAccessKeysResponse, error)
-	// DELETE /api/credential/access-keys/{id}
-	DeleteAccessKeys(context.Context, *DeleteAccessKeysRequest) (*DeleteAccessKeysResponse, error)
+	// GET /api/credentials/access-keys/{id}
+	GetAccessKey(context.Context, *GetAccessKeyRequest) (*GetAccessKeyResponse, error)
+	// POST /api/credentials/access-keys
+	CreateAccessKey(context.Context, *CreateAccessKeyRequest) (*CreateAccessKeyResponse, error)
+	// PUT /api/credentials/access-keys/{id}
+	UpdateAccessKey(context.Context, *UpdateAccessKeyRequest) (*UpdateAccessKeyResponse, error)
+	// DELETE /api/credentials/access-keys/{id}
+	DeleteAccessKey(context.Context, *DeleteAccessKeyRequest) (*DeleteAccessKeyResponse, error)
 }
 
 // RegisterAccessKeyServiceHandler register AccessKeyServiceHandler to http.Router.
@@ -58,7 +58,7 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		}
 		var QueryAccessKeys_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			QueryAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "QueryAccessKeys", srv)
+			QueryAccessKeys_info = transport.NewServiceInfo("erda.core.services.authentication.credentials.accesskey.AccessKeyService", "QueryAccessKeys", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -88,13 +88,13 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		)
 	}
 
-	add_GetAccessKey := func(method, path string, fn func(context.Context, *GetAccessKeysRequest) (*GetAccessKeysResponse, error)) {
+	add_GetAccessKey := func(method, path string, fn func(context.Context, *GetAccessKeyRequest) (*GetAccessKeyResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*GetAccessKeysRequest))
+			return fn(ctx, req.(*GetAccessKeyRequest))
 		}
 		var GetAccessKey_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			GetAccessKey_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "GetAccessKey", srv)
+			GetAccessKey_info = transport.NewServiceInfo("erda.core.services.authentication.credentials.accesskey.AccessKeyService", "GetAccessKey", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -108,7 +108,7 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetAccessKey_info)
 				}
 				r = r.WithContext(ctx)
-				var in GetAccessKeysRequest
+				var in GetAccessKeyRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -147,13 +147,13 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		)
 	}
 
-	add_CreateAccessKeys := func(method, path string, fn func(context.Context, *CreateAccessKeysRequest) (*CreateAccessKeysResponse, error)) {
+	add_CreateAccessKey := func(method, path string, fn func(context.Context, *CreateAccessKeyRequest) (*CreateAccessKeyResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*CreateAccessKeysRequest))
+			return fn(ctx, req.(*CreateAccessKeyRequest))
 		}
-		var CreateAccessKeys_info transport.ServiceInfo
+		var CreateAccessKey_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			CreateAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "CreateAccessKeys", srv)
+			CreateAccessKey_info = transport.NewServiceInfo("erda.core.services.authentication.credentials.accesskey.AccessKeyService", "CreateAccessKey", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -161,10 +161,10 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAccessKeys_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, CreateAccessKey_info)
 				}
 				r = r.WithContext(ctx)
-				var in CreateAccessKeysRequest
+				var in CreateAccessKeyRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -183,72 +183,13 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		)
 	}
 
-	add_UpdateAccessKeys := func(method, path string, fn func(context.Context, *UpdateAccessKeysRequest) (*UpdateAccessKeysResponse, error)) {
+	add_UpdateAccessKey := func(method, path string, fn func(context.Context, *UpdateAccessKeyRequest) (*UpdateAccessKeyResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*UpdateAccessKeysRequest))
+			return fn(ctx, req.(*UpdateAccessKeyRequest))
 		}
-		var UpdateAccessKeys_info transport.ServiceInfo
+		var UpdateAccessKey_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			UpdateAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "UpdateAccessKeys", srv)
-			handler = h.Interceptor(handler)
-		}
-		compiler, _ := httprule.Parse(path)
-		temp := compiler.Compile()
-		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
-		r.Add(method, path, encodeFunc(
-			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAccessKeys_info)
-				}
-				r = r.WithContext(ctx)
-				var in UpdateAccessKeysRequest
-				if err := h.Decode(r, &in); err != nil {
-					return nil, err
-				}
-				var input interface{} = &in
-				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
-					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
-						return nil, err
-					}
-				}
-				path := r.URL.Path
-				if len(path) > 0 {
-					components := strings.Split(path[1:], "/")
-					last := len(components) - 1
-					var verb string
-					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
-						c := components[last]
-						components[last], verb = c[:idx], c[idx+1:]
-					}
-					vars, err := pattern.Match(components, verb)
-					if err != nil {
-						return nil, err
-					}
-					for k, val := range vars {
-						switch k {
-						case "id":
-							in.Id = val
-						}
-					}
-				}
-				out, err := handler(ctx, &in)
-				if err != nil {
-					return out, err
-				}
-				return out, nil
-			}),
-		)
-	}
-
-	add_DeleteAccessKeys := func(method, path string, fn func(context.Context, *DeleteAccessKeysRequest) (*DeleteAccessKeysResponse, error)) {
-		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*DeleteAccessKeysRequest))
-		}
-		var DeleteAccessKeys_info transport.ServiceInfo
-		if h.Interceptor != nil {
-			DeleteAccessKeys_info = transport.NewServiceInfo("erda.core.services.accesskey.AccessKeyService", "DeleteAccessKeys", srv)
+			UpdateAccessKey_info = transport.NewServiceInfo("erda.core.services.authentication.credentials.accesskey.AccessKeyService", "UpdateAccessKey", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)
@@ -259,10 +200,10 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 				ctx := http.WithRequest(r.Context(), r)
 				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
 				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteAccessKeys_info)
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateAccessKey_info)
 				}
 				r = r.WithContext(ctx)
-				var in DeleteAccessKeysRequest
+				var in UpdateAccessKeyRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}
@@ -301,9 +242,68 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		)
 	}
 
-	add_QueryAccessKeys("POST", "/api/credential/access-keys/query", srv.QueryAccessKeys)
-	add_GetAccessKey("GET", "/api/credential/access-keys/{id}", srv.GetAccessKey)
-	add_CreateAccessKeys("POST", "/api/credential/access-keys", srv.CreateAccessKeys)
-	add_UpdateAccessKeys("PUT", "/api/credential/access-keys/{id}", srv.UpdateAccessKeys)
-	add_DeleteAccessKeys("DELETE", "/api/credential/access-keys/{id}", srv.DeleteAccessKeys)
+	add_DeleteAccessKey := func(method, path string, fn func(context.Context, *DeleteAccessKeyRequest) (*DeleteAccessKeyResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*DeleteAccessKeyRequest))
+		}
+		var DeleteAccessKey_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			DeleteAccessKey_info = transport.NewServiceInfo("erda.core.services.authentication.credentials.accesskey.AccessKeyService", "DeleteAccessKey", srv)
+			handler = h.Interceptor(handler)
+		}
+		compiler, _ := httprule.Parse(path)
+		temp := compiler.Compile()
+		pattern, _ := runtime.NewPattern(httprule.SupportPackageIsVersion1, temp.OpCodes, temp.Pool, temp.Verb)
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, DeleteAccessKey_info)
+				}
+				r = r.WithContext(ctx)
+				var in DeleteAccessKeyRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				path := r.URL.Path
+				if len(path) > 0 {
+					components := strings.Split(path[1:], "/")
+					last := len(components) - 1
+					var verb string
+					if idx := strings.LastIndex(components[last], ":"); idx >= 0 {
+						c := components[last]
+						components[last], verb = c[:idx], c[idx+1:]
+					}
+					vars, err := pattern.Match(components, verb)
+					if err != nil {
+						return nil, err
+					}
+					for k, val := range vars {
+						switch k {
+						case "id":
+							in.Id = val
+						}
+					}
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_QueryAccessKeys("POST", "/api/credentials/access-keys/query", srv.QueryAccessKeys)
+	add_GetAccessKey("GET", "/api/credentials/access-keys/{id}", srv.GetAccessKey)
+	add_CreateAccessKey("POST", "/api/credentials/access-keys", srv.CreateAccessKey)
+	add_UpdateAccessKey("PUT", "/api/credentials/access-keys/{id}", srv.UpdateAccessKey)
+	add_DeleteAccessKey("DELETE", "/api/credentials/access-keys/{id}", srv.DeleteAccessKey)
 }

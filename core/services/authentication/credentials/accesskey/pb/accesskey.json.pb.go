@@ -17,22 +17,22 @@ var _ json.Marshaler = (*QueryAccessKeysRequest)(nil)
 var _ json.Unmarshaler = (*QueryAccessKeysRequest)(nil)
 var _ json.Marshaler = (*QueryAccessKeysResponse)(nil)
 var _ json.Unmarshaler = (*QueryAccessKeysResponse)(nil)
-var _ json.Marshaler = (*GetAccessKeysRequest)(nil)
-var _ json.Unmarshaler = (*GetAccessKeysRequest)(nil)
-var _ json.Marshaler = (*GetAccessKeysResponse)(nil)
-var _ json.Unmarshaler = (*GetAccessKeysResponse)(nil)
-var _ json.Marshaler = (*CreateAccessKeysRequest)(nil)
-var _ json.Unmarshaler = (*CreateAccessKeysRequest)(nil)
-var _ json.Marshaler = (*CreateAccessKeysResponse)(nil)
-var _ json.Unmarshaler = (*CreateAccessKeysResponse)(nil)
-var _ json.Marshaler = (*UpdateAccessKeysRequest)(nil)
-var _ json.Unmarshaler = (*UpdateAccessKeysRequest)(nil)
-var _ json.Marshaler = (*UpdateAccessKeysResponse)(nil)
-var _ json.Unmarshaler = (*UpdateAccessKeysResponse)(nil)
-var _ json.Marshaler = (*DeleteAccessKeysRequest)(nil)
-var _ json.Unmarshaler = (*DeleteAccessKeysRequest)(nil)
-var _ json.Marshaler = (*DeleteAccessKeysResponse)(nil)
-var _ json.Unmarshaler = (*DeleteAccessKeysResponse)(nil)
+var _ json.Marshaler = (*GetAccessKeyRequest)(nil)
+var _ json.Unmarshaler = (*GetAccessKeyRequest)(nil)
+var _ json.Marshaler = (*GetAccessKeyResponse)(nil)
+var _ json.Unmarshaler = (*GetAccessKeyResponse)(nil)
+var _ json.Marshaler = (*CreateAccessKeyRequest)(nil)
+var _ json.Unmarshaler = (*CreateAccessKeyRequest)(nil)
+var _ json.Marshaler = (*CreateAccessKeyResponse)(nil)
+var _ json.Unmarshaler = (*CreateAccessKeyResponse)(nil)
+var _ json.Marshaler = (*UpdateAccessKeyRequest)(nil)
+var _ json.Unmarshaler = (*UpdateAccessKeyRequest)(nil)
+var _ json.Marshaler = (*UpdateAccessKeyResponse)(nil)
+var _ json.Unmarshaler = (*UpdateAccessKeyResponse)(nil)
+var _ json.Marshaler = (*DeleteAccessKeyRequest)(nil)
+var _ json.Unmarshaler = (*DeleteAccessKeyRequest)(nil)
+var _ json.Marshaler = (*DeleteAccessKeyResponse)(nil)
+var _ json.Unmarshaler = (*DeleteAccessKeyResponse)(nil)
 var _ json.Marshaler = (*AccessKeysItem)(nil)
 var _ json.Unmarshaler = (*AccessKeysItem)(nil)
 var _ json.Marshaler = (*SubjectTypeEnum)(nil)
@@ -76,8 +76,8 @@ func (m *QueryAccessKeysResponse) UnmarshalJSON(b []byte) error {
 	}).Unmarshal(b, m)
 }
 
-// GetAccessKeysRequest implement json.Marshaler.
-func (m *GetAccessKeysRequest) MarshalJSON() ([]byte, error) {
+// GetAccessKeyRequest implement json.Marshaler.
+func (m *GetAccessKeyRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -87,15 +87,15 @@ func (m *GetAccessKeysRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAccessKeysRequest implement json.Marshaler.
-func (m *GetAccessKeysRequest) UnmarshalJSON(b []byte) error {
+// GetAccessKeyRequest implement json.Marshaler.
+func (m *GetAccessKeyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// GetAccessKeysResponse implement json.Marshaler.
-func (m *GetAccessKeysResponse) MarshalJSON() ([]byte, error) {
+// GetAccessKeyResponse implement json.Marshaler.
+func (m *GetAccessKeyResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -105,15 +105,15 @@ func (m *GetAccessKeysResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// GetAccessKeysResponse implement json.Marshaler.
-func (m *GetAccessKeysResponse) UnmarshalJSON(b []byte) error {
+// GetAccessKeyResponse implement json.Marshaler.
+func (m *GetAccessKeyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// CreateAccessKeysRequest implement json.Marshaler.
-func (m *CreateAccessKeysRequest) MarshalJSON() ([]byte, error) {
+// CreateAccessKeyRequest implement json.Marshaler.
+func (m *CreateAccessKeyRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -123,15 +123,15 @@ func (m *CreateAccessKeysRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// CreateAccessKeysRequest implement json.Marshaler.
-func (m *CreateAccessKeysRequest) UnmarshalJSON(b []byte) error {
+// CreateAccessKeyRequest implement json.Marshaler.
+func (m *CreateAccessKeyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// CreateAccessKeysResponse implement json.Marshaler.
-func (m *CreateAccessKeysResponse) MarshalJSON() ([]byte, error) {
+// CreateAccessKeyResponse implement json.Marshaler.
+func (m *CreateAccessKeyResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -141,15 +141,15 @@ func (m *CreateAccessKeysResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// CreateAccessKeysResponse implement json.Marshaler.
-func (m *CreateAccessKeysResponse) UnmarshalJSON(b []byte) error {
+// CreateAccessKeyResponse implement json.Marshaler.
+func (m *CreateAccessKeyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// UpdateAccessKeysRequest implement json.Marshaler.
-func (m *UpdateAccessKeysRequest) MarshalJSON() ([]byte, error) {
+// UpdateAccessKeyRequest implement json.Marshaler.
+func (m *UpdateAccessKeyRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -159,15 +159,15 @@ func (m *UpdateAccessKeysRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// UpdateAccessKeysRequest implement json.Marshaler.
-func (m *UpdateAccessKeysRequest) UnmarshalJSON(b []byte) error {
+// UpdateAccessKeyRequest implement json.Marshaler.
+func (m *UpdateAccessKeyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// UpdateAccessKeysResponse implement json.Marshaler.
-func (m *UpdateAccessKeysResponse) MarshalJSON() ([]byte, error) {
+// UpdateAccessKeyResponse implement json.Marshaler.
+func (m *UpdateAccessKeyResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -177,15 +177,15 @@ func (m *UpdateAccessKeysResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// UpdateAccessKeysResponse implement json.Marshaler.
-func (m *UpdateAccessKeysResponse) UnmarshalJSON(b []byte) error {
+// UpdateAccessKeyResponse implement json.Marshaler.
+func (m *UpdateAccessKeyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// DeleteAccessKeysRequest implement json.Marshaler.
-func (m *DeleteAccessKeysRequest) MarshalJSON() ([]byte, error) {
+// DeleteAccessKeyRequest implement json.Marshaler.
+func (m *DeleteAccessKeyRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -195,15 +195,15 @@ func (m *DeleteAccessKeysRequest) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// DeleteAccessKeysRequest implement json.Marshaler.
-func (m *DeleteAccessKeysRequest) UnmarshalJSON(b []byte) error {
+// DeleteAccessKeyRequest implement json.Marshaler.
+func (m *DeleteAccessKeyRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
-// DeleteAccessKeysResponse implement json.Marshaler.
-func (m *DeleteAccessKeysResponse) MarshalJSON() ([]byte, error) {
+// DeleteAccessKeyResponse implement json.Marshaler.
+func (m *DeleteAccessKeyResponse) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
@@ -213,8 +213,8 @@ func (m *DeleteAccessKeysResponse) MarshalJSON() ([]byte, error) {
 	return buf.Bytes(), err
 }
 
-// DeleteAccessKeysResponse implement json.Marshaler.
-func (m *DeleteAccessKeysResponse) UnmarshalJSON(b []byte) error {
+// DeleteAccessKeyResponse implement json.Marshaler.
+func (m *DeleteAccessKeyResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

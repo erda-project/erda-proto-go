@@ -10,12 +10,12 @@ import (
 
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto-go/core/services/accesskey/pb"
+	pb "github.com/erda-project/erda-proto-go/core/services/authentication/credentials/accesskey/pb"
 	grpc1 "google.golang.org/grpc"
 )
 
 var dependencies = []string{
-	"grpc-client@erda.core.services.accesskey",
+	"grpc-client@erda.core.services.authentication.credentials.accesskey",
 	"grpc-client",
 }
 
@@ -54,11 +54,11 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 		}
 	}
 	switch ctx.Service() {
-	case "erda.core.services.accesskey-client":
+	case "erda.core.services.authentication.credentials.accesskey-client":
 		return p.client
-	case "erda.core.services.accesskey.AccessKeyService":
+	case "erda.core.services.authentication.credentials.accesskey.AccessKeyService":
 		return &accessKeyServiceWrapper{client: p.client.AccessKeyService(), opts: opts}
-	case "erda.core.services.accesskey.AccessKeyService.client":
+	case "erda.core.services.authentication.credentials.accesskey.AccessKeyService.client":
 		return p.client.AccessKeyService()
 	}
 	switch ctx.Type() {
@@ -73,10 +73,10 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 }
 
 func init() {
-	servicehub.Register("erda.core.services.accesskey-client", &servicehub.Spec{
+	servicehub.Register("erda.core.services.authentication.credentials.accesskey-client", &servicehub.Spec{
 		Services: []string{
-			"erda.core.services.accesskey.AccessKeyService",
-			"erda.core.services.accesskey-client",
+			"erda.core.services.authentication.credentials.accesskey.AccessKeyService",
+			"erda.core.services.authentication.credentials.accesskey-client",
 		},
 		Types: []reflect.Type{
 			clientsType,
