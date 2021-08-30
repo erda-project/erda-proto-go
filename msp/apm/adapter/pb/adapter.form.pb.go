@@ -5,7 +5,6 @@ package pb
 
 import (
 	url "net/url"
-	strconv "strconv"
 
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 )
@@ -34,16 +33,6 @@ func (m *GetInstrumentationLibraryDocsRequest) UnmarshalURLValues(prefix string,
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "projectID":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
-			case "serviceName":
-				m.ServiceName = vals[0]
-			case "type":
-				m.Type = vals[0]
 			case "language":
 				m.Language = vals[0]
 			case "strategy":
@@ -74,8 +63,6 @@ func (m *Language) UnmarshalURLValues(prefix string, values url.Values) error {
 			switch prefix + key {
 			case "language":
 				m.Language = vals[0]
-			case "displayName":
-				m.DisplayName = vals[0]
 			}
 		}
 	}
@@ -87,8 +74,6 @@ func (m *InstrumentationLibrary) UnmarshalURLValues(prefix string, values url.Va
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "displayName":
-				m.DisplayName = vals[0]
 			case "strategy":
 				m.Strategy = vals[0]
 			}
