@@ -197,6 +197,11 @@ func (this *Chart) Validate() error {
 			return github_com_mwitkow_go_proto_validators.FieldError("Controls", err)
 		}
 	}
+	if this.I18N != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.I18N); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("I18N", err)
+		}
+	}
 	return nil
 }
 func (this *DataItem) Validate() error {

@@ -1278,6 +1278,195 @@ func (m *Block) UnmarshalURLValues(prefix string, values url.Values) error {
 						m.Chart.Controls = structpb.NewStringValue(vals[0])
 					}
 				}
+			case "chart.i18n":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "chart.i18n.null_value":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "chart.i18n.number_value":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "chart.i18n.string_value":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "chart.i18n.bool_value":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "chart.i18n.struct_value":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "chart.i18n.list_value":
+				if m.Chart == nil {
+					m.Chart = &Chart{}
+				}
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.Chart.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.Chart.I18N = val
+					} else {
+						m.Chart.I18N = structpb.NewStringValue(vals[0])
+					}
+				}
 			}
 		}
 	}
@@ -1391,6 +1580,30 @@ func (m *Chart) UnmarshalURLValues(prefix string, values url.Values) error {
 						m.Controls = val
 					} else {
 						m.Controls = structpb.NewStringValue(vals[0])
+					}
+				}
+			case "i18n":
+				if len(vals) > 1 {
+					var list []interface{}
+					for _, text := range vals {
+						var v interface{}
+						err := json.NewDecoder(strings.NewReader(text)).Decode(&v)
+						if err != nil {
+							list = append(list, v)
+						} else {
+							list = append(list, text)
+						}
+					}
+					val, _ := structpb.NewList(list)
+					m.I18N = structpb.NewListValue(val)
+				} else {
+					var v interface{}
+					err := json.NewDecoder(strings.NewReader(vals[0])).Decode(&v)
+					if err != nil {
+						val, _ := structpb.NewValue(v)
+						m.I18N = val
+					} else {
+						m.I18N = structpb.NewStringValue(vals[0])
 					}
 				}
 			}
