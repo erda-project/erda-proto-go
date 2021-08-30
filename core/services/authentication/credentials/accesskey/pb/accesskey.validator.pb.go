@@ -31,10 +31,10 @@ func (this *QueryAccessKeysResponse) Validate() error {
 	}
 	return nil
 }
-func (this *GetAccessKeysRequest) Validate() error {
+func (this *GetAccessKeyRequest) Validate() error {
 	return nil
 }
-func (this *GetAccessKeysResponse) Validate() error {
+func (this *GetAccessKeyResponse) Validate() error {
 	if this.Data != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
@@ -42,10 +42,10 @@ func (this *GetAccessKeysResponse) Validate() error {
 	}
 	return nil
 }
-func (this *CreateAccessKeysRequest) Validate() error {
+func (this *CreateAccessKeyRequest) Validate() error {
 	return nil
 }
-func (this *CreateAccessKeysResponse) Validate() error {
+func (this *CreateAccessKeyResponse) Validate() error {
 	if this.Data != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Data); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
@@ -53,16 +53,16 @@ func (this *CreateAccessKeysResponse) Validate() error {
 	}
 	return nil
 }
-func (this *UpdateAccessKeysRequest) Validate() error {
+func (this *UpdateAccessKeyRequest) Validate() error {
 	return nil
 }
-func (this *UpdateAccessKeysResponse) Validate() error {
+func (this *UpdateAccessKeyResponse) Validate() error {
 	return nil
 }
-func (this *DeleteAccessKeysRequest) Validate() error {
+func (this *DeleteAccessKeyRequest) Validate() error {
 	return nil
 }
-func (this *DeleteAccessKeysResponse) Validate() error {
+func (this *DeleteAccessKeyResponse) Validate() error {
 	return nil
 }
 func (this *AccessKeysItem) Validate() error {

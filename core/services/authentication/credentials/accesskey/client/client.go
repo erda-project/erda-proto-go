@@ -7,7 +7,7 @@ import (
 	context "context"
 
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto-go/core/services/accesskey/pb"
+	pb "github.com/erda-project/erda-proto-go/core/services/authentication/credentials/accesskey/pb"
 	grpc1 "google.golang.org/grpc"
 )
 
@@ -41,18 +41,18 @@ func (s *accessKeyServiceWrapper) QueryAccessKeys(ctx context.Context, req *pb.Q
 	return s.client.QueryAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
-func (s *accessKeyServiceWrapper) GetAccessKey(ctx context.Context, req *pb.GetAccessKeysRequest) (*pb.GetAccessKeysResponse, error) {
+func (s *accessKeyServiceWrapper) GetAccessKey(ctx context.Context, req *pb.GetAccessKeyRequest) (*pb.GetAccessKeyResponse, error) {
 	return s.client.GetAccessKey(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
-func (s *accessKeyServiceWrapper) CreateAccessKeys(ctx context.Context, req *pb.CreateAccessKeysRequest) (*pb.CreateAccessKeysResponse, error) {
-	return s.client.CreateAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *accessKeyServiceWrapper) CreateAccessKey(ctx context.Context, req *pb.CreateAccessKeyRequest) (*pb.CreateAccessKeyResponse, error) {
+	return s.client.CreateAccessKey(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
-func (s *accessKeyServiceWrapper) UpdateAccessKeys(ctx context.Context, req *pb.UpdateAccessKeysRequest) (*pb.UpdateAccessKeysResponse, error) {
-	return s.client.UpdateAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *accessKeyServiceWrapper) UpdateAccessKey(ctx context.Context, req *pb.UpdateAccessKeyRequest) (*pb.UpdateAccessKeyResponse, error) {
+	return s.client.UpdateAccessKey(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
 
-func (s *accessKeyServiceWrapper) DeleteAccessKeys(ctx context.Context, req *pb.DeleteAccessKeysRequest) (*pb.DeleteAccessKeysResponse, error) {
-	return s.client.DeleteAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+func (s *accessKeyServiceWrapper) DeleteAccessKey(ctx context.Context, req *pb.DeleteAccessKeyRequest) (*pb.DeleteAccessKeyResponse, error) {
+	return s.client.DeleteAccessKey(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }

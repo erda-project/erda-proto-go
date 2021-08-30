@@ -15,14 +15,14 @@ import (
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
 var _ urlenc.URLValuesUnmarshaler = (*QueryAccessKeysRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*QueryAccessKeysResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetAccessKeysRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*GetAccessKeysResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CreateAccessKeysRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*CreateAccessKeysResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*UpdateAccessKeysRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*UpdateAccessKeysResponse)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeysResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetAccessKeyRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetAccessKeyResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*CreateAccessKeyRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*CreateAccessKeyResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*UpdateAccessKeyRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*UpdateAccessKeyResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeyRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*DeleteAccessKeyResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*AccessKeysItem)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*SubjectTypeEnum)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*StatusEnum)(nil)
@@ -38,6 +38,18 @@ func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Va
 				m.Subject = vals[0]
 			case "accessKey":
 				m.AccessKey = vals[0]
+			case "pageNo":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.PageNo = val
+			case "pageSize":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.PageSize = val
 			}
 		}
 	}
@@ -46,11 +58,23 @@ func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Va
 
 // QueryAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
 func (m *QueryAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "total":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Total = val
+			}
+		}
+	}
 	return nil
 }
 
-// GetAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
-func (m *GetAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetAccessKeyRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetAccessKeyRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -62,8 +86,8 @@ func (m *GetAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Valu
 	return nil
 }
 
-// GetAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
-func (m *GetAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// GetAccessKeyResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetAccessKeyResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -141,8 +165,8 @@ func (m *GetAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Val
 	return nil
 }
 
-// CreateAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
-func (m *CreateAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// CreateAccessKeyRequest implement urlenc.URLValuesUnmarshaler.
+func (m *CreateAccessKeyRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -157,8 +181,8 @@ func (m *CreateAccessKeysRequest) UnmarshalURLValues(prefix string, values url.V
 	return nil
 }
 
-// CreateAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
-func (m *CreateAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// CreateAccessKeyResponse implement urlenc.URLValuesUnmarshaler.
+func (m *CreateAccessKeyResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -236,8 +260,8 @@ func (m *CreateAccessKeysResponse) UnmarshalURLValues(prefix string, values url.
 	return nil
 }
 
-// UpdateAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
-func (m *UpdateAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// UpdateAccessKeyRequest implement urlenc.URLValuesUnmarshaler.
+func (m *UpdateAccessKeyRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -252,13 +276,13 @@ func (m *UpdateAccessKeysRequest) UnmarshalURLValues(prefix string, values url.V
 	return nil
 }
 
-// UpdateAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
-func (m *UpdateAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// UpdateAccessKeyResponse implement urlenc.URLValuesUnmarshaler.
+func (m *UpdateAccessKeyResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 
-// DeleteAccessKeysRequest implement urlenc.URLValuesUnmarshaler.
-func (m *DeleteAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+// DeleteAccessKeyRequest implement urlenc.URLValuesUnmarshaler.
+func (m *DeleteAccessKeyRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
@@ -270,8 +294,8 @@ func (m *DeleteAccessKeysRequest) UnmarshalURLValues(prefix string, values url.V
 	return nil
 }
 
-// DeleteAccessKeysResponse implement urlenc.URLValuesUnmarshaler.
-func (m *DeleteAccessKeysResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+// DeleteAccessKeyResponse implement urlenc.URLValuesUnmarshaler.
+func (m *DeleteAccessKeyResponse) UnmarshalURLValues(prefix string, values url.Values) error {
 	return nil
 }
 

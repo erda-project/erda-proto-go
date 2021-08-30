@@ -22,7 +22,7 @@ func RegisterAccessKeyServiceImp(regester transport.Register, srv AccessKeyServi
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.core.services.accesskey.AccessKeyService",
+		"erda.core.services.authentication.credentials.accesskey.AccessKeyService",
 	)
 }
 
