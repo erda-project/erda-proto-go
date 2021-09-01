@@ -23,12 +23,14 @@ const _ = http.SupportPackageIsVersion1
 type AccessKeyServiceHandler interface {
 	// POST /api/msp/credential/access-keys
 	CreateAccessKey(context.Context, *CreateAccessKeyRequest) (*CreateAccessKeyResponse, error)
-	// DELETE /api/msp/credential/access-keys/{accessKeyId}
+	// DELETE /api/msp/credential/access-keys/{id}
 	DeleteAccessKey(context.Context, *DeleteAccessKeyRequest) (*DeleteAccessKeyResponse, error)
-	// GET /api/msp/credential/access-keys/{accessKeyId}
+	// GET /api/msp/credential/access-keys/{id}
 	GetAccessKey(context.Context, *GetAccessKeyRequest) (*GetAccessKeyResponse, error)
 	// POST /api/msp/credential/access-keys/download
 	DownloadAccessKeyFile(context.Context, *DownloadAccessKeyFileRequest) (*DownloadAccessKeyFileResponse, error)
+	// GET /api/msp/credential/access-keys
+	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
 }
 
 // RegisterAccessKeyServiceHandler register AccessKeyServiceHandler to http.Router.
@@ -131,8 +133,8 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 					}
 					for k, val := range vars {
 						switch k {
-						case "accessKeyId":
-							in.AccessKeyId = val
+						case "id":
+							in.Id = val
 						}
 					}
 				}
@@ -190,8 +192,8 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 					}
 					for k, val := range vars {
 						switch k {
-						case "accessKeyId":
-							in.AccessKeyId = val
+						case "id":
+							in.Id = val
 						}
 					}
 				}
@@ -240,8 +242,45 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 		)
 	}
 
+	add_QueryAccessKeys := func(method, path string, fn func(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*QueryAccessKeysRequest))
+		}
+		var QueryAccessKeys_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			QueryAccessKeys_info = transport.NewServiceInfo("erda.msp.credential.AccessKeyService", "QueryAccessKeys", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, QueryAccessKeys_info)
+				}
+				r = r.WithContext(ctx)
+				var in QueryAccessKeysRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
 	add_CreateAccessKey("POST", "/api/msp/credential/access-keys", srv.CreateAccessKey)
-	add_DeleteAccessKey("DELETE", "/api/msp/credential/access-keys/{accessKeyId}", srv.DeleteAccessKey)
-	add_GetAccessKey("GET", "/api/msp/credential/access-keys/{accessKeyId}", srv.GetAccessKey)
+	add_DeleteAccessKey("DELETE", "/api/msp/credential/access-keys/{id}", srv.DeleteAccessKey)
+	add_GetAccessKey("GET", "/api/msp/credential/access-keys/{id}", srv.GetAccessKey)
 	add_DownloadAccessKeyFile("POST", "/api/msp/credential/access-keys/download", srv.DownloadAccessKeyFile)
+	add_QueryAccessKeys("GET", "/api/msp/credential/access-keys", srv.QueryAccessKeys)
 }
