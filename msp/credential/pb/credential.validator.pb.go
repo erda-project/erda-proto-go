@@ -66,10 +66,10 @@ func (this *QueryAccessKeysResponse) Validate() error {
 	return nil
 }
 func (this *QueryAccessKeysData) Validate() error {
-	for _, item := range this.Data {
+	for _, item := range this.List {
 		if item != nil {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
-				return github_com_mwitkow_go_proto_validators.FieldError("Data", err)
+				return github_com_mwitkow_go_proto_validators.FieldError("List", err)
 			}
 		}
 	}

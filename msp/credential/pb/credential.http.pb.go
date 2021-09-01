@@ -29,7 +29,7 @@ type AccessKeyServiceHandler interface {
 	GetAccessKey(context.Context, *GetAccessKeyRequest) (*GetAccessKeyResponse, error)
 	// POST /api/msp/credential/access-keys/download
 	DownloadAccessKeyFile(context.Context, *DownloadAccessKeyFileRequest) (*DownloadAccessKeyFileResponse, error)
-	// GET /api/msp/credential/access-keys
+	// POST /api/msp/credential/access-keys/records
 	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
 }
 
@@ -282,5 +282,5 @@ func RegisterAccessKeyServiceHandler(r http.Router, srv AccessKeyServiceHandler,
 	add_DeleteAccessKey("DELETE", "/api/msp/credential/access-keys/{id}", srv.DeleteAccessKey)
 	add_GetAccessKey("GET", "/api/msp/credential/access-keys/{id}", srv.GetAccessKey)
 	add_DownloadAccessKeyFile("POST", "/api/msp/credential/access-keys/download", srv.DownloadAccessKeyFile)
-	add_QueryAccessKeys("GET", "/api/msp/credential/access-keys", srv.QueryAccessKeys)
+	add_QueryAccessKeys("POST", "/api/msp/credential/access-keys/records", srv.QueryAccessKeys)
 }
