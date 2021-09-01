@@ -25,6 +25,7 @@ type AccessKeyServiceClient interface {
 	DeleteAccessKey(ctx context.Context, in *DeleteAccessKeyRequest, opts ...grpc.CallOption) (*DeleteAccessKeyResponse, error)
 	GetAccessKey(ctx context.Context, in *GetAccessKeyRequest, opts ...grpc.CallOption) (*GetAccessKeyResponse, error)
 	DownloadAccessKeyFile(ctx context.Context, in *DownloadAccessKeyFileRequest, opts ...grpc.CallOption) (*DownloadAccessKeyFileResponse, error)
+	QueryAccessKeys(ctx context.Context, in *QueryAccessKeysRequest, opts ...grpc.CallOption) (*QueryAccessKeysResponse, error)
 }
 
 type accessKeyServiceClient struct {
@@ -71,6 +72,15 @@ func (c *accessKeyServiceClient) DownloadAccessKeyFile(ctx context.Context, in *
 	return out, nil
 }
 
+func (c *accessKeyServiceClient) QueryAccessKeys(ctx context.Context, in *QueryAccessKeysRequest, opts ...grpc.CallOption) (*QueryAccessKeysResponse, error) {
+	out := new(QueryAccessKeysResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.credential.AccessKeyService/QueryAccessKeys", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
 // AccessKeyServiceServer is the server API for AccessKeyService service.
 // All implementations should embed UnimplementedAccessKeyServiceServer
 // for forward compatibility
@@ -79,6 +89,7 @@ type AccessKeyServiceServer interface {
 	DeleteAccessKey(context.Context, *DeleteAccessKeyRequest) (*DeleteAccessKeyResponse, error)
 	GetAccessKey(context.Context, *GetAccessKeyRequest) (*GetAccessKeyResponse, error)
 	DownloadAccessKeyFile(context.Context, *DownloadAccessKeyFileRequest) (*DownloadAccessKeyFileResponse, error)
+	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
 }
 
 // UnimplementedAccessKeyServiceServer should be embedded to have forward compatible implementations.
@@ -96,6 +107,9 @@ func (*UnimplementedAccessKeyServiceServer) GetAccessKey(context.Context, *GetAc
 }
 func (*UnimplementedAccessKeyServiceServer) DownloadAccessKeyFile(context.Context, *DownloadAccessKeyFileRequest) (*DownloadAccessKeyFileResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method DownloadAccessKeyFile not implemented")
+}
+func (*UnimplementedAccessKeyServiceServer) QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method QueryAccessKeys not implemented")
 }
 
 func RegisterAccessKeyServiceServer(s grpc1.ServiceRegistrar, srv AccessKeyServiceServer, opts ...grpc1.HandleOption) {
@@ -150,6 +164,15 @@ func _get_AccessKeyService_serviceDesc(srv AccessKeyServiceServer, opts ...grpc1
 	if h.Interceptor != nil {
 		_AccessKeyService_DownloadAccessKeyFile_info = transport.NewServiceInfo("erda.msp.credential.AccessKeyService", "DownloadAccessKeyFile", srv)
 		_AccessKeyService_DownloadAccessKeyFile_Handler = h.Interceptor(_AccessKeyService_DownloadAccessKeyFile_Handler)
+	}
+
+	_AccessKeyService_QueryAccessKeys_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.QueryAccessKeys(ctx, req.(*QueryAccessKeysRequest))
+	}
+	var _AccessKeyService_QueryAccessKeys_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_AccessKeyService_QueryAccessKeys_info = transport.NewServiceInfo("erda.msp.credential.AccessKeyService", "QueryAccessKeys", srv)
+		_AccessKeyService_QueryAccessKeys_Handler = h.Interceptor(_AccessKeyService_QueryAccessKeys_Handler)
 	}
 
 	var serviceDesc = _AccessKeyService_serviceDesc
@@ -244,6 +267,29 @@ func _get_AccessKeyService_serviceDesc(srv AccessKeyServiceServer, opts ...grpc1
 					FullMethod: "/erda.msp.credential.AccessKeyService/DownloadAccessKeyFile",
 				}
 				return interceptor(ctx, in, info, _AccessKeyService_DownloadAccessKeyFile_Handler)
+			},
+		},
+		{
+			MethodName: "QueryAccessKeys",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(QueryAccessKeysRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(AccessKeyServiceServer).QueryAccessKeys(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _AccessKeyService_QueryAccessKeys_info)
+				}
+				if interceptor == nil {
+					return _AccessKeyService_QueryAccessKeys_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.credential.AccessKeyService/QueryAccessKeys",
+				}
+				return interceptor(ctx, in, info, _AccessKeyService_QueryAccessKeys_Handler)
 			},
 		},
 	}

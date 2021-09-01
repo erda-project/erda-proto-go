@@ -52,3 +52,7 @@ func (s *accessKeyServiceWrapper) GetAccessKey(ctx context.Context, req *pb.GetA
 func (s *accessKeyServiceWrapper) DownloadAccessKeyFile(ctx context.Context, req *pb.DownloadAccessKeyFileRequest) (*pb.DownloadAccessKeyFileResponse, error) {
 	return s.client.DownloadAccessKeyFile(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
+
+func (s *accessKeyServiceWrapper) QueryAccessKeys(ctx context.Context, req *pb.QueryAccessKeysRequest) (*pb.QueryAccessKeysResponse, error) {
+	return s.client.QueryAccessKeys(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
+}
