@@ -21,7 +21,7 @@ func RegisterDefinitionServiceImp(regester transport.Register, srv DefinitionSer
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.core.pipeline.cms.DefinitionService",
+		"erda.core.pipeline.definition.DefinitionService",
 	)
 }
 

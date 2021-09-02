@@ -48,7 +48,7 @@ func RegisterDefinitionServiceHandler(r http.Router, srv DefinitionServiceHandle
 		}
 		var Process_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			Process_info = transport.NewServiceInfo("erda.core.pipeline.cms.DefinitionService", "Process", srv)
+			Process_info = transport.NewServiceInfo("erda.core.pipeline.definition.DefinitionService", "Process", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -84,7 +84,7 @@ func RegisterDefinitionServiceHandler(r http.Router, srv DefinitionServiceHandle
 		}
 		var Version_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			Version_info = transport.NewServiceInfo("erda.core.pipeline.cms.DefinitionService", "Version", srv)
+			Version_info = transport.NewServiceInfo("erda.core.pipeline.definition.DefinitionService", "Version", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(

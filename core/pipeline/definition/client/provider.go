@@ -7,14 +7,14 @@ import (
 	fmt "fmt"
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto-go/core/pipeline/cms/pb"
+	pb "github.com/erda-project/erda-proto-go/core/pipeline/definition/pb"
 	grpc1 "google.golang.org/grpc"
 	reflect "reflect"
 	strings "strings"
 )
 
 var dependencies = []string{
-	"grpc-client@erda.core.pipeline.cms",
+	"grpc-client@erda.core.pipeline.definition",
 	"grpc-client",
 }
 
@@ -53,11 +53,11 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 		}
 	}
 	switch ctx.Service() {
-	case "erda.core.pipeline.cms-client":
+	case "erda.core.pipeline.definition-client":
 		return p.client
-	case "erda.core.pipeline.cms.DefinitionService":
+	case "erda.core.pipeline.definition.DefinitionService":
 		return &definitionServiceWrapper{client: p.client.DefinitionService(), opts: opts}
-	case "erda.core.pipeline.cms.DefinitionService.client":
+	case "erda.core.pipeline.definition.DefinitionService.client":
 		return p.client.DefinitionService()
 	}
 	switch ctx.Type() {
@@ -72,10 +72,10 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 }
 
 func init() {
-	servicehub.Register("erda.core.pipeline.cms-client", &servicehub.Spec{
+	servicehub.Register("erda.core.pipeline.definition-client", &servicehub.Spec{
 		Services: []string{
-			"erda.core.pipeline.cms.DefinitionService",
-			"erda.core.pipeline.cms-client",
+			"erda.core.pipeline.definition.DefinitionService",
+			"erda.core.pipeline.definition-client",
 		},
 		Types: []reflect.Type{
 			clientsType,

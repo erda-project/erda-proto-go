@@ -34,7 +34,7 @@ func NewDefinitionServiceClient(cc grpc1.ClientConnInterface) DefinitionServiceC
 
 func (c *definitionServiceClient) Process(ctx context.Context, in *PipelineDefinitionProcessRequest, opts ...grpc.CallOption) (*PipelineDefinitionProcessResponse, error) {
 	out := new(PipelineDefinitionProcessResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.pipeline.cms.DefinitionService/Process", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.pipeline.definition.DefinitionService/Process", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -43,7 +43,7 @@ func (c *definitionServiceClient) Process(ctx context.Context, in *PipelineDefin
 
 func (c *definitionServiceClient) Version(ctx context.Context, in *PipelineDefinitionProcessVersionRequest, opts ...grpc.CallOption) (*PipelineDefinitionProcessVersionResponse, error) {
 	out := new(PipelineDefinitionProcessVersionResponse)
-	err := c.cc.Invoke(ctx, "/erda.core.pipeline.cms.DefinitionService/Version", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.core.pipeline.definition.DefinitionService/Version", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -74,7 +74,7 @@ func RegisterDefinitionServiceServer(s grpc1.ServiceRegistrar, srv DefinitionSer
 }
 
 var _DefinitionService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.core.pipeline.cms.DefinitionService",
+	ServiceName: "erda.core.pipeline.definition.DefinitionService",
 	HandlerType: (*DefinitionServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
@@ -92,7 +92,7 @@ func _get_DefinitionService_serviceDesc(srv DefinitionServiceServer, opts ...grp
 	}
 	var _DefinitionService_Process_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_DefinitionService_Process_info = transport.NewServiceInfo("erda.core.pipeline.cms.DefinitionService", "Process", srv)
+		_DefinitionService_Process_info = transport.NewServiceInfo("erda.core.pipeline.definition.DefinitionService", "Process", srv)
 		_DefinitionService_Process_Handler = h.Interceptor(_DefinitionService_Process_Handler)
 	}
 
@@ -101,7 +101,7 @@ func _get_DefinitionService_serviceDesc(srv DefinitionServiceServer, opts ...grp
 	}
 	var _DefinitionService_Version_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_DefinitionService_Version_info = transport.NewServiceInfo("erda.core.pipeline.cms.DefinitionService", "Version", srv)
+		_DefinitionService_Version_info = transport.NewServiceInfo("erda.core.pipeline.definition.DefinitionService", "Version", srv)
 		_DefinitionService_Version_Handler = h.Interceptor(_DefinitionService_Version_Handler)
 	}
 
@@ -125,7 +125,7 @@ func _get_DefinitionService_serviceDesc(srv DefinitionServiceServer, opts ...grp
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.pipeline.cms.DefinitionService/Process",
+					FullMethod: "/erda.core.pipeline.definition.DefinitionService/Process",
 				}
 				return interceptor(ctx, in, info, _DefinitionService_Process_Handler)
 			},
@@ -148,7 +148,7 @@ func _get_DefinitionService_serviceDesc(srv DefinitionServiceServer, opts ...grp
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.core.pipeline.cms.DefinitionService/Version",
+					FullMethod: "/erda.core.pipeline.definition.DefinitionService/Version",
 				}
 				return interceptor(ctx, in, info, _DefinitionService_Version_Handler)
 			},
