@@ -32,6 +32,7 @@ import (
 	_ "github.com/erda-project/erda-proto-go/msp/apm/trace/pb"
 	_ "github.com/erda-project/erda-proto-go/msp/configcenter/pb"
 	_ "github.com/erda-project/erda-proto-go/msp/credential/pb"
+	_ "github.com/erda-project/erda-proto-go/msp/member/pb"
 	_ "github.com/erda-project/erda-proto-go/msp/menu/pb"
 	_ "github.com/erda-project/erda-proto-go/msp/registercenter/pb"
 	_ "github.com/erda-project/erda-proto-go/msp/resource/pb"
