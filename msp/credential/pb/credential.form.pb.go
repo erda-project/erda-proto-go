@@ -4,6 +4,7 @@
 package pb
 
 import (
+	base64 "encoding/base64"
 	url "net/url"
 	strconv "strconv"
 
@@ -246,6 +247,18 @@ func (m *DownloadAccessKeyFileRequest) UnmarshalURLValues(prefix string, values 
 
 // DownloadAccessKeyFileResponse implement urlenc.URLValuesUnmarshaler.
 func (m *DownloadAccessKeyFileResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "data":
+				val, err := base64.StdEncoding.DecodeString(vals[0])
+				if err != nil {
+					return err
+				}
+				m.Data = val
+			}
+		}
+	}
 	return nil
 }
 
