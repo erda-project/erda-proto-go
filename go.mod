@@ -3,7 +3,7 @@ module github.com/erda-project/erda-proto-go
 go 1.14
 
 require (
-	github.com/erda-project/erda-infra v0.0.0-20210706133120-0a742437972c
+	github.com/erda-project/erda-infra v0.0.0-20210824080310-eb60ec8285b0
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang/protobuf v1.5.2
 	github.com/magiconair/properties v1.8.5 // indirect

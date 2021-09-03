@@ -5,10 +5,10 @@ package pb
 
 import (
 	base64 "encoding/base64"
-	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	pb "github.com/erda-project/erda-proto-go/oap/common/pb"
 	url "net/url"
 	strconv "strconv"
+
+	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -30,10 +30,6 @@ func (m *EntityRow) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.RowID = val
-			case "rowData":
-				if m.RowData == nil {
-					m.RowData = &pb.KeyValueList{}
-				}
 			case "createTimeUnixNano":
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {

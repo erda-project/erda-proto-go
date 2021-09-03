@@ -5,6 +5,7 @@ package pb
 
 import (
 	context "context"
+
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	grpc1 "github.com/erda-project/erda-infra/pkg/transport/grpc"
 	grpc "google.golang.org/grpc"
@@ -21,10 +22,8 @@ const _ = grpc.SupportPackageIsVersion5
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type UserServiceClient interface {
 	// get user
-	// +publish path:"/user/{id}"
 	GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error)
 	// update user
-	// +private
 	UpdateUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error)
 }
 
@@ -38,7 +37,7 @@ func NewUserServiceClient(cc grpc1.ClientConnInterface) UserServiceClient {
 
 func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*GetUserResponse, error) {
 	out := new(GetUserResponse)
-	err := c.cc.Invoke(ctx, "/erda.example.UserService/GetUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.examples.UserService/GetUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -47,7 +46,7 @@ func (c *userServiceClient) GetUser(ctx context.Context, in *GetUserRequest, opt
 
 func (c *userServiceClient) UpdateUser(ctx context.Context, in *GetUserRequest, opts ...grpc.CallOption) (*UpdateUserResponse, error) {
 	out := new(UpdateUserResponse)
-	err := c.cc.Invoke(ctx, "/erda.example.UserService/UpdateUser", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.examples.UserService/UpdateUser", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -59,10 +58,8 @@ func (c *userServiceClient) UpdateUser(ctx context.Context, in *GetUserRequest, 
 // for forward compatibility
 type UserServiceServer interface {
 	// get user
-	// +publish path:"/user/{id}"
 	GetUser(context.Context, *GetUserRequest) (*GetUserResponse, error)
 	// update user
-	// +private
 	UpdateUser(context.Context, *GetUserRequest) (*UpdateUserResponse, error)
 }
 
@@ -82,7 +79,7 @@ func RegisterUserServiceServer(s grpc1.ServiceRegistrar, srv UserServiceServer, 
 }
 
 var _UserService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.example.UserService",
+	ServiceName: "erda.examples.UserService",
 	HandlerType: (*UserServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
@@ -100,7 +97,7 @@ func _get_UserService_serviceDesc(srv UserServiceServer, opts ...grpc1.HandleOpt
 	}
 	var _UserService_GetUser_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_UserService_GetUser_info = transport.NewServiceInfo("erda.example.UserService", "GetUser", srv)
+		_UserService_GetUser_info = transport.NewServiceInfo("erda.examples.UserService", "GetUser", srv)
 		_UserService_GetUser_Handler = h.Interceptor(_UserService_GetUser_Handler)
 	}
 
@@ -109,7 +106,7 @@ func _get_UserService_serviceDesc(srv UserServiceServer, opts ...grpc1.HandleOpt
 	}
 	var _UserService_UpdateUser_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_UserService_UpdateUser_info = transport.NewServiceInfo("erda.example.UserService", "UpdateUser", srv)
+		_UserService_UpdateUser_info = transport.NewServiceInfo("erda.examples.UserService", "UpdateUser", srv)
 		_UserService_UpdateUser_Handler = h.Interceptor(_UserService_UpdateUser_Handler)
 	}
 
@@ -133,7 +130,7 @@ func _get_UserService_serviceDesc(srv UserServiceServer, opts ...grpc1.HandleOpt
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.example.UserService/GetUser",
+					FullMethod: "/erda.examples.UserService/GetUser",
 				}
 				return interceptor(ctx, in, info, _UserService_GetUser_Handler)
 			},
@@ -156,7 +153,7 @@ func _get_UserService_serviceDesc(srv UserServiceServer, opts ...grpc1.HandleOpt
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.example.UserService/UpdateUser",
+					FullMethod: "/erda.examples.UserService/UpdateUser",
 				}
 				return interceptor(ctx, in, info, _UserService_UpdateUser_Handler)
 			},

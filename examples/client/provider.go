@@ -5,16 +5,17 @@ package client
 
 import (
 	fmt "fmt"
+	reflect "reflect"
+	strings "strings"
+
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
 	pb "github.com/erda-project/erda-proto-go/examples/pb"
 	grpc1 "google.golang.org/grpc"
-	reflect "reflect"
-	strings "strings"
 )
 
 var dependencies = []string{
-	"grpc-client@erda.example",
+	"grpc-client@erda.examples",
 	"grpc-client",
 }
 
@@ -55,15 +56,15 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 		}
 	}
 	switch ctx.Service() {
-	case "erda.example-client":
+	case "erda.examples-client":
 		return p.client
-	case "erda.example.GreeterService":
+	case "erda.examples.GreeterService":
 		return &greeterServiceWrapper{client: p.client.GreeterService(), opts: opts}
-	case "erda.example.GreeterService.client":
+	case "erda.examples.GreeterService.client":
 		return p.client.GreeterService()
-	case "erda.example.UserService":
+	case "erda.examples.UserService":
 		return &userServiceWrapper{client: p.client.UserService(), opts: opts}
-	case "erda.example.UserService.client":
+	case "erda.examples.UserService.client":
 		return p.client.UserService()
 	}
 	switch ctx.Type() {
@@ -82,11 +83,11 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 }
 
 func init() {
-	servicehub.Register("erda.example-client", &servicehub.Spec{
+	servicehub.Register("erda.examples-client", &servicehub.Spec{
 		Services: []string{
-			"erda.example.GreeterService",
-			"erda.example.UserService",
-			"erda.example-client",
+			"erda.examples.GreeterService",
+			"erda.examples.UserService",
+			"erda.examples-client",
 		},
 		Types: []reflect.Type{
 			clientsType,

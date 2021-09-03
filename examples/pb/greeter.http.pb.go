@@ -5,13 +5,14 @@ package pb
 
 import (
 	context "context"
+	http1 "net/http"
+	strings "strings"
+
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	httprule "github.com/erda-project/erda-infra/pkg/transport/http/httprule"
 	runtime "github.com/erda-project/erda-infra/pkg/transport/http/runtime"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	http1 "net/http"
-	strings "strings"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -21,7 +22,6 @@ const _ = http.SupportPackageIsVersion1
 // GreeterServiceHandler is the server API for GreeterService service.
 type GreeterServiceHandler interface {
 	// say hello
-	// +publish
 	// GET /api/hello/{name}
 	SayHello(context.Context, *HelloRequest) (*HelloResponse, error)
 }
@@ -51,7 +51,7 @@ func RegisterGreeterServiceHandler(r http.Router, srv GreeterServiceHandler, opt
 		}
 		var SayHello_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			SayHello_info = transport.NewServiceInfo("erda.example.GreeterService", "SayHello", srv)
+			SayHello_info = transport.NewServiceInfo("erda.examples.GreeterService", "SayHello", srv)
 			handler = h.Interceptor(handler)
 		}
 		compiler, _ := httprule.Parse(path)

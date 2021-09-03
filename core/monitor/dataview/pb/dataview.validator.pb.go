@@ -6,12 +6,14 @@ package pb
 import (
 	fmt "fmt"
 	math "math"
+
+	_ "github.com/erda-project/erda-proto-go/common/pb"
 	proto "github.com/golang/protobuf/proto"
-	_ "google.golang.org/protobuf/types/descriptorpb"
-	_ "google.golang.org/genproto/googleapis/api/annotations"
-	_ "google.golang.org/protobuf/types/known/structpb"
 	_ "github.com/mwitkow/go-proto-validators"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
+	_ "google.golang.org/genproto/googleapis/api/annotations"
+	_ "google.golang.org/protobuf/types/descriptorpb"
+	_ "google.golang.org/protobuf/types/known/structpb"
 )
 
 // Reference imports to suppress errors if they are not otherwise used.
@@ -194,6 +196,11 @@ func (this *Chart) Validate() error {
 	if this.Controls != nil {
 		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Controls); err != nil {
 			return github_com_mwitkow_go_proto_validators.FieldError("Controls", err)
+		}
+	}
+	if this.I18N != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.I18N); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("I18N", err)
 		}
 	}
 	return nil

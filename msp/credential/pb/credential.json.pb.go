@@ -6,6 +6,7 @@ package pb
 import (
 	bytes "bytes"
 	json "encoding/json"
+
 	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
@@ -16,8 +17,6 @@ var _ json.Marshaler = (*CreateAccessKeyRequest)(nil)
 var _ json.Unmarshaler = (*CreateAccessKeyRequest)(nil)
 var _ json.Marshaler = (*CreateAccessKeyResponse)(nil)
 var _ json.Unmarshaler = (*CreateAccessKeyResponse)(nil)
-var _ json.Marshaler = (*AccessKey)(nil)
-var _ json.Unmarshaler = (*AccessKey)(nil)
 var _ json.Marshaler = (*DeleteAccessKeyRequest)(nil)
 var _ json.Unmarshaler = (*DeleteAccessKeyRequest)(nil)
 var _ json.Marshaler = (*DeleteAccessKeyResponse)(nil)
@@ -30,6 +29,12 @@ var _ json.Marshaler = (*DownloadAccessKeyFileRequest)(nil)
 var _ json.Unmarshaler = (*DownloadAccessKeyFileRequest)(nil)
 var _ json.Marshaler = (*DownloadAccessKeyFileResponse)(nil)
 var _ json.Unmarshaler = (*DownloadAccessKeyFileResponse)(nil)
+var _ json.Marshaler = (*QueryAccessKeysRequest)(nil)
+var _ json.Unmarshaler = (*QueryAccessKeysRequest)(nil)
+var _ json.Marshaler = (*QueryAccessKeysResponse)(nil)
+var _ json.Unmarshaler = (*QueryAccessKeysResponse)(nil)
+var _ json.Marshaler = (*QueryAccessKeysData)(nil)
+var _ json.Unmarshaler = (*QueryAccessKeysData)(nil)
 
 // CreateAccessKeyRequest implement json.Marshaler.
 func (m *CreateAccessKeyRequest) MarshalJSON() ([]byte, error) {
@@ -62,24 +67,6 @@ func (m *CreateAccessKeyResponse) MarshalJSON() ([]byte, error) {
 
 // CreateAccessKeyResponse implement json.Marshaler.
 func (m *CreateAccessKeyResponse) UnmarshalJSON(b []byte) error {
-	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: true,
-	}).Unmarshal(b, m)
-}
-
-// AccessKey implement json.Marshaler.
-func (m *AccessKey) MarshalJSON() ([]byte, error) {
-	buf := &bytes.Buffer{}
-	err := (&jsonpb.Marshaler{
-		OrigName:     false,
-		EnumsAsInts:  false,
-		EmitDefaults: true,
-	}).Marshal(buf, m)
-	return buf.Bytes(), err
-}
-
-// AccessKey implement json.Marshaler.
-func (m *AccessKey) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
@@ -188,6 +175,60 @@ func (m *DownloadAccessKeyFileResponse) MarshalJSON() ([]byte, error) {
 
 // DownloadAccessKeyFileResponse implement json.Marshaler.
 func (m *DownloadAccessKeyFileResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// QueryAccessKeysRequest implement json.Marshaler.
+func (m *QueryAccessKeysRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// QueryAccessKeysRequest implement json.Marshaler.
+func (m *QueryAccessKeysRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// QueryAccessKeysResponse implement json.Marshaler.
+func (m *QueryAccessKeysResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// QueryAccessKeysResponse implement json.Marshaler.
+func (m *QueryAccessKeysResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// QueryAccessKeysData implement json.Marshaler.
+func (m *QueryAccessKeysData) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// QueryAccessKeysData implement json.Marshaler.
+func (m *QueryAccessKeysData) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)

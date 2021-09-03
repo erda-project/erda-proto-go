@@ -2,16 +2,18 @@
 // versions:
 // 	protoc-gen-go v1.26.0
 // 	protoc        v3.15.8
-// source: trace.proto
+// source: tracing.proto
 
 package pb
 
 import (
+	reflect "reflect"
+	sync "sync"
+
 	pb "github.com/erda-project/erda-proto-go/oap/common/pb"
 	protoreflect "google.golang.org/protobuf/reflect/protoreflect"
 	protoimpl "google.golang.org/protobuf/runtime/protoimpl"
-	reflect "reflect"
-	sync "sync"
+	_ "google.golang.org/protobuf/types/known/structpb"
 )
 
 const (
@@ -81,7 +83,7 @@ type Span struct {
 func (x *Span) Reset() {
 	*x = Span{}
 	if protoimpl.UnsafeEnabled {
-		mi := &file_trace_proto_msgTypes[0]
+		mi := &file_tracing_proto_msgTypes[0]
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		ms.StoreMessageInfo(mi)
 	}
@@ -94,7 +96,7 @@ func (x *Span) String() string {
 func (*Span) ProtoMessage() {}
 
 func (x *Span) ProtoReflect() protoreflect.Message {
-	mi := &file_trace_proto_msgTypes[0]
+	mi := &file_tracing_proto_msgTypes[0]
 	if protoimpl.UnsafeEnabled && x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -107,7 +109,7 @@ func (x *Span) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Span.ProtoReflect.Descriptor instead.
 func (*Span) Descriptor() ([]byte, []int) {
-	return file_trace_proto_rawDescGZIP(), []int{0}
+	return file_tracing_proto_rawDescGZIP(), []int{0}
 }
 
 func (x *Span) GetTraceID() []byte {
@@ -166,11 +168,13 @@ func (x *Span) GetAttributes() map[string]string {
 	return nil
 }
 
-var File_trace_proto protoreflect.FileDescriptor
+var File_tracing_proto protoreflect.FileDescriptor
 
-var file_trace_proto_rawDesc = []byte{
-	0x0a, 0x0b, 0x74, 0x72, 0x61, 0x63, 0x65, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12, 0x0e, 0x65,
-	0x72, 0x64, 0x61, 0x2e, 0x6f, 0x61, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x63, 0x65, 0x1a, 0x17, 0x6f,
+var file_tracing_proto_rawDesc = []byte{
+	0x0a, 0x0d, 0x74, 0x72, 0x61, 0x63, 0x69, 0x6e, 0x67, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x12,
+	0x0e, 0x65, 0x72, 0x64, 0x61, 0x2e, 0x6f, 0x61, 0x70, 0x2e, 0x74, 0x72, 0x61, 0x63, 0x65, 0x1a,
+	0x1c, 0x67, 0x6f, 0x6f, 0x67, 0x6c, 0x65, 0x2f, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x62, 0x75, 0x66,
+	0x2f, 0x73, 0x74, 0x72, 0x75, 0x63, 0x74, 0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x1a, 0x17, 0x6f,
 	0x61, 0x70, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e, 0x2f, 0x63, 0x6f, 0x6d, 0x6d, 0x6f, 0x6e,
 	0x2e, 0x70, 0x72, 0x6f, 0x74, 0x6f, 0x22, 0x86, 0x03, 0x0a, 0x04, 0x53, 0x70, 0x61, 0x6e, 0x12,
 	0x18, 0x0a, 0x07, 0x74, 0x72, 0x61, 0x63, 0x65, 0x49, 0x44, 0x18, 0x01, 0x20, 0x01, 0x28, 0x0c,
@@ -204,24 +208,24 @@ var file_trace_proto_rawDesc = []byte{
 }
 
 var (
-	file_trace_proto_rawDescOnce sync.Once
-	file_trace_proto_rawDescData = file_trace_proto_rawDesc
+	file_tracing_proto_rawDescOnce sync.Once
+	file_tracing_proto_rawDescData = file_tracing_proto_rawDesc
 )
 
-func file_trace_proto_rawDescGZIP() []byte {
-	file_trace_proto_rawDescOnce.Do(func() {
-		file_trace_proto_rawDescData = protoimpl.X.CompressGZIP(file_trace_proto_rawDescData)
+func file_tracing_proto_rawDescGZIP() []byte {
+	file_tracing_proto_rawDescOnce.Do(func() {
+		file_tracing_proto_rawDescData = protoimpl.X.CompressGZIP(file_tracing_proto_rawDescData)
 	})
-	return file_trace_proto_rawDescData
+	return file_tracing_proto_rawDescData
 }
 
-var file_trace_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
-var file_trace_proto_goTypes = []interface{}{
+var file_tracing_proto_msgTypes = make([]protoimpl.MessageInfo, 2)
+var file_tracing_proto_goTypes = []interface{}{
 	(*Span)(nil),        // 0: erda.oap.trace.Span
 	nil,                 // 1: erda.oap.trace.Span.AttributesEntry
 	(*pb.Relation)(nil), // 2: erda.oap.common.Relation
 }
-var file_trace_proto_depIdxs = []int32{
+var file_tracing_proto_depIdxs = []int32{
 	2, // 0: erda.oap.trace.Span.relations:type_name -> erda.oap.common.Relation
 	1, // 1: erda.oap.trace.Span.attributes:type_name -> erda.oap.trace.Span.AttributesEntry
 	2, // [2:2] is the sub-list for method output_type
@@ -231,13 +235,13 @@ var file_trace_proto_depIdxs = []int32{
 	0, // [0:2] is the sub-list for field type_name
 }
 
-func init() { file_trace_proto_init() }
-func file_trace_proto_init() {
-	if File_trace_proto != nil {
+func init() { file_tracing_proto_init() }
+func file_tracing_proto_init() {
+	if File_tracing_proto != nil {
 		return
 	}
 	if !protoimpl.UnsafeEnabled {
-		file_trace_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
+		file_tracing_proto_msgTypes[0].Exporter = func(v interface{}, i int) interface{} {
 			switch v := v.(*Span); i {
 			case 0:
 				return &v.state
@@ -254,18 +258,18 @@ func file_trace_proto_init() {
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
-			RawDescriptor: file_trace_proto_rawDesc,
+			RawDescriptor: file_tracing_proto_rawDesc,
 			NumEnums:      0,
 			NumMessages:   2,
 			NumExtensions: 0,
 			NumServices:   0,
 		},
-		GoTypes:           file_trace_proto_goTypes,
-		DependencyIndexes: file_trace_proto_depIdxs,
-		MessageInfos:      file_trace_proto_msgTypes,
+		GoTypes:           file_tracing_proto_goTypes,
+		DependencyIndexes: file_tracing_proto_depIdxs,
+		MessageInfos:      file_tracing_proto_msgTypes,
 	}.Build()
-	File_trace_proto = out.File
-	file_trace_proto_rawDesc = nil
-	file_trace_proto_goTypes = nil
-	file_trace_proto_depIdxs = nil
+	File_tracing_proto = out.File
+	file_tracing_proto_rawDesc = nil
+	file_tracing_proto_goTypes = nil
+	file_tracing_proto_depIdxs = nil
 }

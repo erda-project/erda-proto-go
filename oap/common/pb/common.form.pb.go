@@ -5,145 +5,14 @@ package pb
 
 import (
 	base64 "encoding/base64"
-	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 	url "net/url"
-	strconv "strconv"
+
+	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
 )
 
 // This is a compile-time assertion to ensure that this generated file
 // is compatible with the "github.com/erda-project/erda-infra/pkg/urlenc" package it is being compiled against.
-var _ urlenc.URLValuesUnmarshaler = (*KeyValue)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*KeyValueList)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*AnyValue)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*ArrayValue)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Relation)(nil)
-
-// KeyValue implement urlenc.URLValuesUnmarshaler.
-func (m *KeyValue) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "key":
-				m.Key = vals[0]
-			case "value":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-			case "value.stringValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				m.Value.StringValue = vals[0]
-			case "value.boolValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Value.BoolValue = val
-			case "value.intValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Value.IntValue = val
-			case "value.doubleValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				val, err := strconv.ParseFloat(vals[0], 64)
-				if err != nil {
-					return err
-				}
-				m.Value.DoubleValue = val
-			case "value.arrayValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				if m.Value.ArrayValue == nil {
-					m.Value.ArrayValue = &ArrayValue{}
-				}
-			case "value.kvlistValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				if m.Value.KvlistValue == nil {
-					m.Value.KvlistValue = &KeyValueList{}
-				}
-			case "value.bytesValue":
-				if m.Value == nil {
-					m.Value = &AnyValue{}
-				}
-				val, err := base64.StdEncoding.DecodeString(vals[0])
-				if err != nil {
-					return err
-				}
-				m.Value.BytesValue = val
-			}
-		}
-	}
-	return nil
-}
-
-// KeyValueList implement urlenc.URLValuesUnmarshaler.
-func (m *KeyValueList) UnmarshalURLValues(prefix string, values url.Values) error {
-	return nil
-}
-
-// AnyValue implement urlenc.URLValuesUnmarshaler.
-func (m *AnyValue) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "stringValue":
-				m.StringValue = vals[0]
-			case "boolValue":
-				val, err := strconv.ParseBool(vals[0])
-				if err != nil {
-					return err
-				}
-				m.BoolValue = val
-			case "intValue":
-				val, err := strconv.ParseInt(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.IntValue = val
-			case "doubleValue":
-				val, err := strconv.ParseFloat(vals[0], 64)
-				if err != nil {
-					return err
-				}
-				m.DoubleValue = val
-			case "arrayValue":
-				if m.ArrayValue == nil {
-					m.ArrayValue = &ArrayValue{}
-				}
-			case "kvlistValue":
-				if m.KvlistValue == nil {
-					m.KvlistValue = &KeyValueList{}
-				}
-			case "bytesValue":
-				val, err := base64.StdEncoding.DecodeString(vals[0])
-				if err != nil {
-					return err
-				}
-				m.BytesValue = val
-			}
-		}
-	}
-	return nil
-}
-
-// ArrayValue implement urlenc.URLValuesUnmarshaler.
-func (m *ArrayValue) UnmarshalURLValues(prefix string, values url.Values) error {
-	return nil
-}
 
 // Relation implement urlenc.URLValuesUnmarshaler.
 func (m *Relation) UnmarshalURLValues(prefix string, values url.Values) error {

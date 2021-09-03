@@ -6,6 +6,8 @@ package pb
 import (
 	fmt "fmt"
 	math "math"
+
+	_ "github.com/erda-project/erda-proto-go/common/pb"
 	proto "github.com/golang/protobuf/proto"
 	_ "google.golang.org/genproto/googleapis/api/annotations"
 )
