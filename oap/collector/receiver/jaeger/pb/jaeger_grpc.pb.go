@@ -22,7 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type JaegerServiceClient interface {
-	SpansWithThrift(ctx context.Context, in *pb.VoidRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error)
+	SpansWithThrift(ctx context.Context, in *PostSpansRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error)
 }
 
 type jaegerServiceClient struct {
@@ -33,7 +33,7 @@ func NewJaegerServiceClient(cc grpc1.ClientConnInterface) JaegerServiceClient {
 	return &jaegerServiceClient{cc}
 }
 
-func (c *jaegerServiceClient) SpansWithThrift(ctx context.Context, in *pb.VoidRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error) {
+func (c *jaegerServiceClient) SpansWithThrift(ctx context.Context, in *PostSpansRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error) {
 	out := new(pb.VoidResponse)
 	err := c.cc.Invoke(ctx, "/erda.oap.collector.receiver.jaeger.JaegerService/SpansWithThrift", in, out, opts...)
 	if err != nil {
@@ -46,14 +46,14 @@ func (c *jaegerServiceClient) SpansWithThrift(ctx context.Context, in *pb.VoidRe
 // All implementations should embed UnimplementedJaegerServiceServer
 // for forward compatibility
 type JaegerServiceServer interface {
-	SpansWithThrift(context.Context, *pb.VoidRequest) (*pb.VoidResponse, error)
+	SpansWithThrift(context.Context, *PostSpansRequest) (*pb.VoidResponse, error)
 }
 
 // UnimplementedJaegerServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedJaegerServiceServer struct {
 }
 
-func (*UnimplementedJaegerServiceServer) SpansWithThrift(context.Context, *pb.VoidRequest) (*pb.VoidResponse, error) {
+func (*UnimplementedJaegerServiceServer) SpansWithThrift(context.Context, *PostSpansRequest) (*pb.VoidResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method SpansWithThrift not implemented")
 }
 
@@ -76,7 +76,7 @@ func _get_JaegerService_serviceDesc(srv JaegerServiceServer, opts ...grpc1.Handl
 	}
 
 	_JaegerService_SpansWithThrift_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.SpansWithThrift(ctx, req.(*pb.VoidRequest))
+		return srv.SpansWithThrift(ctx, req.(*PostSpansRequest))
 	}
 	var _JaegerService_SpansWithThrift_info transport.ServiceInfo
 	if h.Interceptor != nil {
@@ -89,7 +89,7 @@ func _get_JaegerService_serviceDesc(srv JaegerServiceServer, opts ...grpc1.Handl
 		{
 			MethodName: "SpansWithThrift",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(pb.VoidRequest)
+				in := new(PostSpansRequest)
 				if err := dec(in); err != nil {
 					return nil, err
 				}
