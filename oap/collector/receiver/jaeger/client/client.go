@@ -8,7 +8,7 @@ import (
 
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
 	pb1 "github.com/erda-project/erda-proto-go/common/pb"
-	pb "github.com/erda-project/erda-proto-go/oap/collector/jaeger/pb"
+	pb "github.com/erda-project/erda-proto-go/oap/collector/receiver/jaeger/pb"
 	grpc1 "google.golang.org/grpc"
 )
 

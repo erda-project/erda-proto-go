@@ -48,7 +48,7 @@ func RegisterJaegerServiceHandler(r http.Router, srv JaegerServiceHandler, opts 
 		}
 		var SpansWithThrift_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			SpansWithThrift_info = transport.NewServiceInfo("erda.oap.collector.jaeger.JaegerService", "SpansWithThrift", srv)
+			SpansWithThrift_info = transport.NewServiceInfo("erda.oap.collector.receiver.jaeger.JaegerService", "SpansWithThrift", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(

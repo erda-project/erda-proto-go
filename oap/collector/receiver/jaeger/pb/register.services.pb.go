@@ -22,7 +22,7 @@ func RegisterJaegerServiceImp(regester transport.Register, srv JaegerServiceServ
 // ServiceNames return all service names
 func ServiceNames(svr ...string) []string {
 	return append(svr,
-		"erda.oap.collector.jaeger.JaegerService",
+		"erda.oap.collector.receiver.jaeger.JaegerService",
 	)
 }
 
