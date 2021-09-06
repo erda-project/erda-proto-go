@@ -38,6 +38,6 @@ type jaegerServiceWrapper struct {
 	opts   []grpc1.CallOption
 }
 
-func (s *jaegerServiceWrapper) SpansWithThrift(ctx context.Context, req *pb1.VoidRequest) (*pb1.VoidResponse, error) {
+func (s *jaegerServiceWrapper) SpansWithThrift(ctx context.Context, req *pb.PostSpansRequest) (*pb1.VoidResponse, error) {
 	return s.client.SpansWithThrift(ctx, req, append(grpc.CallOptionFromContext(ctx), s.opts...)...)
 }
