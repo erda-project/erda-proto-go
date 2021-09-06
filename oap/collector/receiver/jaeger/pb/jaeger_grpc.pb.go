@@ -35,7 +35,7 @@ func NewJaegerServiceClient(cc grpc1.ClientConnInterface) JaegerServiceClient {
 
 func (c *jaegerServiceClient) SpansWithThrift(ctx context.Context, in *pb.VoidRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error) {
 	out := new(pb.VoidResponse)
-	err := c.cc.Invoke(ctx, "/erda.oap.collector.jaeger.JaegerService/SpansWithThrift", in, out, opts...)
+	err := c.cc.Invoke(ctx, "/erda.oap.collector.receiver.jaeger.JaegerService/SpansWithThrift", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -62,7 +62,7 @@ func RegisterJaegerServiceServer(s grpc1.ServiceRegistrar, srv JaegerServiceServ
 }
 
 var _JaegerService_serviceDesc = grpc.ServiceDesc{
-	ServiceName: "erda.oap.collector.jaeger.JaegerService",
+	ServiceName: "erda.oap.collector.receiver.jaeger.JaegerService",
 	HandlerType: (*JaegerServiceServer)(nil),
 	Methods:     []grpc.MethodDesc{},
 	Streams:     []grpc.StreamDesc{},
@@ -80,7 +80,7 @@ func _get_JaegerService_serviceDesc(srv JaegerServiceServer, opts ...grpc1.Handl
 	}
 	var _JaegerService_SpansWithThrift_info transport.ServiceInfo
 	if h.Interceptor != nil {
-		_JaegerService_SpansWithThrift_info = transport.NewServiceInfo("erda.oap.collector.jaeger.JaegerService", "SpansWithThrift", srv)
+		_JaegerService_SpansWithThrift_info = transport.NewServiceInfo("erda.oap.collector.receiver.jaeger.JaegerService", "SpansWithThrift", srv)
 		_JaegerService_SpansWithThrift_Handler = h.Interceptor(_JaegerService_SpansWithThrift_Handler)
 	}
 
@@ -104,7 +104,7 @@ func _get_JaegerService_serviceDesc(srv JaegerServiceServer, opts ...grpc1.Handl
 				}
 				info := &grpc.UnaryServerInfo{
 					Server:     srv,
-					FullMethod: "/erda.oap.collector.jaeger.JaegerService/SpansWithThrift",
+					FullMethod: "/erda.oap.collector.receiver.jaeger.JaegerService/SpansWithThrift",
 				}
 				return interceptor(ctx, in, info, _JaegerService_SpansWithThrift_Handler)
 			},

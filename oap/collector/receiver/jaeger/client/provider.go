@@ -10,12 +10,12 @@ import (
 
 	servicehub "github.com/erda-project/erda-infra/base/servicehub"
 	grpc "github.com/erda-project/erda-infra/pkg/transport/grpc"
-	pb "github.com/erda-project/erda-proto-go/oap/collector/jaeger/pb"
+	pb "github.com/erda-project/erda-proto-go/oap/collector/receiver/jaeger/pb"
 	grpc1 "google.golang.org/grpc"
 )
 
 var dependencies = []string{
-	"grpc-client@erda.oap.collector.jaeger",
+	"grpc-client@erda.oap.collector.receiver.jaeger",
 	"grpc-client",
 }
 
@@ -54,11 +54,11 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 		}
 	}
 	switch ctx.Service() {
-	case "erda.oap.collector.jaeger-client":
+	case "erda.oap.collector.receiver.jaeger-client":
 		return p.client
-	case "erda.oap.collector.jaeger.JaegerService":
+	case "erda.oap.collector.receiver.jaeger.JaegerService":
 		return &jaegerServiceWrapper{client: p.client.JaegerService(), opts: opts}
-	case "erda.oap.collector.jaeger.JaegerService.client":
+	case "erda.oap.collector.receiver.jaeger.JaegerService.client":
 		return p.client.JaegerService()
 	}
 	switch ctx.Type() {
@@ -73,10 +73,10 @@ func (p *provider) Provide(ctx servicehub.DependencyContext, args ...interface{}
 }
 
 func init() {
-	servicehub.Register("erda.oap.collector.jaeger-client", &servicehub.Spec{
+	servicehub.Register("erda.oap.collector.receiver.jaeger-client", &servicehub.Spec{
 		Services: []string{
-			"erda.oap.collector.jaeger.JaegerService",
-			"erda.oap.collector.jaeger-client",
+			"erda.oap.collector.receiver.jaeger.JaegerService",
+			"erda.oap.collector.receiver.jaeger-client",
 		},
 		Types: []reflect.Type{
 			clientsType,
