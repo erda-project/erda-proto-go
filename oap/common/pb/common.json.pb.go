@@ -15,6 +15,8 @@ import (
 // is compatible with the "encoding/json" package it is being compiled against.
 var _ json.Marshaler = (*Relation)(nil)
 var _ json.Unmarshaler = (*Relation)(nil)
+var _ json.Marshaler = (*Principal)(nil)
+var _ json.Unmarshaler = (*Principal)(nil)
 
 // Relation implement json.Marshaler.
 func (m *Relation) MarshalJSON() ([]byte, error) {
@@ -29,6 +31,24 @@ func (m *Relation) MarshalJSON() ([]byte, error) {
 
 // Relation implement json.Marshaler.
 func (m *Relation) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// Principal implement json.Marshaler.
+func (m *Principal) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// Principal implement json.Marshaler.
+func (m *Principal) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
