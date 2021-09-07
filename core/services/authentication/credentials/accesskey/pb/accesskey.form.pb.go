@@ -50,6 +50,10 @@ func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.PageSize = val
+			case "scope":
+				m.Scope = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			}
 		}
 	}
@@ -159,6 +163,16 @@ func (m *GetAccessKeyResponse) UnmarshalURLValues(prefix string, values url.Valu
 					return err
 				}
 				m.Data.CreatedAt.Nanos = int32(val)
+			case "data.scope":
+				if m.Data == nil {
+					m.Data = &AccessKeysItem{}
+				}
+				m.Data.Scope = vals[0]
+			case "data.scopeId":
+				if m.Data == nil {
+					m.Data = &AccessKeysItem{}
+				}
+				m.Data.ScopeId = vals[0]
 			}
 		}
 	}
@@ -175,6 +189,10 @@ func (m *CreateAccessKeyRequest) UnmarshalURLValues(prefix string, values url.Va
 				m.Subject = vals[0]
 			case "description":
 				m.Description = vals[0]
+			case "scope":
+				m.Scope = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			}
 		}
 	}
@@ -254,6 +272,16 @@ func (m *CreateAccessKeyResponse) UnmarshalURLValues(prefix string, values url.V
 					return err
 				}
 				m.Data.CreatedAt.Nanos = int32(val)
+			case "data.scope":
+				if m.Data == nil {
+					m.Data = &AccessKeysItem{}
+				}
+				m.Data.Scope = vals[0]
+			case "data.scopeId":
+				if m.Data == nil {
+					m.Data = &AccessKeysItem{}
+				}
+				m.Data.ScopeId = vals[0]
 			}
 		}
 	}
@@ -338,6 +366,10 @@ func (m *AccessKeysItem) UnmarshalURLValues(prefix string, values url.Values) er
 					return err
 				}
 				m.CreatedAt.Nanos = int32(val)
+			case "scope":
+				m.Scope = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			}
 		}
 	}
