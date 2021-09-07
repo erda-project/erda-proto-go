@@ -37,6 +37,10 @@ func (m *CreateAccessKeyRequest) UnmarshalURLValues(prefix string, values url.Va
 				m.Subject = vals[0]
 			case "description":
 				m.Description = vals[0]
+			case "scope":
+				m.Scope = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			}
 		}
 	}
@@ -116,6 +120,16 @@ func (m *CreateAccessKeyResponse) UnmarshalURLValues(prefix string, values url.V
 					return err
 				}
 				m.Data.CreatedAt.Nanos = int32(val)
+			case "data.scope":
+				if m.Data == nil {
+					m.Data = &pb.AccessKeysItem{}
+				}
+				m.Data.Scope = vals[0]
+			case "data.scopeId":
+				if m.Data == nil {
+					m.Data = &pb.AccessKeysItem{}
+				}
+				m.Data.ScopeId = vals[0]
 			}
 		}
 	}
@@ -226,6 +240,16 @@ func (m *GetAccessKeyResponse) UnmarshalURLValues(prefix string, values url.Valu
 					return err
 				}
 				m.Data.CreatedAt.Nanos = int32(val)
+			case "data.scope":
+				if m.Data == nil {
+					m.Data = &pb.AccessKeysItem{}
+				}
+				m.Data.Scope = vals[0]
+			case "data.scopeId":
+				if m.Data == nil {
+					m.Data = &pb.AccessKeysItem{}
+				}
+				m.Data.ScopeId = vals[0]
 			}
 		}
 	}
@@ -250,12 +274,12 @@ func (m *DownloadAccessKeyFileResponse) UnmarshalURLValues(prefix string, values
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "data":
+			case "content":
 				val, err := base64.StdEncoding.DecodeString(vals[0])
 				if err != nil {
 					return err
 				}
-				m.Data = val
+				m.Content = val
 			}
 		}
 	}
@@ -285,6 +309,10 @@ func (m *QueryAccessKeysRequest) UnmarshalURLValues(prefix string, values url.Va
 					return err
 				}
 				m.PageSize = val
+			case "scope":
+				m.Scope = vals[0]
+			case "scopeId":
+				m.ScopeId = vals[0]
 			}
 		}
 	}

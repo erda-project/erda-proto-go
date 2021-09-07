@@ -29,7 +29,7 @@ type AccessKeyServiceHandler interface {
 	GetAccessKey(context.Context, *GetAccessKeyRequest) (*GetAccessKeyResponse, error)
 	// GET /api/msp/credential/access-keys/download
 	DownloadAccessKeyFile(context.Context, *DownloadAccessKeyFileRequest) (*DownloadAccessKeyFileResponse, error)
-	// GET /api/msp/credential/access-keys/records
+	// POST /api/msp/credential/access-keys/records
 	QueryAccessKeys(context.Context, *QueryAccessKeysRequest) (*QueryAccessKeysResponse, error)
 }
 
