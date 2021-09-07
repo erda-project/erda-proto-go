@@ -20,7 +20,7 @@ const _ = http.SupportPackageIsVersion1
 // JaegerServiceHandler is the server API for JaegerService service.
 type JaegerServiceHandler interface {
 	// POST /api/jaeger/traces
-	SpansWithThrift(context.Context, *pb.VoidRequest) (*pb.VoidResponse, error)
+	SpansWithThrift(context.Context, *PostSpansRequest) (*pb.VoidResponse, error)
 }
 
 // RegisterJaegerServiceHandler register JaegerServiceHandler to http.Router.
@@ -42,13 +42,13 @@ func RegisterJaegerServiceHandler(r http.Router, srv JaegerServiceHandler, opts 
 		}
 	}
 
-	add_SpansWithThrift := func(method, path string, fn func(context.Context, *pb.VoidRequest) (*pb.VoidResponse, error)) {
+	add_SpansWithThrift := func(method, path string, fn func(context.Context, *PostSpansRequest) (*pb.VoidResponse, error)) {
 		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-			return fn(ctx, req.(*pb.VoidRequest))
+			return fn(ctx, req.(*PostSpansRequest))
 		}
 		var SpansWithThrift_info transport.ServiceInfo
 		if h.Interceptor != nil {
-			SpansWithThrift_info = transport.NewServiceInfo("erda.oap.collector.jaeger.JaegerService", "SpansWithThrift", srv)
+			SpansWithThrift_info = transport.NewServiceInfo("erda.oap.collector.receiver.jaeger.JaegerService", "SpansWithThrift", srv)
 			handler = h.Interceptor(handler)
 		}
 		r.Add(method, path, encodeFunc(
@@ -59,7 +59,7 @@ func RegisterJaegerServiceHandler(r http.Router, srv JaegerServiceHandler, opts 
 					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, SpansWithThrift_info)
 				}
 				r = r.WithContext(ctx)
-				var in pb.VoidRequest
+				var in PostSpansRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
 				}

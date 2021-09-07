@@ -28,7 +28,7 @@ func (m *PipelineDefinitionProcessRequest) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -36,7 +36,7 @@ func (m *PipelineDefinitionProcessRequest) MarshalJSON() ([]byte, error) {
 // PipelineDefinitionProcessRequest implement json.Marshaler.
 func (m *PipelineDefinitionProcessRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -46,7 +46,7 @@ func (m *PipelineDefinitionProcessResponse) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -54,7 +54,7 @@ func (m *PipelineDefinitionProcessResponse) MarshalJSON() ([]byte, error) {
 // PipelineDefinitionProcessResponse implement json.Marshaler.
 func (m *PipelineDefinitionProcessResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -64,7 +64,7 @@ func (m *PipelineDefinitionProcessVersionRequest) MarshalJSON() ([]byte, error) 
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -72,7 +72,7 @@ func (m *PipelineDefinitionProcessVersionRequest) MarshalJSON() ([]byte, error) 
 // PipelineDefinitionProcessVersionRequest implement json.Marshaler.
 func (m *PipelineDefinitionProcessVersionRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -82,7 +82,7 @@ func (m *PipelineDefinitionProcessVersionResponse) MarshalJSON() ([]byte, error)
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -90,6 +90,6 @@ func (m *PipelineDefinitionProcessVersionResponse) MarshalJSON() ([]byte, error)
 // PipelineDefinitionProcessVersionResponse implement json.Marshaler.
 func (m *PipelineDefinitionProcessVersionResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }

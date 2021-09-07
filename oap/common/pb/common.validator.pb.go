@@ -20,3 +20,6 @@ var _ = math.Inf
 func (this *Relation) Validate() error {
 	return nil
 }
+func (this *Principal) Validate() error {
+	return nil
+}

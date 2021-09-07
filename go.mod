@@ -3,15 +3,12 @@ module github.com/erda-project/erda-proto-go
 go 1.14
 
 require (
-	github.com/erda-project/erda-infra v0.0.0-20210824080310-eb60ec8285b0
-	github.com/gogo/protobuf v1.3.2 // indirect
+	github.com/erda-project/erda-infra v0.0.0-20210901113044-1130cdf38f06
 	github.com/golang/protobuf v1.5.2
-	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mwitkow/go-proto-validators v0.3.2
-	github.com/pelletier/go-toml v1.9.3 // indirect
-	google.golang.org/genproto v0.0.0-20210602131652-f16073e35f0c
-	google.golang.org/grpc v1.38.0
-	google.golang.org/protobuf v1.26.0
+	google.golang.org/genproto v0.0.0-20210820002220-43fce44e7af1
+	google.golang.org/grpc v1.40.0
+	google.golang.org/protobuf v1.27.1
 )
 
 replace (
