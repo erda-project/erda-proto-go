@@ -250,12 +250,12 @@ func (m *DownloadAccessKeyFileResponse) UnmarshalURLValues(prefix string, values
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "data":
+			case "content":
 				val, err := base64.StdEncoding.DecodeString(vals[0])
 				if err != nil {
 					return err
 				}
-				m.Data = val
+				m.Content = val
 			}
 		}
 	}
