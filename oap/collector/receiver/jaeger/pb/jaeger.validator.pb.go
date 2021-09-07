@@ -8,6 +8,7 @@ import (
 	math "math"
 
 	_ "github.com/erda-project/erda-proto-go/common/pb"
+	_ "github.com/erda-project/erda-proto-go/oap/common/pb"
 	_ "github.com/erda-project/erda-proto-go/oap/trace/pb"
 	proto "github.com/golang/protobuf/proto"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
@@ -27,6 +28,11 @@ func (this *PostSpansRequest) Validate() error {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
 				return github_com_mwitkow_go_proto_validators.FieldError("Spans", err)
 			}
+		}
+	}
+	if this.Principal != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.Principal); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("Principal", err)
 		}
 	}
 	return nil
