@@ -19,6 +19,7 @@ import (
 	_ "github.com/erda-project/erda-proto-go/core/monitor/settings/pb"
 	_ "github.com/erda-project/erda-proto-go/core/pipeline/cms/pb"
 	_ "github.com/erda-project/erda-proto-go/core/pipeline/definition/pb"
+	_ "github.com/erda-project/erda-proto-go/core/pipeline/trigger/pb"
 	_ "github.com/erda-project/erda-proto-go/core/services/authentication/credentials/accesskey/pb"
 	_ "github.com/erda-project/erda-proto-go/core/services/authentication/pb"
 	_ "github.com/erda-project/erda-proto-go/core/services/notify/pb"
