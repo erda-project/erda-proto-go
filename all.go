@@ -9,6 +9,7 @@ import (
 	_ "github.com/erda-project/erda-proto-go/core/dicehub/image/pb"
 	_ "github.com/erda-project/erda-proto-go/core/dicehub/release/pb"
 	_ "github.com/erda-project/erda-proto-go/core/dicehub/template/pb"
+	_ "github.com/erda-project/erda-proto-go/core/dop/autotest/testplan/pb"
 	_ "github.com/erda-project/erda-proto-go/core/monitor/alert/pb"
 	_ "github.com/erda-project/erda-proto-go/core/monitor/alertdetail/pb"
 	_ "github.com/erda-project/erda-proto-go/core/monitor/collector/pb"
