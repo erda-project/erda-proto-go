@@ -6,7 +6,6 @@ package pb
 import (
 	bytes "bytes"
 	json "encoding/json"
-
 	jsonpb "github.com/erda-project/erda-infra/pkg/transport/http/encoding/jsonpb"
 	protojson "google.golang.org/protobuf/encoding/protojson"
 )
@@ -24,7 +23,7 @@ func (m *PipelineTriggerRequest) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -32,7 +31,7 @@ func (m *PipelineTriggerRequest) MarshalJSON() ([]byte, error) {
 // PipelineTriggerRequest implement json.Marshaler.
 func (m *PipelineTriggerRequest) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
 
@@ -42,7 +41,7 @@ func (m *PipelineTriggerResponse) MarshalJSON() ([]byte, error) {
 	err := (&jsonpb.Marshaler{
 		OrigName:     false,
 		EnumsAsInts:  false,
-		EmitDefaults: false,
+		EmitDefaults: true,
 	}).Marshal(buf, m)
 	return buf.Bytes(), err
 }
@@ -50,6 +49,6 @@ func (m *PipelineTriggerResponse) MarshalJSON() ([]byte, error) {
 // PipelineTriggerResponse implement json.Marshaler.
 func (m *PipelineTriggerResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
-		DiscardUnknown: false,
+		DiscardUnknown: true,
 	}).Unmarshal(b, m)
 }
