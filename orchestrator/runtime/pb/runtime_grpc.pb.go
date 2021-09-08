@@ -8,6 +8,7 @@ import (
 
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	grpc1 "github.com/erda-project/erda-infra/pkg/transport/grpc"
+	pb "github.com/erda-project/erda-proto-go/common/pb"
 	grpc "google.golang.org/grpc"
 	codes "google.golang.org/grpc/codes"
 	status "google.golang.org/grpc/status"
@@ -21,8 +22,8 @@ const _ = grpc.SupportPackageIsVersion5
 //
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type RuntimeServiceClient interface {
+	Healthz(ctx context.Context, in *pb.VoidRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error)
 	GetRuntime(ctx context.Context, in *GetRuntimeRequest, opts ...grpc.CallOption) (*RuntimeInspect, error)
-	DelRuntime(ctx context.Context, in *DelRuntimeRequest, opts ...grpc.CallOption) (*Runtime, error)
 }
 
 type runtimeServiceClient struct {
@@ -31,6 +32,15 @@ type runtimeServiceClient struct {
 
 func NewRuntimeServiceClient(cc grpc1.ClientConnInterface) RuntimeServiceClient {
 	return &runtimeServiceClient{cc}
+}
+
+func (c *runtimeServiceClient) Healthz(ctx context.Context, in *pb.VoidRequest, opts ...grpc.CallOption) (*pb.VoidResponse, error) {
+	out := new(pb.VoidResponse)
+	err := c.cc.Invoke(ctx, "/erda.orchestrator.runtime.RuntimeService/Healthz", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
 }
 
 func (c *runtimeServiceClient) GetRuntime(ctx context.Context, in *GetRuntimeRequest, opts ...grpc.CallOption) (*RuntimeInspect, error) {
@@ -42,32 +52,23 @@ func (c *runtimeServiceClient) GetRuntime(ctx context.Context, in *GetRuntimeReq
 	return out, nil
 }
 
-func (c *runtimeServiceClient) DelRuntime(ctx context.Context, in *DelRuntimeRequest, opts ...grpc.CallOption) (*Runtime, error) {
-	out := new(Runtime)
-	err := c.cc.Invoke(ctx, "/erda.orchestrator.runtime.RuntimeService/DelRuntime", in, out, opts...)
-	if err != nil {
-		return nil, err
-	}
-	return out, nil
-}
-
 // RuntimeServiceServer is the server API for RuntimeService service.
 // All implementations should embed UnimplementedRuntimeServiceServer
 // for forward compatibility
 type RuntimeServiceServer interface {
+	Healthz(context.Context, *pb.VoidRequest) (*pb.VoidResponse, error)
 	GetRuntime(context.Context, *GetRuntimeRequest) (*RuntimeInspect, error)
-	DelRuntime(context.Context, *DelRuntimeRequest) (*Runtime, error)
 }
 
 // UnimplementedRuntimeServiceServer should be embedded to have forward compatible implementations.
 type UnimplementedRuntimeServiceServer struct {
 }
 
+func (*UnimplementedRuntimeServiceServer) Healthz(context.Context, *pb.VoidRequest) (*pb.VoidResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method Healthz not implemented")
+}
 func (*UnimplementedRuntimeServiceServer) GetRuntime(context.Context, *GetRuntimeRequest) (*RuntimeInspect, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetRuntime not implemented")
-}
-func (*UnimplementedRuntimeServiceServer) DelRuntime(context.Context, *DelRuntimeRequest) (*Runtime, error) {
-	return nil, status.Errorf(codes.Unimplemented, "method DelRuntime not implemented")
 }
 
 func RegisterRuntimeServiceServer(s grpc1.ServiceRegistrar, srv RuntimeServiceServer, opts ...grpc1.HandleOption) {
@@ -88,6 +89,15 @@ func _get_RuntimeService_serviceDesc(srv RuntimeServiceServer, opts ...grpc1.Han
 		op(h)
 	}
 
+	_RuntimeService_Healthz_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.Healthz(ctx, req.(*pb.VoidRequest))
+	}
+	var _RuntimeService_Healthz_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_RuntimeService_Healthz_info = transport.NewServiceInfo("erda.orchestrator.runtime.RuntimeService", "Healthz", srv)
+		_RuntimeService_Healthz_Handler = h.Interceptor(_RuntimeService_Healthz_Handler)
+	}
+
 	_RuntimeService_GetRuntime_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
 		return srv.GetRuntime(ctx, req.(*GetRuntimeRequest))
 	}
@@ -97,17 +107,31 @@ func _get_RuntimeService_serviceDesc(srv RuntimeServiceServer, opts ...grpc1.Han
 		_RuntimeService_GetRuntime_Handler = h.Interceptor(_RuntimeService_GetRuntime_Handler)
 	}
 
-	_RuntimeService_DelRuntime_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
-		return srv.DelRuntime(ctx, req.(*DelRuntimeRequest))
-	}
-	var _RuntimeService_DelRuntime_info transport.ServiceInfo
-	if h.Interceptor != nil {
-		_RuntimeService_DelRuntime_info = transport.NewServiceInfo("erda.orchestrator.runtime.RuntimeService", "DelRuntime", srv)
-		_RuntimeService_DelRuntime_Handler = h.Interceptor(_RuntimeService_DelRuntime_Handler)
-	}
-
 	var serviceDesc = _RuntimeService_serviceDesc
 	serviceDesc.Methods = []grpc.MethodDesc{
+		{
+			MethodName: "Healthz",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(pb.VoidRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(RuntimeServiceServer).Healthz(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _RuntimeService_Healthz_info)
+				}
+				if interceptor == nil {
+					return _RuntimeService_Healthz_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.orchestrator.runtime.RuntimeService/Healthz",
+				}
+				return interceptor(ctx, in, info, _RuntimeService_Healthz_Handler)
+			},
+		},
 		{
 			MethodName: "GetRuntime",
 			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
@@ -129,29 +153,6 @@ func _get_RuntimeService_serviceDesc(srv RuntimeServiceServer, opts ...grpc1.Han
 					FullMethod: "/erda.orchestrator.runtime.RuntimeService/GetRuntime",
 				}
 				return interceptor(ctx, in, info, _RuntimeService_GetRuntime_Handler)
-			},
-		},
-		{
-			MethodName: "DelRuntime",
-			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
-				in := new(DelRuntimeRequest)
-				if err := dec(in); err != nil {
-					return nil, err
-				}
-				if interceptor == nil && h.Interceptor == nil {
-					return srv.(RuntimeServiceServer).DelRuntime(ctx, in)
-				}
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _RuntimeService_DelRuntime_info)
-				}
-				if interceptor == nil {
-					return _RuntimeService_DelRuntime_Handler(ctx, in)
-				}
-				info := &grpc.UnaryServerInfo{
-					Server:     srv,
-					FullMethod: "/erda.orchestrator.runtime.RuntimeService/DelRuntime",
-				}
-				return interceptor(ctx, in, info, _RuntimeService_DelRuntime_Handler)
 			},
 		},
 	}
