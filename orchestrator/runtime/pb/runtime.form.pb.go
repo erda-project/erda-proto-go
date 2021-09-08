@@ -21,8 +21,6 @@ var _ urlenc.URLValuesUnmarshaler = (*StatusMap)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*Extra)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*ErrorResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*RuntimeInspect)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*DelRuntimeRequest)(nil)
-var _ urlenc.URLValuesUnmarshaler = (*Runtime)(nil)
 
 // GetRuntimeRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetRuntimeRequest) UnmarshalURLValues(prefix string, values url.Values) error {
@@ -168,18 +166,18 @@ func (m *Extra) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
 		if len(vals) > 0 {
 			switch prefix + key {
-			case "applicationID":
+			case "applicationId":
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.ApplicationID = val
-			case "buildID":
+				m.ApplicationId = val
+			case "buildId":
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.BuildID = val
+				m.BuildId = val
 			case "workspace":
 				m.Workspace = vals[0]
 			}
@@ -230,14 +228,14 @@ func (m *RuntimeInspect) UnmarshalURLValues(prefix string, values url.Values) er
 				m.DeployStatus = vals[0]
 			case "deleteStatus":
 				m.DeleteStatus = vals[0]
-			case "releaseID":
-				m.ReleaseID = vals[0]
-			case "clusterID":
+			case "releaseId":
+				m.ReleaseId = vals[0]
+			case "clusterId":
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.ClusterID = val
+				m.ClusterId = val
 			case "clusterName":
 				m.ClusterName = vals[0]
 			case "clusterType":
@@ -277,7 +275,7 @@ func (m *RuntimeInspect) UnmarshalURLValues(prefix string, values url.Values) er
 				if m.Extra == nil {
 					m.Extra = &Extra{}
 				}
-			case "extra.applicationID":
+			case "extra.applicationId":
 				if m.Extra == nil {
 					m.Extra = &Extra{}
 				}
@@ -285,8 +283,8 @@ func (m *RuntimeInspect) UnmarshalURLValues(prefix string, values url.Values) er
 				if err != nil {
 					return err
 				}
-				m.Extra.ApplicationID = val
-			case "extra.buildID":
+				m.Extra.ApplicationId = val
+			case "extra.buildId":
 				if m.Extra == nil {
 					m.Extra = &Extra{}
 				}
@@ -294,7 +292,7 @@ func (m *RuntimeInspect) UnmarshalURLValues(prefix string, values url.Values) er
 				if err != nil {
 					return err
 				}
-				m.Extra.BuildID = val
+				m.Extra.BuildId = val
 			case "extra.workspace":
 				if m.Extra == nil {
 					m.Extra = &Extra{}
@@ -372,74 +370,6 @@ func (m *RuntimeInspect) UnmarshalURLValues(prefix string, values url.Values) er
 					return err
 				}
 				m.UpdatedAt.Nanos = int32(val)
-			}
-		}
-	}
-	return nil
-}
-
-// DelRuntimeRequest implement urlenc.URLValuesUnmarshaler.
-func (m *DelRuntimeRequest) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				m.Id = vals[0]
-			}
-		}
-	}
-	return nil
-}
-
-// Runtime implement urlenc.URLValuesUnmarshaler.
-func (m *Runtime) UnmarshalURLValues(prefix string, values url.Values) error {
-	for key, vals := range values {
-		if len(vals) > 0 {
-			switch prefix + key {
-			case "id":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.Id = val
-			case "name":
-				m.Name = vals[0]
-			case "gitBranch":
-				m.GitBranch = vals[0]
-			case "workspace":
-				m.Workspace = vals[0]
-			case "clusterName":
-				m.ClusterName = vals[0]
-			case "clusterID":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ClusterID = val
-			case "status":
-				m.Status = vals[0]
-			case "applicationID":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ApplicationID = val
-			case "applicationName":
-				m.ApplicationName = vals[0]
-			case "projectID":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.ProjectID = val
-			case "projectName":
-				m.ProjectName = vals[0]
-			case "orgID":
-				val, err := strconv.ParseUint(vals[0], 10, 64)
-				if err != nil {
-					return err
-				}
-				m.OrgID = val
 			}
 		}
 	}
