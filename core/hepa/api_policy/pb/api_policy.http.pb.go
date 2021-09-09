@@ -77,11 +77,11 @@ func RegisterApiPolicyServiceHandler(r http.Router, srv ApiPolicyServiceHandler,
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["apiId"]; len(vals) > 0 {
-					in.ApiId = vals[0]
-				}
 				if vals := params["packageId"]; len(vals) > 0 {
 					in.PackageId = vals[0]
+				}
+				if vals := params["apiId"]; len(vals) > 0 {
+					in.ApiId = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
