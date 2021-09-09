@@ -42,6 +42,8 @@ func (m *LogItem) UnmarshalURLValues(prefix string, values url.Values) error {
 				m.Level = vals[0]
 			case "requestId":
 				m.RequestId = vals[0]
+			case "pattern":
+				m.Pattern = vals[0]
 			}
 		}
 	}
@@ -79,6 +81,8 @@ func (m *GetLogRequest) UnmarshalURLValues(prefix string, values url.Values) err
 					return err
 				}
 				m.Count = val
+			case "pattern":
+				m.Pattern = vals[0]
 			}
 		}
 	}
@@ -118,6 +122,8 @@ func (m *GetLogByRuntimeRequest) UnmarshalURLValues(prefix string, values url.Va
 				m.Count = val
 			case "applicationId":
 				m.ApplicationId = vals[0]
+			case "pattern":
+				m.Pattern = vals[0]
 			}
 		}
 	}
@@ -157,6 +163,8 @@ func (m *GetLogByOrganizationRequest) UnmarshalURLValues(prefix string, values u
 				m.Count = val
 			case "clusterName":
 				m.ClusterName = vals[0]
+			case "pattern":
+				m.Pattern = vals[0]
 			}
 		}
 	}
