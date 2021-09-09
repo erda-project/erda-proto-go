@@ -62,6 +62,24 @@ func (m *TestPlanUpdateByHookRequest) UnmarshalURLValues(prefix string, values u
 					return err
 				}
 				m.Content.PassRate = val
+			case "content.executeMinutes":
+				if m.Content == nil {
+					m.Content = &Content{}
+				}
+				val, err := strconv.ParseFloat(vals[0], 64)
+				if err != nil {
+					return err
+				}
+				m.Content.ExecuteMinutes = val
+			case "content.apiTotalNum":
+				if m.Content == nil {
+					m.Content = &Content{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Content.ApiTotalNum = val
 			}
 		}
 	}
@@ -87,6 +105,18 @@ func (m *Content) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.PassRate = val
+			case "executeMinutes":
+				val, err := strconv.ParseFloat(vals[0], 64)
+				if err != nil {
+					return err
+				}
+				m.ExecuteMinutes = val
+			case "apiTotalNum":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.ApiTotalNum = val
 			}
 		}
 	}
