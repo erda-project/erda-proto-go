@@ -5,10 +5,11 @@ package pb
 
 import (
 	context "context"
+	http1 "net/http"
+
 	transport "github.com/erda-project/erda-infra/pkg/transport"
 	http "github.com/erda-project/erda-infra/pkg/transport/http"
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
-	http1 "net/http"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -17,7 +18,7 @@ const _ = http.SupportPackageIsVersion1
 
 // TriggerServiceHandler is the server API for TriggerService service.
 type TriggerServiceHandler interface {
-	// POST /api/triggers/actions/run
+	// POST /api/pipeline/triggers/actions/run
 	RunPipelineByTriggerRequest(context.Context, *PipelineTriggerRequest) (*PipelineTriggerResponse, error)
 }
 
@@ -76,5 +77,5 @@ func RegisterTriggerServiceHandler(r http.Router, srv TriggerServiceHandler, opt
 		)
 	}
 
-	add_RunPipelineByTriggerRequest("POST", "/api/triggers/actions/run", srv.RunPipelineByTriggerRequest)
+	add_RunPipelineByTriggerRequest("POST", "/api/pipeline/triggers/actions/run", srv.RunPipelineByTriggerRequest)
 }

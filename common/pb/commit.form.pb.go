@@ -24,8 +24,8 @@ func (m *CommitDetail) UnmarshalURLValues(prefix string, values url.Values) erro
 				m.CommitID = vals[0]
 			case "repo":
 				m.Repo = vals[0]
-			case "repoAddr":
-				m.RepoAddr = vals[0]
+			case "repoAbbr":
+				m.RepoAbbr = vals[0]
 			case "author":
 				m.Author = vals[0]
 			case "email":
