@@ -225,14 +225,14 @@ func (m *ChangeRuntimeRequest) UnmarshalURLValues(prefix string, values url.Valu
 			switch prefix + key {
 			case "orgId":
 				m.OrgId = vals[0]
-			case "projectID":
-				m.ProjectID = vals[0]
+			case "projectId":
+				m.ProjectId = vals[0]
 			case "env":
 				m.Env = vals[0]
 			case "clusterName":
 				m.ClusterName = vals[0]
-			case "runtimeID":
-				m.RuntimeID = vals[0]
+			case "runtimeId":
+				m.RuntimeId = vals[0]
 			case "runtimeName":
 				m.RuntimeName = vals[0]
 			case "releaseId":
@@ -243,8 +243,8 @@ func (m *ChangeRuntimeRequest) UnmarshalURLValues(prefix string, values url.Valu
 				m.ProjectNamespace = vals[0]
 			case "serviceGroupName":
 				m.ServiceGroupName = vals[0]
-			case "appID":
-				m.AppID = vals[0]
+			case "appId":
+				m.AppId = vals[0]
 			case "appName":
 				m.AppName = vals[0]
 			case "useApigw":

@@ -70,14 +70,14 @@ func RegisterLegacyConsumerServiceHandler(r http.Router, srv LegacyConsumerServi
 					}
 				}
 				params := r.URL.Query()
+				if vals := params["env"]; len(vals) > 0 {
+					in.Env = vals[0]
+				}
 				if vals := params["orgId"]; len(vals) > 0 {
 					in.OrgId = vals[0]
 				}
 				if vals := params["projectId"]; len(vals) > 0 {
 					in.ProjectId = vals[0]
-				}
-				if vals := params["env"]; len(vals) > 0 {
-					in.Env = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

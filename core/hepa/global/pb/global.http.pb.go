@@ -114,11 +114,11 @@ func RegisterGlobalServiceHandler(r http.Router, srv GlobalServiceHandler, opts 
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["projectId"]; len(vals) > 0 {
-					in.ProjectId = vals[0]
-				}
 				if vals := params["env"]; len(vals) > 0 {
 					in.Env = vals[0]
+				}
+				if vals := params["projectId"]; len(vals) > 0 {
+					in.ProjectId = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
