@@ -110,15 +110,6 @@ func RegisterOpenapiConsumerServiceHandler(r http.Router, srv OpenapiConsumerSer
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["sortField"]; len(vals) > 0 {
-					in.SortField = vals[0]
-				}
-				if vals := params["sortType"]; len(vals) > 0 {
-					in.SortType = vals[0]
-				}
-				if vals := params["projectId"]; len(vals) > 0 {
-					in.ProjectId = vals[0]
-				}
 				if vals := params["env"]; len(vals) > 0 {
 					in.Env = vals[0]
 				}
@@ -135,6 +126,15 @@ func RegisterOpenapiConsumerServiceHandler(r http.Router, srv OpenapiConsumerSer
 						return nil, err
 					}
 					in.PageSize = val
+				}
+				if vals := params["projectId"]; len(vals) > 0 {
+					in.ProjectId = vals[0]
+				}
+				if vals := params["sortField"]; len(vals) > 0 {
+					in.SortField = vals[0]
+				}
+				if vals := params["sortType"]; len(vals) > 0 {
+					in.SortType = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

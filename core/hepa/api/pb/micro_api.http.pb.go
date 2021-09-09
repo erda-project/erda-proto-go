@@ -83,18 +83,17 @@ func RegisterApiServiceHandler(r http.Router, srv ApiServiceHandler, opts ...htt
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["registerType"]; len(vals) > 0 {
-					in.RegisterType = vals[0]
+				if vals := params["apiPath"]; len(vals) > 0 {
+					in.ApiPath = vals[0]
 				}
-				if vals := params["sortType"]; len(vals) > 0 {
-					in.SortType = vals[0]
+				if vals := params["diceApp"]; len(vals) > 0 {
+					in.DiceApp = vals[0]
 				}
-				if vals := params["size"]; len(vals) > 0 {
-					val, err := strconv.ParseInt(vals[0], 10, 64)
-					if err != nil {
-						return nil, err
-					}
-					in.Size = val
+				if vals := params["diceService"]; len(vals) > 0 {
+					in.DiceService = vals[0]
+				}
+				if vals := params["env"]; len(vals) > 0 {
+					in.Env = vals[0]
 				}
 				if vals := params["from"]; len(vals) > 0 {
 					in.From = vals[0]
@@ -109,8 +108,11 @@ func RegisterApiServiceHandler(r http.Router, srv ApiServiceHandler, opts ...htt
 					}
 					in.NeedAuth = int32(val)
 				}
-				if vals := params["apiPath"]; len(vals) > 0 {
-					in.ApiPath = vals[0]
+				if vals := params["netType"]; len(vals) > 0 {
+					in.NetType = vals[0]
+				}
+				if vals := params["orgId"]; len(vals) > 0 {
+					in.OrgId = vals[0]
 				}
 				if vals := params["page"]; len(vals) > 0 {
 					val, err := strconv.ParseInt(vals[0], 10, 64)
@@ -119,29 +121,27 @@ func RegisterApiServiceHandler(r http.Router, srv ApiServiceHandler, opts ...htt
 					}
 					in.Page = val
 				}
-				if vals := params["runtimeId"]; len(vals) > 0 {
-					in.RuntimeId = vals[0]
-				}
-				if vals := params["diceService"]; len(vals) > 0 {
-					in.DiceService = vals[0]
-				}
-				if vals := params["netType"]; len(vals) > 0 {
-					in.NetType = vals[0]
-				}
-				if vals := params["env"]; len(vals) > 0 {
-					in.Env = vals[0]
-				}
-				if vals := params["orgId"]; len(vals) > 0 {
-					in.OrgId = vals[0]
-				}
-				if vals := params["diceApp"]; len(vals) > 0 {
-					in.DiceApp = vals[0]
-				}
 				if vals := params["projectId"]; len(vals) > 0 {
 					in.ProjectId = vals[0]
 				}
+				if vals := params["registerType"]; len(vals) > 0 {
+					in.RegisterType = vals[0]
+				}
+				if vals := params["runtimeId"]; len(vals) > 0 {
+					in.RuntimeId = vals[0]
+				}
+				if vals := params["size"]; len(vals) > 0 {
+					val, err := strconv.ParseInt(vals[0], 10, 64)
+					if err != nil {
+						return nil, err
+					}
+					in.Size = val
+				}
 				if vals := params["sortField"]; len(vals) > 0 {
 					in.SortField = vals[0]
+				}
+				if vals := params["sortType"]; len(vals) > 0 {
+					in.SortType = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
