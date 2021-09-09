@@ -139,26 +139,35 @@ func RegisterBaseServiceHandler(r http.Router, srv BaseServiceHandler, opts ...h
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["anyMatchLabel"]; len(vals) > 0 {
-					in.AnyMatchLabelsQueryParams = vals
+				if vals := params["status"]; len(vals) > 0 {
+					in.Statuses = vals
 				}
-				if vals := params["anyMatchLabels"]; len(vals) > 0 {
-					in.AnyMatchLabelsJSON = vals[0]
-				}
-				if vals := params["branch"]; len(vals) > 0 {
-					in.Branches = vals
-				}
-				if vals := params["branches"]; len(vals) > 0 {
-					in.CommaBranches = vals[0]
-				}
-				if vals := params["clusterName"]; len(vals) > 0 {
-					in.ClusterNames = vals
+				if vals := params["mustMatchLabels"]; len(vals) > 0 {
+					in.MustMatchLabelsJSON = vals[0]
 				}
 				if vals := params["mustMatchLabel"]; len(vals) > 0 {
 					in.MustMatchLabelsQueryParams = vals
 				}
-				if vals := params["mustMatchLabels"]; len(vals) > 0 {
-					in.MustMatchLabelsJSON = vals[0]
+				if vals := params["statuses"]; len(vals) > 0 {
+					in.CommaStatuses = vals[0]
+				}
+				if vals := params["ymlNames"]; len(vals) > 0 {
+					in.CommaYmlNames = vals[0]
+				}
+				if vals := params["branch"]; len(vals) > 0 {
+					in.Branches = vals
+				}
+				if vals := params["clusterName"]; len(vals) > 0 {
+					in.ClusterNames = vals
+				}
+				if vals := params["anyMatchLabels"]; len(vals) > 0 {
+					in.AnyMatchLabelsJSON = vals[0]
+				}
+				if vals := params["anyMatchLabel"]; len(vals) > 0 {
+					in.AnyMatchLabelsQueryParams = vals
+				}
+				if vals := params["ymlName"]; len(vals) > 0 {
+					in.YmlNames = vals
 				}
 				if vals := params["notStatus"]; len(vals) > 0 {
 					in.NotStatuses = vals
@@ -166,23 +175,14 @@ func RegisterBaseServiceHandler(r http.Router, srv BaseServiceHandler, opts ...h
 				if vals := params["source"]; len(vals) > 0 {
 					in.Sources = vals
 				}
+				if vals := params["branches"]; len(vals) > 0 {
+					in.CommaBranches = vals[0]
+				}
 				if vals := params["sources"]; len(vals) > 0 {
 					in.CommaSources = vals[0]
 				}
-				if vals := params["status"]; len(vals) > 0 {
-					in.Statuses = vals
-				}
-				if vals := params["statuses"]; len(vals) > 0 {
-					in.CommaStatuses = vals[0]
-				}
 				if vals := params["triggerMode"]; len(vals) > 0 {
 					in.TriggerModes = vals
-				}
-				if vals := params["ymlName"]; len(vals) > 0 {
-					in.YmlNames = vals
-				}
-				if vals := params["ymlNames"]; len(vals) > 0 {
-					in.CommaYmlNames = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

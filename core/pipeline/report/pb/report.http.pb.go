@@ -142,14 +142,14 @@ func RegisterReportServiceHandler(r http.Router, srv ReportServiceHandler, opts 
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["mustMatchLabel"]; len(vals) > 0 {
-					in.MustMatchLabelsQueryParams = vals
-				}
 				if vals := params["source"]; len(vals) > 0 {
 					in.Sources = vals
 				}
 				if vals := params["type"]; len(vals) > 0 {
 					in.Types = vals
+				}
+				if vals := params["mustMatchLabel"]; len(vals) > 0 {
+					in.MustMatchLabelsQueryParams = vals
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {

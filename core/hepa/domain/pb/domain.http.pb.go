@@ -89,14 +89,17 @@ func RegisterDomainServiceHandler(r http.Router, srv DomainServiceHandler, opts 
 				if vals := params["clusterName"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
-				if vals := params["domain"]; len(vals) > 0 {
-					in.Domain = vals[0]
-				}
-				if vals := params["env"]; len(vals) > 0 {
-					in.Env = vals[0]
+				if vals := params["type"]; len(vals) > 0 {
+					in.Type = vals[0]
 				}
 				if vals := params["orgId"]; len(vals) > 0 {
 					in.OrgId = vals[0]
+				}
+				if vals := params["projectId"]; len(vals) > 0 {
+					in.ProjectId = vals[0]
+				}
+				if vals := params["env"]; len(vals) > 0 {
+					in.Env = vals[0]
 				}
 				if vals := params["pageNo"]; len(vals) > 0 {
 					val, err := strconv.ParseInt(vals[0], 10, 64)
@@ -112,11 +115,8 @@ func RegisterDomainServiceHandler(r http.Router, srv DomainServiceHandler, opts 
 					}
 					in.PageSize = val
 				}
-				if vals := params["projectId"]; len(vals) > 0 {
-					in.ProjectId = vals[0]
-				}
-				if vals := params["type"]; len(vals) > 0 {
-					in.Type = vals[0]
+				if vals := params["domain"]; len(vals) > 0 {
+					in.Domain = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
