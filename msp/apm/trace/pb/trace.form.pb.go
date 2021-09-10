@@ -251,6 +251,18 @@ func (m *GetSpanDashboardsRequest) UnmarshalURLValues(prefix string, values url.
 				m.Type = vals[0]
 			case "serviceInstanceID":
 				m.ServiceInstanceID = vals[0]
+			case "startTime":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.StartTime = val
+			case "endTime":
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.EndTime = val
 			}
 		}
 	}
