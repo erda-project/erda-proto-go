@@ -22,8 +22,11 @@ var _ urlenc.URLValuesUnmarshaler = (*StopTraceDebugRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTraceDebugStatusByRequestIDRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTraceDebugHistoriesRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetSpansRequest)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetSpanDashboardsRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTracesRequest)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetSpansResponse)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*SpanAnalysis)(nil)
+var _ urlenc.URLValuesUnmarshaler = (*GetSpanDashboardsResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTracesResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTraceDebugHistoriesResponse)(nil)
 var _ urlenc.URLValuesUnmarshaler = (*GetTraceDebugResponse)(nil)
@@ -237,6 +240,23 @@ func (m *GetSpansRequest) UnmarshalURLValues(prefix string, values url.Values) e
 	return nil
 }
 
+// GetSpanDashboardsRequest implement urlenc.URLValuesUnmarshaler.
+func (m *GetSpanDashboardsRequest) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "tenantID":
+				m.TenantID = vals[0]
+			case "type":
+				m.Type = vals[0]
+			case "serviceInstanceID":
+				m.ServiceInstanceID = vals[0]
+			}
+		}
+	}
+	return nil
+}
+
 // GetTracesRequest implement urlenc.URLValuesUnmarshaler.
 func (m *GetTracesRequest) UnmarshalURLValues(prefix string, values url.Values) error {
 	for key, vals := range values {
@@ -321,6 +341,60 @@ func (m *GetSpansResponse) UnmarshalURLValues(prefix string, values url.Values) 
 					return err
 				}
 				m.SpanCount = val
+			}
+		}
+	}
+	return nil
+}
+
+// SpanAnalysis implement urlenc.URLValuesUnmarshaler.
+func (m *SpanAnalysis) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "dashboardID":
+				m.DashboardID = vals[0]
+			case "conditions":
+				m.Conditions = vals
+			}
+		}
+	}
+	return nil
+}
+
+// GetSpanDashboardsResponse implement urlenc.URLValuesUnmarshaler.
+func (m *GetSpanDashboardsResponse) UnmarshalURLValues(prefix string, values url.Values) error {
+	for key, vals := range values {
+		if len(vals) > 0 {
+			switch prefix + key {
+			case "callAnalysis":
+				if m.CallAnalysis == nil {
+					m.CallAnalysis = &SpanAnalysis{}
+				}
+			case "callAnalysis.dashboardID":
+				if m.CallAnalysis == nil {
+					m.CallAnalysis = &SpanAnalysis{}
+				}
+				m.CallAnalysis.DashboardID = vals[0]
+			case "callAnalysis.conditions":
+				if m.CallAnalysis == nil {
+					m.CallAnalysis = &SpanAnalysis{}
+				}
+				m.CallAnalysis.Conditions = vals
+			case "serviceAnalysis":
+				if m.ServiceAnalysis == nil {
+					m.ServiceAnalysis = &SpanAnalysis{}
+				}
+			case "serviceAnalysis.dashboardID":
+				if m.ServiceAnalysis == nil {
+					m.ServiceAnalysis = &SpanAnalysis{}
+				}
+				m.ServiceAnalysis.DashboardID = vals[0]
+			case "serviceAnalysis.conditions":
+				if m.ServiceAnalysis == nil {
+					m.ServiceAnalysis = &SpanAnalysis{}
+				}
+				m.ServiceAnalysis.Conditions = vals
 			}
 		}
 	}
