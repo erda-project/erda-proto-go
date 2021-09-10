@@ -34,10 +34,16 @@ var _ json.Marshaler = (*GetTraceDebugHistoriesRequest)(nil)
 var _ json.Unmarshaler = (*GetTraceDebugHistoriesRequest)(nil)
 var _ json.Marshaler = (*GetSpansRequest)(nil)
 var _ json.Unmarshaler = (*GetSpansRequest)(nil)
+var _ json.Marshaler = (*GetSpanDashboardsRequest)(nil)
+var _ json.Unmarshaler = (*GetSpanDashboardsRequest)(nil)
 var _ json.Marshaler = (*GetTracesRequest)(nil)
 var _ json.Unmarshaler = (*GetTracesRequest)(nil)
 var _ json.Marshaler = (*GetSpansResponse)(nil)
 var _ json.Unmarshaler = (*GetSpansResponse)(nil)
+var _ json.Marshaler = (*SpanAnalysis)(nil)
+var _ json.Unmarshaler = (*SpanAnalysis)(nil)
+var _ json.Marshaler = (*GetSpanDashboardsResponse)(nil)
+var _ json.Unmarshaler = (*GetSpanDashboardsResponse)(nil)
 var _ json.Marshaler = (*GetTracesResponse)(nil)
 var _ json.Unmarshaler = (*GetTracesResponse)(nil)
 var _ json.Marshaler = (*GetTraceDebugHistoriesResponse)(nil)
@@ -259,6 +265,24 @@ func (m *GetSpansRequest) UnmarshalJSON(b []byte) error {
 	}).Unmarshal(b, m)
 }
 
+// GetSpanDashboardsRequest implement json.Marshaler.
+func (m *GetSpanDashboardsRequest) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetSpanDashboardsRequest implement json.Marshaler.
+func (m *GetSpanDashboardsRequest) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
 // GetTracesRequest implement json.Marshaler.
 func (m *GetTracesRequest) MarshalJSON() ([]byte, error) {
 	buf := &bytes.Buffer{}
@@ -290,6 +314,42 @@ func (m *GetSpansResponse) MarshalJSON() ([]byte, error) {
 
 // GetSpansResponse implement json.Marshaler.
 func (m *GetSpansResponse) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// SpanAnalysis implement json.Marshaler.
+func (m *SpanAnalysis) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// SpanAnalysis implement json.Marshaler.
+func (m *SpanAnalysis) UnmarshalJSON(b []byte) error {
+	return (&protojson.UnmarshalOptions{
+		DiscardUnknown: true,
+	}).Unmarshal(b, m)
+}
+
+// GetSpanDashboardsResponse implement json.Marshaler.
+func (m *GetSpanDashboardsResponse) MarshalJSON() ([]byte, error) {
+	buf := &bytes.Buffer{}
+	err := (&jsonpb.Marshaler{
+		OrigName:     false,
+		EnumsAsInts:  false,
+		EmitDefaults: true,
+	}).Marshal(buf, m)
+	return buf.Bytes(), err
+}
+
+// GetSpanDashboardsResponse implement json.Marshaler.
+func (m *GetSpanDashboardsResponse) UnmarshalJSON(b []byte) error {
 	return (&protojson.UnmarshalOptions{
 		DiscardUnknown: true,
 	}).Unmarshal(b, m)
