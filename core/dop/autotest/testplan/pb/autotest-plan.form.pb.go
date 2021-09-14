@@ -8,6 +8,7 @@ import (
 	strconv "strconv"
 
 	urlenc "github.com/erda-project/erda-infra/pkg/urlenc"
+	timestamppb "google.golang.org/protobuf/types/known/timestamppb"
 )
 
 // This is a compile-time assertion to ensure that this generated file
@@ -52,7 +53,33 @@ func (m *TestPlanUpdateByHookRequest) UnmarshalURLValues(prefix string, values u
 				if m.Content == nil {
 					m.Content = &Content{}
 				}
-				m.Content.ExecuteTime = vals[0]
+				if m.Content.ExecuteTime == nil {
+					m.Content.ExecuteTime = &timestamppb.Timestamp{}
+				}
+			case "content.executeTime.seconds":
+				if m.Content == nil {
+					m.Content = &Content{}
+				}
+				if m.Content.ExecuteTime == nil {
+					m.Content.ExecuteTime = &timestamppb.Timestamp{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.Content.ExecuteTime.Seconds = val
+			case "content.executeTime.nanos":
+				if m.Content == nil {
+					m.Content = &Content{}
+				}
+				if m.Content.ExecuteTime == nil {
+					m.Content.ExecuteTime = &timestamppb.Timestamp{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 32)
+				if err != nil {
+					return err
+				}
+				m.Content.ExecuteTime.Nanos = int32(val)
 			case "content.passRate":
 				if m.Content == nil {
 					m.Content = &Content{}
@@ -62,15 +89,6 @@ func (m *TestPlanUpdateByHookRequest) UnmarshalURLValues(prefix string, values u
 					return err
 				}
 				m.Content.PassRate = val
-			case "content.executeMinutes":
-				if m.Content == nil {
-					m.Content = &Content{}
-				}
-				val, err := strconv.ParseFloat(vals[0], 64)
-				if err != nil {
-					return err
-				}
-				m.Content.ExecuteMinutes = val
 			case "content.apiTotalNum":
 				if m.Content == nil {
 					m.Content = &Content{}
@@ -80,6 +98,11 @@ func (m *TestPlanUpdateByHookRequest) UnmarshalURLValues(prefix string, values u
 					return err
 				}
 				m.Content.ApiTotalNum = val
+			case "content.executeDuration":
+				if m.Content == nil {
+					m.Content = &Content{}
+				}
+				m.Content.ExecuteDuration = vals[0]
 			}
 		}
 	}
@@ -98,25 +121,41 @@ func (m *Content) UnmarshalURLValues(prefix string, values url.Values) error {
 				}
 				m.TestPlanID = val
 			case "executeTime":
-				m.ExecuteTime = vals[0]
+				if m.ExecuteTime == nil {
+					m.ExecuteTime = &timestamppb.Timestamp{}
+				}
+			case "executeTime.seconds":
+				if m.ExecuteTime == nil {
+					m.ExecuteTime = &timestamppb.Timestamp{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 64)
+				if err != nil {
+					return err
+				}
+				m.ExecuteTime.Seconds = val
+			case "executeTime.nanos":
+				if m.ExecuteTime == nil {
+					m.ExecuteTime = &timestamppb.Timestamp{}
+				}
+				val, err := strconv.ParseInt(vals[0], 10, 32)
+				if err != nil {
+					return err
+				}
+				m.ExecuteTime.Nanos = int32(val)
 			case "passRate":
 				val, err := strconv.ParseFloat(vals[0], 64)
 				if err != nil {
 					return err
 				}
 				m.PassRate = val
-			case "executeMinutes":
-				val, err := strconv.ParseFloat(vals[0], 64)
-				if err != nil {
-					return err
-				}
-				m.ExecuteMinutes = val
 			case "apiTotalNum":
 				val, err := strconv.ParseInt(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
 				m.ApiTotalNum = val
+			case "executeDuration":
+				m.ExecuteDuration = vals[0]
 			}
 		}
 	}
