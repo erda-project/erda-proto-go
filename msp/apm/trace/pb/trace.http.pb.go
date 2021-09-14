@@ -151,11 +151,11 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["serviceInstanceId"]; len(vals) > 0 {
-					in.ServiceInstanceID = vals[0]
-				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["serviceInstanceId"]; len(vals) > 0 {
+					in.ServiceInstanceID = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -194,11 +194,11 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["traceId"]; len(vals) > 0 {
-					in.TraceID = vals[0]
-				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
+				}
+				if vals := params["traceId"]; len(vals) > 0 {
+					in.TraceID = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
