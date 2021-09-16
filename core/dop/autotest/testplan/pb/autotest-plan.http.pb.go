@@ -29,7 +29,7 @@ func RegisterTestPlanServiceHandler(r http.Router, srv TestPlanServiceHandler, o
 		op(h)
 	}
 	encodeFunc := func(fn func(http1.ResponseWriter, *http1.Request) (interface{}, error)) http.HandlerFunc {
-		return func(w http1.ResponseWriter, r *http1.Request) {
+		handler := func(w http1.ResponseWriter, r *http1.Request) {
 			out, err := fn(w, r)
 			if err != nil {
 				h.Error(w, r, err)
@@ -39,6 +39,10 @@ func RegisterTestPlanServiceHandler(r http.Router, srv TestPlanServiceHandler, o
 				h.Error(w, r, err)
 			}
 		}
+		if h.HTTPInterceptor != nil {
+			handler = h.HTTPInterceptor(handler)
+		}
+		return handler
 	}
 
 	add_UpdateTestPlanByHook := func(method, path string, fn func(context.Context, *TestPlanUpdateByHookRequest) (*TestPlanUpdateByHookResponse, error)) {
@@ -52,6 +56,12 @@ func RegisterTestPlanServiceHandler(r http.Router, srv TestPlanServiceHandler, o
 		}
 		r.Add(method, path, encodeFunc(
 			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateTestPlanByHook_info)
+				}
+				r = r.WithContext(ctx)
 				var in TestPlanUpdateByHookRequest
 				if err := h.Decode(r, &in); err != nil {
 					return nil, err
@@ -61,11 +71,6 @@ func RegisterTestPlanServiceHandler(r http.Router, srv TestPlanServiceHandler, o
 					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
 						return nil, err
 					}
-				}
-				ctx := http.WithRequest(r.Context(), r)
-				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
-				if h.Interceptor != nil {
-					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, UpdateTestPlanByHook_info)
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
