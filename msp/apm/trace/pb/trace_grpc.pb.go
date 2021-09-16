@@ -22,6 +22,7 @@ const _ = grpc.SupportPackageIsVersion5
 // For semantics around ctx use and closing/ending streaming RPCs, please refer to https://pkg.go.dev/google.golang.org/grpc/?tab=doc#ClientConn.NewStream.
 type TraceServiceClient interface {
 	GetSpans(ctx context.Context, in *GetSpansRequest, opts ...grpc.CallOption) (*GetSpansResponse, error)
+	GetSpanDashboards(ctx context.Context, in *GetSpanDashboardsRequest, opts ...grpc.CallOption) (*GetSpanDashboardsResponse, error)
 	GetTraces(ctx context.Context, in *GetTracesRequest, opts ...grpc.CallOption) (*GetTracesResponse, error)
 	GetTraceQueryConditions(ctx context.Context, in *GetTraceQueryConditionsRequest, opts ...grpc.CallOption) (*GetTraceQueryConditionsResponse, error)
 	GetTraceDebugHistories(ctx context.Context, in *GetTraceDebugHistoriesRequest, opts ...grpc.CallOption) (*GetTraceDebugHistoriesResponse, error)
@@ -42,6 +43,15 @@ func NewTraceServiceClient(cc grpc1.ClientConnInterface) TraceServiceClient {
 func (c *traceServiceClient) GetSpans(ctx context.Context, in *GetSpansRequest, opts ...grpc.CallOption) (*GetSpansResponse, error) {
 	out := new(GetSpansResponse)
 	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetSpans", in, out, opts...)
+	if err != nil {
+		return nil, err
+	}
+	return out, nil
+}
+
+func (c *traceServiceClient) GetSpanDashboards(ctx context.Context, in *GetSpanDashboardsRequest, opts ...grpc.CallOption) (*GetSpanDashboardsResponse, error) {
+	out := new(GetSpanDashboardsResponse)
+	err := c.cc.Invoke(ctx, "/erda.msp.apm.trace.TraceService/GetSpanDashboards", in, out, opts...)
 	if err != nil {
 		return nil, err
 	}
@@ -116,6 +126,7 @@ func (c *traceServiceClient) GetTraceDebugHistoryStatusByRequestID(ctx context.C
 // for forward compatibility
 type TraceServiceServer interface {
 	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
+	GetSpanDashboards(context.Context, *GetSpanDashboardsRequest) (*GetSpanDashboardsResponse, error)
 	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
 	GetTraceQueryConditions(context.Context, *GetTraceQueryConditionsRequest) (*GetTraceQueryConditionsResponse, error)
 	GetTraceDebugHistories(context.Context, *GetTraceDebugHistoriesRequest) (*GetTraceDebugHistoriesResponse, error)
@@ -131,6 +142,9 @@ type UnimplementedTraceServiceServer struct {
 
 func (*UnimplementedTraceServiceServer) GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetSpans not implemented")
+}
+func (*UnimplementedTraceServiceServer) GetSpanDashboards(context.Context, *GetSpanDashboardsRequest) (*GetSpanDashboardsResponse, error) {
+	return nil, status.Errorf(codes.Unimplemented, "method GetSpanDashboards not implemented")
 }
 func (*UnimplementedTraceServiceServer) GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error) {
 	return nil, status.Errorf(codes.Unimplemented, "method GetTraces not implemented")
@@ -179,6 +193,15 @@ func _get_TraceService_serviceDesc(srv TraceServiceServer, opts ...grpc1.HandleO
 	if h.Interceptor != nil {
 		_TraceService_GetSpans_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetSpans", srv)
 		_TraceService_GetSpans_Handler = h.Interceptor(_TraceService_GetSpans_Handler)
+	}
+
+	_TraceService_GetSpanDashboards_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+		return srv.GetSpanDashboards(ctx, req.(*GetSpanDashboardsRequest))
+	}
+	var _TraceService_GetSpanDashboards_info transport.ServiceInfo
+	if h.Interceptor != nil {
+		_TraceService_GetSpanDashboards_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetSpanDashboards", srv)
+		_TraceService_GetSpanDashboards_Handler = h.Interceptor(_TraceService_GetSpanDashboards_Handler)
 	}
 
 	_TraceService_GetTraces_Handler := func(ctx context.Context, req interface{}) (interface{}, error) {
@@ -267,6 +290,29 @@ func _get_TraceService_serviceDesc(srv TraceServiceServer, opts ...grpc1.HandleO
 					FullMethod: "/erda.msp.apm.trace.TraceService/GetSpans",
 				}
 				return interceptor(ctx, in, info, _TraceService_GetSpans_Handler)
+			},
+		},
+		{
+			MethodName: "GetSpanDashboards",
+			Handler: func(_ interface{}, ctx context.Context, dec func(interface{}) error, interceptor grpc.UnaryServerInterceptor) (interface{}, error) {
+				in := new(GetSpanDashboardsRequest)
+				if err := dec(in); err != nil {
+					return nil, err
+				}
+				if interceptor == nil && h.Interceptor == nil {
+					return srv.(TraceServiceServer).GetSpanDashboards(ctx, in)
+				}
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, _TraceService_GetSpanDashboards_info)
+				}
+				if interceptor == nil {
+					return _TraceService_GetSpanDashboards_Handler(ctx, in)
+				}
+				info := &grpc.UnaryServerInfo{
+					Server:     srv,
+					FullMethod: "/erda.msp.apm.trace.TraceService/GetSpanDashboards",
+				}
+				return interceptor(ctx, in, info, _TraceService_GetSpanDashboards_Handler)
 			},
 		},
 		{

@@ -32,7 +32,7 @@ type CronServiceHandler interface {
 	CronStop(context.Context, *CronStopRequest) (*CronStopResponse, error)
 	// DELETE /api/pipeline-crons/{cronID}
 	CronDelete(context.Context, *CronDeleteRequest) (*CronDeleteResponse, error)
-	// POST /api/pipeline-crons/{cronID}
+	// GET /api/pipeline-crons/{cronID}
 	CronGet(context.Context, *CronGetRequest) (*CronGetResponse, error)
 	// PUT /api/pipeline-crons/{cronID}
 	CronUpdate(context.Context, *CronUpdateRequest) (*CronUpdateResponse, error)
@@ -460,6 +460,6 @@ func RegisterCronServiceHandler(r http.Router, srv CronServiceHandler, opts ...h
 	add_CronStart("PUT", "/api/pipeline-crons/{cronID}/actions/start", srv.CronStart)
 	add_CronStop("PUT", "/api/pipeline-crons/{cronID}/actions/stop", srv.CronStop)
 	add_CronDelete("DELETE", "/api/pipeline-crons/{cronID}", srv.CronDelete)
-	add_CronGet("POST", "/api/pipeline-crons/{cronID}", srv.CronGet)
+	add_CronGet("GET", "/api/pipeline-crons/{cronID}", srv.CronGet)
 	add_CronUpdate("PUT", "/api/pipeline-crons/{cronID}", srv.CronUpdate)
 }

@@ -7,6 +7,7 @@ import (
 	fmt "fmt"
 	math "math"
 
+	_ "github.com/erda-project/erda-proto-go/common/pb"
 	proto "github.com/golang/protobuf/proto"
 	_ "github.com/mwitkow/go-proto-validators"
 	github_com_mwitkow_go_proto_validators "github.com/mwitkow/go-proto-validators"
@@ -114,6 +115,18 @@ func (this *GetSpansRequest) Validate() error {
 	}
 	return nil
 }
+func (this *GetSpanDashboardsRequest) Validate() error {
+	if this.TenantID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("TenantID", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantID))
+	}
+	if this.Type == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("Type", fmt.Errorf(`value '%v' must not be an empty string`, this.Type))
+	}
+	if this.ServiceInstanceID == "" {
+		return github_com_mwitkow_go_proto_validators.FieldError("ServiceInstanceID", fmt.Errorf(`value '%v' must not be an empty string`, this.ServiceInstanceID))
+	}
+	return nil
+}
 func (this *GetTracesRequest) Validate() error {
 	if this.TenantID == "" {
 		return github_com_mwitkow_go_proto_validators.FieldError("TenantID", fmt.Errorf(`value '%v' must not be an empty string`, this.TenantID))
@@ -126,6 +139,22 @@ func (this *GetSpansResponse) Validate() error {
 			if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(item); err != nil {
 				return github_com_mwitkow_go_proto_validators.FieldError("Spans", err)
 			}
+		}
+	}
+	return nil
+}
+func (this *SpanAnalysis) Validate() error {
+	return nil
+}
+func (this *GetSpanDashboardsResponse) Validate() error {
+	if this.CallAnalysis != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.CallAnalysis); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("CallAnalysis", err)
+		}
+	}
+	if this.ServiceAnalysis != nil {
+		if err := github_com_mwitkow_go_proto_validators.CallValidatorIfExists(this.ServiceAnalysis); err != nil {
+			return github_com_mwitkow_go_proto_validators.FieldError("ServiceAnalysis", err)
 		}
 	}
 	return nil
