@@ -77,7 +77,7 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 		op(h)
 	}
 	encodeFunc := func(fn func(http1.ResponseWriter, *http1.Request) (interface{}, error)) http.HandlerFunc {
-		return func(w http1.ResponseWriter, r *http1.Request) {
+		handler := func(w http1.ResponseWriter, r *http1.Request) {
 			out, err := fn(w, r)
 			if err != nil {
 				h.Error(w, r, err)
@@ -87,6 +87,10 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				h.Error(w, r, err)
 			}
 		}
+		if h.HTTPInterceptor != nil {
+			handler = h.HTTPInterceptor(handler)
+		}
+		return handler
 	}
 
 	add_ListInterface := func(method, path string, fn func(context.Context, *ListInterfaceRequest) (*ListInterfaceResponse, error)) {
@@ -123,14 +127,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -197,11 +201,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
-				if vals := params["nacosId"]; len(vals) > 0 {
-					in.NacosID = vals[0]
-				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
+				}
+				if vals := params["nacosId"]; len(vals) > 0 {
+					in.NacosID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -372,14 +376,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -445,17 +449,17 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -524,14 +528,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -600,11 +604,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -673,11 +677,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -743,14 +747,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -816,14 +820,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -892,11 +896,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
-				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -965,14 +969,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
 				}
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["runtimeId"]; len(vals) > 0 {
 					in.RuntimeID = vals[0]
 				}
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1036,14 +1040,14 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["tenantId"]; len(vals) > 0 {
-					in.TenantID = vals[0]
+				if vals := params["appid"]; len(vals) > 0 {
+					in.AppID = vals[0]
 				}
 				if vals := params["az"]; len(vals) > 0 {
 					in.ClusterName = vals[0]
 				}
-				if vals := params["appid"]; len(vals) > 0 {
-					in.AppID = vals[0]
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				path := r.URL.Path
 				if len(path) > 0 {
@@ -1109,11 +1113,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
@@ -1182,11 +1186,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
@@ -1255,11 +1259,11 @@ func RegisterRegisterCenterServiceHandler(r http.Router, srv RegisterCenterServi
 					}
 				}
 				params := r.URL.Query()
-				if vals := params["az"]; len(vals) > 0 {
-					in.ClusterName = vals[0]
-				}
 				if vals := params["appid"]; len(vals) > 0 {
 					in.AppID = vals[0]
+				}
+				if vals := params["az"]; len(vals) > 0 {
+					in.ClusterName = vals[0]
 				}
 				if vals := params["tenantId"]; len(vals) > 0 {
 					in.TenantID = vals[0]
