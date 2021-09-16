@@ -37,8 +37,6 @@ func (m *GetInstrumentationLibraryDocsRequest) UnmarshalURLValues(prefix string,
 				m.Language = vals[0]
 			case "strategy":
 				m.Strategy = vals[0]
-			case "scopeId":
-				m.ScopeId = vals[0]
 			}
 		}
 	}
