@@ -13,3 +13,7 @@ format:
 	 	gofmt -w -l $${path}; \
 	  	goimports -w -l $${path}; \
 	done;
+
+update-infra:
+	go get -u github.com/erda-project/erda-infra
+    go get -u github.com/erda-project/erda-infra/tools/gohub
