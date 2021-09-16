@@ -1,5 +1,5 @@
 .PHONY: build clean
-build:
+build: auto-update-infra-for-master
 	@./build.sh build
 	@go mod tidy
 	@echo "" && make format
@@ -14,6 +14,12 @@ format:
 		goimports -w -l $${path}; \
 	done;
 
+auto-update-infra-for-master:
+	@if [[ "$$(git rev-parse --abbrev-ref HEAD)" == "master" ]]; then \
+		make update-infra; \
+	fi;
+
 update-infra:
+	echo "update erda-infra and gohub"
 	go get -u github.com/erda-project/erda-infra
 	go get -u github.com/erda-project/erda-infra/tools/gohub
