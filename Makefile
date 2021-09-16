@@ -10,10 +10,10 @@ format:
 	@echo "run gofmt && goimports"
 	@GOFILES=$$(find . -name "*.go"); \
 	for path in $${GOFILES}; do \
-	 	gofmt -w -l $${path}; \
-	  	goimports -w -l $${path}; \
+		gofmt -w -l $${path}; \
+		goimports -w -l $${path}; \
 	done;
 
 update-infra:
 	go get -u github.com/erda-project/erda-infra
-    go get -u github.com/erda-project/erda-infra/tools/gohub
+	go get -u github.com/erda-project/erda-infra/tools/gohub
