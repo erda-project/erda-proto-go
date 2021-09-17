@@ -32,7 +32,7 @@ type CronServiceHandler interface {
 	CronStop(context.Context, *CronStopRequest) (*CronStopResponse, error)
 	// DELETE /api/pipeline-crons/{cronID}
 	CronDelete(context.Context, *CronDeleteRequest) (*CronDeleteResponse, error)
-	// POST /api/pipeline-crons/{cronID}
+	// GET /api/pipeline-crons/{cronID}
 	CronGet(context.Context, *CronGetRequest) (*CronGetResponse, error)
 	// PUT /api/pipeline-crons/{cronID}
 	CronUpdate(context.Context, *CronUpdateRequest) (*CronUpdateResponse, error)
@@ -45,7 +45,7 @@ func RegisterCronServiceHandler(r http.Router, srv CronServiceHandler, opts ...h
 		op(h)
 	}
 	encodeFunc := func(fn func(http1.ResponseWriter, *http1.Request) (interface{}, error)) http.HandlerFunc {
-		return func(w http1.ResponseWriter, r *http1.Request) {
+		handler := func(w http1.ResponseWriter, r *http1.Request) {
 			out, err := fn(w, r)
 			if err != nil {
 				h.Error(w, r, err)
@@ -55,6 +55,10 @@ func RegisterCronServiceHandler(r http.Router, srv CronServiceHandler, opts ...h
 				h.Error(w, r, err)
 			}
 		}
+		if h.HTTPInterceptor != nil {
+			handler = h.HTTPInterceptor(handler)
+		}
+		return handler
 	}
 
 	add_CronCreate := func(method, path string, fn func(context.Context, *CronCreateRequest) (*CronCreateResponse, error)) {
@@ -456,6 +460,6 @@ func RegisterCronServiceHandler(r http.Router, srv CronServiceHandler, opts ...h
 	add_CronStart("PUT", "/api/pipeline-crons/{cronID}/actions/start", srv.CronStart)
 	add_CronStop("PUT", "/api/pipeline-crons/{cronID}/actions/stop", srv.CronStop)
 	add_CronDelete("DELETE", "/api/pipeline-crons/{cronID}", srv.CronDelete)
-	add_CronGet("POST", "/api/pipeline-crons/{cronID}", srv.CronGet)
+	add_CronGet("GET", "/api/pipeline-crons/{cronID}", srv.CronGet)
 	add_CronUpdate("PUT", "/api/pipeline-crons/{cronID}", srv.CronUpdate)
 }

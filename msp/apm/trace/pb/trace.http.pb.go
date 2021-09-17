@@ -23,6 +23,8 @@ const _ = http.SupportPackageIsVersion1
 type TraceServiceHandler interface {
 	// GET /api/msp/apm/traces/{traceID}/spans
 	GetSpans(context.Context, *GetSpansRequest) (*GetSpansResponse, error)
+	// GET /api/msp/apm/trace/span-analysis
+	GetSpanDashboards(context.Context, *GetSpanDashboardsRequest) (*GetSpanDashboardsResponse, error)
 	// GET /api/msp/apm/traces
 	GetTraces(context.Context, *GetTracesRequest) (*GetTracesResponse, error)
 	// GET /api/msp/apm/trace/conditions
@@ -46,7 +48,7 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 		op(h)
 	}
 	encodeFunc := func(fn func(http1.ResponseWriter, *http1.Request) (interface{}, error)) http.HandlerFunc {
-		return func(w http1.ResponseWriter, r *http1.Request) {
+		handler := func(w http1.ResponseWriter, r *http1.Request) {
 			out, err := fn(w, r)
 			if err != nil {
 				h.Error(w, r, err)
@@ -56,6 +58,10 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 				h.Error(w, r, err)
 			}
 		}
+		if h.HTTPInterceptor != nil {
+			handler = h.HTTPInterceptor(handler)
+		}
+		return handler
 	}
 
 	add_GetSpans := func(method, path string, fn func(context.Context, *GetSpansRequest) (*GetSpansResponse, error)) {
@@ -111,6 +117,49 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 							in.TraceID = val
 						}
 					}
+				}
+				out, err := handler(ctx, &in)
+				if err != nil {
+					return out, err
+				}
+				return out, nil
+			}),
+		)
+	}
+
+	add_GetSpanDashboards := func(method, path string, fn func(context.Context, *GetSpanDashboardsRequest) (*GetSpanDashboardsResponse, error)) {
+		handler := func(ctx context.Context, req interface{}) (interface{}, error) {
+			return fn(ctx, req.(*GetSpanDashboardsRequest))
+		}
+		var GetSpanDashboards_info transport.ServiceInfo
+		if h.Interceptor != nil {
+			GetSpanDashboards_info = transport.NewServiceInfo("erda.msp.apm.trace.TraceService", "GetSpanDashboards", srv)
+			handler = h.Interceptor(handler)
+		}
+		r.Add(method, path, encodeFunc(
+			func(w http1.ResponseWriter, r *http1.Request) (interface{}, error) {
+				ctx := http.WithRequest(r.Context(), r)
+				ctx = transport.WithHTTPHeaderForServer(ctx, r.Header)
+				if h.Interceptor != nil {
+					ctx = context.WithValue(ctx, transport.ServiceInfoContextKey, GetSpanDashboards_info)
+				}
+				r = r.WithContext(ctx)
+				var in GetSpanDashboardsRequest
+				if err := h.Decode(r, &in); err != nil {
+					return nil, err
+				}
+				var input interface{} = &in
+				if u, ok := (input).(urlenc.URLValuesUnmarshaler); ok {
+					if err := u.UnmarshalURLValues("", r.URL.Query()); err != nil {
+						return nil, err
+					}
+				}
+				params := r.URL.Query()
+				if vals := params["serviceInstanceId"]; len(vals) > 0 {
+					in.ServiceInstanceID = vals[0]
+				}
+				if vals := params["tenantId"]; len(vals) > 0 {
+					in.TenantID = vals[0]
 				}
 				out, err := handler(ctx, &in)
 				if err != nil {
@@ -470,6 +519,7 @@ func RegisterTraceServiceHandler(r http.Router, srv TraceServiceHandler, opts ..
 	}
 
 	add_GetSpans("GET", "/api/msp/apm/traces/{traceID}/spans", srv.GetSpans)
+	add_GetSpanDashboards("GET", "/api/msp/apm/trace/span-analysis", srv.GetSpanDashboards)
 	add_GetTraces("GET", "/api/msp/apm/traces", srv.GetTraces)
 	add_GetTraceQueryConditions("GET", "/api/msp/apm/trace/conditions", srv.GetTraceQueryConditions)
 	add_GetTraceDebugHistories("GET", "/api/msp/apm/trace/debug/histories", srv.GetTraceDebugHistories)
