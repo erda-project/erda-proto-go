@@ -39,12 +39,12 @@ func (m *Span) UnmarshalURLValues(prefix string, values url.Values) error {
 					return err
 				}
 				m.ParentSpanID = val
-			case "stratTimeUnixNano":
+			case "startTimeUnixNano":
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
 					return err
 				}
-				m.StratTimeUnixNano = val
+				m.StartTimeUnixNano = val
 			case "endTimeUnixNano":
 				val, err := strconv.ParseUint(vals[0], 10, 64)
 				if err != nil {
